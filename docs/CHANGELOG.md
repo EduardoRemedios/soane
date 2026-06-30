@@ -12,3 +12,4 @@
 - Added a Factory V2 planning-only research spike for Project Memory architecture at `docs/Factory/runs/RUN_20260630_1129_project_memory_research/`.
 - Added `docs/research/PROJECT_MEMORY_RESEARCH_SYNTHESIS.md` as the research input for the future Project Memory architecture.
 - Added `docs/PROJECT_MEMORY_ARCHITECTURE.md` as the conceptual architecture for Project Memory, including layers, first-class objects, lifecycle, provenance, context assembly, Markdown generation, and portfolio boundaries.
+- Clarified `docs/ROADMAP.md` into an explicit sequence from foundation documents through Project Memory prototype, Thinking Engine architecture, Workspace Shell architecture, and first product surface.
