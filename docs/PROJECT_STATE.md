@@ -16,6 +16,7 @@ Constitutional documents:
 
 - `docs/VISION.md`
 - `docs/CORE_CONCEPTS.md`
+- `docs/GOVERNANCE_MODEL.md`
 - `docs/PORTFOLIO_CONTEXT.md`
 - `docs/PORTFOLIO_ASSUMPTIONS.md`
 - `docs/INTEGRATION_ARCHITECTURE.md`
@@ -85,3 +86,4 @@ There is no product build or application test suite yet.
 - Keep Factory V3 work in `/Users/eduardodosremedios/Factory_V3`.
 - Use `/Users/eduardodosremedios/Eduardo_Product_Stack` as the portfolio context source.
 - Do not duplicate neighbouring product responsibilities inside the Workspace.
+- Treat `docs/GOVERNANCE_MODEL.md` as the repository-level rule for document status, amendments, decisions, evidence levels, and implementation blockers.

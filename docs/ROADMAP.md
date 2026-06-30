@@ -10,6 +10,7 @@
 | --- | --- | --- |
 | Founding vision | Done | `docs/VISION.md` |
 | Core concepts v1.1 | Done | `docs/CORE_CONCEPTS.md` |
+| Governance model | Done | `docs/GOVERNANCE_MODEL.md` |
 | Portfolio context documents | Done | `docs/PORTFOLIO_CONTEXT.md`, `docs/PORTFOLIO_ASSUMPTIONS.md`, `docs/INTEGRATION_ARCHITECTURE.md` |
 | Factory V2 process scaffold | Done | `docs/Factory/`, `docs/Factory/SOANE_FACTORY_V2_ADAPTER.md`, `scripts/`, `AGENTS.md`, `docs/PROJECT_STATE.md` |
 
@@ -17,7 +18,6 @@
 
 | Candidate | Status | Notes |
 | --- | --- | --- |
-| Governance model | Candidate | Define amendment process, decision authority references, evidence levels, and fail-closed blocking states for Workspace docs and future implementation. |
 | Project Memory architecture | Candidate | Define the durable substrate, graph model, canonical Markdown generation, provenance, and retrieval boundaries. |
 | Thinking Engine architecture | Candidate | Define discovery, Thinking, Socratic dialogue, hypotheses, inference strategies, and Discovery Playbooks. |
 | Workspace product shell architecture | Candidate | Define desktop, web, mobile, voice, collaboration, dashboards, and mission monitoring surfaces. |
