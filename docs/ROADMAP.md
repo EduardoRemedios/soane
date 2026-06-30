@@ -22,8 +22,8 @@
 | --- | --- | --- |
 | 1 | Foundation documents | Done | Vision, core concepts, governance, portfolio context, integration architecture, Factory V2 scaffold, Project Memory research, and Project Memory architecture are complete. |
 | 2 | Project Memory implementation planning | Next | Run a Factory V2 `PLANNING_ONLY` pack for the first local Project Memory object-model prototype. |
-| 3 | Project Memory v0 prototype | Pending | Implement the smallest local prototype for object types, lifecycle states, provenance, relationships, and traceability. No database choice unless the planning pack proves it is needed. |
-| 4 | Project Memory validation pass | Pending | Validate the prototype against existing canonical docs and the research synthesis. Prove import, traceability, amendment, supersession, and Markdown source mapping. |
+| 3 | Project Memory v0 prototype | Pending | Implement the smallest local prototype for object types, lifecycle states, provenance, relationships, and traceability. Use a coding workflow as the first proof path if the planning pack supports it. No database choice unless the planning pack proves it is needed. |
+| 4 | Project Memory validation pass | Pending | Validate the prototype against existing canonical docs and the research synthesis. Prove import, traceability, amendment, supersession, Markdown source mapping, and adapter-backed provider invocation fixtures. |
 | 5 | Thinking Engine architecture | Pending | Define discovery, Thinking, Socratic dialogue, hypotheses, inference strategies, Discovery Playbooks, and readiness assessment. |
 | 6 | Thinking Engine planning run | Pending | Use Factory V2 to plan the first Thinking Engine implementation slice after the architecture is accepted. |
 | 7 | Workspace Shell architecture | Pending | Define desktop, web, mobile, voice, collaboration, dashboards, notifications, mission monitoring, and portfolio views. |
@@ -55,6 +55,7 @@ The output should define:
 - validation strategy
 - fixtures
 - commands/tests to add
+- coding-first proof path using Cursor SDK or OpenAI SDK as candidate adapters, without narrowing the Workspace to coding
 
 It should not implement during the planning run.
 
@@ -65,6 +66,7 @@ It should not implement during the planning run.
 | Decision Record format | Candidate | Useful once the Project Memory prototype needs durable Decision fixtures. |
 | Evidence Artifact format | Candidate | Useful once the Project Memory prototype needs traceability fixtures. |
 | Canonical Markdown generation rules | Candidate | Useful after object model and provenance are proven locally. |
+| Cursor/OpenAI adapter fixtures | Candidate | Useful as the first coding proof path for Provider Invocation and Capability Reference semantics. |
 | Thinking Engine architecture | Candidate | Next major architecture document after Project Memory implementation planning starts. |
 | Workspace Shell architecture | Candidate | Defer until Project Memory and Thinking Engine shape are stable enough to drive UI. |
 

@@ -181,6 +181,22 @@ Expected responsibilities:
 
 Each product may have local adapters. The contract should preserve cross-portfolio governance and evidence continuity.
 
+### Candidate SDK Adapters
+
+The first proof path for the Workspace may be a coding workflow, because coding exposes concrete project memory, planning, delegation, review, evidence, and execution feedback loops.
+
+This does not make the Workspace a coding-only product. The Workspace must continue to support other project domains such as research, operations, marketing, consulting, product strategy, and regulated collaboration.
+
+Candidate early adapters include:
+
+- Cursor SDK as a coding-agent harness or execution adapter
+- OpenAI SDK as a model and tool invocation adapter
+- OpenAI Agents SDK as an agent orchestration adapter where code-first orchestration is useful
+
+These SDKs should sit behind Provider Invocation, Capability Reference, Inference Strategy, and governed work contracts. They should not define Project Memory, authority, evidence semantics, mission governance, or the Workspace product boundary.
+
+The first implementation proof should use coding as a demanding test case while preserving domain-general architecture.
+
 ### Canonical Knowledge Artifact
 
 Represents a durable generated or curated view over Project Memory.
@@ -746,4 +762,3 @@ The Workspace should clarify these questions before committing to final implemen
 - Does the Workspace call Factory V3, Temper, Aegis, Sentinel, and Harmony directly, or are some flows mediated?
 - Which integration contracts must exist before the Workspace can launch its first governed mission?
 - What are the minimum fail-closed states the Workspace must enforce in v1?
-
