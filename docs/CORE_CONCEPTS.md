@@ -2,6 +2,8 @@
 
 ## Status
 
+Version: 1.1.
+
 This document defines the core vocabulary of the Workspace.
 
 It exists to reduce ambiguity across product, architecture, engineering, governance, and future AI-agent work. Terms in this document should be used consistently in code, documentation, user interfaces, planning artifacts, and integration contracts.
@@ -48,6 +50,18 @@ The Workspace is the primary human-facing environment through which people perfo
 It helps humans think, understand, decide, collaborate, govern, and supervise autonomous execution. It coordinates other portfolio systems through APIs and integration contracts.
 
 The Workspace owns the experience of project understanding and supervised delegation. It does not own mission governance, agent runtime, authority, proof, or regulated conversational runtime.
+
+## Thinking
+
+Thinking is the deliberate process of reducing uncertainty through exploration, questioning, comparison, reasoning, synthesis, and judgement.
+
+Thinking precedes planning.
+
+Planning precedes delegation.
+
+The Workspace treats Thinking as a first-class engineering activity rather than an informal precursor to implementation.
+
+The purpose of the Thinking Engine is not to replace human thinking, but to augment it by making uncertainty visible, challenging assumptions, surfacing trade-offs, and improving decision quality.
 
 ## Project
 
@@ -172,6 +186,25 @@ Discovery may involve:
 - external research
 
 Discovery produces candidate knowledge. It does not automatically produce settled truth.
+
+## Discovery Playbook
+
+A Discovery Playbook defines a structured approach for reducing uncertainty within a particular domain.
+
+Different domains require different discovery approaches.
+
+Examples include:
+
+- software engineering
+- research
+- digital marketing
+- operations
+- consulting
+- product strategy
+
+The Thinking Engine should select, adapt, or compose Discovery Playbooks according to the nature of the Project rather than applying a single generic process.
+
+The output of a Discovery Playbook contributes to Project Memory and Readiness.
 
 ## Research
 
@@ -402,6 +435,27 @@ Readiness may consider:
 - operational dependencies
 
 The Workspace should make readiness visible before delegating work.
+
+## Inference Strategy
+
+An Inference Strategy defines how one or more reasoning systems are selected and combined to perform a specific task.
+
+An Inference Strategy may use:
+
+- a single model
+- multiple models
+- local models
+- cloud models
+- specialist models
+- verifier models
+- Mixture of Agents
+- sequential reasoning pipelines
+
+Inference Strategies should be selected according to task requirements, policy, privacy, confidence, cost, latency, and available capabilities.
+
+The Workspace owns Inference Strategies.
+
+It does not own the models themselves.
 
 ## Capability
 
