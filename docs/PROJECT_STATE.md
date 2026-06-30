@@ -17,6 +17,7 @@ Constitutional documents:
 - `docs/VISION.md`
 - `docs/CORE_CONCEPTS.md`
 - `docs/GOVERNANCE_MODEL.md`
+- `docs/PROJECT_MEMORY_ARCHITECTURE.md`
 - `docs/PORTFOLIO_CONTEXT.md`
 - `docs/PORTFOLIO_ASSUMPTIONS.md`
 - `docs/INTEGRATION_ARCHITECTURE.md`
@@ -71,7 +72,6 @@ Factory V3 remains separate in its own repository and should continue to own mis
 - runnable application tests
 - active Factory runs
 - active Workspace missions
-- Project Memory architecture document
 
 ## Current Verification
 
@@ -93,4 +93,5 @@ There is no product build or application test suite yet.
 - Use `/Users/eduardodosremedios/Eduardo_Product_Stack` as the portfolio context source.
 - Do not duplicate neighbouring product responsibilities inside the Workspace.
 - Treat `docs/GOVERNANCE_MODEL.md` as the repository-level rule for document status, amendments, decisions, evidence levels, and implementation blockers.
-- Use `docs/research/PROJECT_MEMORY_RESEARCH_SYNTHESIS.md` as the input to the future Project Memory architecture document.
+- Use `docs/research/PROJECT_MEMORY_RESEARCH_SYNTHESIS.md` as the research input behind the Project Memory architecture.
+- Treat `docs/PROJECT_MEMORY_ARCHITECTURE.md` as the conceptual architecture for Project Memory. It intentionally defers storage, API, UI, and implementation choices.

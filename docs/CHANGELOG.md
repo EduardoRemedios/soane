@@ -11,3 +11,4 @@
 - Added Soane-specific repository adapter docs: `AGENTS.md`, `docs/PROJECT_STATE.md`, `docs/ROADMAP.md`, and this changelog.
 - Added a Factory V2 planning-only research spike for Project Memory architecture at `docs/Factory/runs/RUN_20260630_1129_project_memory_research/`.
 - Added `docs/research/PROJECT_MEMORY_RESEARCH_SYNTHESIS.md` as the research input for the future Project Memory architecture.
+- Added `docs/PROJECT_MEMORY_ARCHITECTURE.md` as the conceptual architecture for Project Memory, including layers, first-class objects, lifecycle, provenance, context assembly, Markdown generation, and portfolio boundaries.

@@ -14,12 +14,13 @@
 | Portfolio context documents | Done | `docs/PORTFOLIO_CONTEXT.md`, `docs/PORTFOLIO_ASSUMPTIONS.md`, `docs/INTEGRATION_ARCHITECTURE.md` |
 | Factory V2 process scaffold | Done | `docs/Factory/`, `docs/Factory/SOANE_FACTORY_V2_ADAPTER.md`, `scripts/`, `AGENTS.md`, `docs/PROJECT_STATE.md` |
 | Project Memory research synthesis | Done | `docs/research/PROJECT_MEMORY_RESEARCH_SYNTHESIS.md`, `docs/Factory/runs/RUN_20260630_1129_project_memory_research/` |
+| Project Memory architecture | Done | `docs/PROJECT_MEMORY_ARCHITECTURE.md` |
 
 ## Current Candidates
 
 | Candidate | Status | Notes |
 | --- | --- | --- |
-| Project Memory architecture | Next | Define the durable substrate, object model, lifecycle states, graph relationships, canonical Markdown generation, provenance, and retrieval boundaries. |
+| Project Memory implementation planning | Next | Use Factory V2 to plan the first small implementation slice for object modeling, lifecycle states, provenance, and traceability. |
 | Thinking Engine architecture | Candidate | Define discovery, Thinking, Socratic dialogue, hypotheses, inference strategies, and Discovery Playbooks. |
 | Workspace product shell architecture | Candidate | Define desktop, web, mobile, voice, collaboration, dashboards, and mission monitoring surfaces. |
 | Factory V2 first planning run | Candidate | Use the scaffold to plan the first implementation slice once the next concrete build objective is chosen. |
@@ -34,4 +35,4 @@ Do not move Factory V3 work into this repository. Factory V3 remains a separate 
 
 In this roadmap, Factory V2 means the starter-kit process. Factory V3 means the separate newer repository and is not scaffolded here.
 
-The next architectural document should consume `docs/research/PROJECT_MEMORY_RESEARCH_SYNTHESIS.md`.
+The next Factory V2 planning run should consume `docs/PROJECT_MEMORY_ARCHITECTURE.md` and produce the first implementation plan for a local Project Memory object-model prototype.
