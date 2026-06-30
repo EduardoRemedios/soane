@@ -14,3 +14,5 @@
 - Added `docs/PROJECT_MEMORY_ARCHITECTURE.md` as the conceptual architecture for Project Memory, including layers, first-class objects, lifecycle, provenance, context assembly, Markdown generation, and portfolio boundaries.
 - Clarified `docs/ROADMAP.md` into an explicit sequence from foundation documents through Project Memory prototype, Thinking Engine architecture, Workspace Shell architecture, and first product surface.
 - Clarified that Cursor SDK and OpenAI SDK may be used as early adapter-backed proof paths for coding workflows without narrowing the Workspace to coding-only use cases.
+- Updated the roadmap to make the implementation path explicit: Project Memory v0, then headless CLI, then simple TUI, before any broader Workspace product shell.
+- Tightened the roadmap with Project Memory v0 contract gates, golden fixtures, mock-first adapter proof, context assembly v0, capture/review/promotion flow, and persistence guardrails before implementation.

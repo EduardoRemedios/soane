@@ -65,6 +65,8 @@ Factory V3 remains separate in its own repository and should continue to own mis
 - application code
 - product UI
 - Project Memory implementation
+- headless CLI
+- TUI
 - Thinking Engine implementation
 - Workspace Shell implementation
 - integration clients for Factory V3, Temper, Aegis, Sentinel, or Harmony
@@ -97,3 +99,5 @@ There is no product build or application test suite yet.
 - Use `docs/research/PROJECT_MEMORY_RESEARCH_SYNTHESIS.md` as the research input behind the Project Memory architecture.
 - Treat `docs/PROJECT_MEMORY_ARCHITECTURE.md` as the conceptual architecture for Project Memory. It intentionally defers storage, API, UI, and implementation choices.
 - Use coding as an acceptable first proof path for Workspace primitives, while keeping the Workspace domain-general and treating Cursor SDK and OpenAI SDK integrations as adapters.
+- Use a headless CLI first, then a thin TUI, before starting the broader Workspace product shell.
+- Define the Project Memory v0 contract, golden fixtures, context assembly v0, capture/review/promotion flow, and mock-first adapter contract before implementation.
