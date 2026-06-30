@@ -44,6 +44,11 @@ Repository adapter:
 - `docs/ROADMAP.md`
 - `docs/CHANGELOG.md`
 
+Research outputs:
+
+- `docs/research/PROJECT_MEMORY_RESEARCH_SYNTHESIS.md`
+- `docs/Factory/runs/RUN_20260630_1129_project_memory_research/`
+
 ## Current Architectural Posture
 
 The Workspace is separate from Factory V2, Factory V3, Temper, Aegis, Sentinel, and Harmony.
@@ -66,6 +71,7 @@ Factory V3 remains separate in its own repository and should continue to own mis
 - runnable application tests
 - active Factory runs
 - active Workspace missions
+- Project Memory architecture document
 
 ## Current Verification
 
@@ -87,3 +93,4 @@ There is no product build or application test suite yet.
 - Use `/Users/eduardodosremedios/Eduardo_Product_Stack` as the portfolio context source.
 - Do not duplicate neighbouring product responsibilities inside the Workspace.
 - Treat `docs/GOVERNANCE_MODEL.md` as the repository-level rule for document status, amendments, decisions, evidence levels, and implementation blockers.
+- Use `docs/research/PROJECT_MEMORY_RESEARCH_SYNTHESIS.md` as the input to the future Project Memory architecture document.
