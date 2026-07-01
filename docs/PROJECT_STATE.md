@@ -78,6 +78,7 @@ Planning outputs:
 - `docs/Factory/runs/RUN_20260701_0848_project_memory_v0_plan/VALIDATION_CLOSEOUT_REPORT.md`
 - `docs/Factory/runs/RUN_20260701_1438_thinking_engine_intake_v0_plan/`
 - `docs/Factory/runs/RUN_20260701_1438_thinking_engine_intake_v0_plan/VALIDATION_CLOSEOUT_REPORT.md`
+- `docs/Factory/runs/RUN_20260701_1455_candidate_review_promotion_v0_plan/`
 
 ## Current Architectural Posture
 
@@ -175,4 +176,5 @@ cat docs/Factory/runs/RUN_20260701_1438_thinking_engine_intake_v0_plan/VALIDATIO
 - `RUN_20260701_1438_thinking_engine_intake_v0_plan`: Factory V2 `PLANNING_ONLY` pack for `TEI-V0-001` Thinking Engine Intake v0. Status: `PASS`; pack lint passed.
 - Human Go for `TEI-V0-001` was given on 2026-07-01.
 - `TEI-V0-001` Thinking Engine Intake v0 is implemented with local deterministic intake classification, Context Baseline, Discovery Playbook selection, Readiness Assessment, and Project Memory write-back candidates.
-- Next roadmap step: review the Thinking Engine Intake v0 proof and decide the next bounded Thinking Engine or Workspace Shell slice.
+- `RUN_20260701_1455_candidate_review_promotion_v0_plan`: Factory V2 `PLANNING_ONLY` pack for `CRP-V0-001` Candidate Review and Promotion v0. Status: `PASS`; pack lint passed.
+- Next roadmap step: human Go/No-go review for `CRP-V0-001` before implementation.
