@@ -29,19 +29,20 @@
 | 6 | Simple TUI | Done | Added thin terminal navigation over the same service functions for project navigation, memory browsing, evidence, decisions, hypotheses, adapter invocations, validation state, and unresolved questions. |
 | 7 | Project Memory validation pass | Done | Validation closeout passed at `docs/Factory/runs/RUN_20260701_0848_project_memory_v0_plan/VALIDATION_CLOSEOUT_REPORT.md`. |
 | 8 | Thinking Engine architecture | Done | Defined discovery, Thinking, Socratic dialogue, hypotheses, inference strategies, Discovery Playbooks, Greenfield/Brownfield project intake, non-repository context sources, and readiness assessment. |
-| 9 | Thinking Engine planning run | Next | Use Factory V2 to plan the first Thinking Engine implementation slice after the architecture is accepted. |
-| 10 | Workspace Shell architecture | Pending | Define desktop, web, mobile, voice, collaboration, dashboards, notifications, mission monitoring, and portfolio views after CLI/TUI proof has clarified the primitives. |
-| 11 | First product surface prototype | Pending | Build only after Project Memory, CLI/TUI navigation, and Thinking Engine primitives are coherent enough to support a real workflow. |
+| 9 | Thinking Engine planning run | Done | Factory V2 `PLANNING_ONLY` pack completed at `docs/Factory/runs/RUN_20260701_1438_thinking_engine_intake_v0_plan/`; pack-lint passed. |
+| 10 | Thinking Engine Intake v0 implementation | Next | Requires explicit human Go against `TEI-V0-001` before execution. Planned slice covers intake classification, Context Baseline, Discovery Playbook selection, Readiness Assessment, and Project Memory write-back candidates. |
+| 11 | Workspace Shell architecture | Pending | Define desktop, web, mobile, voice, collaboration, dashboards, notifications, mission monitoring, and portfolio views after CLI/TUI proof has clarified the primitives. |
+| 12 | First product surface prototype | Pending | Build only after Project Memory, CLI/TUI navigation, and Thinking Engine primitives are coherent enough to support a real workflow. |
 
 ## Immediate Next Move
 
 Continue implementation with:
 
-`Thinking Engine planning run`
+`Thinking Engine Intake v0 implementation review`
 
 Pack path:
 
-- `docs/Factory/runs/RUN_20260701_0848_project_memory_v0_plan/`
+- `docs/Factory/runs/RUN_20260701_1438_thinking_engine_intake_v0_plan/`
 
 Current state:
 
@@ -56,7 +57,8 @@ Current state:
 - MS-06 Thin TUI Scope: complete.
 - MS-07 Validation Closeout: complete.
 - Thinking Engine architecture: complete.
-- Next work: Thinking Engine planning run.
+- Thinking Engine planning run: complete.
+- Next work: human Go/No-go review for `TEI-V0-001`.
 
 The pack consumed:
 
@@ -91,9 +93,9 @@ The Thinking Engine architecture must treat Greenfield and Brownfield project in
 - Non-coding projects may have critical context outside repositories entirely. Intake must support external context sources such as analytics dashboards, campaign assets, research notes, briefs, spreadsheets, design files, CRM records, ad accounts, and other operational artifacts.
 - Both paths must verify that the minimum context files, Markdown documents, or equivalent source artifacts exist before Soane agrees a starting point or delegates work.
 
-The next work should use Factory V2 to plan the first bounded Thinking Engine implementation slice. That planning run should consume `docs/THINKING_ENGINE_ARCHITECTURE.md`, `docs/PROJECT_MEMORY_ARCHITECTURE.md`, and the Project Memory validation closeout.
+The completed Thinking Engine planning run produced `TEI-V0-001`, a bounded implementation plan for Thinking Engine Intake v0.
 
-Do not implement live adapters, database selection, or a broader Workspace product shell during the Thinking Engine planning step.
+Future implementation requires explicit human Go. Do not implement live adapters, database selection, or a broader Workspace product shell during the Thinking Engine Intake v0 slice.
 
 The golden fixture set should include at least:
 
@@ -136,7 +138,8 @@ The governed memory invariants should include:
 | TUI navigation model | Done | Implemented as `python3 -m soane.project_memory.tui` with deterministic screens over the existing memory, context, fixture, and CLI primitives. |
 | Project Memory validation closeout | Done | Validation report records VC-001 through VC-016 evidence, residual risks, budget variance, and readiness for Thinking Engine architecture. |
 | Thinking Engine architecture | Done | `docs/THINKING_ENGINE_ARCHITECTURE.md` defines intake, discovery, Socratic dialogue, hypotheses, evidence review, synthesis, inference strategy, readiness states, and boundaries. |
-| Thinking Engine planning run | Next | Should use Factory V2 to plan the first implementation slice after architecture review. |
+| Thinking Engine planning run | Done | `docs/Factory/runs/RUN_20260701_1438_thinking_engine_intake_v0_plan/` defines `TEI-V0-001`. |
+| Thinking Engine Intake v0 implementation | Next | Requires human Go; planned scope is local deterministic intake classification, Context Baseline, Discovery Playbook selection, Readiness Assessment, and Project Memory write-back candidates. |
 | Workspace Shell architecture | Candidate | Defer until Project Memory and Thinking Engine shape are stable enough to drive UI. |
 
 ## Process Guidance
