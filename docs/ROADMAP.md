@@ -23,8 +23,8 @@
 | 1 | Foundation documents | Done | Vision, core concepts, governance, portfolio context, integration architecture, Factory V2 scaffold, Project Memory research, and Project Memory architecture are complete. |
 | 2 | Project Memory implementation planning | Done | Factory V2 `PLANNING_ONLY` pack completed at `docs/Factory/runs/RUN_20260701_0848_project_memory_v0_plan/`; human Go received on 2026-07-01. |
 | 3 | Project Memory v0 contract | Done | Contract scaffold, lifecycle transitions, relationship types, evidence levels, governed memory invariants, deterministic fixture IDs, and validation tests exist in `soane/project_memory/contract.py` and `tests/test_project_memory_contract.py`. |
-| 4 | Project Memory v0 prototype | Next | Continue with MS-04 Mock Coding Adapter Contract. Contract, fixture corpus, local memory semantics, context assembly, and Markdown mapping are in place. No database choice unless the implementation proves it is needed. |
-| 5 | Headless CLI | Pending | Add a small command surface over the Project Memory v0 primitives before building a navigable interface. |
+| 4 | Project Memory v0 prototype | Done | Contract, fixture corpus, local memory semantics, context assembly, Markdown mapping, and deterministic adapter twins are in place. No database choice unless the implementation proves it is needed. |
+| 5 | Headless CLI | Next | Add a small command surface over the Project Memory v0 primitives before building a navigable interface. |
 | 6 | Simple TUI | Pending | Add a thin terminal UI over the same CLI/service functions for project navigation, memory browsing, evidence, decisions, hypotheses, adapter invocations, validation state, and unresolved questions. |
 | 7 | Project Memory validation pass | Pending | Validate the prototype against existing canonical docs and the research synthesis. Prove import, traceability, amendment, supersession, Markdown source mapping, context assembly, capture/review/promotion, and adapter-backed provider invocation fixtures. |
 | 8 | Thinking Engine architecture | Pending | Define discovery, Thinking, Socratic dialogue, hypotheses, inference strategies, Discovery Playbooks, and readiness assessment. |
@@ -34,9 +34,9 @@
 
 ## Immediate Next Move
 
-Continue implementation of:
+Continue implementation with:
 
-`Project Memory v0 Object Model Prototype`
+`MS-05 Headless CLI`
 
 Pack path:
 
@@ -50,7 +50,8 @@ Current state:
 - MS-01 Golden Fixture Corpus: complete.
 - MS-02 Memory Semantics: complete.
 - MS-03 Context Assembly And Markdown Mapping: complete.
-- Next micro-sprint: MS-04 Mock Coding Adapter Contract.
+- MS-04 Mock Coding Adapter Contract: complete.
+- Next micro-sprint: MS-05 Headless CLI.
 
 The pack consumed:
 
@@ -60,7 +61,7 @@ The pack consumed:
 - `docs/research/PROJECT_MEMORY_RESEARCH_SYNTHESIS.md`
 - `docs/PROJECT_MEMORY_ARCHITECTURE.md`
 
-The next micro-sprint should implement deterministic local functions and tests for:
+The completed MS-04 micro-sprint implemented deterministic local functions and tests for:
 
 - mocked Provider Invocation records
 - Cursor/Codex/OpenAI adapter surface metadata
@@ -69,7 +70,9 @@ The next micro-sprint should implement deterministic local functions and tests f
 - capability and authority separation
 - no live CLI or SDK calls
 
-Do not implement CLI, TUI, live adapters, or database selection during MS-04.
+The next micro-sprint should implement a small headless CLI over the existing Project Memory service functions. The CLI should not duplicate contract, fixture, semantics, context assembly, or adapter-twin logic.
+
+Do not implement TUI, live adapters, or database selection during MS-05.
 
 The golden fixture set should include at least:
 
@@ -103,12 +106,12 @@ The governed memory invariants should include:
 | Evidence Artifact format | Candidate | Useful once the Project Memory prototype needs traceability fixtures. |
 | Golden fixture suite | Candidate | Should be the proof harness for decisions, assumptions, contradictions, staleness, source mapping, provider invocation, capability, authority, and redaction behavior. |
 | Canonical Markdown generation rules | Candidate | Useful after object model and provenance are proven locally. |
-| Mock Cursor/Codex/OpenAI adapter contract | Candidate | Useful as the first coding proof path for Provider Invocation and Capability Reference semantics before live CLI or SDK coupling. |
+| Mock Cursor/Codex/OpenAI adapter contract | Done | Implemented as deterministic adapter twins for Cursor CLI, Codex CLI, Cursor SDK, OpenAI SDK, and OpenAI Agents SDK. |
 | Context assembly v0 | Candidate | Should prove task-specific context packaging from Decisions, Evidence, Assumptions, Questions, and stale or contradictory records. |
 | Capture/review/promotion flow | Candidate | Needed so raw conversation, notes, and model output do not silently become durable memory. |
 | Persistence guardrails | Candidate | Should keep storage portable, IDs deterministic, fixtures stable, and migration/rewrite behavior explicit before database selection. |
 | Governed memory invariant tests | Candidate | Should verify scope, temporal supersession, provenance lineage, controlled propagation, contradiction resolution, and equivalent enforcement across retrieval paths. |
-| CLI command model | Candidate | Should be defined before TUI work so navigation wraps stable primitives. |
+| CLI command model | Next | Should be defined before TUI work so navigation wraps stable primitives. |
 | TUI navigation model | Candidate | Useful after the headless CLI exists; should stay thin and avoid becoming the product shell. |
 | Thinking Engine architecture | Candidate | Next major architecture document after Project Memory implementation planning starts. |
 | Workspace Shell architecture | Candidate | Defer until Project Memory and Thinking Engine shape are stable enough to drive UI. |

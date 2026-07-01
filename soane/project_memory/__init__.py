@@ -1,5 +1,15 @@
 """Project Memory v0 contract surface."""
 
+from soane.project_memory.adapters import (
+    AdapterInvocationStatus,
+    AdapterSurface,
+    AdapterSurfaceKind,
+    AdapterTwin,
+    AdapterTwinError,
+    AdapterTwinInvocation,
+    AdapterTwinResult,
+    default_adapter_twins,
+)
 from soane.project_memory.contract import (
     CONTRACT_VERSION,
     EVIDENCE_LEVELS,
@@ -50,6 +60,13 @@ __all__ = [
     "MEMORY_OBJECT_TYPES",
     "RELATIONSHIP_TYPES",
     "ContractValidationError",
+    "AdapterInvocationStatus",
+    "AdapterSurface",
+    "AdapterSurfaceKind",
+    "AdapterTwin",
+    "AdapterTwinError",
+    "AdapterTwinInvocation",
+    "AdapterTwinResult",
     "EvidenceLevel",
     "LifecycleStatus",
     "MemoryObject",
@@ -75,6 +92,7 @@ __all__ = [
     "ProjectMemory",
     "build_context_package",
     "can_transition",
+    "default_adapter_twins",
     "deterministic_fixture_id",
     "is_visible",
     "load_fixture",
