@@ -1,0 +1,34 @@
+{
+  "fixture_id": "TEI-GF-005",
+  "title": "Blocked intake due missing required context",
+  "domain": "software",
+  "project": {
+    "name": "Unknown production service",
+    "goal": "Add authentication behavior safely",
+    "declared_category": "brownfield_single_repo",
+    "system_boundary": "unknown production service"
+  },
+  "goals": ["Determine whether feature work can proceed"],
+  "non_goals": ["Do not edit authentication code during intake"],
+  "repositories": [
+    {
+      "id": "repo-auth",
+      "type": "repository",
+      "title": "Authentication service repository",
+      "location": "git@example.com:team/auth-service.git",
+      "owner": "unknown",
+      "evidence_level": "E1"
+    }
+  ],
+  "canonical_docs": [],
+  "assumptions": ["The service is production critical"],
+  "constraints": ["Authentication changes require explicit authority"],
+  "open_questions": ["Who owns production approval?"],
+  "missing_context": ["build command", "test command", "architecture documentation", "production owner", "authority path"],
+  "blocking_missing_context": true,
+  "expected": {
+    "category": "brownfield_single_repo",
+    "readiness": "blocked",
+    "playbooks": ["brownfield_repository_audit", "software_engineering_discovery"]
+  }
+}

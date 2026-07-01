@@ -1,0 +1,49 @@
+{
+  "fixture_id": "TEI-GF-003",
+  "title": "Brownfield multi-repo system",
+  "domain": "software",
+  "project": {
+    "name": "Customer onboarding system",
+    "goal": "Understand cross-service context before changing onboarding behavior",
+    "declared_category": "brownfield_multi_repo",
+    "system_boundary": "web app, API service, and shared package"
+  },
+  "goals": ["Map repositories and integration boundaries"],
+  "non_goals": ["Do not change service contracts during intake"],
+  "repositories": [
+    {
+      "id": "repo-web",
+      "type": "repository",
+      "title": "Onboarding web app",
+      "location": "git@example.com:team/onboarding-web.git",
+      "owner": "growth-team",
+      "evidence_level": "E1"
+    },
+    {
+      "id": "repo-api",
+      "type": "repository",
+      "title": "Onboarding API",
+      "location": "git@example.com:team/onboarding-api.git",
+      "owner": "platform-team",
+      "evidence_level": "E1"
+    },
+    {
+      "id": "repo-shared",
+      "type": "repository",
+      "title": "Shared onboarding package",
+      "location": "git@example.com:team/onboarding-shared.git",
+      "owner": "platform-team",
+      "evidence_level": "E1"
+    }
+  ],
+  "canonical_docs": ["SYSTEM_OVERVIEW.md", "API_CONTRACTS.md"],
+  "assumptions": ["The API contract is shared across web and API repositories"],
+  "constraints": ["Repository ownership must be preserved"],
+  "open_questions": ["Which repo owns onboarding validation rules?"],
+  "missing_context": [],
+  "expected": {
+    "category": "brownfield_multi_repo",
+    "readiness": "ready_for_planning",
+    "playbooks": ["brownfield_system_audit", "integration_boundary_discovery"]
+  }
+}

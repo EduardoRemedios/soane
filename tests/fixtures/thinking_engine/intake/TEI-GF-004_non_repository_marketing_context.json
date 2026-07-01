@@ -1,0 +1,49 @@
+{
+  "fixture_id": "TEI-GF-004",
+  "title": "Non-repository digital marketing campaign context",
+  "domain": "digital_marketing",
+  "project": {
+    "name": "Q4 acquisition campaign",
+    "goal": "Assess campaign context before proposing new creative tests",
+    "declared_category": "non_repository_context",
+    "system_boundary": "analytics, campaign assets, and ad account"
+  },
+  "goals": ["Understand campaign performance and available assets"],
+  "non_goals": ["Do not launch ads during intake"],
+  "external_sources": [
+    {
+      "id": "ga-dashboard",
+      "type": "analytics_dashboard",
+      "title": "Google Analytics acquisition dashboard",
+      "location": "analytics://ga4/property/acquisition",
+      "owner": "marketing-ops",
+      "evidence_level": "E1"
+    },
+    {
+      "id": "creative-assets",
+      "type": "campaign_asset",
+      "title": "Approved campaign creative assets",
+      "location": "drive://marketing/q4-assets",
+      "owner": "brand-team",
+      "evidence_level": "E1"
+    },
+    {
+      "id": "ads-account",
+      "type": "ad_account",
+      "title": "Paid search account",
+      "location": "ads://paid-search/q4",
+      "owner": "performance-team",
+      "evidence_level": "E1"
+    }
+  ],
+  "canonical_docs": ["CAMPAIGN_BRIEF.md"],
+  "assumptions": ["Dashboard metrics are current enough for planning"],
+  "constraints": ["Creative must follow brand rules"],
+  "open_questions": ["Which audience segment has the highest marginal opportunity?"],
+  "missing_context": [],
+  "expected": {
+    "category": "non_repository_context",
+    "readiness": "ready_for_planning",
+    "playbooks": ["digital_marketing_campaign_discovery", "external_context_review"]
+  }
+}

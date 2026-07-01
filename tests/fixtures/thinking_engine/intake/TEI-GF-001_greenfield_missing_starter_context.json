@@ -1,0 +1,22 @@
+{
+  "fixture_id": "TEI-GF-001",
+  "title": "Greenfield project missing starter context",
+  "domain": "software",
+  "project": {
+    "name": "New workspace companion",
+    "goal": "Create a new governed AI workspace companion",
+    "declared_category": "greenfield"
+  },
+  "goals": ["Define initial project purpose"],
+  "non_goals": ["Do not start implementation before starter context exists"],
+  "canonical_docs": [],
+  "assumptions": ["The project has no existing codebase"],
+  "constraints": ["Initial work must create canonical starter context"],
+  "open_questions": ["Who owns the first decision review?"],
+  "missing_context": ["VISION.md", "CORE_CONCEPTS.md", "ROADMAP.md"],
+  "expected": {
+    "category": "greenfield",
+    "readiness": "ready_for_discovery",
+    "playbooks": ["greenfield_product_definition", "context_baseline_discovery"]
+  }
+}

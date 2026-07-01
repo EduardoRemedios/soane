@@ -1,0 +1,35 @@
+{
+  "fixture_id": "TEI-GF-002",
+  "title": "Brownfield single-repo coding project",
+  "domain": "software",
+  "project": {
+    "name": "Existing API service",
+    "goal": "Understand the existing service before adding a new endpoint",
+    "declared_category": "brownfield_single_repo",
+    "system_boundary": "one service repository"
+  },
+  "goals": ["Audit current repository context"],
+  "non_goals": ["Do not implement the endpoint during intake"],
+  "repositories": [
+    {
+      "id": "repo-api",
+      "type": "repository",
+      "title": "API service repository",
+      "location": "git@example.com:team/api-service.git",
+      "owner": "platform-team",
+      "evidence_level": "E1"
+    }
+  ],
+  "canonical_docs": ["README.md", "ARCHITECTURE.md"],
+  "assumptions": ["Existing tests describe expected service behavior"],
+  "constraints": ["Use existing test command before proposing feature work"],
+  "open_questions": ["Where are deployment checks documented?"],
+  "missing_context": [],
+  "build_commands": ["npm run build"],
+  "test_commands": ["npm test"],
+  "expected": {
+    "category": "brownfield_single_repo",
+    "readiness": "ready_for_planning",
+    "playbooks": ["brownfield_repository_audit", "software_engineering_discovery"]
+  }
+}

@@ -21,7 +21,9 @@ Implementation:
 - Project Memory context assembly and Markdown mapping at `soane/project_memory/context.py`
 - Project Memory golden fixture loader at `soane/project_memory/fixtures.py`
 - Project Memory local semantics layer at `soane/project_memory/semantics.py`
+- Thinking Engine Intake v0 local service at `soane/thinking_engine/intake.py`
 - Project Memory golden fixture corpus at `tests/fixtures/project_memory/golden/`
+- Thinking Engine Intake v0 fixture corpus at `tests/fixtures/thinking_engine/intake/`
 - static contract tests at `tests/test_project_memory_contract.py`
 - adapter twin tests at `tests/test_project_memory_adapter_twins.py`
 - headless CLI tests at `tests/test_project_memory_cli.py`
@@ -29,6 +31,7 @@ Implementation:
 - context assembly and Markdown mapping tests at `tests/test_project_memory_context.py`
 - golden fixture tests at `tests/test_project_memory_fixtures.py`
 - memory semantics tests at `tests/test_project_memory_semantics.py`
+- Thinking Engine Intake v0 tests at `tests/test_thinking_engine_intake.py`
 
 Constitutional documents:
 
@@ -74,6 +77,7 @@ Planning outputs:
 - `docs/Factory/runs/RUN_20260701_0848_project_memory_v0_plan/`
 - `docs/Factory/runs/RUN_20260701_0848_project_memory_v0_plan/VALIDATION_CLOSEOUT_REPORT.md`
 - `docs/Factory/runs/RUN_20260701_1438_thinking_engine_intake_v0_plan/`
+- `docs/Factory/runs/RUN_20260701_1438_thinking_engine_intake_v0_plan/VALIDATION_CLOSEOUT_REPORT.md`
 
 ## Current Architectural Posture
 
@@ -89,7 +93,7 @@ Factory V3 remains separate in its own repository and should continue to own mis
 
 - product UI
 - full Project Memory implementation
-- Thinking Engine implementation
+- full Thinking Engine implementation beyond Intake v0
 - Workspace Shell implementation
 - integration clients for Factory V3, Temper, Aegis, Sentinel, or Harmony
 - live Cursor CLI, Codex CLI, Cursor SDK, OpenAI SDK, or OpenAI Agents SDK adapters
@@ -110,6 +114,8 @@ python3 -m unittest tests/test_project_memory_contract.py tests/test_project_mem
 python3 -m unittest tests/test_project_memory_adapter_twins.py
 python3 -m unittest tests/test_project_memory_cli.py
 python3 -m unittest tests/test_project_memory_tui.py
+python3 -m unittest tests/test_thinking_engine_intake.py
+./scripts/factoryctl pack-lint --run RUN_20260701_1438_thinking_engine_intake_v0_plan
 python3 scripts/agent_loop_bridge_validate.py tests/fixtures/agent_loop_bridge/valid_handoff.json --json
 ```
 
@@ -131,6 +137,7 @@ Validation closeout:
 
 ```bash
 cat docs/Factory/runs/RUN_20260701_0848_project_memory_v0_plan/VALIDATION_CLOSEOUT_REPORT.md
+cat docs/Factory/runs/RUN_20260701_1438_thinking_engine_intake_v0_plan/VALIDATION_CLOSEOUT_REPORT.md
 ```
 
 ## Active Boundary Decisions
@@ -166,4 +173,6 @@ cat docs/Factory/runs/RUN_20260701_0848_project_memory_v0_plan/VALIDATION_CLOSEO
 - MS-07 Validation Closeout is complete.
 - Thinking Engine architecture is complete.
 - `RUN_20260701_1438_thinking_engine_intake_v0_plan`: Factory V2 `PLANNING_ONLY` pack for `TEI-V0-001` Thinking Engine Intake v0. Status: `PASS`; pack lint passed.
-- Next roadmap step: human Go/No-go review for `TEI-V0-001` before implementation.
+- Human Go for `TEI-V0-001` was given on 2026-07-01.
+- `TEI-V0-001` Thinking Engine Intake v0 is implemented with local deterministic intake classification, Context Baseline, Discovery Playbook selection, Readiness Assessment, and Project Memory write-back candidates.
+- Next roadmap step: review the Thinking Engine Intake v0 proof and decide the next bounded Thinking Engine or Workspace Shell slice.
