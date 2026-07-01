@@ -25,6 +25,7 @@
 - Implemented `SD-V0-001` Socratic Discovery v0 with local deterministic discovery sessions, traceable question generation, candidate answer capture, uncertainty-preserving candidate hypotheses, stop conditions, tests, and validation closeout.
 - Added Factory V2 planning-only pack `RUN_20260701_1548_coding_proof_harness_v0_plan` for `CPH-V0-001`, the Coding Proof Harness v0 slice for a mock-first Greenfield/Brownfield coding workflow using intake, discovery, context assembly, provider invocation records, candidate output capture, and review-gated promotion.
 - Implemented `CPH-V0-001` Coding Proof Harness v0 with local deterministic Greenfield/Brownfield coding fixtures, service composition, mocked provider invocation, candidate output capture, review-gated promotion, tests, and validation closeout.
+- Added Factory V2 planning-only pack `RUN_20260701_1604_roadmap_sequence_review` for `ROADMAP-SEQ-001`, updating the roadmap sequence to put a CLI-first Coding Harness Workflow before Workspace Shell architecture.
 
 ## 2026-06-30
 

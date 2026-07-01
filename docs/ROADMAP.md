@@ -23,6 +23,7 @@
 | Socratic Discovery v0 | Done | `soane/thinking_engine/discovery.py`, `tests/test_thinking_engine_discovery.py`, `docs/Factory/runs/RUN_20260701_1529_socratic_discovery_v0_plan/VALIDATION_CLOSEOUT_REPORT.md` |
 | Coding Proof Harness planning | Done | `docs/Factory/runs/RUN_20260701_1548_coding_proof_harness_v0_plan/` |
 | Coding Proof Harness v0 | Done | `soane/thinking_engine/coding_harness.py`, `tests/test_thinking_engine_coding_harness.py`, `docs/Factory/runs/RUN_20260701_1548_coding_proof_harness_v0_plan/VALIDATION_CLOSEOUT_REPORT.md` |
+| Roadmap sequencing review | Done | `docs/Factory/runs/RUN_20260701_1604_roadmap_sequence_review/pack/ROADMAP_SEQUENCE_REVIEW.md` |
 
 ## Sequence
 
@@ -46,19 +47,25 @@
 | 16 | Next bounded slice selection | Done | Selected Coding Proof Harness v0 before Workspace Shell architecture, so Soane has one end-to-end workflow to design around. |
 | 17 | Coding Proof Harness planning run | Done | Factory V2 `PLANNING_ONLY` pack completed at `docs/Factory/runs/RUN_20260701_1548_coding_proof_harness_v0_plan/`; pack-lint passed. |
 | 18 | Coding Proof Harness v0 implementation | Done | Implemented Greenfield/Brownfield coding fixtures, service composition, mocked provider invocation, candidate output capture, review-gated promotion, and validation closeout. Optional wrapper was skipped. |
-| 19 | Next bounded slice selection | Next | Choose between a thin CLI/TUI workflow over the harness and Workspace Shell architecture now that one end-to-end coding proof path exists. |
-| 20 | Workspace Shell architecture | Pending | Define desktop, web, mobile, voice, collaboration, dashboards, notifications, mission monitoring, and portfolio views after the coding proof harness clarifies the first end-to-end workflow. |
-| 21 | First product surface prototype | Pending | Build only after Project Memory, CLI/TUI navigation, Thinking Engine primitives, and the coding proof harness are coherent enough to support a real workflow. |
+| 19 | Roadmap sequencing review | Done | `ROADMAP-SEQ-001` selected a CLI-first workflow wrapper before Workspace Shell architecture. |
+| 20 | Coding Harness Workflow v0 planning | Next | Plan `CHW-V0-001`: a thin CLI-first workflow over the existing coding harness service, with optional TUI only if it stays service-delegating. |
+| 21 | Coding Harness Workflow v0 implementation | Pending | Implement only after `CHW-V0-001` receives human Go. No live providers, persistence, product UI, or Workspace Shell. |
+| 22 | Brownfield multi-repo coding proof | Pending | Extend the coding proof to multi-repository system boundaries before product shell design hides Brownfield complexity. |
+| 23 | Live coding adapter evaluation plan | Pending | Evaluate Codex CLI, Cursor CLI, Cursor SDK, OpenAI SDK, and OpenAI Agents SDK against invocation, authority, evidence, and no-mutation requirements before live use. |
+| 24 | Memory provider evaluation | Pending | Evaluate Supermemory-style providers as external retrieval/context adapters, not canonical Project Memory. |
+| 25 | Project Memory persistence architecture | Pending | Define persistence after workflow and provider evidence clarifies which objects and transitions must be durable. |
+| 26 | Workspace Shell architecture | Pending | Define desktop, web, mobile, voice, collaboration, dashboards, notifications, mission monitoring, and portfolio views after the workflow and integration boundaries are clearer. |
+| 27 | First product surface prototype | Pending | Build only after Project Memory, CLI/TUI navigation, Thinking Engine primitives, coding workflow, and shell architecture are coherent enough to support a real workflow. |
 
 ## Immediate Next Move
 
 Continue planning with:
 
-`Next bounded slice selection after Coding Proof Harness v0`
+`Coding Harness Workflow v0 planning`
 
 Pack path:
 
-- `docs/Factory/runs/RUN_20260701_1548_coding_proof_harness_v0_plan/`
+- `docs/Factory/runs/RUN_20260701_1604_roadmap_sequence_review/`
 
 Current state:
 
@@ -82,7 +89,8 @@ Current state:
 - Socratic Discovery v0 implementation: complete and passed validation closeout.
 - Coding Proof Harness planning run: complete and passed.
 - Coding Proof Harness v0 implementation: complete and passed validation closeout.
-- Next work: decide whether the next Factory pack should cover a thin CLI/TUI workflow over the harness or Workspace Shell architecture.
+- Roadmap sequencing review: complete and passed.
+- Next work: create a Factory planning pack for `CHW-V0-001` Coding Harness Workflow v0.
 
 The pack consumed:
 
@@ -133,6 +141,8 @@ The completed Coding Proof Harness planning run defines `CPH-V0-001`, the next b
 
 The completed Coding Proof Harness v0 implementation proves that end-to-end path locally with Greenfield and Brownfield coding fixtures, task-specific context assembly, mocked provider selection, Provider Invocation records, candidate output capture, and review-gated promotion. It does not introduce live providers, repository mutation, persistence, product UI, Workspace Shell, or mission execution.
 
+The completed roadmap sequencing review records that the next immediate slice should be a CLI-first workflow wrapper over the coding harness before Workspace Shell architecture. The recommended sequence after that is Brownfield multi-repo proof, live coding adapter evaluation planning, memory-provider evaluation, Project Memory persistence architecture, Workspace Shell architecture, and then first product surface prototype.
+
 The golden fixture set should include at least:
 
 - Decision linked to Evidence
@@ -182,8 +192,13 @@ The governed memory invariants should include:
 | Socratic Discovery v0 implementation | Done | Implemented local deterministic discovery sessions, traceable question generation, candidate answer capture, candidate hypotheses with uncertainty state and evidence-gap links, stop conditions, tests, and validation closeout. |
 | Coding Proof Harness planning run | Done | `docs/Factory/runs/RUN_20260701_1548_coding_proof_harness_v0_plan/` defines `CPH-V0-001`. |
 | Coding Proof Harness v0 implementation | Done | Implemented local deterministic Greenfield/Brownfield coding proof, service composition, mocked provider invocation, candidate output capture, review-gated promotion, tests, and validation closeout. |
-| Thinking Engine next slice | Next | Choose after Coding Proof Harness v0 implementation, likely a thin CLI/TUI workflow over the harness or Workspace Shell architecture. |
-| Workspace Shell architecture | Candidate | Defer until Project Memory and Thinking Engine shape are stable enough to drive UI. |
+| Roadmap sequencing review | Done | `docs/Factory/runs/RUN_20260701_1604_roadmap_sequence_review/` selects a CLI-first workflow wrapper before Workspace Shell architecture. |
+| Coding Harness Workflow v0 planning | Next | Plan `CHW-V0-001` as a thin CLI-first workflow over `soane.thinking_engine.coding_harness`; optional TUI must stay service-delegating. |
+| Brownfield multi-repo coding proof | Candidate | Add before product shell design so system-boundary complexity is explicit. |
+| Live coding adapter evaluation plan | Candidate | Evaluate live Codex/Cursor/OpenAI surfaces before any live provider invocation is introduced. |
+| Memory provider evaluation | Candidate | Evaluate Supermemory-style providers as external retrieval/context adapters before persistence choices. |
+| Project Memory persistence architecture | Candidate | Defer until workflow and provider evidence clarifies durable storage requirements. |
+| Workspace Shell architecture | Candidate | Defer until workflow and integration boundaries are clearer. |
 
 ## Process Guidance
 
