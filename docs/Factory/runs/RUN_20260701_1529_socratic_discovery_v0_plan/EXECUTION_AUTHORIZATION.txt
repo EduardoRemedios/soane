@@ -1,0 +1,2 @@
+Execution Mode: EXECUTION_ENABLED
+Execution Authorization: Human Go in Codex thread on 2026-07-01 after Supermemory review.

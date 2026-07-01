@@ -20,6 +20,7 @@
 | Candidate Review and Promotion planning | Done | `docs/Factory/runs/RUN_20260701_1455_candidate_review_promotion_v0_plan/` |
 | Candidate Review and Promotion v0 | Done | `soane/project_memory/review.py`, `tests/test_project_memory_review.py`, `docs/Factory/runs/RUN_20260701_1455_candidate_review_promotion_v0_plan/VALIDATION_CLOSEOUT_REPORT.md` |
 | Socratic Discovery planning | Done | `docs/Factory/runs/RUN_20260701_1529_socratic_discovery_v0_plan/` |
+| Socratic Discovery v0 | Done | `soane/thinking_engine/discovery.py`, `tests/test_thinking_engine_discovery.py`, `docs/Factory/runs/RUN_20260701_1529_socratic_discovery_v0_plan/VALIDATION_CLOSEOUT_REPORT.md` |
 
 ## Sequence
 
@@ -39,17 +40,18 @@
 | 12 | Candidate Review and Promotion planning run | Done | Factory V2 `PLANNING_ONLY` pack completed at `docs/Factory/runs/RUN_20260701_1455_candidate_review_promotion_v0_plan/`; pack-lint passed. |
 | 13 | Candidate Review and Promotion v0 implementation | Done | Implemented local deterministic review decisions, provenance retention, promotion semantics, current-truth separation, negative fixtures, thin CLI wrapper, and validation closeout. |
 | 14 | Socratic Discovery planning run | Done | Factory V2 `PLANNING_ONLY` pack completed at `docs/Factory/runs/RUN_20260701_1529_socratic_discovery_v0_plan/`; pack-lint passed. |
-| 15 | Socratic Discovery v0 implementation | Next | Requires explicit human Go against `SD-V0-001` before execution. Planned slice covers deterministic discovery sessions, traceable question generation, answer capture, candidate hypotheses, stop conditions, and optional wrapper. |
-| 16 | Workspace Shell architecture | Pending | Define desktop, web, mobile, voice, collaboration, dashboards, notifications, mission monitoring, and portfolio views after CLI/TUI proof has clarified the primitives. |
-| 17 | First product surface prototype | Pending | Build only after Project Memory, CLI/TUI navigation, and Thinking Engine primitives are coherent enough to support a real workflow. |
+| 15 | Socratic Discovery v0 implementation | Done | Implemented deterministic discovery sessions, traceable question generation, candidate answer capture, uncertainty-preserving candidate hypotheses, stop conditions, and validation closeout. Optional wrapper was skipped. |
+| 16 | Next bounded slice selection | Next | Choose between a coding proof harness slice and Workspace Shell architecture now that Project Memory, Intake, Review/Promotion, and Socratic Discovery v0 are in place. |
+| 17 | Workspace Shell architecture | Pending | Define desktop, web, mobile, voice, collaboration, dashboards, notifications, mission monitoring, and portfolio views after CLI/TUI proof has clarified the primitives. |
+| 18 | First product surface prototype | Pending | Build only after Project Memory, CLI/TUI navigation, and Thinking Engine primitives are coherent enough to support a real workflow. |
 
 ## Immediate Next Move
 
-Continue implementation with:
+Continue planning with:
 
-`Socratic Discovery v0 implementation review`
+`Next bounded slice selection after Socratic Discovery v0`
 
-Pack path:
+Recent pack path:
 
 - `docs/Factory/runs/RUN_20260701_1529_socratic_discovery_v0_plan/`
 
@@ -72,7 +74,8 @@ Current state:
 - Candidate Review and Promotion planning run: complete and passed.
 - Candidate Review and Promotion v0 implementation: complete.
 - Socratic Discovery planning run: complete and passed.
-- Next work: human Go/No-go review for `SD-V0-001`.
+- Socratic Discovery v0 implementation: complete and passed validation closeout.
+- Next work: decide whether the next Factory pack should cover a coding proof harness or Workspace Shell architecture.
 
 The pack consumed:
 
@@ -116,6 +119,8 @@ The completed Candidate Review and Promotion planning run defines `CRP-V0-001`, 
 The completed Candidate Review and Promotion v0 implementation closes that gap locally by requiring explicit review decisions, preserving provenance and lineage, keeping candidate and non-current records out of current truth, preserving the authority boundary, and exposing a thin CLI wrapper over the shared service.
 
 The completed Socratic Discovery planning run defines `SD-V0-001`, the next bounded Thinking Engine slice. It should prove the local guided discovery loop before Workspace Shell architecture or live model integrations proceed.
+
+The completed Socratic Discovery v0 implementation proves the local guided discovery loop with deterministic sessions, traceable questions, Project Memory candidate answers, uncertainty-preserving candidate hypotheses, and stop conditions. It does not introduce live models, live adapters, persistence, product UI, Workspace Shell, or mission execution.
 
 The golden fixture set should include at least:
 
@@ -163,8 +168,8 @@ The governed memory invariants should include:
 | Candidate Review and Promotion planning run | Done | `docs/Factory/runs/RUN_20260701_1455_candidate_review_promotion_v0_plan/` defines `CRP-V0-001`. |
 | Candidate Review and Promotion v0 implementation | Done | Implemented local deterministic review decisions, promotion semantics, provenance retention, current-truth separation, negative fixtures, thin CLI wrapper, and validation closeout. |
 | Socratic Discovery planning run | Done | `docs/Factory/runs/RUN_20260701_1529_socratic_discovery_v0_plan/` defines `SD-V0-001`. |
-| Socratic Discovery v0 implementation | Next | Requires human Go; planned scope is local deterministic discovery sessions, traceable question generation, answer capture, candidate hypotheses, stop conditions, and optional wrapper. |
-| Thinking Engine next slice | Candidate | Choose after Socratic Discovery v0, likely Workspace Shell architecture or a coding proof harness slice. |
+| Socratic Discovery v0 implementation | Done | Implemented local deterministic discovery sessions, traceable question generation, candidate answer capture, candidate hypotheses with uncertainty state and evidence-gap links, stop conditions, tests, and validation closeout. |
+| Thinking Engine next slice | Next | Choose after Socratic Discovery v0, likely a coding proof harness slice or Workspace Shell architecture. |
 | Workspace Shell architecture | Candidate | Defer until Project Memory and Thinking Engine shape are stable enough to drive UI. |
 
 ## Process Guidance

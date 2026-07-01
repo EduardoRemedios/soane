@@ -1,5 +1,18 @@
 """Thinking Engine local proof surface."""
 
+from soane.thinking_engine.discovery import (
+    DiscoveryAnswer,
+    DiscoveryHypothesis,
+    DiscoveryQuestion,
+    DiscoverySession,
+    DiscoveryStopCondition,
+    DiscoveryValidationError,
+    QuestionSourceKind,
+    capture_answer,
+    determine_stop_condition,
+    generate_questions,
+    start_discovery_session,
+)
 from soane.thinking_engine.intake import (
     ContextBaseline,
     ContextSource,
@@ -18,14 +31,25 @@ from soane.thinking_engine.intake import (
 __all__ = [
     "ContextBaseline",
     "ContextSource",
+    "DiscoveryAnswer",
+    "DiscoveryHypothesis",
     "DiscoveryPlaybook",
+    "DiscoveryQuestion",
+    "DiscoverySession",
+    "DiscoveryStopCondition",
+    "DiscoveryValidationError",
     "IntakeAssessment",
     "IntakeCategory",
     "IntakeFixture",
     "IntakeValidationError",
+    "QuestionSourceKind",
     "ReadinessAssessment",
     "ReadinessState",
     "assess_intake",
+    "capture_answer",
+    "determine_stop_condition",
+    "generate_questions",
     "load_intake_fixture",
     "load_intake_fixtures",
+    "start_discovery_session",
 ]

@@ -23,6 +23,7 @@ Implementation:
 - Project Memory local semantics layer at `soane/project_memory/semantics.py`
 - Project Memory candidate review and promotion service at `soane/project_memory/review.py`
 - Thinking Engine Intake v0 local service at `soane/thinking_engine/intake.py`
+- Socratic Discovery v0 local service at `soane/thinking_engine/discovery.py`
 - Project Memory golden fixture corpus at `tests/fixtures/project_memory/golden/`
 - Project Memory review fixture corpus at `tests/fixtures/project_memory/review/`
 - Thinking Engine Intake v0 fixture corpus at `tests/fixtures/thinking_engine/intake/`
@@ -35,6 +36,7 @@ Implementation:
 - memory semantics tests at `tests/test_project_memory_semantics.py`
 - candidate review and promotion tests at `tests/test_project_memory_review.py`
 - Thinking Engine Intake v0 tests at `tests/test_thinking_engine_intake.py`
+- Socratic Discovery v0 tests at `tests/test_thinking_engine_discovery.py`
 
 Constitutional documents:
 
@@ -84,6 +86,7 @@ Planning outputs:
 - `docs/Factory/runs/RUN_20260701_1455_candidate_review_promotion_v0_plan/`
 - `docs/Factory/runs/RUN_20260701_1455_candidate_review_promotion_v0_plan/VALIDATION_CLOSEOUT_REPORT.md`
 - `docs/Factory/runs/RUN_20260701_1529_socratic_discovery_v0_plan/`
+- `docs/Factory/runs/RUN_20260701_1529_socratic_discovery_v0_plan/VALIDATION_CLOSEOUT_REPORT.md`
 
 ## Current Architectural Posture
 
@@ -99,7 +102,7 @@ Factory V3 remains separate in its own repository and should continue to own mis
 
 - product UI
 - full Project Memory implementation beyond v0 local contract, semantics, context, adapter twins, CLI/TUI, and candidate review
-- full Thinking Engine implementation beyond Intake v0
+- full Thinking Engine implementation beyond Intake v0 and Socratic Discovery v0
 - Workspace Shell implementation
 - integration clients for Factory V3, Temper, Aegis, Sentinel, or Harmony
 - live Cursor CLI, Codex CLI, Cursor SDK, OpenAI SDK, or OpenAI Agents SDK adapters
@@ -122,8 +125,10 @@ python3 -m unittest tests/test_project_memory_cli.py
 python3 -m unittest tests/test_project_memory_tui.py
 python3 -m unittest tests/test_project_memory_review.py
 python3 -m unittest tests/test_thinking_engine_intake.py
+python3 -m unittest tests/test_thinking_engine_discovery.py
 ./scripts/factoryctl pack-lint --run RUN_20260701_1438_thinking_engine_intake_v0_plan
 ./scripts/factoryctl pack-lint --run RUN_20260701_1455_candidate_review_promotion_v0_plan
+./scripts/factoryctl pack-lint --run RUN_20260701_1529_socratic_discovery_v0_plan
 python3 scripts/agent_loop_bridge_validate.py tests/fixtures/agent_loop_bridge/valid_handoff.json --json
 ```
 
@@ -147,6 +152,7 @@ Validation closeout:
 cat docs/Factory/runs/RUN_20260701_0848_project_memory_v0_plan/VALIDATION_CLOSEOUT_REPORT.md
 cat docs/Factory/runs/RUN_20260701_1438_thinking_engine_intake_v0_plan/VALIDATION_CLOSEOUT_REPORT.md
 cat docs/Factory/runs/RUN_20260701_1455_candidate_review_promotion_v0_plan/VALIDATION_CLOSEOUT_REPORT.md
+cat docs/Factory/runs/RUN_20260701_1529_socratic_discovery_v0_plan/VALIDATION_CLOSEOUT_REPORT.md
 ```
 
 ## Active Boundary Decisions
@@ -187,5 +193,6 @@ cat docs/Factory/runs/RUN_20260701_1455_candidate_review_promotion_v0_plan/VALID
 - `RUN_20260701_1455_candidate_review_promotion_v0_plan`: Factory V2 `PLANNING_ONLY` pack for `CRP-V0-001` Candidate Review and Promotion v0. Status: `PASS`; pack lint passed.
 - Human Go for `CRP-V0-001` was given on 2026-07-01.
 - `CRP-V0-001` Candidate Review and Promotion v0 is implemented with local deterministic review decisions, promotion semantics, provenance retention, current-truth separation, negative fixtures, a thin CLI wrapper, and validation closeout.
-- `RUN_20260701_1529_socratic_discovery_v0_plan`: Factory V2 `PLANNING_ONLY` pack for `SD-V0-001` Socratic Discovery v0. Status: `PASS`; pack lint passed.
-- Next roadmap step: human Go/No-go review for `SD-V0-001` before implementation.
+- `RUN_20260701_1529_socratic_discovery_v0_plan`: Factory V2 pack for `SD-V0-001` Socratic Discovery v0. Status: `PASS`; execution enabled after human Go on 2026-07-01; pack lint passed.
+- `SD-V0-001` Socratic Discovery v0 is implemented with deterministic discovery sessions, traceable question generation, candidate answer capture, uncertainty-preserving candidate hypotheses, stop conditions, and validation closeout.
+- Next roadmap step: choose the next bounded slice after Socratic Discovery v0, likely a coding proof harness slice or Workspace Shell architecture.
