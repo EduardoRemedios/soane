@@ -83,6 +83,7 @@ Planning outputs:
 - `docs/Factory/runs/RUN_20260701_1438_thinking_engine_intake_v0_plan/VALIDATION_CLOSEOUT_REPORT.md`
 - `docs/Factory/runs/RUN_20260701_1455_candidate_review_promotion_v0_plan/`
 - `docs/Factory/runs/RUN_20260701_1455_candidate_review_promotion_v0_plan/VALIDATION_CLOSEOUT_REPORT.md`
+- `docs/Factory/runs/RUN_20260701_1529_socratic_discovery_v0_plan/`
 
 ## Current Architectural Posture
 
@@ -186,4 +187,5 @@ cat docs/Factory/runs/RUN_20260701_1455_candidate_review_promotion_v0_plan/VALID
 - `RUN_20260701_1455_candidate_review_promotion_v0_plan`: Factory V2 `PLANNING_ONLY` pack for `CRP-V0-001` Candidate Review and Promotion v0. Status: `PASS`; pack lint passed.
 - Human Go for `CRP-V0-001` was given on 2026-07-01.
 - `CRP-V0-001` Candidate Review and Promotion v0 is implemented with local deterministic review decisions, promotion semantics, provenance retention, current-truth separation, negative fixtures, a thin CLI wrapper, and validation closeout.
-- Next roadmap step: choose the next bounded Thinking Engine or Workspace Shell slice.
+- `RUN_20260701_1529_socratic_discovery_v0_plan`: Factory V2 `PLANNING_ONLY` pack for `SD-V0-001` Socratic Discovery v0. Status: `PASS`; pack lint passed.
+- Next roadmap step: human Go/No-go review for `SD-V0-001` before implementation.
