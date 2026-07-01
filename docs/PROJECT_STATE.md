@@ -147,6 +147,7 @@ cat docs/Factory/runs/RUN_20260701_0848_project_memory_v0_plan/VALIDATION_CLOSEO
 - Define the Project Memory v0 contract, golden fixtures, context assembly v0, capture/review/promotion flow, and mock-first adapter contract before implementation.
 - Include governed memory invariants in the Project Memory v0 contract: scope and visibility, temporal supersession, provenance lineage, controlled propagation, contradiction handling, and equivalent enforcement across retrieval paths.
 - Prefer mock-first, then CLI-backed coding harness adapters, then SDK-backed integrations once the adapter contract is stable.
+- Treat Greenfield and Brownfield project intake differently. Brownfield repositories require repo/workspace audit, existing application context, build/test discovery, architecture/documentation gap analysis, and agreed starting-context files before feature planning or coding delegation.
 
 ## Current Implementation State
 
@@ -160,4 +161,4 @@ cat docs/Factory/runs/RUN_20260701_0848_project_memory_v0_plan/VALIDATION_CLOSEO
 - MS-05 Headless CLI is implemented.
 - MS-06 Thin TUI Scope is implemented.
 - MS-07 Validation Closeout is complete.
-- Next roadmap step: Thinking Engine architecture.
+- Next roadmap step: Thinking Engine architecture, including Greenfield/Brownfield intake and starting-context readiness.

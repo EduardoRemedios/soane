@@ -27,7 +27,7 @@
 | 5 | Headless CLI | Done | Added `python3 -m soane.project_memory.cli` commands over Project Memory v0 primitives before building a navigable interface. |
 | 6 | Simple TUI | Done | Added thin terminal navigation over the same service functions for project navigation, memory browsing, evidence, decisions, hypotheses, adapter invocations, validation state, and unresolved questions. |
 | 7 | Project Memory validation pass | Done | Validation closeout passed at `docs/Factory/runs/RUN_20260701_0848_project_memory_v0_plan/VALIDATION_CLOSEOUT_REPORT.md`. |
-| 8 | Thinking Engine architecture | Next | Define discovery, Thinking, Socratic dialogue, hypotheses, inference strategies, Discovery Playbooks, and readiness assessment. |
+| 8 | Thinking Engine architecture | Next | Define discovery, Thinking, Socratic dialogue, hypotheses, inference strategies, Discovery Playbooks, Greenfield/Brownfield project intake, and readiness assessment. |
 | 9 | Thinking Engine planning run | Pending | Use Factory V2 to plan the first Thinking Engine implementation slice after the architecture is accepted. |
 | 10 | Workspace Shell architecture | Pending | Define desktop, web, mobile, voice, collaboration, dashboards, notifications, mission monitoring, and portfolio views after CLI/TUI proof has clarified the primitives. |
 | 11 | First product surface prototype | Pending | Build only after Project Memory, CLI/TUI navigation, and Thinking Engine primitives are coherent enough to support a real workflow. |
@@ -81,6 +81,12 @@ The completed MS-07 validation closeout validates the Project Memory v0 prototyp
 
 The next work should define Thinking Engine architecture. It should build on the validated Project Memory v0 proof and clarify discovery, Thinking, Socratic dialogue, hypotheses, inference strategies, Discovery Playbooks, readiness assessment, and the boundary between thinking support and mission execution.
 
+The Thinking Engine architecture must treat Greenfield and Brownfield project intake as different starting conditions:
+
+- Greenfield projects start by creating the initial project context, canonical docs, assumptions, constraints, and working agreements before feature work begins.
+- Brownfield projects start with a repo/workspace audit before feature work begins, including existing application structure, build/test commands, architecture documentation, dependency and integration context, known risks, missing docs, and current decision/evidence gaps.
+- Both paths must verify that the minimum context files or Markdown documents exist before Soane agrees a starting point or delegates coding work.
+
 Do not implement live adapters, database selection, or a broader Workspace product shell during the Thinking Engine architecture step.
 
 The golden fixture set should include at least:
@@ -123,7 +129,7 @@ The governed memory invariants should include:
 | CLI command model | Done | Implemented as `python3 -m soane.project_memory.cli` with validate, fixture-test, context-build, export-markdown, and inspect commands. |
 | TUI navigation model | Done | Implemented as `python3 -m soane.project_memory.tui` with deterministic screens over the existing memory, context, fixture, and CLI primitives. |
 | Project Memory validation closeout | Done | Validation report records VC-001 through VC-016 evidence, residual risks, budget variance, and readiness for Thinking Engine architecture. |
-| Thinking Engine architecture | Next | Next major architecture document after Project Memory v0 validation. |
+| Thinking Engine architecture | Next | Next major architecture document after Project Memory v0 validation; must include Greenfield/Brownfield intake and starting-context readiness. |
 | Workspace Shell architecture | Candidate | Defer until Project Memory and Thinking Engine shape are stable enough to drive UI. |
 
 ## Process Guidance

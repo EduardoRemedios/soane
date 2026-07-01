@@ -13,6 +13,7 @@
 - Implemented MS-05 Project Memory headless CLI with validate, fixture-test, context-build, export-markdown, and inspect commands over the existing service functions.
 - Implemented MS-06 Project Memory thin TUI with deterministic terminal screens for project navigation, memory browsing, evidence, decisions, hypotheses, adapter invocations, validation status, and unresolved questions.
 - Completed MS-07 Project Memory validation closeout with VC-001 through VC-016 evidence, residual risks, budget variance notes, and readiness for Thinking Engine architecture.
+- Added Greenfield versus Brownfield project intake as a required concern for the upcoming Thinking Engine architecture, including Brownfield repo audit and starting-context readiness before feature delegation.
 
 ## 2026-06-30
 
