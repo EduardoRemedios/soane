@@ -1,0 +1,43 @@
+"""Project Memory v0 contract surface."""
+
+from soane.project_memory.contract import (
+    CONTRACT_VERSION,
+    EVIDENCE_LEVELS,
+    GOVERNED_INVARIANTS,
+    LIFECYCLE_TRANSITIONS,
+    MEMORY_OBJECT_TYPES,
+    RELATIONSHIP_TYPES,
+    ContractValidationError,
+    EvidenceLevel,
+    LifecycleStatus,
+    MemoryObject,
+    MemoryObjectType,
+    Provenance,
+    Relationship,
+    RelationshipType,
+    Visibility,
+    can_transition,
+    deterministic_fixture_id,
+    validate_memory_object,
+)
+
+__all__ = [
+    "CONTRACT_VERSION",
+    "EVIDENCE_LEVELS",
+    "GOVERNED_INVARIANTS",
+    "LIFECYCLE_TRANSITIONS",
+    "MEMORY_OBJECT_TYPES",
+    "RELATIONSHIP_TYPES",
+    "ContractValidationError",
+    "EvidenceLevel",
+    "LifecycleStatus",
+    "MemoryObject",
+    "MemoryObjectType",
+    "Provenance",
+    "Relationship",
+    "RelationshipType",
+    "Visibility",
+    "can_transition",
+    "deterministic_fixture_id",
+    "validate_memory_object",
+]

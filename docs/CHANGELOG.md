@@ -5,6 +5,7 @@
 - Added governed memory invariants to the Project Memory v0 roadmap, informed by the MemClaw governed shared memory paper: scope and visibility, temporal supersession, provenance lineage, controlled propagation, contradiction handling, and equivalent enforcement across retrieval paths.
 - Clarified that Cursor CLI and Codex CLI are candidate coding harness adapter surfaces alongside Cursor SDK, OpenAI SDK, and OpenAI Agents SDK, with a preferred mock-first, CLI-backed, then SDK-backed proof order.
 - Added Factory V2 planning-only pack `RUN_20260701_0848_project_memory_v0_plan` for the Project Memory v0 object-model prototype, including v0 contract gates, golden fixtures, governed memory invariants, mock adapter proof, CLI/TUI sequencing, and final pack audit.
+- Implemented MS-00 Project Memory v0 contract scaffold with object types, lifecycle transitions, relationship types, evidence levels, governed memory invariants, deterministic fixture IDs, and static unit tests.
 
 ## 2026-06-30
 

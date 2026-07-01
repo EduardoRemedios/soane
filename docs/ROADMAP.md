@@ -21,9 +21,9 @@
 | Order | Work | Status | Notes |
 | --- | --- | --- |
 | 1 | Foundation documents | Done | Vision, core concepts, governance, portfolio context, integration architecture, Factory V2 scaffold, Project Memory research, and Project Memory architecture are complete. |
-| 2 | Project Memory implementation planning | Review Ready | Factory V2 `PLANNING_ONLY` pack completed at `docs/Factory/runs/RUN_20260701_0848_project_memory_v0_plan/`; human Go/No-go review is next. |
-| 3 | Project Memory v0 contract | Pending | Define the object contract, lifecycle transitions, relationship types, governed memory invariants, fixture set, mock adapter contract, context assembly v0, capture/review/promotion flow, and persistence guardrails after human Go. |
-| 4 | Project Memory v0 prototype | Pending | Implement the smallest local prototype for object types, lifecycle states, provenance, relationships, and traceability. Use a coding workflow as the first proof path if the planning pack supports it. No database choice unless the planning pack proves it is needed. |
+| 2 | Project Memory implementation planning | Done | Factory V2 `PLANNING_ONLY` pack completed at `docs/Factory/runs/RUN_20260701_0848_project_memory_v0_plan/`; human Go received on 2026-07-01. |
+| 3 | Project Memory v0 contract | Done | Contract scaffold, lifecycle transitions, relationship types, evidence levels, governed memory invariants, deterministic fixture IDs, and validation tests exist in `soane/project_memory/contract.py` and `tests/test_project_memory_contract.py`. |
+| 4 | Project Memory v0 prototype | Next | Continue with MS-01 Golden Fixture Corpus, then implement local prototype for object types, lifecycle states, provenance, relationships, and traceability. No database choice unless the implementation proves it is needed. |
 | 5 | Headless CLI | Pending | Add a small command surface over the Project Memory v0 primitives before building a navigable interface. |
 | 6 | Simple TUI | Pending | Add a thin terminal UI over the same CLI/service functions for project navigation, memory browsing, evidence, decisions, hypotheses, adapter invocations, validation state, and unresolved questions. |
 | 7 | Project Memory validation pass | Pending | Validate the prototype against existing canonical docs and the research synthesis. Prove import, traceability, amendment, supersession, Markdown source mapping, context assembly, capture/review/promotion, and adapter-backed provider invocation fixtures. |
@@ -34,7 +34,7 @@
 
 ## Immediate Next Move
 
-Review the completed Factory V2 `PLANNING_ONLY` implementation-planning pack for:
+Continue implementation of:
 
 `Project Memory v0 Object Model Prototype`
 
@@ -42,10 +42,12 @@ Pack path:
 
 - `docs/Factory/runs/RUN_20260701_0848_project_memory_v0_plan/`
 
-Current required decision:
+Current state:
 
-- Human Go: proceed to Project Memory v0 contract and implementation planning execution.
-- Human No-go: revise the pack before implementation.
+- Factory V2 planning pack: complete and passed.
+- Human Go: received on 2026-07-01.
+- MS-00 Contract Scaffold: complete.
+- Next micro-sprint: MS-01 Golden Fixture Corpus.
 
 The pack consumed:
 
@@ -55,37 +57,22 @@ The pack consumed:
 - `docs/research/PROJECT_MEMORY_RESEARCH_SYNTHESIS.md`
 - `docs/PROJECT_MEMORY_ARCHITECTURE.md`
 
-The pack defines:
+The next micro-sprint should define executable local fixtures for:
 
-- first implementation slice
-- non-goals
-- file/module layout
-- v0 object contract
-- minimal object model
-- required fields and governed memory invariants
-- lifecycle states
-- lifecycle transition rules
-- provenance representation
-- relationship representation
-- evidence-level handling
-- capture, review, and promotion flow
-- contradiction, staleness, supersession, and redaction behavior
-- validation strategy
-- pre-mortem
-- golden fixtures
-- scope and visibility enforcement proof
-- temporal supersession proof
-- provenance lineage proof
-- controlled propagation proof for context assembly
-- context assembly v0
-- canonical Markdown source-mapping proof
-- commands/tests to add
-- headless CLI command surface
-- simple TUI navigation scope
-- mock-first Cursor/Codex CLI or SDK adapter contract, without narrowing the Workspace to coding
-- persistence, deterministic ID, and migration guardrails
+- Decision linked to Evidence
+- Assumption superseded by Evidence
+- Contradiction between sources
+- Stale Evidence
+- canonical Markdown source mapping
+- Provider Invocation via mocked Cursor/Codex or OpenAI adapter
+- Capability without Authority
+- redaction or retrieval suppression
+- unauthorized retrieval blocked by scope or visibility
+- stale or superseded record excluded as current truth
+- promoted claim with reconstructable provenance lineage
+- context assembly respects visibility and propagation rules
 
-It did not implement during the planning run.
+Do not implement CLI, TUI, live adapters, or database selection during MS-01.
 
 The golden fixture set should include at least:
 

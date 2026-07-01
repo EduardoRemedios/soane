@@ -1,0 +1,2 @@
+"""Soane workspace prototype package."""
+
