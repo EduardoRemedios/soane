@@ -19,6 +19,7 @@
 - Added Factory V2 planning-only pack `RUN_20260701_1438_thinking_engine_intake_v0_plan` for `TEI-V0-001`, the first Thinking Engine Intake v0 implementation slice.
 - Implemented `TEI-V0-001` Thinking Engine Intake v0 with local deterministic intake classification, Context Baseline, Discovery Playbook selection, Readiness Assessment, Project Memory write-back candidates, five intake fixtures, tests, and validation closeout.
 - Added Factory V2 planning-only pack `RUN_20260701_1455_candidate_review_promotion_v0_plan` for `CRP-V0-001`, the Candidate Review and Promotion v0 slice that governs how Project Memory candidates become, or do not become, accepted truth.
+- Implemented `CRP-V0-001` Candidate Review and Promotion v0 with local deterministic review decisions, provenance retention, amended lineage, authority separation, current-truth filtering for candidate and review states, six review fixtures, tests, and validation closeout.
 
 ## 2026-06-30
 

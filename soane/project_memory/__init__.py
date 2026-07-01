@@ -42,6 +42,14 @@ from soane.project_memory.context import (
     render_markdown_view,
 )
 from soane.project_memory.fixtures import FixtureValidationError, GoldenFixture, load_fixture, load_fixtures
+from soane.project_memory.review import (
+    CandidateReviewError,
+    CandidateReviewResult,
+    ReviewDecision,
+    ReviewOutcome,
+    is_candidate_object,
+    review_candidate,
+)
 from soane.project_memory.semantics import (
     EXTERNAL_ADAPTER,
     PROJECT_READER,
@@ -60,6 +68,8 @@ __all__ = [
     "MEMORY_OBJECT_TYPES",
     "RELATIONSHIP_TYPES",
     "ContractValidationError",
+    "CandidateReviewError",
+    "CandidateReviewResult",
     "AdapterInvocationStatus",
     "AdapterSurface",
     "AdapterSurfaceKind",
@@ -74,6 +84,8 @@ __all__ = [
     "Provenance",
     "Relationship",
     "RelationshipType",
+    "ReviewDecision",
+    "ReviewOutcome",
     "Visibility",
     "FixtureValidationError",
     "GoldenFixture",
@@ -95,8 +107,10 @@ __all__ = [
     "default_adapter_twins",
     "deterministic_fixture_id",
     "is_visible",
+    "is_candidate_object",
     "load_fixture",
     "load_fixtures",
     "render_markdown_view",
+    "review_candidate",
     "validate_memory_object",
 ]

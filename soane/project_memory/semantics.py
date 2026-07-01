@@ -46,6 +46,14 @@ NON_CURRENT_STATUSES = frozenset(
         LifecycleStatus.INVALIDATED,
         LifecycleStatus.RETIRED,
         LifecycleStatus.ARCHIVED,
+        LifecycleStatus.PROPOSED,
+        LifecycleStatus.OPEN,
+        LifecycleStatus.UNDER_INVESTIGATION,
+        LifecycleStatus.DEFERRED,
+        LifecycleStatus.BLOCKED,
+        LifecycleStatus.SUBMITTED,
+        LifecycleStatus.REVIEWED,
+        LifecycleStatus.CHALLENGED,
         LifecycleStatus.STALE,
         LifecycleStatus.REVOKED,
         LifecycleStatus.REJECTED,
@@ -180,4 +188,3 @@ def _metadata_string_set(metadata: Mapping[str, object], key: str) -> frozenset[
     if not isinstance(raw_value, list):
         return frozenset()
     return frozenset(item for item in raw_value if isinstance(item, str) and item)
-

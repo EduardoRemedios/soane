@@ -1,0 +1,6 @@
+{
+  "fixture_id": "CRP-GF-004",
+  "title": "Amend candidate while retaining lineage",
+  "outcome": "amend",
+  "expected_status": "accepted"
+}

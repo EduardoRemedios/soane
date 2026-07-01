@@ -204,6 +204,12 @@ def _propagation_exclusion_reason(memory_object: MemoryObject, boundary: str) ->
 
 
 def _surface_reason(status: LifecycleStatus) -> str:
+    if status == LifecycleStatus.PROPOSED:
+        return "candidate_record_surface_for_review"
+    if status == LifecycleStatus.OPEN:
+        return "open_record_surface_for_review"
+    if status == LifecycleStatus.DEFERRED:
+        return "deferred_record_surface_for_review"
     if status == LifecycleStatus.STALE:
         return "stale_record_surface_for_review"
     if status == LifecycleStatus.SUPERSEDED:

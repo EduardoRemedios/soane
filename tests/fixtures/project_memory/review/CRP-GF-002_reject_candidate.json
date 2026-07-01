@@ -1,0 +1,6 @@
+{
+  "fixture_id": "CRP-GF-002",
+  "title": "Reject candidate while keeping audit history",
+  "outcome": "reject",
+  "expected_status": "rejected"
+}

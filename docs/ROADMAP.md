@@ -18,6 +18,7 @@
 | Thinking Engine architecture | Done | `docs/THINKING_ENGINE_ARCHITECTURE.md` |
 | Thinking Engine Intake v0 | Done | `soane/thinking_engine/intake.py`, `tests/test_thinking_engine_intake.py`, `docs/Factory/runs/RUN_20260701_1438_thinking_engine_intake_v0_plan/VALIDATION_CLOSEOUT_REPORT.md` |
 | Candidate Review and Promotion planning | Done | `docs/Factory/runs/RUN_20260701_1455_candidate_review_promotion_v0_plan/` |
+| Candidate Review and Promotion v0 | Done | `soane/project_memory/review.py`, `tests/test_project_memory_review.py`, `docs/Factory/runs/RUN_20260701_1455_candidate_review_promotion_v0_plan/VALIDATION_CLOSEOUT_REPORT.md` |
 
 ## Sequence
 
@@ -35,15 +36,16 @@
 | 10 | Thinking Engine Intake v0 implementation | Done | Implemented local deterministic intake classification, Context Baseline, Discovery Playbook selection, Readiness Assessment, and Project Memory write-back candidates. No live integrations, database, or product shell were introduced. |
 | 11 | Thinking Engine Intake v0 review | Done | Review selected Candidate Review and Promotion as the next bounded slice because Intake v0 emits candidates that must not silently become accepted Project Memory truth. |
 | 12 | Candidate Review and Promotion planning run | Done | Factory V2 `PLANNING_ONLY` pack completed at `docs/Factory/runs/RUN_20260701_1455_candidate_review_promotion_v0_plan/`; pack-lint passed. |
-| 13 | Candidate Review and Promotion v0 implementation | Next | Requires explicit human Go against `CRP-V0-001` before execution. Planned slice covers candidate review decisions, provenance retention, promotion semantics, current-truth separation, negative fixtures, and optional thin CLI wrapper. |
-| 14 | Workspace Shell architecture | Pending | Define desktop, web, mobile, voice, collaboration, dashboards, notifications, mission monitoring, and portfolio views after CLI/TUI proof has clarified the primitives. |
-| 15 | First product surface prototype | Pending | Build only after Project Memory, CLI/TUI navigation, and Thinking Engine primitives are coherent enough to support a real workflow. |
+| 13 | Candidate Review and Promotion v0 implementation | Done | Implemented local deterministic review decisions, provenance retention, promotion semantics, current-truth separation, negative fixtures, and validation closeout. Optional CLI wrapper was skipped. |
+| 14 | Next Thinking Engine slice | Next | Choose the next bounded slice now that candidate output and promotion semantics are governed. Likely candidates are Socratic discovery flow or Workspace Shell architecture. |
+| 15 | Workspace Shell architecture | Pending | Define desktop, web, mobile, voice, collaboration, dashboards, notifications, mission monitoring, and portfolio views after CLI/TUI proof has clarified the primitives. |
+| 16 | First product surface prototype | Pending | Build only after Project Memory, CLI/TUI navigation, and Thinking Engine primitives are coherent enough to support a real workflow. |
 
 ## Immediate Next Move
 
 Continue implementation with:
 
-`Candidate Review and Promotion v0 implementation review`
+`Next Thinking Engine slice selection`
 
 Pack path:
 
@@ -66,7 +68,8 @@ Current state:
 - Thinking Engine Intake v0 implementation: complete.
 - Thinking Engine Intake v0 proof review: complete.
 - Candidate Review and Promotion planning run: complete and passed.
-- Next work: human Go/No-go review for `CRP-V0-001`.
+- Candidate Review and Promotion v0 implementation: complete.
+- Next work: choose the next bounded slice now that candidate promotion is governed.
 
 The pack consumed:
 
@@ -106,6 +109,8 @@ The completed Thinking Engine planning run produced `TEI-V0-001`, a bounded impl
 The completed Thinking Engine Intake v0 implementation proves the local service layer for intake category classification, Context Baseline construction, Discovery Playbook selection, Readiness Assessment, and Project Memory candidate output. Do not extend this proof into live adapters, database selection, or a broader Workspace product shell without a new bounded plan.
 
 The completed Candidate Review and Promotion planning run defines `CRP-V0-001`, the next bounded slice. It should close the gap between candidate output and accepted Project Memory truth before Socratic discovery or Workspace Shell work proceeds.
+
+The completed Candidate Review and Promotion v0 implementation closes that gap locally by requiring explicit review decisions, preserving provenance and lineage, keeping candidate and non-current records out of current truth, and preserving the authority boundary.
 
 The golden fixture set should include at least:
 
@@ -151,8 +156,8 @@ The governed memory invariants should include:
 | Thinking Engine planning run | Done | `docs/Factory/runs/RUN_20260701_1438_thinking_engine_intake_v0_plan/` defines `TEI-V0-001`. |
 | Thinking Engine Intake v0 implementation | Done | Implemented local deterministic intake classification, Context Baseline, Discovery Playbook selection, Readiness Assessment, and Project Memory write-back candidates. |
 | Candidate Review and Promotion planning run | Done | `docs/Factory/runs/RUN_20260701_1455_candidate_review_promotion_v0_plan/` defines `CRP-V0-001`. |
-| Candidate Review and Promotion v0 implementation | Next | Requires human Go; planned scope is local deterministic review decisions, promotion semantics, provenance retention, current-truth separation, negative fixtures, and optional thin CLI wrapper. |
-| Thinking Engine next slice | Candidate | Choose after Candidate Review and Promotion v0, likely Socratic discovery flow or Workspace Shell architecture. |
+| Candidate Review and Promotion v0 implementation | Done | Implemented local deterministic review decisions, promotion semantics, provenance retention, current-truth separation, negative fixtures, and validation closeout. |
+| Thinking Engine next slice | Next | Choose after Candidate Review and Promotion v0, likely Socratic discovery flow or Workspace Shell architecture. |
 | Workspace Shell architecture | Candidate | Defer until Project Memory and Thinking Engine shape are stable enough to drive UI. |
 
 ## Process Guidance

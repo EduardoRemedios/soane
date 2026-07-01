@@ -1,0 +1,6 @@
+{
+  "fixture_id": "CRP-GF-006",
+  "title": "Preserve conflicting candidates through review",
+  "outcome": "accept",
+  "expected_relationship": "contradicts"
+}

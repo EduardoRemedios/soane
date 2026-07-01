@@ -1,0 +1,6 @@
+{
+  "fixture_id": "CRP-GF-001",
+  "title": "Accept candidate with retained provenance",
+  "outcome": "accept",
+  "expected_status": "accepted"
+}

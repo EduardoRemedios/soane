@@ -1,0 +1,6 @@
+{
+  "fixture_id": "CRP-GF-003",
+  "title": "Defer candidate with review rationale",
+  "outcome": "defer",
+  "expected_status": "deferred"
+}

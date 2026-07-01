@@ -1,0 +1,6 @@
+{
+  "fixture_id": "CRP-GF-005",
+  "title": "Block promotion that requires authority",
+  "outcome": "accept",
+  "expected_error": "authority_ref is required to promote this candidate"
+}
