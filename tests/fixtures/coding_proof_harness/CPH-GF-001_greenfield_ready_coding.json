@@ -1,0 +1,33 @@
+{
+  "fixture_id": "CPH-GF-001",
+  "title": "Greenfield coding proof ready for mocked provider",
+  "domain": "software",
+  "project": {
+    "name": "New CLI utility",
+    "goal": "Plan a small CLI utility before implementation",
+    "declared_category": "greenfield"
+  },
+  "goals": ["Create a deterministic coding proof path"],
+  "non_goals": ["Do not call a live provider"],
+  "canonical_docs": ["VISION.md", "CORE_CONCEPTS.md", "ROADMAP.md"],
+  "assumptions": ["No existing repository code needs auditing"],
+  "constraints": ["Provider output must remain a candidate"],
+  "open_questions": ["Which command shape should the proof prefer?"],
+  "missing_context": [],
+  "expected": {
+    "category": "greenfield",
+    "readiness": "ready_for_planning",
+    "playbooks": ["greenfield_product_definition", "context_baseline_discovery"]
+  },
+  "harness": {
+    "provider_surface": "codex_cli",
+    "task": {
+      "title": "Draft CLI command model",
+      "prompt": "Propose the smallest CLI command model for the greenfield utility."
+    },
+    "proposed_output": "Create a validate command and a run command backed by deterministic fixtures.",
+    "expected": {
+      "ready_for_provider": true
+    }
+  }
+}

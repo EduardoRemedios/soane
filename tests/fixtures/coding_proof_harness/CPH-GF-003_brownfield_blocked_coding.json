@@ -1,0 +1,45 @@
+{
+  "fixture_id": "CPH-GF-003",
+  "title": "Brownfield coding proof blocked by missing audit and authority",
+  "domain": "software",
+  "project": {
+    "name": "Unknown production auth service",
+    "goal": "Plan authentication behavior safely",
+    "declared_category": "brownfield_single_repo",
+    "system_boundary": "unknown production service"
+  },
+  "goals": ["Determine whether coding can proceed"],
+  "non_goals": ["Do not edit authentication code"],
+  "repositories": [
+    {
+      "id": "repo-auth",
+      "type": "repository",
+      "title": "Authentication service repository",
+      "location": "git@example.com:team/auth-service.git",
+      "owner": "unknown",
+      "evidence_level": "E1"
+    }
+  ],
+  "canonical_docs": [],
+  "assumptions": ["The service is production critical"],
+  "constraints": ["Authentication changes require explicit authority"],
+  "open_questions": ["Who owns production approval?"],
+  "missing_context": ["build command", "test command", "architecture documentation", "production owner", "authority path"],
+  "blocking_missing_context": true,
+  "expected": {
+    "category": "brownfield_single_repo",
+    "readiness": "blocked",
+    "playbooks": ["brownfield_repository_audit", "software_engineering_discovery"]
+  },
+  "harness": {
+    "provider_surface": "codex_cli",
+    "task": {
+      "title": "Plan authentication change",
+      "prompt": "Propose an authentication change plan."
+    },
+    "proposed_output": "No provider output should be created while audit and authority context are missing.",
+    "expected": {
+      "ready_for_provider": false
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "fixture_id": "CPH-GF-002",
+  "title": "Brownfield single-repo coding proof ready for mocked provider",
+  "domain": "software",
+  "project": {
+    "name": "Existing billing service",
+    "goal": "Plan a safe endpoint change after repository context is available",
+    "declared_category": "brownfield_single_repo",
+    "system_boundary": "one service repository"
+  },
+  "goals": ["Use existing build and test context before proposing code"],
+  "non_goals": ["Do not mutate the repository"],
+  "repositories": [
+    {
+      "id": "repo-billing",
+      "type": "repository",
+      "title": "Billing service repository",
+      "location": "git@example.com:team/billing-service.git",
+      "owner": "platform-team",
+      "evidence_level": "E1"
+    }
+  ],
+  "canonical_docs": ["README.md", "ARCHITECTURE.md"],
+  "assumptions": ["Existing tests cover billing endpoint behavior"],
+  "constraints": ["Use the discovered test command before any future edit"],
+  "open_questions": ["Where is the endpoint ownership documented?"],
+  "missing_context": [],
+  "build_commands": ["npm run build"],
+  "test_commands": ["npm test"],
+  "expected": {
+    "category": "brownfield_single_repo",
+    "readiness": "ready_for_planning",
+    "playbooks": ["brownfield_repository_audit", "software_engineering_discovery"]
+  },
+  "harness": {
+    "provider_surface": "cursor_cli",
+    "task": {
+      "title": "Plan endpoint change",
+      "prompt": "Propose a minimal endpoint change plan using the existing repository context."
+    },
+    "proposed_output": "Inspect the route module, add a narrow handler test, then implement the endpoint behind existing validation.",
+    "expected": {
+      "ready_for_provider": true
+    }
+  }
+}

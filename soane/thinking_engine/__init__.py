@@ -1,5 +1,15 @@
 """Thinking Engine local proof surface."""
 
+from soane.thinking_engine.coding_harness import (
+    CodingHarnessFixture,
+    CodingHarnessResult,
+    CodingHarnessValidationError,
+    CodingTask,
+    load_coding_harness_fixture,
+    load_coding_harness_fixtures,
+    review_provider_output,
+    run_coding_proof,
+)
 from soane.thinking_engine.discovery import (
     DiscoveryAnswer,
     DiscoveryHypothesis,
@@ -31,6 +41,10 @@ from soane.thinking_engine.intake import (
 __all__ = [
     "ContextBaseline",
     "ContextSource",
+    "CodingHarnessFixture",
+    "CodingHarnessResult",
+    "CodingHarnessValidationError",
+    "CodingTask",
     "DiscoveryAnswer",
     "DiscoveryHypothesis",
     "DiscoveryPlaybook",
@@ -49,7 +63,11 @@ __all__ = [
     "capture_answer",
     "determine_stop_condition",
     "generate_questions",
+    "load_coding_harness_fixture",
+    "load_coding_harness_fixtures",
     "load_intake_fixture",
     "load_intake_fixtures",
+    "review_provider_output",
+    "run_coding_proof",
     "start_discovery_session",
 ]
