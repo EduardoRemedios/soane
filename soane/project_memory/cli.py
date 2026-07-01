@@ -5,12 +5,24 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+from datetime import datetime
 from pathlib import Path
 from typing import Any, Mapping, Sequence
 
 from soane.project_memory.context import ContextRequest, build_context_package, render_markdown_view
-from soane.project_memory.contract import MemoryObject, validate_memory_object
+from soane.project_memory.contract import (
+    EvidenceLevel,
+    LifecycleStatus,
+    MemoryObject,
+    MemoryObjectType,
+    Provenance,
+    Relationship,
+    RelationshipType,
+    Visibility,
+    validate_memory_object,
+)
 from soane.project_memory.fixtures import GoldenFixture, load_fixtures
+from soane.project_memory.review import ReviewDecision, ReviewOutcome, review_candidate
 from soane.project_memory.semantics import AccessContext, ProjectMemory
 
 
@@ -73,6 +85,20 @@ def _build_parser() -> argparse.ArgumentParser:
     inspect_selector.add_argument("--fixture-key", nargs=2, metavar=("FIXTURE_ID", "KEY"), help="fixture object selector")
     inspect_parser.add_argument("--audit", action="store_true", help="inspect without visibility filtering")
     inspect_parser.set_defaults(func=_cmd_inspect)
+
+    review_parser = _add_fixture_args(subparsers.add_parser("review-candidate", help="review one candidate object"))
+    review_parser.add_argument("--candidate-json", type=Path, required=True, help="candidate MemoryObject JSON path")
+    review_parser.add_argument(
+        "--outcome",
+        choices=[outcome.value for outcome in ReviewOutcome],
+        required=True,
+        help="review outcome",
+    )
+    review_parser.add_argument("--reviewer", required=True, help="reviewer identifier")
+    review_parser.add_argument("--rationale", default="", help="review rationale")
+    review_parser.add_argument("--amended-title", help="amended title for amend outcome")
+    review_parser.add_argument("--authority-ref", help="authority reference for authority-gated promotion")
+    review_parser.set_defaults(func=_cmd_review_candidate)
 
     return parser
 
@@ -180,6 +206,32 @@ def _cmd_inspect(args: argparse.Namespace) -> dict[str, Any]:
     }
 
 
+def _cmd_review_candidate(args: argparse.Namespace) -> dict[str, Any]:
+    candidate = _memory_object_from_json(args.candidate_json)
+    decision = ReviewDecision(
+        outcome=ReviewOutcome(args.outcome),
+        reviewer=args.reviewer,
+        rationale=args.rationale,
+        amended_title=args.amended_title,
+        authority_ref=args.authority_ref,
+    )
+    result = review_candidate(candidate, decision)
+    return {
+        "ok": True,
+        "command": "review-candidate",
+        "candidate": _memory_object_summary(result.candidate),
+        "reviewed_object": _memory_object_summary(result.reviewed_object),
+        "decision": {
+            "outcome": result.decision.outcome.value,
+            "reviewer": result.decision.reviewer,
+            "rationale": result.decision.rationale,
+            "reviewed_at": result.decision.reviewed_at.isoformat(),
+            "amended_title": result.decision.amended_title,
+            "authority_ref": result.decision.authority_ref,
+        },
+    }
+
+
 def _context_request(args: argparse.Namespace, fixtures: Sequence[GoldenFixture]) -> ContextRequest:
     seed_ids = list(args.seed)
     for fixture_id, key in args.fixture_key:
@@ -243,6 +295,7 @@ def _memory_object_summary(memory_object: MemoryObject) -> dict[str, Any]:
         "authority_ref": memory_object.authority_ref,
         "confidence": memory_object.confidence,
         "source_refs": list(memory_object.provenance.source_refs),
+        "derivation_refs": list(memory_object.provenance.derivation_refs),
         "created_by": memory_object.provenance.created_by,
         "created_at": memory_object.provenance.created_at.isoformat(),
         "evidence_level": memory_object.provenance.evidence_level.value,
@@ -256,6 +309,87 @@ def _memory_object_summary(memory_object: MemoryObject) -> dict[str, Any]:
         ],
         "metadata": dict(memory_object.metadata),
     }
+
+
+def _memory_object_from_json(path: Path) -> MemoryObject:
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(payload, dict):
+        raise CliError(f"{path} must contain a JSON object")
+    provenance_payload = payload.get("provenance")
+    if not isinstance(provenance_payload, dict):
+        raise CliError(f"{path} requires provenance object")
+    memory_object = MemoryObject(
+        id=_required_payload_str(payload, "id", path),
+        type=MemoryObjectType(_required_payload_str(payload, "type", path)),
+        title=_required_payload_str(payload, "title", path),
+        status=LifecycleStatus(_required_payload_str(payload, "status", path)),
+        visibility=Visibility(_required_payload_str(payload, "visibility", path)),
+        provenance=Provenance(
+            source_refs=tuple(_required_payload_str_list(provenance_payload, "source_refs", path)),
+            created_by=_required_payload_str(provenance_payload, "created_by", path),
+            created_at=_parse_datetime(_required_payload_str(provenance_payload, "created_at", path), path),
+            evidence_level=EvidenceLevel(_required_payload_str(provenance_payload, "evidence_level", path)),
+            derivation_refs=tuple(_optional_payload_str_list(provenance_payload, "derivation_refs")),
+        ),
+        relationships=tuple(_relationship_from_payload(item, path) for item in payload.get("relationships", [])),
+        updated_at=_parse_optional_datetime(payload.get("updated_at"), path),
+        supersedes=tuple(_optional_payload_str_list(payload, "supersedes")),
+        superseded_by=tuple(_optional_payload_str_list(payload, "superseded_by")),
+        authority_ref=payload.get("authority_ref") if isinstance(payload.get("authority_ref"), str) else None,
+        confidence=payload.get("confidence") if isinstance(payload.get("confidence"), float | int) else None,
+        metadata=payload.get("metadata", {}) if isinstance(payload.get("metadata", {}), dict) else {},
+    )
+    validate_memory_object(memory_object)
+    return memory_object
+
+
+def _relationship_from_payload(payload: Any, path: Path) -> Relationship:
+    if not isinstance(payload, dict):
+        raise CliError(f"{path} relationship entries must be objects")
+    return Relationship(
+        type=RelationshipType(_required_payload_str(payload, "type", path)),
+        target_id=_required_payload_str(payload, "target_id", path),
+        evidence_ids=tuple(_optional_payload_str_list(payload, "evidence_ids")),
+    )
+
+
+def _parse_datetime(raw_value: str, path: Path) -> datetime:
+    try:
+        value = datetime.fromisoformat(raw_value.replace("Z", "+00:00"))
+    except ValueError as exc:
+        raise CliError(f"{path} invalid datetime: {raw_value}") from exc
+    if value.tzinfo is None:
+        raise CliError(f"{path} datetime must be timezone-aware: {raw_value}")
+    return value
+
+
+def _parse_optional_datetime(raw_value: Any, path: Path) -> datetime | None:
+    if raw_value is None:
+        return None
+    if not isinstance(raw_value, str):
+        raise CliError(f"{path} optional datetime must be a string")
+    return _parse_datetime(raw_value, path)
+
+
+def _required_payload_str(payload: Mapping[str, Any], key: str, path: Path) -> str:
+    value = payload.get(key)
+    if not isinstance(value, str) or not value.strip():
+        raise CliError(f"{path} requires non-empty string field: {key}")
+    return value
+
+
+def _required_payload_str_list(payload: Mapping[str, Any], key: str, path: Path) -> tuple[str, ...]:
+    value = payload.get(key)
+    if not isinstance(value, list) or not value or not all(isinstance(item, str) and item for item in value):
+        raise CliError(f"{path} requires non-empty string list field: {key}")
+    return tuple(value)
+
+
+def _optional_payload_str_list(payload: Mapping[str, Any], key: str) -> tuple[str, ...]:
+    value = payload.get(key, [])
+    if not isinstance(value, list):
+        return ()
+    return tuple(item for item in value if isinstance(item, str) and item)
 
 
 def _source_map_summary(source_map: Mapping[str, Any]) -> dict[str, Any]:

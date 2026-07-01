@@ -185,5 +185,5 @@ cat docs/Factory/runs/RUN_20260701_1455_candidate_review_promotion_v0_plan/VALID
 - `TEI-V0-001` Thinking Engine Intake v0 is implemented with local deterministic intake classification, Context Baseline, Discovery Playbook selection, Readiness Assessment, and Project Memory write-back candidates.
 - `RUN_20260701_1455_candidate_review_promotion_v0_plan`: Factory V2 `PLANNING_ONLY` pack for `CRP-V0-001` Candidate Review and Promotion v0. Status: `PASS`; pack lint passed.
 - Human Go for `CRP-V0-001` was given on 2026-07-01.
-- `CRP-V0-001` Candidate Review and Promotion v0 is implemented with local deterministic review decisions, promotion semantics, provenance retention, current-truth separation, negative fixtures, and validation closeout.
+- `CRP-V0-001` Candidate Review and Promotion v0 is implemented with local deterministic review decisions, promotion semantics, provenance retention, current-truth separation, negative fixtures, a thin CLI wrapper, and validation closeout.
 - Next roadmap step: choose the next bounded Thinking Engine or Workspace Shell slice.

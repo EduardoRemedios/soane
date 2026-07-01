@@ -7,6 +7,8 @@ import tempfile
 import unittest
 from pathlib import Path
 
+from soane.project_memory.contract import MemoryObjectType, deterministic_fixture_id
+
 
 FIXTURE_DIR = Path(__file__).parent / "fixtures" / "project_memory" / "golden"
 
@@ -115,6 +117,57 @@ class ProjectMemoryCliTests(unittest.TestCase):
         self.assertIn("not visible", denied.stderr)
         self.assertEqual("suppressed", json.loads(allowed.stdout)["object"]["visibility"])
 
+    def test_review_candidate_command_wraps_review_service(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            candidate_path = Path(tmp) / "candidate.json"
+            candidate_path.write_text(
+                json.dumps(_candidate_payload("CRP-CLI-001", "CLI accepted candidate")),
+                encoding="utf-8",
+            )
+
+            result = self._run_cli(
+                "review-candidate",
+                "--candidate-json",
+                str(candidate_path),
+                "--outcome",
+                "accept",
+                "--reviewer",
+                "cli-reviewer",
+                "--rationale",
+                "CLI wrapper delegates to review service.",
+            )
+            payload = json.loads(result.stdout)
+
+        self.assertTrue(payload["ok"])
+        self.assertEqual("review-candidate", payload["command"])
+        self.assertEqual("accepted", payload["reviewed_object"]["status"])
+        self.assertEqual("accept", payload["reviewed_object"]["metadata"]["review_outcome"])
+        self.assertEqual("cli-reviewer", payload["reviewed_object"]["created_by"])
+        self.assertIn(payload["candidate"]["id"], payload["reviewed_object"]["derivation_refs"])
+
+    def test_review_candidate_command_surfaces_service_errors(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            candidate_path = Path(tmp) / "candidate.json"
+            payload = _candidate_payload("CRP-CLI-002", "Authority-gated CLI candidate")
+            payload["metadata"]["requires_authority"] = True
+            candidate_path.write_text(json.dumps(payload), encoding="utf-8")
+
+            result = self._run_cli(
+                "review-candidate",
+                "--candidate-json",
+                str(candidate_path),
+                "--outcome",
+                "accept",
+                "--reviewer",
+                "cli-reviewer",
+                "--rationale",
+                "Authority is missing.",
+                expect_success=False,
+            )
+
+        self.assertNotEqual(0, result.returncode)
+        self.assertIn("authority_ref is required", result.stderr)
+
     def _run_cli(self, command: str, *args: str, expect_success: bool = True) -> subprocess.CompletedProcess[str]:
         result = subprocess.run(
             [
@@ -134,6 +187,27 @@ class ProjectMemoryCliTests(unittest.TestCase):
         if expect_success and result.returncode != 0:
             self.fail(f"CLI failed with {result.returncode}\nstdout={result.stdout}\nstderr={result.stderr}")
         return result
+
+
+def _candidate_payload(fixture_id: str, title: str) -> dict[str, object]:
+    return {
+        "id": deterministic_fixture_id(fixture_id, MemoryObjectType.ASSUMPTION, title),
+        "type": "assumption",
+        "title": title,
+        "status": "proposed",
+        "visibility": "project",
+        "provenance": {
+            "source_refs": [f"source://{fixture_id}"],
+            "created_by": "thinking-engine-intake",
+            "created_at": "2026-07-01T15:00:00+00:00",
+            "evidence_level": "E2",
+            "derivation_refs": [],
+        },
+        "relationships": [],
+        "authority_ref": None,
+        "confidence": None,
+        "metadata": {"candidate": True, "promotion_required": True},
+    }
 
 
 if __name__ == "__main__":
