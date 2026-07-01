@@ -8,6 +8,7 @@
 - Implemented MS-00 Project Memory v0 contract scaffold with object types, lifecycle transitions, relationship types, evidence levels, governed memory invariants, deterministic fixture IDs, and static unit tests.
 - Implemented MS-01 Project Memory golden fixture corpus with twelve fixture files, a fixture loader, deterministic ID validation, and fixture conformance tests.
 - Implemented MS-02 Project Memory local semantics with lifecycle transitions, provenance preservation, relationship/evidence queries, visibility enforcement, current-truth filtering, suppression handling, and contradiction representation tests.
+- Implemented MS-03 Project Memory context assembly and Markdown source mapping with lifecycle-aware context packages, visibility and propagation exclusions, contradiction and stale-record surfacing, and explicit Markdown source maps.
 
 ## 2026-06-30
 

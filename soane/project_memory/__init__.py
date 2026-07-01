@@ -20,6 +20,17 @@ from soane.project_memory.contract import (
     deterministic_fixture_id,
     validate_memory_object,
 )
+from soane.project_memory.context import (
+    ContextAssemblyError,
+    ContextExclusion,
+    ContextItem,
+    ContextPackage,
+    ContextRequest,
+    MarkdownSource,
+    MarkdownView,
+    build_context_package,
+    render_markdown_view,
+)
 from soane.project_memory.fixtures import FixtureValidationError, GoldenFixture, load_fixture, load_fixtures
 from soane.project_memory.semantics import (
     EXTERNAL_ADAPTER,
@@ -53,12 +64,21 @@ __all__ = [
     "PROJECT_READER",
     "PROJECT_REVIEWER",
     "AccessContext",
+    "ContextAssemblyError",
+    "ContextExclusion",
+    "ContextItem",
+    "ContextPackage",
+    "ContextRequest",
     "MemorySemanticsError",
+    "MarkdownSource",
+    "MarkdownView",
     "ProjectMemory",
+    "build_context_package",
     "can_transition",
     "deterministic_fixture_id",
     "is_visible",
     "load_fixture",
     "load_fixtures",
+    "render_markdown_view",
     "validate_memory_object",
 ]

@@ -15,10 +15,12 @@ The Workspace is a new product: the primary human-facing environment for governe
 Implementation:
 
 - Project Memory v0 contract scaffold at `soane/project_memory/contract.py`
+- Project Memory context assembly and Markdown mapping at `soane/project_memory/context.py`
 - Project Memory golden fixture loader at `soane/project_memory/fixtures.py`
 - Project Memory local semantics layer at `soane/project_memory/semantics.py`
 - Project Memory golden fixture corpus at `tests/fixtures/project_memory/golden/`
 - static contract tests at `tests/test_project_memory_contract.py`
+- context assembly and Markdown mapping tests at `tests/test_project_memory_context.py`
 - golden fixture tests at `tests/test_project_memory_fixtures.py`
 - memory semantics tests at `tests/test_project_memory_semantics.py`
 
@@ -78,7 +80,6 @@ Factory V3 remains separate in its own repository and should continue to own mis
 
 - product UI
 - full Project Memory implementation
-- context assembly implementation
 - mock coding adapter implementation
 - headless CLI
 - TUI
@@ -99,7 +100,7 @@ Process scaffold verification:
 bash scripts/knowledge_lint.sh
 ./scripts/factoryctl context-index
 ./scripts/factoryctl pack-lint --run RUN_20260701_0848_project_memory_v0_plan
-python3 -m unittest tests/test_project_memory_contract.py tests/test_project_memory_fixtures.py tests/test_project_memory_semantics.py
+python3 -m unittest tests/test_project_memory_contract.py tests/test_project_memory_fixtures.py tests/test_project_memory_semantics.py tests/test_project_memory_context.py
 python3 scripts/agent_loop_bridge_validate.py tests/fixtures/agent_loop_bridge/valid_handoff.json --json
 ```
 
@@ -128,4 +129,6 @@ There is no product build yet.
 - MS-00 Contract Scaffold is implemented.
 - MS-01 Golden Fixture Corpus is implemented.
 - MS-02 Memory Semantics is implemented.
+- MS-03 Context Assembly And Markdown Mapping is implemented.
+- Next implementation micro-sprint: MS-04 Mock Coding Adapter Contract.
 - Next implementation micro-sprint: MS-03 Context Assembly And Markdown Mapping.

@@ -23,7 +23,7 @@
 | 1 | Foundation documents | Done | Vision, core concepts, governance, portfolio context, integration architecture, Factory V2 scaffold, Project Memory research, and Project Memory architecture are complete. |
 | 2 | Project Memory implementation planning | Done | Factory V2 `PLANNING_ONLY` pack completed at `docs/Factory/runs/RUN_20260701_0848_project_memory_v0_plan/`; human Go received on 2026-07-01. |
 | 3 | Project Memory v0 contract | Done | Contract scaffold, lifecycle transitions, relationship types, evidence levels, governed memory invariants, deterministic fixture IDs, and validation tests exist in `soane/project_memory/contract.py` and `tests/test_project_memory_contract.py`. |
-| 4 | Project Memory v0 prototype | Next | Continue with MS-03 Context Assembly And Markdown Mapping. Contract, fixture corpus, and local memory semantics are in place. No database choice unless the implementation proves it is needed. |
+| 4 | Project Memory v0 prototype | Next | Continue with MS-04 Mock Coding Adapter Contract. Contract, fixture corpus, local memory semantics, context assembly, and Markdown mapping are in place. No database choice unless the implementation proves it is needed. |
 | 5 | Headless CLI | Pending | Add a small command surface over the Project Memory v0 primitives before building a navigable interface. |
 | 6 | Simple TUI | Pending | Add a thin terminal UI over the same CLI/service functions for project navigation, memory browsing, evidence, decisions, hypotheses, adapter invocations, validation state, and unresolved questions. |
 | 7 | Project Memory validation pass | Pending | Validate the prototype against existing canonical docs and the research synthesis. Prove import, traceability, amendment, supersession, Markdown source mapping, context assembly, capture/review/promotion, and adapter-backed provider invocation fixtures. |
@@ -49,7 +49,8 @@ Current state:
 - MS-00 Contract Scaffold: complete.
 - MS-01 Golden Fixture Corpus: complete.
 - MS-02 Memory Semantics: complete.
-- Next micro-sprint: MS-03 Context Assembly And Markdown Mapping.
+- MS-03 Context Assembly And Markdown Mapping: complete.
+- Next micro-sprint: MS-04 Mock Coding Adapter Contract.
 
 The pack consumed:
 
@@ -61,14 +62,14 @@ The pack consumed:
 
 The next micro-sprint should implement deterministic local functions and tests for:
 
-- task context package building
-- lifecycle-aware inclusion and exclusion
-- evidence-aware context selection
-- visibility and propagation filtering
-- contradiction and stale-record surfacing
-- canonical Markdown source mapping proof
+- mocked Provider Invocation records
+- Cursor/Codex/OpenAI adapter surface metadata
+- input and output references
+- policy context, confidence, cost, and latency fields
+- capability and authority separation
+- no live CLI or SDK calls
 
-Do not implement CLI, TUI, live adapters, or database selection during MS-03.
+Do not implement CLI, TUI, live adapters, or database selection during MS-04.
 
 The golden fixture set should include at least:
 
