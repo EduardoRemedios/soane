@@ -23,6 +23,7 @@
 - Added the optional thin `review-candidate` CLI wrapper over Candidate Review and Promotion v0 service semantics.
 - Added Factory V2 planning-only pack `RUN_20260701_1529_socratic_discovery_v0_plan` for `SD-V0-001`, the Socratic Discovery v0 slice for deterministic guided discovery sessions, traceable questions, candidate answers, candidate hypotheses, and stop conditions.
 - Implemented `SD-V0-001` Socratic Discovery v0 with local deterministic discovery sessions, traceable question generation, candidate answer capture, uncertainty-preserving candidate hypotheses, stop conditions, tests, and validation closeout.
+- Added Factory V2 planning-only pack `RUN_20260701_1548_coding_proof_harness_v0_plan` for `CPH-V0-001`, the Coding Proof Harness v0 slice for a mock-first Greenfield/Brownfield coding workflow using intake, discovery, context assembly, provider invocation records, candidate output capture, and review-gated promotion.
 
 ## 2026-06-30
 
