@@ -26,8 +26,8 @@
 | 4 | Project Memory v0 prototype | Done | Contract, fixture corpus, local memory semantics, context assembly, Markdown mapping, and deterministic adapter twins are in place. No database choice unless the implementation proves it is needed. |
 | 5 | Headless CLI | Done | Added `python3 -m soane.project_memory.cli` commands over Project Memory v0 primitives before building a navigable interface. |
 | 6 | Simple TUI | Done | Added thin terminal navigation over the same service functions for project navigation, memory browsing, evidence, decisions, hypotheses, adapter invocations, validation state, and unresolved questions. |
-| 7 | Project Memory validation pass | Next | Validate the prototype against existing canonical docs and the research synthesis. Prove import, traceability, amendment, supersession, Markdown source mapping, context assembly, capture/review/promotion, and adapter-backed provider invocation fixtures. |
-| 8 | Thinking Engine architecture | Pending | Define discovery, Thinking, Socratic dialogue, hypotheses, inference strategies, Discovery Playbooks, and readiness assessment. |
+| 7 | Project Memory validation pass | Done | Validation closeout passed at `docs/Factory/runs/RUN_20260701_0848_project_memory_v0_plan/VALIDATION_CLOSEOUT_REPORT.md`. |
+| 8 | Thinking Engine architecture | Next | Define discovery, Thinking, Socratic dialogue, hypotheses, inference strategies, Discovery Playbooks, and readiness assessment. |
 | 9 | Thinking Engine planning run | Pending | Use Factory V2 to plan the first Thinking Engine implementation slice after the architecture is accepted. |
 | 10 | Workspace Shell architecture | Pending | Define desktop, web, mobile, voice, collaboration, dashboards, notifications, mission monitoring, and portfolio views after CLI/TUI proof has clarified the primitives. |
 | 11 | First product surface prototype | Pending | Build only after Project Memory, CLI/TUI navigation, and Thinking Engine primitives are coherent enough to support a real workflow. |
@@ -36,7 +36,7 @@
 
 Continue implementation with:
 
-`MS-07 Validation Closeout`
+`Thinking Engine architecture`
 
 Pack path:
 
@@ -53,7 +53,8 @@ Current state:
 - MS-04 Mock Coding Adapter Contract: complete.
 - MS-05 Headless CLI: complete.
 - MS-06 Thin TUI Scope: complete.
-- Next micro-sprint: MS-07 Validation Closeout.
+- MS-07 Validation Closeout: complete.
+- Next work: Thinking Engine architecture.
 
 The pack consumed:
 
@@ -76,9 +77,11 @@ The completed MS-05 micro-sprint implemented a small headless CLI over the exist
 
 The completed MS-06 micro-sprint implemented the smallest thin TUI scope over the same service and CLI primitives. It improves navigation without becoming the product shell.
 
-The next micro-sprint should validate the Project Memory v0 prototype against the canonical documents, research synthesis, Factory pack, fixtures, CLI, TUI, context assembly, Markdown mapping, and adapter-twin behavior.
+The completed MS-07 validation closeout validates the Project Memory v0 prototype against the canonical documents, research synthesis, Factory pack, fixtures, CLI, TUI, context assembly, Markdown mapping, and adapter-twin behavior.
 
-Do not implement live adapters, database selection, or a broader Workspace product shell during MS-07.
+The next work should define Thinking Engine architecture. It should build on the validated Project Memory v0 proof and clarify discovery, Thinking, Socratic dialogue, hypotheses, inference strategies, Discovery Playbooks, readiness assessment, and the boundary between thinking support and mission execution.
+
+Do not implement live adapters, database selection, or a broader Workspace product shell during the Thinking Engine architecture step.
 
 The golden fixture set should include at least:
 
@@ -119,7 +122,8 @@ The governed memory invariants should include:
 | Governed memory invariant tests | Candidate | Should verify scope, temporal supersession, provenance lineage, controlled propagation, contradiction resolution, and equivalent enforcement across retrieval paths. |
 | CLI command model | Done | Implemented as `python3 -m soane.project_memory.cli` with validate, fixture-test, context-build, export-markdown, and inspect commands. |
 | TUI navigation model | Done | Implemented as `python3 -m soane.project_memory.tui` with deterministic screens over the existing memory, context, fixture, and CLI primitives. |
-| Thinking Engine architecture | Candidate | Next major architecture document after Project Memory implementation planning starts. |
+| Project Memory validation closeout | Done | Validation report records VC-001 through VC-016 evidence, residual risks, budget variance, and readiness for Thinking Engine architecture. |
+| Thinking Engine architecture | Next | Next major architecture document after Project Memory v0 validation. |
 | Workspace Shell architecture | Candidate | Defer until Project Memory and Thinking Engine shape are stable enough to drive UI. |
 
 ## Process Guidance

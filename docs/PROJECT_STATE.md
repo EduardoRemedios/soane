@@ -71,6 +71,7 @@ Research outputs:
 Planning outputs:
 
 - `docs/Factory/runs/RUN_20260701_0848_project_memory_v0_plan/`
+- `docs/Factory/runs/RUN_20260701_0848_project_memory_v0_plan/VALIDATION_CLOSEOUT_REPORT.md`
 
 ## Current Architectural Posture
 
@@ -86,6 +87,7 @@ Factory V3 remains separate in its own repository and should continue to own mis
 
 - product UI
 - full Project Memory implementation
+- Thinking Engine architecture
 - Thinking Engine implementation
 - Workspace Shell implementation
 - integration clients for Factory V3, Temper, Aegis, Sentinel, or Harmony
@@ -124,6 +126,12 @@ Thin TUI entry point:
 python3 -m soane.project_memory.tui --help
 ```
 
+Validation closeout:
+
+```bash
+cat docs/Factory/runs/RUN_20260701_0848_project_memory_v0_plan/VALIDATION_CLOSEOUT_REPORT.md
+```
+
 ## Active Boundary Decisions
 
 - Use Factory V2 locally for planning discipline.
@@ -151,4 +159,5 @@ python3 -m soane.project_memory.tui --help
 - MS-04 Mock Coding Adapter Contract is implemented.
 - MS-05 Headless CLI is implemented.
 - MS-06 Thin TUI Scope is implemented.
-- Next implementation micro-sprint: MS-07 Validation Closeout.
+- MS-07 Validation Closeout is complete.
+- Next roadmap step: Thinking Engine architecture.

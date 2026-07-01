@@ -12,6 +12,7 @@
 - Implemented MS-04 Project Memory adapter twins for Cursor CLI, Codex CLI, Cursor SDK, OpenAI SDK, and OpenAI Agents SDK, recording deterministic Provider Invocation objects without live CLI or SDK calls.
 - Implemented MS-05 Project Memory headless CLI with validate, fixture-test, context-build, export-markdown, and inspect commands over the existing service functions.
 - Implemented MS-06 Project Memory thin TUI with deterministic terminal screens for project navigation, memory browsing, evidence, decisions, hypotheses, adapter invocations, validation status, and unresolved questions.
+- Completed MS-07 Project Memory validation closeout with VC-001 through VC-016 evidence, residual risks, budget variance notes, and readiness for Thinking Engine architecture.
 
 ## 2026-06-30
 
