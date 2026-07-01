@@ -50,6 +50,10 @@ Research outputs:
 - `docs/research/PROJECT_MEMORY_RESEARCH_SYNTHESIS.md`
 - `docs/Factory/runs/RUN_20260630_1129_project_memory_research/`
 
+Planning outputs:
+
+- `docs/Factory/runs/RUN_20260701_0848_project_memory_v0_plan/`
+
 ## Current Architectural Posture
 
 The Workspace is separate from Factory V2, Factory V3, Temper, Aegis, Sentinel, and Harmony.
@@ -73,7 +77,7 @@ Factory V3 remains separate in its own repository and should continue to own mis
 - Cursor CLI, Codex CLI, Cursor SDK, or OpenAI SDK adapters
 - concrete API schemas
 - runnable application tests
-- active Factory runs
+- active implementation runs
 - active Workspace missions
 
 ## Current Verification
@@ -103,3 +107,7 @@ There is no product build or application test suite yet.
 - Define the Project Memory v0 contract, golden fixtures, context assembly v0, capture/review/promotion flow, and mock-first adapter contract before implementation.
 - Include governed memory invariants in the Project Memory v0 contract: scope and visibility, temporal supersession, provenance lineage, controlled propagation, contradiction handling, and equivalent enforcement across retrieval paths.
 - Prefer mock-first, then CLI-backed coding harness adapters, then SDK-backed integrations once the adapter contract is stable.
+
+## Current Review Queue
+
+- `RUN_20260701_0848_project_memory_v0_plan`: Factory V2 `PLANNING_ONLY` pack for Project Memory v0 object-model prototype. Status: `REVIEW_READY`; final pack lint passed. Human Go/No-go review required before implementation.

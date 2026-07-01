@@ -21,8 +21,8 @@
 | Order | Work | Status | Notes |
 | --- | --- | --- |
 | 1 | Foundation documents | Done | Vision, core concepts, governance, portfolio context, integration architecture, Factory V2 scaffold, Project Memory research, and Project Memory architecture are complete. |
-| 2 | Project Memory implementation planning | Next | Run a Factory V2 `PLANNING_ONLY` pack for the first local Project Memory object-model prototype. |
-| 3 | Project Memory v0 contract | Pending | Define the object contract, lifecycle transitions, relationship types, governed memory invariants, fixture set, mock adapter contract, context assembly v0, capture/review/promotion flow, and persistence guardrails before implementation. |
+| 2 | Project Memory implementation planning | Review Ready | Factory V2 `PLANNING_ONLY` pack completed at `docs/Factory/runs/RUN_20260701_0848_project_memory_v0_plan/`; human Go/No-go review is next. |
+| 3 | Project Memory v0 contract | Pending | Define the object contract, lifecycle transitions, relationship types, governed memory invariants, fixture set, mock adapter contract, context assembly v0, capture/review/promotion flow, and persistence guardrails after human Go. |
 | 4 | Project Memory v0 prototype | Pending | Implement the smallest local prototype for object types, lifecycle states, provenance, relationships, and traceability. Use a coding workflow as the first proof path if the planning pack supports it. No database choice unless the planning pack proves it is needed. |
 | 5 | Headless CLI | Pending | Add a small command surface over the Project Memory v0 primitives before building a navigable interface. |
 | 6 | Simple TUI | Pending | Add a thin terminal UI over the same CLI/service functions for project navigation, memory browsing, evidence, decisions, hypotheses, adapter invocations, validation state, and unresolved questions. |
@@ -34,11 +34,20 @@
 
 ## Immediate Next Move
 
-Run a Factory V2 `PLANNING_ONLY` implementation-planning pack for:
+Review the completed Factory V2 `PLANNING_ONLY` implementation-planning pack for:
 
 `Project Memory v0 Object Model Prototype`
 
-The pack should consume:
+Pack path:
+
+- `docs/Factory/runs/RUN_20260701_0848_project_memory_v0_plan/`
+
+Current required decision:
+
+- Human Go: proceed to Project Memory v0 contract and implementation planning execution.
+- Human No-go: revise the pack before implementation.
+
+The pack consumed:
 
 - `docs/VISION.md`
 - `docs/CORE_CONCEPTS.md`
@@ -46,7 +55,7 @@ The pack should consume:
 - `docs/research/PROJECT_MEMORY_RESEARCH_SYNTHESIS.md`
 - `docs/PROJECT_MEMORY_ARCHITECTURE.md`
 
-The output should define:
+The pack defines:
 
 - first implementation slice
 - non-goals
@@ -76,7 +85,7 @@ The output should define:
 - mock-first Cursor/Codex CLI or SDK adapter contract, without narrowing the Workspace to coding
 - persistence, deterministic ID, and migration guardrails
 
-It should not implement during the planning run.
+It did not implement during the planning run.
 
 The golden fixture set should include at least:
 
