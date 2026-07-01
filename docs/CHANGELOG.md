@@ -11,6 +11,7 @@
 - Implemented MS-03 Project Memory context assembly and Markdown source mapping with lifecycle-aware context packages, visibility and propagation exclusions, contradiction and stale-record surfacing, and explicit Markdown source maps.
 - Implemented MS-04 Project Memory adapter twins for Cursor CLI, Codex CLI, Cursor SDK, OpenAI SDK, and OpenAI Agents SDK, recording deterministic Provider Invocation objects without live CLI or SDK calls.
 - Implemented MS-05 Project Memory headless CLI with validate, fixture-test, context-build, export-markdown, and inspect commands over the existing service functions.
+- Implemented MS-06 Project Memory thin TUI with deterministic terminal screens for project navigation, memory browsing, evidence, decisions, hypotheses, adapter invocations, validation status, and unresolved questions.
 
 ## 2026-06-30
 

@@ -17,6 +17,7 @@ Implementation:
 - Project Memory v0 contract scaffold at `soane/project_memory/contract.py`
 - Project Memory deterministic adapter twins at `soane/project_memory/adapters.py`
 - Project Memory headless CLI at `soane/project_memory/cli.py`
+- Project Memory thin TUI at `soane/project_memory/tui.py`
 - Project Memory context assembly and Markdown mapping at `soane/project_memory/context.py`
 - Project Memory golden fixture loader at `soane/project_memory/fixtures.py`
 - Project Memory local semantics layer at `soane/project_memory/semantics.py`
@@ -24,6 +25,7 @@ Implementation:
 - static contract tests at `tests/test_project_memory_contract.py`
 - adapter twin tests at `tests/test_project_memory_adapter_twins.py`
 - headless CLI tests at `tests/test_project_memory_cli.py`
+- thin TUI tests at `tests/test_project_memory_tui.py`
 - context assembly and Markdown mapping tests at `tests/test_project_memory_context.py`
 - golden fixture tests at `tests/test_project_memory_fixtures.py`
 - memory semantics tests at `tests/test_project_memory_semantics.py`
@@ -84,7 +86,6 @@ Factory V3 remains separate in its own repository and should continue to own mis
 
 - product UI
 - full Project Memory implementation
-- TUI
 - Thinking Engine implementation
 - Workspace Shell implementation
 - integration clients for Factory V3, Temper, Aegis, Sentinel, or Harmony
@@ -105,6 +106,7 @@ bash scripts/knowledge_lint.sh
 python3 -m unittest tests/test_project_memory_contract.py tests/test_project_memory_fixtures.py tests/test_project_memory_semantics.py tests/test_project_memory_context.py
 python3 -m unittest tests/test_project_memory_adapter_twins.py
 python3 -m unittest tests/test_project_memory_cli.py
+python3 -m unittest tests/test_project_memory_tui.py
 python3 scripts/agent_loop_bridge_validate.py tests/fixtures/agent_loop_bridge/valid_handoff.json --json
 ```
 
@@ -114,6 +116,12 @@ Headless CLI entry point:
 
 ```bash
 python3 -m soane.project_memory.cli --help
+```
+
+Thin TUI entry point:
+
+```bash
+python3 -m soane.project_memory.tui --help
 ```
 
 ## Active Boundary Decisions
@@ -142,4 +150,5 @@ python3 -m soane.project_memory.cli --help
 - MS-03 Context Assembly And Markdown Mapping is implemented.
 - MS-04 Mock Coding Adapter Contract is implemented.
 - MS-05 Headless CLI is implemented.
-- Next implementation micro-sprint: MS-06 Thin TUI Scope.
+- MS-06 Thin TUI Scope is implemented.
+- Next implementation micro-sprint: MS-07 Validation Closeout.
