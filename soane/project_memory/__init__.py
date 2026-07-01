@@ -21,6 +21,15 @@ from soane.project_memory.contract import (
     validate_memory_object,
 )
 from soane.project_memory.fixtures import FixtureValidationError, GoldenFixture, load_fixture, load_fixtures
+from soane.project_memory.semantics import (
+    EXTERNAL_ADAPTER,
+    PROJECT_READER,
+    PROJECT_REVIEWER,
+    AccessContext,
+    MemorySemanticsError,
+    ProjectMemory,
+    is_visible,
+)
 
 __all__ = [
     "CONTRACT_VERSION",
@@ -40,8 +49,15 @@ __all__ = [
     "Visibility",
     "FixtureValidationError",
     "GoldenFixture",
+    "EXTERNAL_ADAPTER",
+    "PROJECT_READER",
+    "PROJECT_REVIEWER",
+    "AccessContext",
+    "MemorySemanticsError",
+    "ProjectMemory",
     "can_transition",
     "deterministic_fixture_id",
+    "is_visible",
     "load_fixture",
     "load_fixtures",
     "validate_memory_object",

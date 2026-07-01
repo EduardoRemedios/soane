@@ -19,7 +19,10 @@
       },
       "metadata": {
         "propagation": "allowed_for_project_context"
-      }
+      },
+      "relationships": [
+        {"type": "references", "target_key": "restricted_evidence"}
+      ]
     },
     {
       "key": "restricted_evidence",
