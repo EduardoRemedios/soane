@@ -20,6 +20,7 @@ from soane.project_memory.contract import (
     deterministic_fixture_id,
     validate_memory_object,
 )
+from soane.project_memory.fixtures import FixtureValidationError, GoldenFixture, load_fixture, load_fixtures
 
 __all__ = [
     "CONTRACT_VERSION",
@@ -37,7 +38,11 @@ __all__ = [
     "Relationship",
     "RelationshipType",
     "Visibility",
+    "FixtureValidationError",
+    "GoldenFixture",
     "can_transition",
     "deterministic_fixture_id",
+    "load_fixture",
+    "load_fixtures",
     "validate_memory_object",
 ]

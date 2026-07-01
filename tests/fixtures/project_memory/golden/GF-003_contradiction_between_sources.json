@@ -1,0 +1,58 @@
+{
+  "fixture_id": "GF-003",
+  "title": "Contradiction between sources",
+  "expectations": [
+    "contradiction remains explicit"
+  ],
+  "objects": [
+    {
+      "key": "source_a",
+      "type": "evidence_artifact",
+      "title": "Source A says live adapters should be used first",
+      "status": "challenged",
+      "visibility": "project",
+      "provenance": {
+        "source_refs": ["example/source-a.md"],
+        "created_by": "fixture-author",
+        "created_at": "2026-07-01T09:15:00Z",
+        "evidence_level": "E0"
+      },
+      "relationships": [
+        {"type": "contradicts", "target_key": "source_b"}
+      ]
+    },
+    {
+      "key": "source_b",
+      "type": "evidence_artifact",
+      "title": "Source B says mock-first adapters should be used first",
+      "status": "accepted",
+      "visibility": "project",
+      "provenance": {
+        "source_refs": ["docs/INTEGRATION_ARCHITECTURE.md"],
+        "created_by": "fixture-author",
+        "created_at": "2026-07-01T09:16:00Z",
+        "evidence_level": "E1"
+      },
+      "relationships": [
+        {"type": "contradicts", "target_key": "source_a"}
+      ]
+    },
+    {
+      "key": "question",
+      "type": "question",
+      "title": "Which adapter proof order is current?",
+      "status": "answered",
+      "visibility": "project",
+      "provenance": {
+        "source_refs": ["docs/ROADMAP.md"],
+        "created_by": "fixture-author",
+        "created_at": "2026-07-01T09:17:00Z",
+        "evidence_level": "E1"
+      },
+      "relationships": [
+        {"type": "references", "target_key": "source_a"},
+        {"type": "references", "target_key": "source_b"}
+      ]
+    }
+  ]
+}

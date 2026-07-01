@@ -1,0 +1,29 @@
+{
+  "fixture_id": "GF-004",
+  "title": "Stale Evidence",
+  "expectations": [
+    "stale evidence is surfaced as stale"
+  ],
+  "objects": [
+    {
+      "key": "evidence",
+      "type": "evidence_artifact",
+      "title": "Old roadmap says implementation planning is next",
+      "status": "stale",
+      "visibility": "project",
+      "updated_at": "2026-07-01T09:20:00Z",
+      "provenance": {
+        "source_refs": ["docs/ROADMAP.md"],
+        "created_by": "fixture-author",
+        "created_at": "2026-06-30T12:00:00Z",
+        "evidence_level": "E1"
+      },
+      "metadata": {
+        "staleness_reason": "Roadmap changed after human Go"
+      },
+      "relationships": [
+        {"type": "references", "target_id": "external_roadmap_snapshot"}
+      ]
+    }
+  ]
+}

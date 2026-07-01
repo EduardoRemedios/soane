@@ -15,7 +15,10 @@ The Workspace is a new product: the primary human-facing environment for governe
 Implementation:
 
 - Project Memory v0 contract scaffold at `soane/project_memory/contract.py`
+- Project Memory golden fixture loader at `soane/project_memory/fixtures.py`
+- Project Memory golden fixture corpus at `tests/fixtures/project_memory/golden/`
 - static contract tests at `tests/test_project_memory_contract.py`
+- golden fixture tests at `tests/test_project_memory_fixtures.py`
 
 Constitutional documents:
 
@@ -73,7 +76,6 @@ Factory V3 remains separate in its own repository and should continue to own mis
 
 - product UI
 - full Project Memory implementation
-- golden fixture corpus
 - local Project Memory service functions
 - context assembly implementation
 - mock coding adapter implementation
@@ -96,7 +98,7 @@ Process scaffold verification:
 bash scripts/knowledge_lint.sh
 ./scripts/factoryctl context-index
 ./scripts/factoryctl pack-lint --run RUN_20260701_0848_project_memory_v0_plan
-python3 -m unittest tests/test_project_memory_contract.py
+python3 -m unittest tests/test_project_memory_contract.py tests/test_project_memory_fixtures.py
 python3 scripts/agent_loop_bridge_validate.py tests/fixtures/agent_loop_bridge/valid_handoff.json --json
 ```
 
@@ -123,4 +125,5 @@ There is no product build yet.
 - `RUN_20260701_0848_project_memory_v0_plan`: Factory V2 `PLANNING_ONLY` pack for Project Memory v0 object-model prototype. Status: `PASS`; final pack lint passed.
 - Human Go for `PM-V0-001` was given on 2026-07-01.
 - MS-00 Contract Scaffold is implemented.
-- Next implementation micro-sprint: MS-01 Golden Fixture Corpus.
+- MS-01 Golden Fixture Corpus is implemented.
+- Next implementation micro-sprint: MS-02 Memory Semantics.

@@ -6,6 +6,7 @@
 - Clarified that Cursor CLI and Codex CLI are candidate coding harness adapter surfaces alongside Cursor SDK, OpenAI SDK, and OpenAI Agents SDK, with a preferred mock-first, CLI-backed, then SDK-backed proof order.
 - Added Factory V2 planning-only pack `RUN_20260701_0848_project_memory_v0_plan` for the Project Memory v0 object-model prototype, including v0 contract gates, golden fixtures, governed memory invariants, mock adapter proof, CLI/TUI sequencing, and final pack audit.
 - Implemented MS-00 Project Memory v0 contract scaffold with object types, lifecycle transitions, relationship types, evidence levels, governed memory invariants, deterministic fixture IDs, and static unit tests.
+- Implemented MS-01 Project Memory golden fixture corpus with twelve fixture files, a fixture loader, deterministic ID validation, and fixture conformance tests.
 
 ## 2026-06-30
 

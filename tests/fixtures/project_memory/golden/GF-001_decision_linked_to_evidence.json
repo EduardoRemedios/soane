@@ -1,0 +1,38 @@
+{
+  "fixture_id": "GF-001",
+  "title": "Decision linked to Evidence",
+  "expectations": [
+    "decision has evidences relationship to evidence"
+  ],
+  "objects": [
+    {
+      "key": "evidence",
+      "type": "evidence_artifact",
+      "title": "Roadmap identifies Project Memory v0 as next implementation path",
+      "status": "accepted",
+      "visibility": "project",
+      "provenance": {
+        "source_refs": ["docs/ROADMAP.md"],
+        "created_by": "fixture-author",
+        "created_at": "2026-07-01T09:00:00Z",
+        "evidence_level": "E1"
+      }
+    },
+    {
+      "key": "decision",
+      "type": "decision",
+      "title": "Accept Project Memory v0 contract-first implementation",
+      "status": "accepted",
+      "visibility": "project",
+      "provenance": {
+        "source_refs": ["docs/Factory/runs/RUN_20260701_0848_project_memory_v0_plan/pack/PACK_AUDIT_REPORT.md"],
+        "created_by": "human-go",
+        "created_at": "2026-07-01T09:10:00Z",
+        "evidence_level": "E2"
+      },
+      "relationships": [
+        {"type": "evidences", "target_key": "evidence"}
+      ]
+    }
+  ]
+}

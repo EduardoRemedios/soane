@@ -23,7 +23,7 @@
 | 1 | Foundation documents | Done | Vision, core concepts, governance, portfolio context, integration architecture, Factory V2 scaffold, Project Memory research, and Project Memory architecture are complete. |
 | 2 | Project Memory implementation planning | Done | Factory V2 `PLANNING_ONLY` pack completed at `docs/Factory/runs/RUN_20260701_0848_project_memory_v0_plan/`; human Go received on 2026-07-01. |
 | 3 | Project Memory v0 contract | Done | Contract scaffold, lifecycle transitions, relationship types, evidence levels, governed memory invariants, deterministic fixture IDs, and validation tests exist in `soane/project_memory/contract.py` and `tests/test_project_memory_contract.py`. |
-| 4 | Project Memory v0 prototype | Next | Continue with MS-01 Golden Fixture Corpus, then implement local prototype for object types, lifecycle states, provenance, relationships, and traceability. No database choice unless the implementation proves it is needed. |
+| 4 | Project Memory v0 prototype | Next | Continue with MS-02 Memory Semantics, then implement local prototype service functions for lifecycle states, provenance, relationships, evidence, scope, visibility, supersession, redaction, and contradiction behavior. No database choice unless the implementation proves it is needed. |
 | 5 | Headless CLI | Pending | Add a small command surface over the Project Memory v0 primitives before building a navigable interface. |
 | 6 | Simple TUI | Pending | Add a thin terminal UI over the same CLI/service functions for project navigation, memory browsing, evidence, decisions, hypotheses, adapter invocations, validation state, and unresolved questions. |
 | 7 | Project Memory validation pass | Pending | Validate the prototype against existing canonical docs and the research synthesis. Prove import, traceability, amendment, supersession, Markdown source mapping, context assembly, capture/review/promotion, and adapter-backed provider invocation fixtures. |
@@ -47,7 +47,8 @@ Current state:
 - Factory V2 planning pack: complete and passed.
 - Human Go: received on 2026-07-01.
 - MS-00 Contract Scaffold: complete.
-- Next micro-sprint: MS-01 Golden Fixture Corpus.
+- MS-01 Golden Fixture Corpus: complete.
+- Next micro-sprint: MS-02 Memory Semantics.
 
 The pack consumed:
 
@@ -57,22 +58,18 @@ The pack consumed:
 - `docs/research/PROJECT_MEMORY_RESEARCH_SYNTHESIS.md`
 - `docs/PROJECT_MEMORY_ARCHITECTURE.md`
 
-The next micro-sprint should define executable local fixtures for:
+The next micro-sprint should implement local Project Memory service functions and invariant tests for:
 
-- Decision linked to Evidence
-- Assumption superseded by Evidence
-- Contradiction between sources
-- Stale Evidence
-- canonical Markdown source mapping
-- Provider Invocation via mocked Cursor/Codex or OpenAI adapter
-- Capability without Authority
-- redaction or retrieval suppression
-- unauthorized retrieval blocked by scope or visibility
-- stale or superseded record excluded as current truth
-- promoted claim with reconstructable provenance lineage
-- context assembly respects visibility and propagation rules
+- lifecycle transitions
+- provenance preservation
+- relationships and evidence links
+- evidence-level handling
+- scope and visibility enforcement
+- supersession and stale-current-truth handling
+- redaction and retrieval suppression
+- contradiction representation
 
-Do not implement CLI, TUI, live adapters, or database selection during MS-01.
+Do not implement context assembly, CLI, TUI, live adapters, or database selection during MS-02.
 
 The golden fixture set should include at least:
 
