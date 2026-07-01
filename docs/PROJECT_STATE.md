@@ -36,6 +36,7 @@ Constitutional documents:
 - `docs/CORE_CONCEPTS.md`
 - `docs/GOVERNANCE_MODEL.md`
 - `docs/PROJECT_MEMORY_ARCHITECTURE.md`
+- `docs/THINKING_ENGINE_ARCHITECTURE.md`
 - `docs/PORTFOLIO_CONTEXT.md`
 - `docs/PORTFOLIO_ASSUMPTIONS.md`
 - `docs/INTEGRATION_ARCHITECTURE.md`
@@ -87,7 +88,6 @@ Factory V3 remains separate in its own repository and should continue to own mis
 
 - product UI
 - full Project Memory implementation
-- Thinking Engine architecture
 - Thinking Engine implementation
 - Workspace Shell implementation
 - integration clients for Factory V3, Temper, Aegis, Sentinel, or Harmony
@@ -142,6 +142,7 @@ cat docs/Factory/runs/RUN_20260701_0848_project_memory_v0_plan/VALIDATION_CLOSEO
 - Treat `docs/GOVERNANCE_MODEL.md` as the repository-level rule for document status, amendments, decisions, evidence levels, and implementation blockers.
 - Use `docs/research/PROJECT_MEMORY_RESEARCH_SYNTHESIS.md` as the research input behind the Project Memory architecture.
 - Treat `docs/PROJECT_MEMORY_ARCHITECTURE.md` as the conceptual architecture for Project Memory. It intentionally defers storage, API, UI, and implementation choices.
+- Treat `docs/THINKING_ENGINE_ARCHITECTURE.md` as the conceptual architecture for the Thinking Engine. It defines intake, discovery, Socratic dialogue, hypotheses, evidence review, synthesis, inference strategy, readiness states, and boundaries without defining implementation APIs or UI.
 - Use coding as an acceptable first proof path for Workspace primitives, while keeping the Workspace domain-general and treating Cursor CLI, Codex CLI, Cursor SDK, and OpenAI SDK integrations as adapters.
 - Use a headless CLI first, then a thin TUI, before starting the broader Workspace product shell.
 - Define the Project Memory v0 contract, golden fixtures, context assembly v0, capture/review/promotion flow, and mock-first adapter contract before implementation.
@@ -162,4 +163,5 @@ cat docs/Factory/runs/RUN_20260701_0848_project_memory_v0_plan/VALIDATION_CLOSEO
 - MS-05 Headless CLI is implemented.
 - MS-06 Thin TUI Scope is implemented.
 - MS-07 Validation Closeout is complete.
-- Next roadmap step: Thinking Engine architecture, including Greenfield/Brownfield intake and starting-context readiness.
+- Thinking Engine architecture is complete.
+- Next roadmap step: Factory V2 planning run for the first Thinking Engine implementation slice.

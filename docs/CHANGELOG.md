@@ -15,6 +15,7 @@
 - Completed MS-07 Project Memory validation closeout with VC-001 through VC-016 evidence, residual risks, budget variance notes, and readiness for Thinking Engine architecture.
 - Added Greenfield versus Brownfield project intake as a required concern for the upcoming Thinking Engine architecture, including Brownfield repo audit and starting-context readiness before feature delegation.
 - Expanded upcoming Thinking Engine intake requirements to cover multi-repository Brownfield systems and non-repository context sources such as analytics dashboards, campaign assets, briefs, spreadsheets, design files, CRM records, ad accounts, and operational artifacts.
+- Added `docs/THINKING_ENGINE_ARCHITECTURE.md` to define intake, discovery, Socratic dialogue, hypotheses, evidence review, synthesis, Inference Strategy, readiness assessment, Greenfield/Brownfield handling, non-repository context sources, and implementation boundaries.
 
 ## 2026-06-30
 
