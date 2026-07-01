@@ -84,8 +84,10 @@ The next work should define Thinking Engine architecture. It should build on the
 The Thinking Engine architecture must treat Greenfield and Brownfield project intake as different starting conditions:
 
 - Greenfield projects start by creating the initial project context, canonical docs, assumptions, constraints, and working agreements before feature work begins.
-- Brownfield projects start with a repo/workspace audit before feature work begins, including existing application structure, build/test commands, architecture documentation, dependency and integration context, known risks, missing docs, and current decision/evidence gaps.
-- Both paths must verify that the minimum context files or Markdown documents exist before Soane agrees a starting point or delegates coding work.
+- Brownfield coding projects start with a repo/workspace audit before feature work begins, including existing application structure, build/test commands, architecture documentation, dependency and integration context, known risks, missing docs, and current decision/evidence gaps.
+- Brownfield systems may span multiple repositories rather than one monorepo. Intake must identify the system boundary, repository map, ownership, integration points, deployment surfaces, shared documentation, and where decisions/evidence currently live.
+- Non-coding projects may have critical context outside repositories entirely. Intake must support external context sources such as analytics dashboards, campaign assets, research notes, briefs, spreadsheets, design files, CRM records, ad accounts, and other operational artifacts.
+- Both paths must verify that the minimum context files, Markdown documents, or equivalent source artifacts exist before Soane agrees a starting point or delegates work.
 
 Do not implement live adapters, database selection, or a broader Workspace product shell during the Thinking Engine architecture step.
 

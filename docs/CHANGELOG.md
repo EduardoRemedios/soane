@@ -14,6 +14,7 @@
 - Implemented MS-06 Project Memory thin TUI with deterministic terminal screens for project navigation, memory browsing, evidence, decisions, hypotheses, adapter invocations, validation status, and unresolved questions.
 - Completed MS-07 Project Memory validation closeout with VC-001 through VC-016 evidence, residual risks, budget variance notes, and readiness for Thinking Engine architecture.
 - Added Greenfield versus Brownfield project intake as a required concern for the upcoming Thinking Engine architecture, including Brownfield repo audit and starting-context readiness before feature delegation.
+- Expanded upcoming Thinking Engine intake requirements to cover multi-repository Brownfield systems and non-repository context sources such as analytics dashboards, campaign assets, briefs, spreadsheets, design files, CRM records, ad accounts, and operational artifacts.
 
 ## 2026-06-30
 

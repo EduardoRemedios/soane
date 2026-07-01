@@ -147,7 +147,8 @@ cat docs/Factory/runs/RUN_20260701_0848_project_memory_v0_plan/VALIDATION_CLOSEO
 - Define the Project Memory v0 contract, golden fixtures, context assembly v0, capture/review/promotion flow, and mock-first adapter contract before implementation.
 - Include governed memory invariants in the Project Memory v0 contract: scope and visibility, temporal supersession, provenance lineage, controlled propagation, contradiction handling, and equivalent enforcement across retrieval paths.
 - Prefer mock-first, then CLI-backed coding harness adapters, then SDK-backed integrations once the adapter contract is stable.
-- Treat Greenfield and Brownfield project intake differently. Brownfield repositories require repo/workspace audit, existing application context, build/test discovery, architecture/documentation gap analysis, and agreed starting-context files before feature planning or coding delegation.
+- Treat Greenfield and Brownfield project intake differently. Brownfield coding work may involve one repository, multiple repositories, or a wider workspace/system boundary. Intake requires repo/workspace audit, existing application context, build/test discovery, architecture/documentation gap analysis, ownership and integration mapping, and agreed starting-context files before feature planning or coding delegation.
+- Do not assume all project context lives in Git. Non-coding work may depend on external artifacts such as analytics dashboards, campaign assets, research notes, briefs, spreadsheets, design files, CRM records, ad accounts, and other operational systems. Soane must be able to identify and govern those sources as context inputs.
 
 ## Current Implementation State
 
