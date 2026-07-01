@@ -181,19 +181,23 @@ Expected responsibilities:
 
 Each product may have local adapters. The contract should preserve cross-portfolio governance and evidence continuity.
 
-### Candidate SDK Adapters
+### Candidate Coding Adapter Surfaces
 
 The first proof path for the Workspace may be a coding workflow, because coding exposes concrete project memory, planning, delegation, review, evidence, and execution feedback loops.
 
 This does not make the Workspace a coding-only product. The Workspace must continue to support other project domains such as research, operations, marketing, consulting, product strategy, and regulated collaboration.
 
-Candidate early adapters include:
+Candidate early adapter surfaces include:
 
+- Codex CLI as a terminal-native coding harness adapter
+- Cursor CLI as a coding-agent harness adapter for terminal, headless, and automation workflows
 - Cursor SDK as a coding-agent harness or execution adapter
 - OpenAI SDK as a model and tool invocation adapter
 - OpenAI Agents SDK as an agent orchestration adapter where code-first orchestration is useful
 
-These SDKs should sit behind Provider Invocation, Capability Reference, Inference Strategy, and governed work contracts. They should not define Project Memory, authority, evidence semantics, mission governance, or the Workspace product boundary.
+These CLIs and SDKs should sit behind Provider Invocation, Capability Reference, Inference Strategy, and governed work contracts. They should not define Project Memory, authority, evidence semantics, mission governance, or the Workspace product boundary.
+
+The preferred proof order is mock-first, then CLI-backed harness adapters, then SDK-backed integrations once the contract is stable.
 
 The first implementation proof should use coding as a demanding test case while preserving domain-general architecture.
 

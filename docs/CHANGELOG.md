@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-07-01
+
+- Added governed memory invariants to the Project Memory v0 roadmap, informed by the MemClaw governed shared memory paper: scope and visibility, temporal supersession, provenance lineage, controlled propagation, contradiction handling, and equivalent enforcement across retrieval paths.
+- Clarified that Cursor CLI and Codex CLI are candidate coding harness adapter surfaces alongside Cursor SDK, OpenAI SDK, and OpenAI Agents SDK, with a preferred mock-first, CLI-backed, then SDK-backed proof order.
+
 ## 2026-06-30
 
 - Added the founding Workspace vision document.
