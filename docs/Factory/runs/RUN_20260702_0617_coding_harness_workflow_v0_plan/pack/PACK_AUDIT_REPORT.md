@@ -7,6 +7,7 @@ v1
 ## Change Log
 
 - v1 (2026-07-02): Initial Stage I2 Purple Audit.
+- v1.1 (2026-07-02): Updated after execution-enabled closeout.
 
 ## Skill Invocation
 
@@ -45,4 +46,4 @@ Use the factory-purple-gate skill.
 
 ## Human Review Note
 
-This is a `PLANNING_ONLY` pack. Implementation requires explicit future human Go for `CHW-V0-001`.
+This pack is now execution-enabled after explicit human Go on 2026-07-02. Implementation evidence is recorded in `../VALIDATION_CLOSEOUT_REPORT.md`.

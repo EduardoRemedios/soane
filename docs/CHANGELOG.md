@@ -3,6 +3,7 @@
 ## 2026-07-02
 
 - Added Factory V2 planning-only pack `RUN_20260702_0617_coding_harness_workflow_v0_plan` for `CHW-V0-001`, a CLI-first Coding Harness Workflow v0 wrapper over the existing coding proof harness.
+- Implemented `CHW-V0-001` Coding Harness Workflow v0 with service-delegating fixture list/run commands, text and JSON summaries, explicit optional candidate review, blocked Brownfield summaries, focused tests, and validation closeout.
 
 ## 2026-07-01
 

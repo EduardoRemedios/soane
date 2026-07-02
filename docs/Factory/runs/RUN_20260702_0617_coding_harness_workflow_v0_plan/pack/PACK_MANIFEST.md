@@ -7,13 +7,14 @@ v1
 ## Change Log
 
 - v1 (2026-07-02): Initial Stage J manifest.
+- v1.1 (2026-07-02): Updated after human Go and CHW-V0-001 execution closeout.
 
 ## Run Metadata
 
 - RUN_ID: RUN_20260702_0617_coding_harness_workflow_v0_plan
 - Sprint ID: CHW-V0-001
 - Created: 2026-07-02 06:17 local
-- Execution Mode: PLANNING_ONLY
+- Execution Mode: EXECUTION_ENABLED
 - Spec Versions: STAGE_CONTRACTS v4.13, PURPLE_GATE_CHECKLIST v3.3
 
 ## Required Run Root Files
@@ -22,7 +23,10 @@ v1
 - KNOWLEDGE_LINT.txt: present
 - CONTEXT_RECALL_REPORT.md: present
 - EXECUTION_MODE.txt: present
+- EXECUTION_AUTHORIZATION.txt: present
+- EXECUTION_PROMPT.md: present
 - SPRINT_ID.txt: present
+- VALIDATION_CLOSEOUT_REPORT.md: present
 
 ## Required Pack Files
 
@@ -33,6 +37,7 @@ v1
 - premortem.md: present
 - risk_register.md: present
 - verification_plan.md: present
+- verification_manifest.yaml: present
 - traceability_matrix.md: present
 - micro_sprints.md: present
 - CHW-V0-001_ENVELOPE.md: present

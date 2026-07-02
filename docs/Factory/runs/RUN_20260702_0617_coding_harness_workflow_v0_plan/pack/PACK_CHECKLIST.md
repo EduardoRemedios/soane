@@ -7,6 +7,7 @@ v1
 ## Change Log
 
 - v1 (2026-07-02): Initial Stage J checklist.
+- v1.1 (2026-07-02): Updated after execution-enabled closeout.
 
 ## Overall Outcome
 
@@ -18,7 +19,7 @@ v1
 C1. All required artifacts exist and are non-empty. | Answer: YES | Evidence: PACK_MANIFEST.md
 C2. intent.md is contract-grade per DEFINITIONS.md section 8. | Answer: YES | Evidence: intent.md
 C3. No unresolved Critical findings remain from intent or envelope red teams. | Answer: YES | Evidence: intent_redteam.md; CHW-V0-001_ENVELOPE_REDTEAM.md
-C4. Every Critical or High constraint has verification coverage and a verification tier. | Answer: YES | Evidence: traceability_matrix.md; verification_plan.md
+C4. Every Critical or High constraint has verification coverage and a verification tier. | Answer: YES | Evidence: traceability_matrix.md; verification_plan.md; verification_manifest.yaml
 C5. Sprint envelope includes file-touch budgets and they are non-empty. | Answer: YES | Evidence: CHW-V0-001_ENVELOPE.md
 C6. Micro-sprints include entry or exit criteria and stop/go gates. | Answer: YES | Evidence: micro_sprints.md
 C7. No unbounded deferrals exist. | Answer: YES | Evidence: intent_lock_report.md; micro_sprints.md

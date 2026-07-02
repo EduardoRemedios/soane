@@ -25,6 +25,7 @@ Implementation:
 - Thinking Engine Intake v0 local service at `soane/thinking_engine/intake.py`
 - Socratic Discovery v0 local service at `soane/thinking_engine/discovery.py`
 - Coding Proof Harness v0 local service at `soane/thinking_engine/coding_harness.py`
+- Coding Harness Workflow v0 CLI wrapper at `soane/thinking_engine/coding_workflow.py`
 - Project Memory golden fixture corpus at `tests/fixtures/project_memory/golden/`
 - Project Memory review fixture corpus at `tests/fixtures/project_memory/review/`
 - Thinking Engine Intake v0 fixture corpus at `tests/fixtures/thinking_engine/intake/`
@@ -40,6 +41,7 @@ Implementation:
 - Thinking Engine Intake v0 tests at `tests/test_thinking_engine_intake.py`
 - Socratic Discovery v0 tests at `tests/test_thinking_engine_discovery.py`
 - Coding Proof Harness v0 tests at `tests/test_thinking_engine_coding_harness.py`
+- Coding Harness Workflow v0 tests at `tests/test_thinking_engine_coding_workflow.py`
 
 Constitutional documents:
 
@@ -94,6 +96,7 @@ Planning outputs:
 - `docs/Factory/runs/RUN_20260701_1548_coding_proof_harness_v0_plan/VALIDATION_CLOSEOUT_REPORT.md`
 - `docs/Factory/runs/RUN_20260701_1604_roadmap_sequence_review/`
 - `docs/Factory/runs/RUN_20260702_0617_coding_harness_workflow_v0_plan/`
+- `docs/Factory/runs/RUN_20260702_0617_coding_harness_workflow_v0_plan/VALIDATION_CLOSEOUT_REPORT.md`
 
 ## Current Architectural Posture
 
@@ -109,7 +112,7 @@ Factory V3 remains separate in its own repository and should continue to own mis
 
 - product UI
 - full Project Memory implementation beyond v0 local contract, semantics, context, adapter twins, CLI/TUI, and candidate review
-- full Thinking Engine implementation beyond Intake v0, Socratic Discovery v0, and Coding Proof Harness v0
+- full Thinking Engine implementation beyond Intake v0, Socratic Discovery v0, Coding Proof Harness v0, and Coding Harness Workflow v0
 - Workspace Shell implementation
 - integration clients for Factory V3, Temper, Aegis, Sentinel, or Harmony
 - live Cursor CLI, Codex CLI, Cursor SDK, OpenAI SDK, or OpenAI Agents SDK adapters
@@ -134,6 +137,7 @@ python3 -m unittest tests/test_project_memory_review.py
 python3 -m unittest tests/test_thinking_engine_intake.py
 python3 -m unittest tests/test_thinking_engine_discovery.py
 python3 -m unittest tests/test_thinking_engine_coding_harness.py
+python3 -m unittest tests/test_thinking_engine_coding_workflow.py
 ./scripts/factoryctl pack-lint --run RUN_20260701_1438_thinking_engine_intake_v0_plan
 ./scripts/factoryctl pack-lint --run RUN_20260701_1455_candidate_review_promotion_v0_plan
 ./scripts/factoryctl pack-lint --run RUN_20260701_1529_socratic_discovery_v0_plan
@@ -157,6 +161,12 @@ Thin TUI entry point:
 python3 -m soane.project_memory.tui --help
 ```
 
+Coding Harness Workflow entry point:
+
+```bash
+python3 -m soane.thinking_engine.coding_workflow --help
+```
+
 Validation closeout:
 
 ```bash
@@ -165,6 +175,7 @@ cat docs/Factory/runs/RUN_20260701_1438_thinking_engine_intake_v0_plan/VALIDATIO
 cat docs/Factory/runs/RUN_20260701_1455_candidate_review_promotion_v0_plan/VALIDATION_CLOSEOUT_REPORT.md
 cat docs/Factory/runs/RUN_20260701_1529_socratic_discovery_v0_plan/VALIDATION_CLOSEOUT_REPORT.md
 cat docs/Factory/runs/RUN_20260701_1548_coding_proof_harness_v0_plan/VALIDATION_CLOSEOUT_REPORT.md
+cat docs/Factory/runs/RUN_20260702_0617_coding_harness_workflow_v0_plan/VALIDATION_CLOSEOUT_REPORT.md
 ```
 
 ## Active Boundary Decisions
@@ -210,5 +221,7 @@ cat docs/Factory/runs/RUN_20260701_1548_coding_proof_harness_v0_plan/VALIDATION_
 - `RUN_20260701_1548_coding_proof_harness_v0_plan`: Factory V2 pack for `CPH-V0-001` Coding Proof Harness v0. Status: `PASS`; execution enabled after human Go on 2026-07-01; pack lint passed.
 - `CPH-V0-001` Coding Proof Harness v0 is implemented with local deterministic Greenfield/Brownfield coding fixtures, service composition, mocked provider invocation, candidate output capture, review-gated promotion, and validation closeout.
 - `RUN_20260701_1604_roadmap_sequence_review`: Factory V2 `PLANNING_ONLY` pack for `ROADMAP-SEQ-001` Roadmap Sequencing Review. Status: `PASS`; pack lint passed.
-- `RUN_20260702_0617_coding_harness_workflow_v0_plan`: Factory V2 `PLANNING_ONLY` pack for `CHW-V0-001` Coding Harness Workflow v0. Status: `PASS`; pack lint passed.
-- Next roadmap step: human Go/No-go review for `CHW-V0-001` Coding Harness Workflow v0 implementation.
+- `RUN_20260702_0617_coding_harness_workflow_v0_plan`: Factory V2 pack for `CHW-V0-001` Coding Harness Workflow v0. Status: `PASS`; execution enabled after human Go on 2026-07-02; pack lint passed.
+- Human Go for `CHW-V0-001` was given on 2026-07-02.
+- `CHW-V0-001` Coding Harness Workflow v0 is implemented with fixture listing, selected fixture execution, text and JSON summaries, explicit optional candidate review, blocked Brownfield summaries, no live provider calls, and no repository mutation.
+- Next roadmap step: Factory planning for the Brownfield multi-repo coding proof.
