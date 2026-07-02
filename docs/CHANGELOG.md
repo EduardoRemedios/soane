@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-07-02
+
+- Added Factory V2 planning-only pack `RUN_20260702_0617_coding_harness_workflow_v0_plan` for `CHW-V0-001`, a CLI-first Coding Harness Workflow v0 wrapper over the existing coding proof harness.
+
 ## 2026-07-01
 
 - Added governed memory invariants to the Project Memory v0 roadmap, informed by the MemClaw governed shared memory paper: scope and visibility, temporal supersession, provenance lineage, controlled propagation, contradiction handling, and equivalent enforcement across retrieval paths.

@@ -2,7 +2,7 @@
 
 > Purpose: Track near-term Soane repository work.
 >
-> Last updated: 2026-07-01
+> Last updated: 2026-07-02
 
 ## Completed
 
@@ -24,6 +24,7 @@
 | Coding Proof Harness planning | Done | `docs/Factory/runs/RUN_20260701_1548_coding_proof_harness_v0_plan/` |
 | Coding Proof Harness v0 | Done | `soane/thinking_engine/coding_harness.py`, `tests/test_thinking_engine_coding_harness.py`, `docs/Factory/runs/RUN_20260701_1548_coding_proof_harness_v0_plan/VALIDATION_CLOSEOUT_REPORT.md` |
 | Roadmap sequencing review | Done | `docs/Factory/runs/RUN_20260701_1604_roadmap_sequence_review/pack/ROADMAP_SEQUENCE_REVIEW.md` |
+| Coding Harness Workflow planning | Done | `docs/Factory/runs/RUN_20260702_0617_coding_harness_workflow_v0_plan/` |
 
 ## Sequence
 
@@ -48,8 +49,8 @@
 | 17 | Coding Proof Harness planning run | Done | Factory V2 `PLANNING_ONLY` pack completed at `docs/Factory/runs/RUN_20260701_1548_coding_proof_harness_v0_plan/`; pack-lint passed. |
 | 18 | Coding Proof Harness v0 implementation | Done | Implemented Greenfield/Brownfield coding fixtures, service composition, mocked provider invocation, candidate output capture, review-gated promotion, and validation closeout. Optional wrapper was skipped. |
 | 19 | Roadmap sequencing review | Done | `ROADMAP-SEQ-001` selected a CLI-first workflow wrapper before Workspace Shell architecture. |
-| 20 | Coding Harness Workflow v0 planning | Next | Plan `CHW-V0-001`: a thin CLI-first workflow over the existing coding harness service, with optional TUI only if it stays service-delegating. |
-| 21 | Coding Harness Workflow v0 implementation | Pending | Implement only after `CHW-V0-001` receives human Go. No live providers, persistence, product UI, or Workspace Shell. |
+| 20 | Coding Harness Workflow v0 planning | Done | Factory V2 `PLANNING_ONLY` pack completed at `docs/Factory/runs/RUN_20260702_0617_coding_harness_workflow_v0_plan/`; pack-lint passed. |
+| 21 | Coding Harness Workflow v0 implementation | Next | Implement only after `CHW-V0-001` receives human Go. No live providers, persistence, product UI, or Workspace Shell. |
 | 22 | Brownfield multi-repo coding proof | Pending | Extend the coding proof to multi-repository system boundaries before product shell design hides Brownfield complexity. |
 | 23 | Live coding adapter evaluation plan | Pending | Evaluate Codex CLI, Cursor CLI, Cursor SDK, OpenAI SDK, and OpenAI Agents SDK against invocation, authority, evidence, and no-mutation requirements before live use. |
 | 24 | Memory provider evaluation | Pending | Evaluate Supermemory-style providers as external retrieval/context adapters, not canonical Project Memory. |
@@ -59,13 +60,13 @@
 
 ## Immediate Next Move
 
-Continue planning with:
+Continue with human Go/No-go review for:
 
-`Coding Harness Workflow v0 planning`
+`CHW-V0-001` Coding Harness Workflow v0 implementation
 
 Pack path:
 
-- `docs/Factory/runs/RUN_20260701_1604_roadmap_sequence_review/`
+- `docs/Factory/runs/RUN_20260702_0617_coding_harness_workflow_v0_plan/`
 
 Current state:
 
@@ -90,7 +91,8 @@ Current state:
 - Coding Proof Harness planning run: complete and passed.
 - Coding Proof Harness v0 implementation: complete and passed validation closeout.
 - Roadmap sequencing review: complete and passed.
-- Next work: create a Factory planning pack for `CHW-V0-001` Coding Harness Workflow v0.
+- Coding Harness Workflow v0 planning run: complete and passed.
+- Next work: human Go/No-go for `CHW-V0-001` Coding Harness Workflow v0 implementation.
 
 The pack consumed:
 
@@ -143,6 +145,8 @@ The completed Coding Proof Harness v0 implementation proves that end-to-end path
 
 The completed roadmap sequencing review records that the next immediate slice should be a CLI-first workflow wrapper over the coding harness before Workspace Shell architecture. The recommended sequence after that is Brownfield multi-repo proof, live coding adapter evaluation planning, memory-provider evaluation, Project Memory persistence architecture, Workspace Shell architecture, and then first product surface prototype.
 
+The completed Coding Harness Workflow v0 planning run defines `CHW-V0-001`, a bounded implementation slice for a thin CLI-first workflow wrapper over `soane.thinking_engine.coding_harness`. It should make the coding proof easier to navigate by listing fixtures, running selected scenarios, summarizing intake, discovery, context package, mocked provider invocation, candidate output, and review status, and optionally emitting JSON. It must not introduce live providers, repository mutation, persistence, product UI, Workspace Shell, or mission execution.
+
 The golden fixture set should include at least:
 
 - Decision linked to Evidence
@@ -193,7 +197,8 @@ The governed memory invariants should include:
 | Coding Proof Harness planning run | Done | `docs/Factory/runs/RUN_20260701_1548_coding_proof_harness_v0_plan/` defines `CPH-V0-001`. |
 | Coding Proof Harness v0 implementation | Done | Implemented local deterministic Greenfield/Brownfield coding proof, service composition, mocked provider invocation, candidate output capture, review-gated promotion, tests, and validation closeout. |
 | Roadmap sequencing review | Done | `docs/Factory/runs/RUN_20260701_1604_roadmap_sequence_review/` selects a CLI-first workflow wrapper before Workspace Shell architecture. |
-| Coding Harness Workflow v0 planning | Next | Plan `CHW-V0-001` as a thin CLI-first workflow over `soane.thinking_engine.coding_harness`; optional TUI must stay service-delegating. |
+| Coding Harness Workflow v0 planning | Done | `docs/Factory/runs/RUN_20260702_0617_coding_harness_workflow_v0_plan/` defines `CHW-V0-001`. |
+| Coding Harness Workflow v0 implementation | Next | Implement the thin CLI-first wrapper only after human Go; optional TUI must stay service-delegating. |
 | Brownfield multi-repo coding proof | Candidate | Add before product shell design so system-boundary complexity is explicit. |
 | Live coding adapter evaluation plan | Candidate | Evaluate live Codex/Cursor/OpenAI surfaces before any live provider invocation is introduced. |
 | Memory provider evaluation | Candidate | Evaluate Supermemory-style providers as external retrieval/context adapters before persistence choices. |

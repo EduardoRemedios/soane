@@ -2,7 +2,7 @@
 
 > Purpose: Current source of truth for the Soane repository state.
 >
-> Last updated: 2026-07-01
+> Last updated: 2026-07-02
 
 ## Current Identity
 
@@ -93,6 +93,7 @@ Planning outputs:
 - `docs/Factory/runs/RUN_20260701_1548_coding_proof_harness_v0_plan/`
 - `docs/Factory/runs/RUN_20260701_1548_coding_proof_harness_v0_plan/VALIDATION_CLOSEOUT_REPORT.md`
 - `docs/Factory/runs/RUN_20260701_1604_roadmap_sequence_review/`
+- `docs/Factory/runs/RUN_20260702_0617_coding_harness_workflow_v0_plan/`
 
 ## Current Architectural Posture
 
@@ -138,6 +139,7 @@ python3 -m unittest tests/test_thinking_engine_coding_harness.py
 ./scripts/factoryctl pack-lint --run RUN_20260701_1529_socratic_discovery_v0_plan
 ./scripts/factoryctl pack-lint --run RUN_20260701_1548_coding_proof_harness_v0_plan
 ./scripts/factoryctl pack-lint --run RUN_20260701_1604_roadmap_sequence_review
+./scripts/factoryctl pack-lint --run RUN_20260702_0617_coding_harness_workflow_v0_plan
 python3 scripts/agent_loop_bridge_validate.py tests/fixtures/agent_loop_bridge/valid_handoff.json --json
 ```
 
@@ -208,4 +210,5 @@ cat docs/Factory/runs/RUN_20260701_1548_coding_proof_harness_v0_plan/VALIDATION_
 - `RUN_20260701_1548_coding_proof_harness_v0_plan`: Factory V2 pack for `CPH-V0-001` Coding Proof Harness v0. Status: `PASS`; execution enabled after human Go on 2026-07-01; pack lint passed.
 - `CPH-V0-001` Coding Proof Harness v0 is implemented with local deterministic Greenfield/Brownfield coding fixtures, service composition, mocked provider invocation, candidate output capture, review-gated promotion, and validation closeout.
 - `RUN_20260701_1604_roadmap_sequence_review`: Factory V2 `PLANNING_ONLY` pack for `ROADMAP-SEQ-001` Roadmap Sequencing Review. Status: `PASS`; pack lint passed.
-- Next roadmap step: create a Factory planning pack for `CHW-V0-001` Coding Harness Workflow v0.
+- `RUN_20260702_0617_coding_harness_workflow_v0_plan`: Factory V2 `PLANNING_ONLY` pack for `CHW-V0-001` Coding Harness Workflow v0. Status: `PASS`; pack lint passed.
+- Next roadmap step: human Go/No-go review for `CHW-V0-001` Coding Harness Workflow v0 implementation.
