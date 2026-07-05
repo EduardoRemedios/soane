@@ -2,7 +2,7 @@
 
 > Purpose: Current source of truth for the Soane repository state.
 >
-> Last updated: 2026-07-02
+> Last updated: 2026-07-05
 
 ## Current Identity
 
@@ -65,6 +65,7 @@ Factory V2 process scaffold:
 - `scripts/factory_stage_lint.py`
 - `scripts/factory_pack_lint.py`
 - `scripts/factory_context_index.py`
+- `tests/test_context_recall_repair.py`
 - `scripts/mission_lint.sh`
 - `scripts/mission_cursor_lint.sh`
 - `tools/repo_cartographer/`
@@ -138,6 +139,7 @@ python3 -m unittest tests/test_thinking_engine_intake.py
 python3 -m unittest tests/test_thinking_engine_discovery.py
 python3 -m unittest tests/test_thinking_engine_coding_harness.py
 python3 -m unittest tests/test_thinking_engine_coding_workflow.py
+python3 -m unittest tests/test_context_recall_repair.py
 ./scripts/factoryctl pack-lint --run RUN_20260701_1438_thinking_engine_intake_v0_plan
 ./scripts/factoryctl pack-lint --run RUN_20260701_1455_candidate_review_promotion_v0_plan
 ./scripts/factoryctl pack-lint --run RUN_20260701_1529_socratic_discovery_v0_plan
@@ -181,6 +183,7 @@ cat docs/Factory/runs/RUN_20260702_0617_coding_harness_workflow_v0_plan/VALIDATI
 ## Active Boundary Decisions
 
 - Use Factory V2 locally for planning discipline.
+- Soane's embedded Factory V2 scaffold includes the direct-source recall repair path from the Factory starter kit: generated `WEAK` Stage A context recall remains blocking unless locally verifiable direct-source repair evidence records `Final Repaired Verdict: REPAIRED_DIRECT_SOURCE_CHECK`.
 - Treat `docs/Factory/` as Factory V2 starter-kit process only.
 - Keep Factory V3 work in `/Users/eduardodosremedios/Factory_V3`.
 - Use `/Users/eduardodosremedios/Eduardo_Product_Stack` as the portfolio context source.
@@ -224,4 +227,5 @@ cat docs/Factory/runs/RUN_20260702_0617_coding_harness_workflow_v0_plan/VALIDATI
 - `RUN_20260702_0617_coding_harness_workflow_v0_plan`: Factory V2 pack for `CHW-V0-001` Coding Harness Workflow v0. Status: `PASS`; execution enabled after human Go on 2026-07-02; pack lint passed.
 - Human Go for `CHW-V0-001` was given on 2026-07-02.
 - `CHW-V0-001` Coding Harness Workflow v0 is implemented with fixture listing, selected fixture execution, text and JSON summaries, explicit optional candidate review, blocked Brownfield summaries, no live provider calls, and no repository mutation.
+- Factory V2 direct-source recall repair support has been refreshed from `/Users/eduardodosremedios/factory-starter-kit` in the embedded Soane scaffold.
 - Next roadmap step: Factory planning for the Brownfield multi-repo coding proof.

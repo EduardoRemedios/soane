@@ -2,7 +2,7 @@
 
 > Purpose: Track near-term Soane repository work.
 >
-> Last updated: 2026-07-02
+> Last updated: 2026-07-05
 
 ## Completed
 
@@ -26,6 +26,7 @@
 | Roadmap sequencing review | Done | `docs/Factory/runs/RUN_20260701_1604_roadmap_sequence_review/pack/ROADMAP_SEQUENCE_REVIEW.md` |
 | Coding Harness Workflow planning | Done | `docs/Factory/runs/RUN_20260702_0617_coding_harness_workflow_v0_plan/` |
 | Coding Harness Workflow v0 | Done | `soane/thinking_engine/coding_workflow.py`, `tests/test_thinking_engine_coding_workflow.py`, `docs/Factory/runs/RUN_20260702_0617_coding_harness_workflow_v0_plan/VALIDATION_CLOSEOUT_REPORT.md` |
+| Factory V2 direct-source recall repair refresh | Done | `docs/Factory/ORCHESTRATION.md`, `docs/Factory/Spec/STAGE_CONTRACTS.md`, `docs/Factory/templates/CONTEXT_RECALL_REPORT_TEMPLATE.md`, `scripts/factory_pack_lint.py`, `scripts/factory_stage_lint.py`, `tests/test_context_recall_repair.py` |
 
 ## Sequence
 
@@ -52,12 +53,13 @@
 | 19 | Roadmap sequencing review | Done | `ROADMAP-SEQ-001` selected a CLI-first workflow wrapper before Workspace Shell architecture. |
 | 20 | Coding Harness Workflow v0 planning | Done | Factory V2 `PLANNING_ONLY` pack completed at `docs/Factory/runs/RUN_20260702_0617_coding_harness_workflow_v0_plan/`; pack-lint passed. |
 | 21 | Coding Harness Workflow v0 implementation | Done | Implemented CLI-first fixture listing and execution, text and JSON summaries, candidate/review status, blocked Brownfield summary, and validation closeout. Optional TUI was skipped. |
-| 22 | Brownfield multi-repo coding proof | Next | Extend the coding proof to multi-repository system boundaries before product shell design hides Brownfield complexity. |
-| 23 | Live coding adapter evaluation plan | Pending | Evaluate Codex CLI, Cursor CLI, Cursor SDK, OpenAI SDK, and OpenAI Agents SDK against invocation, authority, evidence, and no-mutation requirements before live use. |
-| 24 | Memory provider evaluation | Pending | Evaluate Supermemory-style providers as external retrieval/context adapters, not canonical Project Memory. |
-| 25 | Project Memory persistence architecture | Pending | Define persistence after workflow and provider evidence clarifies which objects and transitions must be durable. |
-| 26 | Workspace Shell architecture | Pending | Define desktop, web, mobile, voice, collaboration, dashboards, notifications, mission monitoring, and portfolio views after the workflow and integration boundaries are clearer. |
-| 27 | First product surface prototype | Pending | Build only after Project Memory, CLI/TUI navigation, Thinking Engine primitives, coding workflow, and shell architecture are coherent enough to support a real workflow. |
+| 22 | Factory V2 direct-source recall repair refresh | Done | Refreshed embedded Factory V2 scaffold from the starter kit so upcoming context-heavy runs can repair generated `WEAK` recall only through direct local source evidence. |
+| 23 | Brownfield multi-repo coding proof | Next | Extend the coding proof to multi-repository system boundaries before product shell design hides Brownfield complexity. |
+| 24 | Live coding adapter evaluation plan | Pending | Evaluate Codex CLI, Cursor CLI, Cursor SDK, OpenAI SDK, and OpenAI Agents SDK against invocation, authority, evidence, and no-mutation requirements before live use. |
+| 25 | Memory provider evaluation | Pending | Evaluate Supermemory-style providers as external retrieval/context adapters, not canonical Project Memory. |
+| 26 | Project Memory persistence architecture | Pending | Define persistence after workflow and provider evidence clarifies which objects and transitions must be durable. |
+| 27 | Workspace Shell architecture | Pending | Define desktop, web, mobile, voice, collaboration, dashboards, notifications, mission monitoring, and portfolio views after the workflow and integration boundaries are clearer. |
+| 28 | First product surface prototype | Pending | Build only after Project Memory, CLI/TUI navigation, Thinking Engine primitives, coding workflow, and shell architecture are coherent enough to support a real workflow. |
 
 ## Immediate Next Move
 
@@ -94,6 +96,7 @@ Current state:
 - Roadmap sequencing review: complete and passed.
 - Coding Harness Workflow v0 planning run: complete and passed.
 - Coding Harness Workflow v0 implementation: complete and passed validation closeout.
+- Factory V2 direct-source recall repair refresh: complete.
 - Next work: create a Factory planning pack for the Brownfield multi-repo coding proof.
 
 The pack consumed:
@@ -151,6 +154,8 @@ The completed Coding Harness Workflow v0 planning run defines `CHW-V0-001`, a bo
 
 The completed Coding Harness Workflow v0 implementation provides `python3 -m soane.thinking_engine.coding_workflow` with fixture listing, fixture execution, readable text summaries, JSON summaries, explicit optional candidate review, blocked Brownfield summaries, and no live provider or repository side effects. It is the operator surface for inspecting the coding proof before multi-repo Brownfield expansion.
 
+The completed Factory V2 direct-source recall repair refresh imports the starter-kit repair path into Soane's embedded scaffold. Generated `WEAK` Stage A recall remains blocking unless a direct-source repair addendum records concrete local files read, source summaries, remaining unresolved refs, materiality check, and `Final Repaired Verdict: REPAIRED_DIRECT_SOURCE_CHECK`.
+
 The golden fixture set should include at least:
 
 - Decision linked to Evidence
@@ -203,6 +208,7 @@ The governed memory invariants should include:
 | Roadmap sequencing review | Done | `docs/Factory/runs/RUN_20260701_1604_roadmap_sequence_review/` selects a CLI-first workflow wrapper before Workspace Shell architecture. |
 | Coding Harness Workflow v0 planning | Done | `docs/Factory/runs/RUN_20260702_0617_coding_harness_workflow_v0_plan/` defines `CHW-V0-001`. |
 | Coding Harness Workflow v0 implementation | Done | Implemented `python3 -m soane.thinking_engine.coding_workflow` with service-delegating fixture list/run commands and validation closeout. |
+| Factory V2 direct-source recall repair refresh | Done | Embedded Factory V2 scaffold now supports validated direct-source repair for generated `WEAK` Stage A context recall reports. |
 | Brownfield multi-repo coding proof | Next | Add before product shell design so system-boundary complexity is explicit. |
 | Live coding adapter evaluation plan | Candidate | Evaluate live Codex/Cursor/OpenAI surfaces before any live provider invocation is introduced. |
 | Memory provider evaluation | Candidate | Evaluate Supermemory-style providers as external retrieval/context adapters before persistence choices. |
@@ -219,7 +225,7 @@ Do not move Factory V3 work into this repository. Factory V3 remains a separate 
 
 In this roadmap, Factory V2 means the starter-kit process. Factory V3 means the separate newer repository and is not scaffolded here.
 
-The next Factory V2 planning run should consume `docs/PROJECT_MEMORY_ARCHITECTURE.md` and produce the first implementation plan for a local Project Memory object-model prototype.
+The next Factory V2 planning run should produce the Brownfield multi-repo coding proof plan and consume `docs/PROJECT_MEMORY_ARCHITECTURE.md`, `docs/THINKING_ENGINE_ARCHITECTURE.md`, the Coding Proof Harness v0 evidence, the Coding Harness Workflow v0 evidence, and the refreshed direct-source recall repair rules.
 
 Define the Project Memory v0 contract before implementation. The CLI should wrap the contract; it should not become the accidental architecture.
 
