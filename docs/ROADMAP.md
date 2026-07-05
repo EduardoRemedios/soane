@@ -61,10 +61,22 @@
 | 24 | Brownfield multi-repo coding proof implementation | Done | Implemented deterministic multi-repo Brownfield fixtures, system-boundary context, blocked readiness behavior, workflow summaries, candidate-only provider output, and validation closeout. |
 | 25 | Live coding adapter evaluation planning | Done | Factory V2 `PLANNING_ONLY` pack completed at `docs/Factory/runs/RUN_20260705_0923_live_coding_adapter_eval_plan/`; pack-lint passed. |
 | 26 | Live coding adapter evaluation implementation | Next | Build deterministic, source-backed adapter profiles, scoring, and CLI evaluation output for Codex CLI, Cursor CLI, Cursor SDK, OpenAI SDK, and OpenAI Agents SDK. No live provider calls, credential reads, dependency installs, or repository mutation. |
-| 27 | Memory provider evaluation | Pending | Evaluate Supermemory-style providers as external retrieval/context adapters, not canonical Project Memory. |
-| 28 | Project Memory persistence architecture | Pending | Define persistence after workflow and provider evidence clarifies which objects and transitions must be durable. |
-| 29 | Workspace Shell architecture | Pending | Define desktop, web, mobile, voice, collaboration, dashboards, notifications, mission monitoring, and portfolio views after the workflow and integration boundaries are clearer. |
-| 30 | First product surface prototype | Pending | Build only after Project Memory, CLI/TUI navigation, Thinking Engine primitives, coding workflow, and shell architecture are coherent enough to support a real workflow. |
+| 27 | First live read-only coding proof | Pending | Run only after `LCAE-V0-001` selects a first surface and a separate human-approved live-proof pack defines auth, sandbox, read-only scope, output capture, evidence capture, and rollback/stop rules. |
+| 28 | Second domain proof selection | Pending | Select a non-coding proof domain so Workspace primitives are not overfit to software repositories. Candidate domains include research, digital marketing, operations, consulting, or product strategy. |
+| 29 | Memory provider evaluation | Pending | Evaluate Supermemory-style providers as external retrieval/context adapters, not canonical Project Memory. |
+| 30 | Project Memory persistence architecture | Pending | Define persistence after workflow, provider, and live-proof evidence clarifies which objects and transitions must be durable. |
+| 31 | Workspace Shell architecture | Pending | Define desktop, web, mobile, voice, collaboration, dashboards, notifications, mission monitoring, and portfolio views after workflow, integration, memory, and second-domain boundaries are clearer. |
+| 32 | First product surface prototype | Pending | Build only after Project Memory, CLI/TUI navigation, Thinking Engine primitives, coding workflow, adapter evaluation, and shell architecture are coherent enough to support a real workflow. |
+
+## Decision Gates
+
+| Gate | Unlocks | Required Evidence |
+| --- | --- | --- |
+| Deterministic adapter evaluation gate | First live read-only coding proof | `LCAE-V0-001` implementation passes tests, recommends a first live surface, records blocked alternatives, and proves no live calls, credential reads, dependency installs, or repository mutation. |
+| Live coding proof gate | Broader coding adapter work | Separate Factory pack authorizes live use, repository scope is read-only unless explicitly approved otherwise, sandbox and approval policy are recorded, output and trace capture are deterministic enough for review, and Provider Invocation records remain candidate-only until reviewed. |
+| Second domain gate | Workspace generalization beyond coding | A non-coding proof domain is selected with concrete context sources, authority rules, evidence types, and expected outputs. The proof must show that Project Memory and Thinking Engine primitives are domain-general. |
+| Persistence gate | Project Memory persistence architecture | Local memory semantics, context assembly, candidate review, adapter invocation records, provider evaluation, and at least one live-proof path reveal which objects and transitions need durable storage. |
+| Shell gate | Workspace Shell architecture | CLI/TUI workflow, memory boundaries, thinking workflow, adapter strategy, live-proof evidence, and second-domain requirements are stable enough to design a human-facing shell around real workflows. |
 
 ## Immediate Next Move
 
@@ -87,20 +99,9 @@ The completed Brownfield multi-repo coding proof implementation proves determini
 
 The completed live coding adapter evaluation plan keeps the next implementation bounded to evidence-backed profile generation. It must not call live Codex, Cursor, OpenAI, SDK, CLI, cloud-agent, credential, or dependency-install surfaces.
 
-The golden fixture set should include at least:
+## Backlog Notes
 
-- Decision linked to Evidence
-- Assumption superseded by Evidence
-- Contradiction between sources
-- Stale Evidence
-- canonical Markdown source mapping
-- Provider Invocation via mocked Cursor/Codex or OpenAI adapter
-- Capability without Authority
-- redaction or retrieval suppression
-- unauthorized retrieval blocked by scope or visibility
-- stale or superseded record excluded as current truth
-- promoted claim with reconstructable provenance lineage
-- context assembly respects visibility and propagation rules
+These notes are not the immediate next move. They are retained because they remain useful constraints for future Project Memory, persistence, and non-coding proof work.
 
 The governed memory invariants should include:
 
@@ -110,20 +111,22 @@ The governed memory invariants should include:
 - Propagation: context assembly must control which memory crosses task, actor, project, or adapter boundaries.
 - Resolution: contradictions must remain explicit until reviewed; deduplication must not suppress structural conflicts before contradiction handling.
 
+Future fixture expansion should continue to cover Decision linked to Evidence, Assumption superseded by Evidence, contradiction between sources, stale Evidence, canonical Markdown source mapping, Provider Invocation through adapter twins, Capability without Authority, retrieval suppression, unauthorized retrieval blocked by scope or visibility, stale records excluded as current truth, promoted claims with reconstructable provenance lineage, and context assembly respecting visibility and propagation rules.
+
 ## Current Candidates
 
 | Candidate | Status | Notes |
 | --- | --- | --- |
-| Project Memory v0 contract | Candidate | Should define object contracts, governed memory invariants, lifecycle transitions, relationship types, and evidence-level handling before code. |
-| Decision Record format | Candidate | Useful once the Project Memory prototype needs durable Decision fixtures. |
-| Evidence Artifact format | Candidate | Useful once the Project Memory prototype needs traceability fixtures. |
-| Golden fixture suite | Candidate | Should be the proof harness for decisions, assumptions, contradictions, staleness, source mapping, provider invocation, capability, authority, and redaction behavior. |
-| Canonical Markdown generation rules | Candidate | Useful after object model and provenance are proven locally. |
+| Project Memory v0 contract | Done | Object contracts, lifecycle transitions, relationship types, evidence levels, governed memory invariants, deterministic fixture IDs, and validation tests exist. |
+| Decision Record format | Pending | Should become durable when persistence architecture clarifies storage, migration, and source-of-truth rules. |
+| Evidence Artifact format | Pending | Should become durable when persistence architecture clarifies storage, traceability, and retrieval rules. |
+| Golden fixture suite | Done | Current fixture corpus covers core v0 memory, context, review, adapter twin, intake, discovery, and coding workflow behavior; future expansion remains expected. |
+| Canonical Markdown generation rules | Partial | Source mapping exists in Project Memory v0; durable canonical generation rules should wait for persistence architecture. |
 | Mock Cursor/Codex/OpenAI adapter contract | Done | Implemented as deterministic adapter twins for Cursor CLI, Codex CLI, Cursor SDK, OpenAI SDK, and OpenAI Agents SDK. |
-| Context assembly v0 | Candidate | Should prove task-specific context packaging from Decisions, Evidence, Assumptions, Questions, and stale or contradictory records. |
-| Capture/review/promotion flow | Candidate | Needed so raw conversation, notes, and model output do not silently become durable memory. |
-| Persistence guardrails | Candidate | Should keep storage portable, IDs deterministic, fixtures stable, and migration/rewrite behavior explicit before database selection. |
-| Governed memory invariant tests | Candidate | Should verify scope, temporal supersession, provenance lineage, controlled propagation, contradiction resolution, and equivalent enforcement across retrieval paths. |
+| Context assembly v0 | Done | Implemented task-specific context packaging with source maps and lifecycle-aware memory selection. |
+| Capture/review/promotion flow | Done | Candidate Review and Promotion v0 prevents raw conversation, notes, and model output from silently becoming accepted Project Memory truth. |
+| Persistence guardrails | Pending | Should keep storage portable, IDs deterministic, fixtures stable, and migration/rewrite behavior explicit before database selection. |
+| Governed memory invariant tests | Done | Current tests cover scope, temporal supersession, provenance preservation, controlled propagation, contradiction representation, and retrieval/current-truth behavior at v0 scale. |
 | CLI command model | Done | Implemented as `python3 -m soane.project_memory.cli` with validate, fixture-test, context-build, export-markdown, and inspect commands. |
 | TUI navigation model | Done | Implemented as `python3 -m soane.project_memory.tui` with deterministic screens over the existing memory, context, fixture, and CLI primitives. |
 | Project Memory validation closeout | Done | Validation report records VC-001 through VC-016 evidence, residual risks, budget variance, and readiness for Thinking Engine architecture. |
@@ -144,6 +147,8 @@ The governed memory invariants should include:
 | Brownfield multi-repo coding proof implementation | Done | Implemented deterministic multi-repo Brownfield fixtures, local system-boundary context, workflow summaries, blocked readiness behavior, and validation closeout. |
 | Live coding adapter evaluation planning | Done | `docs/Factory/runs/RUN_20260705_0923_live_coding_adapter_eval_plan/` defines `LCAE-V0-001`. |
 | Live coding adapter evaluation implementation | Next | Implement deterministic adapter profiles, scoring, recommendation output, blocked cases, and CLI evaluation output without live provider calls. |
+| First live read-only coding proof | Pending | Requires a separate human-approved live-proof pack after deterministic adapter evaluation selects a first surface. |
+| Second domain proof | Pending | Should prevent Soane from becoming coding-only by proving the same primitives on a non-coding workflow. |
 | Memory provider evaluation | Candidate | Evaluate Supermemory-style providers as external retrieval/context adapters before persistence choices. |
 | Project Memory persistence architecture | Candidate | Defer until workflow and provider evidence clarifies durable storage requirements. |
 | Workspace Shell architecture | Candidate | Defer until workflow and integration boundaries are clearer. |

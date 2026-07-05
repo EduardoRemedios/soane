@@ -6,6 +6,7 @@
 - Added Factory V2 planning-only pack `RUN_20260705_0747_brownfield_multi_repo_coding_proof_plan` for `BMR-CPH-V0-001`, the Brownfield multi-repo coding proof slice.
 - Implemented `BMR-CPH-V0-001` Brownfield Multi-Repo Coding Proof with ready and blocked multi-repo fixtures, local system-boundary context, task-relevant versus out-of-scope repository summaries, blocked readiness behavior, workflow JSON/text summaries, candidate-only provider output, and validation closeout.
 - Added Factory V2 planning-only pack `RUN_20260705_0923_live_coding_adapter_eval_plan` for `LCAE-V0-001`, the live coding adapter evaluation plan covering Codex CLI, Cursor CLI, Cursor SDK, OpenAI SDK, and OpenAI Agents SDK before any live provider invocation.
+- Cleaned up `docs/ROADMAP.md` to separate the immediate `LCAE-V0-001` implementation step from backlog memory notes, add explicit decision gates, and add first live read-only coding proof plus second non-coding domain proof to the medium-term sequence.
 
 ## 2026-07-02
 
