@@ -100,6 +100,7 @@ Planning outputs:
 - `docs/Factory/runs/RUN_20260702_0617_coding_harness_workflow_v0_plan/VALIDATION_CLOSEOUT_REPORT.md`
 - `docs/Factory/runs/RUN_20260705_0747_brownfield_multi_repo_coding_proof_plan/`
 - `docs/Factory/runs/RUN_20260705_0747_brownfield_multi_repo_coding_proof_plan/VALIDATION_CLOSEOUT_REPORT.md`
+- `docs/Factory/runs/RUN_20260705_0923_live_coding_adapter_eval_plan/`
 
 ## Current Architectural Posture
 
@@ -149,6 +150,7 @@ python3 -m unittest tests/test_context_recall_repair.py
 ./scripts/factoryctl pack-lint --run RUN_20260701_1604_roadmap_sequence_review
 ./scripts/factoryctl pack-lint --run RUN_20260702_0617_coding_harness_workflow_v0_plan
 ./scripts/factoryctl pack-lint --run RUN_20260705_0747_brownfield_multi_repo_coding_proof_plan
+./scripts/factoryctl pack-lint --run RUN_20260705_0923_live_coding_adapter_eval_plan
 python3 scripts/agent_loop_bridge_validate.py tests/fixtures/agent_loop_bridge/valid_handoff.json --json
 ```
 
@@ -234,4 +236,5 @@ cat docs/Factory/runs/RUN_20260705_0747_brownfield_multi_repo_coding_proof_plan/
 - Factory V2 direct-source recall repair support has been refreshed from `/Users/eduardodosremedios/factory-starter-kit` in the embedded Soane scaffold.
 - `RUN_20260705_0747_brownfield_multi_repo_coding_proof_plan`: Factory V2 pack for `BMR-CPH-V0-001` Brownfield Multi-Repo Coding Proof. Status: `PASS`; execution enabled after human Go on 2026-07-05; pack lint passed.
 - `BMR-CPH-V0-001` Brownfield Multi-Repo Coding Proof is implemented with deterministic ready and blocked multi-repo fixtures, local system-boundary context, task-relevant versus out-of-scope repository summaries, blocked readiness behavior, workflow JSON/text summaries, candidate-only provider output, no live provider calls, and no repository mutation.
-- Next roadmap step: Factory planning for live coding adapter evaluation.
+- `RUN_20260705_0923_live_coding_adapter_eval_plan`: Factory V2 `PLANNING_ONLY` pack for `LCAE-V0-001` Live Coding Adapter Evaluation. Status: `PASS`; pack lint passed.
+- Next roadmap step: human Go/No-go for `LCAE-V0-001` implementation. The planned implementation creates deterministic, source-backed adapter evaluation profiles and scoring only; it does not invoke live Codex, Cursor, OpenAI, SDK, CLI, or cloud-agent surfaces.
