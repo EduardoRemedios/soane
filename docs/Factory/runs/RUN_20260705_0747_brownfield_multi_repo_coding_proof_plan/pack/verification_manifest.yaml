@@ -1,0 +1,71 @@
+schema_version: 1
+run_id: RUN_20260705_0747_brownfield_multi_repo_coding_proof_plan
+sprint_id: BMR-CPH-V0-001
+execution_mode: EXECUTION_ENABLED
+
+checks:
+  - id: VM-001
+    tier: V2
+    type: test
+    constraint_ids:
+      - VC-001
+      - VC-002
+      - VC-003
+      - VC-004
+      - VC-005
+      - VC-006
+      - VC-007
+    description: Focused Brownfield multi-repo harness and workflow tests.
+    command: python3 -m unittest tests/test_thinking_engine_coding_harness.py tests/test_thinking_engine_coding_workflow.py
+    expected: Command exits 0 and covers ready and blocked multi-repo fixture behavior.
+    halt_on_failure: true
+    evidence_path: docs/Factory/runs/RUN_20260705_0747_brownfield_multi_repo_coding_proof_plan/VALIDATION_CLOSEOUT_REPORT.md
+
+  - id: VM-002
+    tier: V3
+    type: test
+    constraint_ids:
+      - VC-008
+      - VC-009
+      - VC-010
+    description: Focused regression suite for Project Memory, Thinking Engine, coding proof, workflow, and Factory recall repair.
+    command: python3 -m unittest tests/test_project_memory_contract.py tests/test_project_memory_fixtures.py tests/test_project_memory_semantics.py tests/test_project_memory_context.py tests/test_project_memory_adapter_twins.py tests/test_project_memory_cli.py tests/test_project_memory_tui.py tests/test_project_memory_review.py tests/test_thinking_engine_intake.py tests/test_thinking_engine_discovery.py tests/test_thinking_engine_coding_harness.py tests/test_thinking_engine_coding_workflow.py tests/test_context_recall_repair.py
+    expected: Command exits 0.
+    halt_on_failure: true
+    evidence_path: docs/Factory/runs/RUN_20260705_0747_brownfield_multi_repo_coding_proof_plan/VALIDATION_CLOSEOUT_REPORT.md
+
+  - id: VM-003
+    tier: V1
+    type: command
+    constraint_ids:
+      - VC-008
+      - VC-010
+    description: Factory knowledge lint remains clean after implementation.
+    command: bash scripts/knowledge_lint.sh
+    expected: Command exits 0.
+    halt_on_failure: true
+    evidence_path: docs/Factory/runs/RUN_20260705_0747_brownfield_multi_repo_coding_proof_plan/VALIDATION_CLOSEOUT_REPORT.md
+
+  - id: VM-004
+    tier: V1
+    type: command
+    constraint_ids:
+      - VC-008
+      - VC-010
+    description: Factory pack lint accepts the executed pack.
+    command: ./scripts/factoryctl pack-lint --run RUN_20260705_0747_brownfield_multi_repo_coding_proof_plan
+    expected: Command exits 0.
+    halt_on_failure: true
+    evidence_path: docs/Factory/runs/RUN_20260705_0747_brownfield_multi_repo_coding_proof_plan/VALIDATION_CLOSEOUT_REPORT.md
+
+  - id: VM-005
+    tier: V1
+    type: static
+    constraint_ids:
+      - VC-008
+      - VC-010
+    description: Diff contains no whitespace errors.
+    command: git diff --check
+    expected: Command exits 0.
+    halt_on_failure: true
+    evidence_path: docs/Factory/runs/RUN_20260705_0747_brownfield_multi_repo_coding_proof_plan/VALIDATION_CLOSEOUT_REPORT.md

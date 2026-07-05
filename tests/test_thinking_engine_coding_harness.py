@@ -31,13 +31,17 @@ class ThinkingEngineCodingHarnessTests(unittest.TestCase):
         }
 
     def test_fixture_corpus_covers_greenfield_brownfield_and_blocked_paths(self) -> None:
-        self.assertEqual({"CPH-GF-001", "CPH-GF-002", "CPH-GF-003"}, set(self.by_id))
+        self.assertEqual({"CPH-GF-001", "CPH-GF-002", "CPH-GF-003", "CPH-MR-001", "CPH-MR-002"}, set(self.by_id))
         self.assertEqual(IntakeCategory.GREENFIELD, self.results["CPH-GF-001"].intake.baseline.category)
         self.assertEqual(IntakeCategory.BROWNFIELD_SINGLE_REPO, self.results["CPH-GF-002"].intake.baseline.category)
         self.assertEqual(IntakeCategory.BROWNFIELD_SINGLE_REPO, self.results["CPH-GF-003"].intake.baseline.category)
+        self.assertEqual(IntakeCategory.BROWNFIELD_MULTI_REPO, self.results["CPH-MR-001"].intake.baseline.category)
+        self.assertEqual(IntakeCategory.BROWNFIELD_MULTI_REPO, self.results["CPH-MR-002"].intake.baseline.category)
         self.assertTrue(self.results["CPH-GF-001"].ready_for_provider)
         self.assertTrue(self.results["CPH-GF-002"].ready_for_provider)
         self.assertFalse(self.results["CPH-GF-003"].ready_for_provider)
+        self.assertTrue(self.results["CPH-MR-001"].ready_for_provider)
+        self.assertFalse(self.results["CPH-MR-002"].ready_for_provider)
 
     def test_harness_composes_existing_services_and_assembles_context(self) -> None:
         result = self.results["CPH-GF-002"]
@@ -101,6 +105,61 @@ class ThinkingEngineCodingHarnessTests(unittest.TestCase):
 
         memory = ProjectMemory(result.memory_objects)
         self.assertNotIn(candidate, memory.current_objects(PROJECT_READER))
+
+    def test_multi_repo_ready_fixture_records_system_boundary_context(self) -> None:
+        result = self.results["CPH-MR-001"]
+        system = result.multi_repo_system
+        assert system is not None
+
+        self.assertEqual(ReadinessState.READY_FOR_PLANNING, result.intake.readiness.state)
+        self.assertEqual(DiscoveryStopCondition.READY_FOR_PLANNING, result.discovery.stop_condition)
+        self.assertEqual(
+            ["brownfield_system_audit", "integration_boundary_discovery"],
+            [playbook.id for playbook in result.intake.playbooks],
+        )
+        self.assertTrue(system.ready_for_provider)
+        self.assertEqual(
+            ("repo-checkout-web", "repo-order-api", "repo-payments-adapter"),
+            system.relevant_repositories,
+        )
+        self.assertEqual(("repo-analytics-export",), system.out_of_scope_repositories)
+        self.assertEqual(4, len(system.repository_map))
+        self.assertTrue(system.service_boundaries)
+        self.assertTrue(system.integration_contracts)
+        self.assertTrue(system.ownership)
+        self.assertTrue(system.build_test_responsibility)
+        self.assertTrue(system.authority_path)
+
+    def test_multi_repo_provider_output_preserves_candidate_and_boundary_metadata(self) -> None:
+        result = self.results["CPH-MR-001"]
+        candidate = result.output_candidate
+        assert candidate is not None
+
+        self.assertIsNotNone(result.provider_invocation)
+        self.assertTrue(is_candidate_object(candidate))
+        self.assertNotIn(candidate, ProjectMemory(result.memory_objects).current_objects(PROJECT_READER))
+        metadata = candidate.metadata["multi_repo_system"]
+        self.assertEqual(
+            ["repo-checkout-web", "repo-order-api", "repo-payments-adapter"],
+            metadata["relevant_repositories"],
+        )
+        self.assertEqual(["repo-analytics-export"], metadata["out_of_scope_repositories"])
+        self.assertTrue(metadata["ready_for_provider"])
+
+    def test_multi_repo_blocked_fixture_prevents_provider_invocation(self) -> None:
+        result = self.results["CPH-MR-002"]
+        system = result.multi_repo_system
+        assert system is not None
+
+        self.assertEqual(ReadinessState.BLOCKED, result.intake.readiness.state)
+        self.assertEqual(DiscoveryStopCondition.BLOCKED, result.discovery.stop_condition)
+        self.assertFalse(system.ready_for_provider)
+        self.assertFalse(result.ready_for_provider)
+        self.assertIsNone(result.provider_result)
+        self.assertIsNone(result.provider_invocation)
+        self.assertIsNone(result.output_candidate)
+        self.assertIn("integration contract", result.intake.readiness.missing_context)
+        self.assertIn("missing approval path", system.documentation_gaps)
 
     def test_candidate_review_is_only_promotion_path_for_provider_output(self) -> None:
         result = self.results["CPH-GF-001"]

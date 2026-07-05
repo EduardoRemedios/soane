@@ -28,6 +28,7 @@
 | Coding Harness Workflow v0 | Done | `soane/thinking_engine/coding_workflow.py`, `tests/test_thinking_engine_coding_workflow.py`, `docs/Factory/runs/RUN_20260702_0617_coding_harness_workflow_v0_plan/VALIDATION_CLOSEOUT_REPORT.md` |
 | Factory V2 direct-source recall repair refresh | Done | `docs/Factory/ORCHESTRATION.md`, `docs/Factory/Spec/STAGE_CONTRACTS.md`, `docs/Factory/templates/CONTEXT_RECALL_REPORT_TEMPLATE.md`, `scripts/factory_pack_lint.py`, `scripts/factory_stage_lint.py`, `tests/test_context_recall_repair.py` |
 | Brownfield multi-repo coding proof planning | Done | `docs/Factory/runs/RUN_20260705_0747_brownfield_multi_repo_coding_proof_plan/` |
+| Brownfield multi-repo coding proof implementation | Done | `soane/thinking_engine/coding_harness.py`, `soane/thinking_engine/coding_workflow.py`, `tests/fixtures/coding_proof_harness/`, `docs/Factory/runs/RUN_20260705_0747_brownfield_multi_repo_coding_proof_plan/VALIDATION_CLOSEOUT_REPORT.md` |
 
 ## Sequence
 
@@ -56,8 +57,8 @@
 | 21 | Coding Harness Workflow v0 implementation | Done | Implemented CLI-first fixture listing and execution, text and JSON summaries, candidate/review status, blocked Brownfield summary, and validation closeout. Optional TUI was skipped. |
 | 22 | Factory V2 direct-source recall repair refresh | Done | Refreshed embedded Factory V2 scaffold from the starter kit so upcoming context-heavy runs can repair generated `WEAK` recall only through direct local source evidence. |
 | 23 | Brownfield multi-repo coding proof planning | Done | Factory V2 `PLANNING_ONLY` pack completed at `docs/Factory/runs/RUN_20260705_0747_brownfield_multi_repo_coding_proof_plan/`; pack-lint passed. |
-| 24 | Brownfield multi-repo coding proof implementation | Next | Implement only after `BMR-CPH-V0-001` receives human Go. No live providers, real repo access, persistence, product UI, or Workspace Shell. |
-| 25 | Live coding adapter evaluation plan | Pending | Evaluate Codex CLI, Cursor CLI, Cursor SDK, OpenAI SDK, and OpenAI Agents SDK against invocation, authority, evidence, and no-mutation requirements before live use. |
+| 24 | Brownfield multi-repo coding proof implementation | Done | Implemented deterministic multi-repo Brownfield fixtures, system-boundary context, blocked readiness behavior, workflow summaries, candidate-only provider output, and validation closeout. |
+| 25 | Live coding adapter evaluation plan | Next | Evaluate Codex CLI, Cursor CLI, Cursor SDK, OpenAI SDK, and OpenAI Agents SDK against invocation, authority, evidence, and no-mutation requirements before live use. |
 | 26 | Memory provider evaluation | Pending | Evaluate Supermemory-style providers as external retrieval/context adapters, not canonical Project Memory. |
 | 27 | Project Memory persistence architecture | Pending | Define persistence after workflow and provider evidence clarifies which objects and transitions must be durable. |
 | 28 | Workspace Shell architecture | Pending | Define desktop, web, mobile, voice, collaboration, dashboards, notifications, mission monitoring, and portfolio views after the workflow and integration boundaries are clearer. |
@@ -65,21 +66,20 @@
 
 ## Immediate Next Move
 
-Continue with human Go/No-go review for:
+Continue with Factory planning for:
 
-`BMR-CPH-V0-001` Brownfield Multi-Repo Coding Proof implementation
+Live coding adapter evaluation plan
 
-Pack path:
+Recent implementation evidence:
 
-- `docs/Factory/runs/RUN_20260705_0747_brownfield_multi_repo_coding_proof_plan/`
+- `docs/Factory/runs/RUN_20260705_0747_brownfield_multi_repo_coding_proof_plan/VALIDATION_CLOSEOUT_REPORT.md`
 
 Current state:
 
-- Factory V2 planning pack: complete and passed.
-- Human Go for implementation: not yet recorded for `BMR-CPH-V0-001`.
-- Immediate decision: approve, revise, or reject the planning pack before implementation.
+- Brownfield multi-repo coding proof: implemented and passed validation closeout.
+- Next work: create a Factory planning pack for evaluating live coding adapter surfaces before any live provider invocation.
 
-The completed Brownfield multi-repo coding proof planning run defines a bounded implementation slice for deterministic multi-repository Brownfield fixtures. It should prove repository maps, in-scope and out-of-scope repositories, service boundaries, integration contracts, ownership, build/test responsibility, authority path, blocked readiness, workflow summaries, and candidate review behavior without live providers or real repository access.
+The completed Brownfield multi-repo coding proof implementation proves deterministic multi-repository Brownfield fixtures, repository maps, in-scope and out-of-scope repositories, service boundaries, integration contracts, ownership, build/test responsibility, authority path, blocked readiness, workflow summaries, and candidate review behavior without live providers or real repository access.
 
 The golden fixture set should include at least:
 
@@ -135,8 +135,8 @@ The governed memory invariants should include:
 | Coding Harness Workflow v0 implementation | Done | Implemented `python3 -m soane.thinking_engine.coding_workflow` with service-delegating fixture list/run commands and validation closeout. |
 | Factory V2 direct-source recall repair refresh | Done | Embedded Factory V2 scaffold now supports validated direct-source repair for generated `WEAK` Stage A context recall reports. |
 | Brownfield multi-repo coding proof planning | Done | `docs/Factory/runs/RUN_20260705_0747_brownfield_multi_repo_coding_proof_plan/` defines `BMR-CPH-V0-001`. |
-| Brownfield multi-repo coding proof implementation | Next | Implement only after human Go; keep it deterministic, fixture-backed, and service-delegating. |
-| Live coding adapter evaluation plan | Candidate | Evaluate live Codex/Cursor/OpenAI surfaces before any live provider invocation is introduced. |
+| Brownfield multi-repo coding proof implementation | Done | Implemented deterministic multi-repo Brownfield fixtures, local system-boundary context, workflow summaries, blocked readiness behavior, and validation closeout. |
+| Live coding adapter evaluation plan | Next | Evaluate live Codex/Cursor/OpenAI surfaces before any live provider invocation is introduced. |
 | Memory provider evaluation | Candidate | Evaluate Supermemory-style providers as external retrieval/context adapters before persistence choices. |
 | Project Memory persistence architecture | Candidate | Defer until workflow and provider evidence clarifies durable storage requirements. |
 | Workspace Shell architecture | Candidate | Defer until workflow and integration boundaries are clearer. |
@@ -151,7 +151,7 @@ Do not move Factory V3 work into this repository. Factory V3 remains a separate 
 
 In this roadmap, Factory V2 means the starter-kit process. Factory V3 means the separate newer repository and is not scaffolded here.
 
-The next implementation run should consume `docs/Factory/runs/RUN_20260705_0747_brownfield_multi_repo_coding_proof_plan/` and execute only after explicit human Go.
+The next Factory V2 planning run should evaluate live coding adapter surfaces before any live provider invocation is introduced.
 
 Define the Project Memory v0 contract before implementation. The CLI should wrap the contract; it should not become the accidental architecture.
 

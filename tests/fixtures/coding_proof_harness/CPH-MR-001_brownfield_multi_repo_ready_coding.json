@@ -1,0 +1,125 @@
+{
+  "fixture_id": "CPH-MR-001",
+  "title": "Brownfield multi-repo coding proof ready for mocked provider",
+  "domain": "software",
+  "project": {
+    "name": "Existing checkout system",
+    "goal": "Plan a safe checkout change across a bounded multi-repository system",
+    "declared_category": "brownfield_multi_repo",
+    "system_boundary": "checkout web app, order API, and payments adapter repositories"
+  },
+  "goals": ["Use existing multi-repo boundary context before proposing code"],
+  "non_goals": ["Do not inspect or mutate real repositories", "Do not include analytics repository in the coding task"],
+  "repositories": [
+    {
+      "id": "repo-checkout-web",
+      "type": "repository",
+      "title": "Checkout web application",
+      "location": "fixture://checkout-system/checkout-web",
+      "owner": "commerce-frontend-team",
+      "evidence_level": "E1"
+    },
+    {
+      "id": "repo-order-api",
+      "type": "repository",
+      "title": "Order API",
+      "location": "fixture://checkout-system/order-api",
+      "owner": "commerce-platform-team",
+      "evidence_level": "E1"
+    },
+    {
+      "id": "repo-payments-adapter",
+      "type": "repository",
+      "title": "Payments adapter",
+      "location": "fixture://checkout-system/payments-adapter",
+      "owner": "payments-platform-team",
+      "evidence_level": "E1"
+    },
+    {
+      "id": "repo-analytics-export",
+      "type": "repository",
+      "title": "Analytics export jobs",
+      "location": "fixture://checkout-system/analytics-export",
+      "owner": "data-platform-team",
+      "evidence_level": "E1"
+    }
+  ],
+  "canonical_docs": ["docs/system-boundary.md", "docs/checkout-contracts.md", "docs/runbooks/build-test.md"],
+  "assumptions": ["The checkout confirmation change touches web copy, order API response shape, and payment callback validation"],
+  "constraints": ["Provider output must remain a candidate until reviewed"],
+  "open_questions": ["Which repository owns the checkout confirmation copy?"],
+  "missing_context": [],
+  "build_commands": ["checkout-web: npm run build", "order-api: pytest", "payments-adapter: go test ./..."],
+  "test_commands": ["checkout-web: npm test", "order-api: pytest tests/checkout", "payments-adapter: go test ./internal/callbacks"],
+  "multi_repo_system": {
+    "repository_map": [
+      {
+        "id": "repo-checkout-web",
+        "title": "Checkout web application",
+        "role": "customer-facing checkout UI",
+        "task_relevant": true,
+        "reason": "Displays checkout confirmation state"
+      },
+      {
+        "id": "repo-order-api",
+        "title": "Order API",
+        "role": "checkout order state API",
+        "task_relevant": true,
+        "reason": "Provides confirmation payload"
+      },
+      {
+        "id": "repo-payments-adapter",
+        "title": "Payments adapter",
+        "role": "payment provider callback boundary",
+        "task_relevant": true,
+        "reason": "Validates payment status transition"
+      },
+      {
+        "id": "repo-analytics-export",
+        "title": "Analytics export jobs",
+        "role": "downstream reporting jobs",
+        "task_relevant": false,
+        "reason": "Not needed for the planned coding change"
+      }
+    ],
+    "relevant_repositories": ["repo-checkout-web", "repo-order-api", "repo-payments-adapter"],
+    "out_of_scope_repositories": ["repo-analytics-export"],
+    "service_boundaries": [
+      "checkout-web consumes order-api checkout confirmation payload",
+      "order-api records payment status emitted by payments-adapter",
+      "payments-adapter owns external payment callback validation"
+    ],
+    "integration_contracts": [
+      "GET /checkout/{id}/confirmation response contract",
+      "payment_status_changed internal event contract"
+    ],
+    "ownership": [
+      "repo-checkout-web: commerce-frontend-team",
+      "repo-order-api: commerce-platform-team",
+      "repo-payments-adapter: payments-platform-team"
+    ],
+    "build_test_responsibility": [
+      "checkout-web: build and UI test commands",
+      "order-api: checkout API tests",
+      "payments-adapter: callback validation tests"
+    ],
+    "documentation_gaps": [],
+    "authority_path": ["commerce-platform technical lead approves implementation plan before real provider use"]
+  },
+  "expected": {
+    "category": "brownfield_multi_repo",
+    "readiness": "ready_for_planning",
+    "playbooks": ["brownfield_system_audit", "integration_boundary_discovery"]
+  },
+  "harness": {
+    "provider_surface": "codex_cli",
+    "task": {
+      "title": "Plan checkout confirmation change",
+      "prompt": "Propose a minimal multi-repo checkout confirmation change plan using only task-relevant repositories."
+    },
+    "proposed_output": "Update checkout-web display logic, extend the order-api confirmation contract with a backward-compatible field, and add payments-adapter callback tests before any implementation.",
+    "expected": {
+      "ready_for_provider": true
+    }
+  }
+}

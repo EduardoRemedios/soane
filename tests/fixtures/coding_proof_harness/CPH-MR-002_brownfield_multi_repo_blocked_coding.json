@@ -1,0 +1,91 @@
+{
+  "fixture_id": "CPH-MR-002",
+  "title": "Brownfield multi-repo coding proof blocked by missing system context",
+  "domain": "software",
+  "project": {
+    "name": "Unclear fulfilment system",
+    "goal": "Plan a fulfilment change only after system ownership and contracts are known",
+    "declared_category": "brownfield_multi_repo",
+    "system_boundary": "unclear multi-repository fulfilment system"
+  },
+  "goals": ["Determine whether a multi-repo coding task can proceed"],
+  "non_goals": ["Do not propose implementation while system context is missing"],
+  "repositories": [
+    {
+      "id": "repo-fulfilment-api",
+      "type": "repository",
+      "title": "Fulfilment API",
+      "location": "fixture://fulfilment-system/fulfilment-api",
+      "owner": "unknown",
+      "evidence_level": "E1"
+    },
+    {
+      "id": "repo-warehouse-sync",
+      "type": "repository",
+      "title": "Warehouse sync worker",
+      "location": "fixture://fulfilment-system/warehouse-sync",
+      "owner": "unknown",
+      "evidence_level": "E1"
+    }
+  ],
+  "canonical_docs": [],
+  "assumptions": ["The fulfilment change may affect production inventory data"],
+  "constraints": ["Production-impacting fulfilment changes require explicit approval"],
+  "open_questions": ["Which team owns cross-repository fulfilment changes?"],
+  "missing_context": [
+    "system boundary",
+    "owning team",
+    "integration contract",
+    "build and test responsibility",
+    "approval path"
+  ],
+  "blocking_missing_context": true,
+  "multi_repo_system": {
+    "repository_map": [
+      {
+        "id": "repo-fulfilment-api",
+        "title": "Fulfilment API",
+        "role": "unknown",
+        "task_relevant": true,
+        "reason": "May own fulfilment state"
+      },
+      {
+        "id": "repo-warehouse-sync",
+        "title": "Warehouse sync worker",
+        "role": "unknown",
+        "task_relevant": true,
+        "reason": "May update warehouse inventory"
+      }
+    ],
+    "relevant_repositories": ["repo-fulfilment-api", "repo-warehouse-sync"],
+    "out_of_scope_repositories": [],
+    "service_boundaries": [],
+    "integration_contracts": [],
+    "ownership": [],
+    "build_test_responsibility": [],
+    "documentation_gaps": [
+      "missing system boundary",
+      "missing owning team",
+      "missing integration contract",
+      "missing build/test responsibility",
+      "missing approval path"
+    ],
+    "authority_path": []
+  },
+  "expected": {
+    "category": "brownfield_multi_repo",
+    "readiness": "blocked",
+    "playbooks": ["brownfield_system_audit", "integration_boundary_discovery"]
+  },
+  "harness": {
+    "provider_surface": "codex_cli",
+    "task": {
+      "title": "Plan fulfilment change",
+      "prompt": "Propose a fulfilment change across repositories."
+    },
+    "proposed_output": "No provider output should be created while multi-repo boundary, owner, contract, build/test, and approval context are missing.",
+    "expected": {
+      "ready_for_provider": false
+    }
+  }
+}

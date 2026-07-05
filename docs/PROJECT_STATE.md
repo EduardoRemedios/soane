@@ -99,6 +99,7 @@ Planning outputs:
 - `docs/Factory/runs/RUN_20260702_0617_coding_harness_workflow_v0_plan/`
 - `docs/Factory/runs/RUN_20260702_0617_coding_harness_workflow_v0_plan/VALIDATION_CLOSEOUT_REPORT.md`
 - `docs/Factory/runs/RUN_20260705_0747_brownfield_multi_repo_coding_proof_plan/`
+- `docs/Factory/runs/RUN_20260705_0747_brownfield_multi_repo_coding_proof_plan/VALIDATION_CLOSEOUT_REPORT.md`
 
 ## Current Architectural Posture
 
@@ -114,7 +115,7 @@ Factory V3 remains separate in its own repository and should continue to own mis
 
 - product UI
 - full Project Memory implementation beyond v0 local contract, semantics, context, adapter twins, CLI/TUI, and candidate review
-- full Thinking Engine implementation beyond Intake v0, Socratic Discovery v0, Coding Proof Harness v0, and Coding Harness Workflow v0
+- full Thinking Engine implementation beyond Intake v0, Socratic Discovery v0, Coding Proof Harness v0, Coding Harness Workflow v0, and Brownfield multi-repo coding proof behavior
 - Workspace Shell implementation
 - integration clients for Factory V3, Temper, Aegis, Sentinel, or Harmony
 - live Cursor CLI, Codex CLI, Cursor SDK, OpenAI SDK, or OpenAI Agents SDK adapters
@@ -180,6 +181,7 @@ cat docs/Factory/runs/RUN_20260701_1455_candidate_review_promotion_v0_plan/VALID
 cat docs/Factory/runs/RUN_20260701_1529_socratic_discovery_v0_plan/VALIDATION_CLOSEOUT_REPORT.md
 cat docs/Factory/runs/RUN_20260701_1548_coding_proof_harness_v0_plan/VALIDATION_CLOSEOUT_REPORT.md
 cat docs/Factory/runs/RUN_20260702_0617_coding_harness_workflow_v0_plan/VALIDATION_CLOSEOUT_REPORT.md
+cat docs/Factory/runs/RUN_20260705_0747_brownfield_multi_repo_coding_proof_plan/VALIDATION_CLOSEOUT_REPORT.md
 ```
 
 ## Active Boundary Decisions
@@ -230,5 +232,6 @@ cat docs/Factory/runs/RUN_20260702_0617_coding_harness_workflow_v0_plan/VALIDATI
 - Human Go for `CHW-V0-001` was given on 2026-07-02.
 - `CHW-V0-001` Coding Harness Workflow v0 is implemented with fixture listing, selected fixture execution, text and JSON summaries, explicit optional candidate review, blocked Brownfield summaries, no live provider calls, and no repository mutation.
 - Factory V2 direct-source recall repair support has been refreshed from `/Users/eduardodosremedios/factory-starter-kit` in the embedded Soane scaffold.
-- `RUN_20260705_0747_brownfield_multi_repo_coding_proof_plan`: Factory V2 `PLANNING_ONLY` pack for `BMR-CPH-V0-001` Brownfield Multi-Repo Coding Proof. Status: `PASS`; pack lint passed.
-- Next roadmap step: human Go/No-go review for `BMR-CPH-V0-001` Brownfield Multi-Repo Coding Proof implementation.
+- `RUN_20260705_0747_brownfield_multi_repo_coding_proof_plan`: Factory V2 pack for `BMR-CPH-V0-001` Brownfield Multi-Repo Coding Proof. Status: `PASS`; execution enabled after human Go on 2026-07-05; pack lint passed.
+- `BMR-CPH-V0-001` Brownfield Multi-Repo Coding Proof is implemented with deterministic ready and blocked multi-repo fixtures, local system-boundary context, task-relevant versus out-of-scope repository summaries, blocked readiness behavior, workflow JSON/text summaries, candidate-only provider output, no live provider calls, and no repository mutation.
+- Next roadmap step: Factory planning for live coding adapter evaluation.

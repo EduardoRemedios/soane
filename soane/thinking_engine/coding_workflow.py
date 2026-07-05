@@ -96,6 +96,7 @@ def run_workflow_summary(
             "contradiction_count": len(result.context_package.contradictions),
             "exclusion_count": len(result.context_package.exclusions),
         },
+        "system_boundary": _system_boundary_summary(result),
         "provider": _provider_summary(result),
         "output_candidate": _candidate_summary(result, current_ids),
         "review": _review_summary(reviewed, current_ids),
@@ -113,6 +114,7 @@ def render_text_summary(summary: dict[str, Any]) -> str:
     intake = summary["intake"]
     discovery = summary["discovery"]
     context = summary["context_package"]
+    system_boundary = summary["system_boundary"]
     provider = summary["provider"]
     candidate = summary["output_candidate"]
     review = summary["review"]
@@ -126,6 +128,10 @@ def render_text_summary(summary: dict[str, Any]) -> str:
         f"Discovery stop: {discovery['stop_condition']}",
         f"Context: current={context['current_count']} surfaced={context['surfaced_count']} "
         f"excluded={context['exclusion_count']}",
+        f"System boundary: multi_repo={system_boundary['multi_repo']} "
+        f"ready={system_boundary['ready_for_provider']} "
+        f"relevant_repos={system_boundary['relevant_repository_count']} "
+        f"out_of_scope_repos={system_boundary['out_of_scope_repository_count']}",
         f"Provider: {provider['surface']} ready={provider['ready_for_provider']} "
         f"invocation_available={provider['invocation_available']} mocked={provider['mocked']}",
         f"Output candidate: available={candidate['available']} status={candidate['status']} "
@@ -229,6 +235,34 @@ def _fixture_summary(fixture: CodingHarnessFixture) -> dict[str, Any]:
         "expected_ready_for_provider": fixture.expected_ready_for_provider,
         "provider_surface": fixture.provider_surface.value,
         "path": str(fixture.path),
+        "multi_repo": fixture.multi_repo_system is not None,
+    }
+
+
+def _system_boundary_summary(result: CodingHarnessResult) -> dict[str, Any]:
+    system = result.multi_repo_system
+    if system is None:
+        return {
+            "multi_repo": False,
+            "ready_for_provider": True,
+            "repository_map": [],
+            "relevant_repositories": [],
+            "out_of_scope_repositories": [],
+            "relevant_repository_count": 0,
+            "out_of_scope_repository_count": 0,
+            "service_boundaries": [],
+            "integration_contracts": [],
+            "ownership": [],
+            "build_test_responsibility": [],
+            "documentation_gaps": [],
+            "authority_path": [],
+        }
+    metadata = system.as_metadata()
+    return {
+        **metadata,
+        "multi_repo": True,
+        "relevant_repository_count": len(system.relevant_repositories),
+        "out_of_scope_repository_count": len(system.out_of_scope_repositories),
     }
 
 

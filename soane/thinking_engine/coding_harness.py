@@ -46,6 +46,47 @@ class CodingTask:
 
 
 @dataclass(frozen=True)
+class MultiRepoSystemContext:
+    repository_map: tuple[Mapping[str, object], ...]
+    relevant_repositories: tuple[str, ...]
+    out_of_scope_repositories: tuple[str, ...]
+    service_boundaries: tuple[str, ...]
+    integration_contracts: tuple[str, ...]
+    ownership: tuple[str, ...]
+    build_test_responsibility: tuple[str, ...]
+    documentation_gaps: tuple[str, ...]
+    authority_path: tuple[str, ...]
+
+    @property
+    def ready_for_provider(self) -> bool:
+        return all(
+            (
+                self.repository_map,
+                self.relevant_repositories,
+                self.service_boundaries,
+                self.integration_contracts,
+                self.ownership,
+                self.build_test_responsibility,
+                self.authority_path,
+            )
+        )
+
+    def as_metadata(self) -> dict[str, object]:
+        return {
+            "repository_map": list(self.repository_map),
+            "relevant_repositories": list(self.relevant_repositories),
+            "out_of_scope_repositories": list(self.out_of_scope_repositories),
+            "service_boundaries": list(self.service_boundaries),
+            "integration_contracts": list(self.integration_contracts),
+            "ownership": list(self.ownership),
+            "build_test_responsibility": list(self.build_test_responsibility),
+            "documentation_gaps": list(self.documentation_gaps),
+            "authority_path": list(self.authority_path),
+            "ready_for_provider": self.ready_for_provider,
+        }
+
+
+@dataclass(frozen=True)
 class CodingHarnessFixture:
     fixture_id: str
     title: str
@@ -55,6 +96,7 @@ class CodingHarnessFixture:
     proposed_output: str
     expected_ready_for_provider: bool
     path: Path
+    multi_repo_system: MultiRepoSystemContext | None = None
 
 
 @dataclass(frozen=True)
@@ -69,6 +111,7 @@ class CodingHarnessResult:
     output_candidate: MemoryObject | None
     memory_objects: tuple[MemoryObject, ...]
     ready_for_provider: bool
+    multi_repo_system: MultiRepoSystemContext | None = None
     live_call_performed: bool = False
     repository_mutation_performed: bool = False
 
@@ -92,12 +135,13 @@ def load_coding_harness_fixture(path: Path | str) -> CodingHarnessFixture:
         proposed_output=_required_str(harness, "proposed_output", fixture_path),
         expected_ready_for_provider=bool(expected.get("ready_for_provider", False)),
         path=fixture_path,
+        multi_repo_system=_parse_multi_repo_system(payload.get("multi_repo_system"), fixture_path),
     )
 
 
 def load_coding_harness_fixtures(directory: Path | str) -> tuple[CodingHarnessFixture, ...]:
     root = Path(directory)
-    return tuple(load_coding_harness_fixture(path) for path in sorted(root.glob("CPH-GF-*.json")))
+    return tuple(load_coding_harness_fixture(path) for path in sorted(root.glob("CPH-*.json")))
 
 
 def run_coding_proof(fixture: CodingHarnessFixture) -> CodingHarnessResult:
@@ -114,7 +158,7 @@ def run_coding_proof(fixture: CodingHarnessFixture) -> CodingHarnessResult:
             boundary="external_adapter_context",
         ),
     )
-    ready_for_provider = _ready_for_provider(intake, discovery)
+    ready_for_provider = _ready_for_provider(intake, discovery, fixture)
 
     provider_result: AdapterTwinResult | None = None
     provider_invocation: MemoryObject | None = None
@@ -144,6 +188,7 @@ def run_coding_proof(fixture: CodingHarnessFixture) -> CodingHarnessResult:
         output_candidate=output_candidate,
         memory_objects=memory_objects,
         ready_for_provider=ready_for_provider,
+        multi_repo_system=fixture.multi_repo_system,
         live_call_performed=False,
         repository_mutation_performed=False,
     )
@@ -157,11 +202,16 @@ def review_provider_output(result: CodingHarnessResult, decision: ReviewDecision
     return review_candidate(result.output_candidate, decision)
 
 
-def _ready_for_provider(intake: IntakeAssessment, discovery: DiscoverySession) -> bool:
-    return (
+def _ready_for_provider(intake: IntakeAssessment, discovery: DiscoverySession, fixture: CodingHarnessFixture) -> bool:
+    base_ready = (
         intake.readiness.state == ReadinessState.READY_FOR_PLANNING
         and discovery.stop_condition == DiscoveryStopCondition.READY_FOR_PLANNING
     )
+    if not base_ready:
+        return False
+    if intake.baseline.category.value == "brownfield_multi_repo":
+        return fixture.multi_repo_system is not None and fixture.multi_repo_system.ready_for_provider
+    return True
 
 
 def _invoke_provider(fixture: CodingHarnessFixture, context_package: ContextPackage) -> AdapterTwinResult:
@@ -206,6 +256,8 @@ def _output_candidate(fixture: CodingHarnessFixture, provider_invocation: Memory
         "provider_invocation_id": provider_invocation.id,
         "proposed_output": fixture.proposed_output,
     }
+    if fixture.multi_repo_system is not None:
+        metadata["multi_repo_system"] = fixture.multi_repo_system.as_metadata()
     candidate = MemoryObject(
         id=_deterministic_output_id(fixture),
         type=MemoryObjectType.EVIDENCE_ARTIFACT,
@@ -244,6 +296,68 @@ def _required_mapping(payload: Mapping[str, Any], key: str, fixture_path: Path) 
     if not isinstance(value, dict):
         raise CodingHarnessValidationError(f"{fixture_path} requires object field: {key}")
     return value
+
+
+def _parse_multi_repo_system(raw_value: Any, fixture_path: Path) -> MultiRepoSystemContext | None:
+    if raw_value is None:
+        return None
+    if not isinstance(raw_value, dict):
+        raise CodingHarnessValidationError(f"{fixture_path} multi_repo_system must be an object")
+    return MultiRepoSystemContext(
+        repository_map=_parse_repository_map(raw_value.get("repository_map", []), fixture_path),
+        relevant_repositories=_string_list(
+            raw_value.get("relevant_repositories", []),
+            "relevant_repositories",
+            fixture_path,
+        ),
+        out_of_scope_repositories=_string_list(
+            raw_value.get("out_of_scope_repositories", []),
+            "out_of_scope_repositories",
+            fixture_path,
+        ),
+        service_boundaries=_string_list(raw_value.get("service_boundaries", []), "service_boundaries", fixture_path),
+        integration_contracts=_string_list(
+            raw_value.get("integration_contracts", []),
+            "integration_contracts",
+            fixture_path,
+        ),
+        ownership=_string_list(raw_value.get("ownership", []), "ownership", fixture_path),
+        build_test_responsibility=_string_list(
+            raw_value.get("build_test_responsibility", []),
+            "build_test_responsibility",
+            fixture_path,
+        ),
+        documentation_gaps=_string_list(raw_value.get("documentation_gaps", []), "documentation_gaps", fixture_path),
+        authority_path=_string_list(raw_value.get("authority_path", []), "authority_path", fixture_path),
+    )
+
+
+def _parse_repository_map(raw_value: Any, fixture_path: Path) -> tuple[Mapping[str, object], ...]:
+    if not isinstance(raw_value, list):
+        raise CodingHarnessValidationError(f"{fixture_path} repository_map must be a list")
+    repositories: list[Mapping[str, object]] = []
+    for item in raw_value:
+        if not isinstance(item, dict):
+            raise CodingHarnessValidationError(f"{fixture_path} repository_map entries must be objects")
+        repo_id = _required_str(item, "id", fixture_path)
+        repositories.append(
+            {
+                "id": repo_id,
+                "title": _required_str(item, "title", fixture_path),
+                "role": _required_str(item, "role", fixture_path),
+                "task_relevant": bool(item.get("task_relevant", False)),
+                "reason": item.get("reason") if isinstance(item.get("reason"), str) else "",
+            }
+        )
+    return tuple(repositories)
+
+
+def _string_list(raw_value: Any, field_name: str, fixture_path: Path) -> tuple[str, ...]:
+    if not isinstance(raw_value, list):
+        raise CodingHarnessValidationError(f"{fixture_path} {field_name} must be a list")
+    if not all(isinstance(item, str) and item.strip() for item in raw_value):
+        raise CodingHarnessValidationError(f"{fixture_path} {field_name} must contain only non-empty strings")
+    return tuple(raw_value)
 
 
 def _required_str(payload: Mapping[str, Any], key: str, fixture_path: Path) -> str:

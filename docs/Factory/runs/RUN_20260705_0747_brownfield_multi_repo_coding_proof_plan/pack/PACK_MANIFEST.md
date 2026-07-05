@@ -13,7 +13,7 @@ v1
 - RUN_ID: RUN_20260705_0747_brownfield_multi_repo_coding_proof_plan
 - Sprint ID: BMR-CPH-V0-001
 - Created: 2026-07-05 07:47 local
-- Execution Mode: PLANNING_ONLY
+- Execution Mode: EXECUTION_ENABLED
 - Spec Versions: STAGE_CONTRACTS v4.14, PURPLE_GATE_CHECKLIST v3.3
 
 ## Required Run Root Files
@@ -58,5 +58,5 @@ v1
 
 ## Verification Manifest
 
-- verification_manifest.yaml present: no
-- Reason: planning-only pack; runnable manifest belongs to future execution-enabled implementation if needed.
+- verification_manifest.yaml present: yes
+- Reason: execution-enabled implementation records runnable verification checks for closeout.

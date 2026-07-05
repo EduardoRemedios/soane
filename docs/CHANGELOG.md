@@ -4,6 +4,7 @@
 
 - Refreshed Soane's embedded Factory V2 scaffold from `/Users/eduardodosremedios/factory-starter-kit` with the direct-source recall repair path for generated `WEAK` Stage A context recall reports, including docs, template, lint support, knowledge lint coverage, and `tests/test_context_recall_repair.py`.
 - Added Factory V2 planning-only pack `RUN_20260705_0747_brownfield_multi_repo_coding_proof_plan` for `BMR-CPH-V0-001`, the Brownfield multi-repo coding proof slice.
+- Implemented `BMR-CPH-V0-001` Brownfield Multi-Repo Coding Proof with ready and blocked multi-repo fixtures, local system-boundary context, task-relevant versus out-of-scope repository summaries, blocked readiness behavior, workflow JSON/text summaries, candidate-only provider output, and validation closeout.
 
 ## 2026-07-02
 
