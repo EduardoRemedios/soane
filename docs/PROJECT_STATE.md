@@ -98,6 +98,7 @@ Planning outputs:
 - `docs/Factory/runs/RUN_20260701_1604_roadmap_sequence_review/`
 - `docs/Factory/runs/RUN_20260702_0617_coding_harness_workflow_v0_plan/`
 - `docs/Factory/runs/RUN_20260702_0617_coding_harness_workflow_v0_plan/VALIDATION_CLOSEOUT_REPORT.md`
+- `docs/Factory/runs/RUN_20260705_0747_brownfield_multi_repo_coding_proof_plan/`
 
 ## Current Architectural Posture
 
@@ -146,6 +147,7 @@ python3 -m unittest tests/test_context_recall_repair.py
 ./scripts/factoryctl pack-lint --run RUN_20260701_1548_coding_proof_harness_v0_plan
 ./scripts/factoryctl pack-lint --run RUN_20260701_1604_roadmap_sequence_review
 ./scripts/factoryctl pack-lint --run RUN_20260702_0617_coding_harness_workflow_v0_plan
+./scripts/factoryctl pack-lint --run RUN_20260705_0747_brownfield_multi_repo_coding_proof_plan
 python3 scripts/agent_loop_bridge_validate.py tests/fixtures/agent_loop_bridge/valid_handoff.json --json
 ```
 
@@ -228,4 +230,5 @@ cat docs/Factory/runs/RUN_20260702_0617_coding_harness_workflow_v0_plan/VALIDATI
 - Human Go for `CHW-V0-001` was given on 2026-07-02.
 - `CHW-V0-001` Coding Harness Workflow v0 is implemented with fixture listing, selected fixture execution, text and JSON summaries, explicit optional candidate review, blocked Brownfield summaries, no live provider calls, and no repository mutation.
 - Factory V2 direct-source recall repair support has been refreshed from `/Users/eduardodosremedios/factory-starter-kit` in the embedded Soane scaffold.
-- Next roadmap step: Factory planning for the Brownfield multi-repo coding proof.
+- `RUN_20260705_0747_brownfield_multi_repo_coding_proof_plan`: Factory V2 `PLANNING_ONLY` pack for `BMR-CPH-V0-001` Brownfield Multi-Repo Coding Proof. Status: `PASS`; pack lint passed.
+- Next roadmap step: human Go/No-go review for `BMR-CPH-V0-001` Brownfield Multi-Repo Coding Proof implementation.

@@ -27,6 +27,7 @@
 | Coding Harness Workflow planning | Done | `docs/Factory/runs/RUN_20260702_0617_coding_harness_workflow_v0_plan/` |
 | Coding Harness Workflow v0 | Done | `soane/thinking_engine/coding_workflow.py`, `tests/test_thinking_engine_coding_workflow.py`, `docs/Factory/runs/RUN_20260702_0617_coding_harness_workflow_v0_plan/VALIDATION_CLOSEOUT_REPORT.md` |
 | Factory V2 direct-source recall repair refresh | Done | `docs/Factory/ORCHESTRATION.md`, `docs/Factory/Spec/STAGE_CONTRACTS.md`, `docs/Factory/templates/CONTEXT_RECALL_REPORT_TEMPLATE.md`, `scripts/factory_pack_lint.py`, `scripts/factory_stage_lint.py`, `tests/test_context_recall_repair.py` |
+| Brownfield multi-repo coding proof planning | Done | `docs/Factory/runs/RUN_20260705_0747_brownfield_multi_repo_coding_proof_plan/` |
 
 ## Sequence
 
@@ -54,107 +55,31 @@
 | 20 | Coding Harness Workflow v0 planning | Done | Factory V2 `PLANNING_ONLY` pack completed at `docs/Factory/runs/RUN_20260702_0617_coding_harness_workflow_v0_plan/`; pack-lint passed. |
 | 21 | Coding Harness Workflow v0 implementation | Done | Implemented CLI-first fixture listing and execution, text and JSON summaries, candidate/review status, blocked Brownfield summary, and validation closeout. Optional TUI was skipped. |
 | 22 | Factory V2 direct-source recall repair refresh | Done | Refreshed embedded Factory V2 scaffold from the starter kit so upcoming context-heavy runs can repair generated `WEAK` recall only through direct local source evidence. |
-| 23 | Brownfield multi-repo coding proof | Next | Extend the coding proof to multi-repository system boundaries before product shell design hides Brownfield complexity. |
-| 24 | Live coding adapter evaluation plan | Pending | Evaluate Codex CLI, Cursor CLI, Cursor SDK, OpenAI SDK, and OpenAI Agents SDK against invocation, authority, evidence, and no-mutation requirements before live use. |
-| 25 | Memory provider evaluation | Pending | Evaluate Supermemory-style providers as external retrieval/context adapters, not canonical Project Memory. |
-| 26 | Project Memory persistence architecture | Pending | Define persistence after workflow and provider evidence clarifies which objects and transitions must be durable. |
-| 27 | Workspace Shell architecture | Pending | Define desktop, web, mobile, voice, collaboration, dashboards, notifications, mission monitoring, and portfolio views after the workflow and integration boundaries are clearer. |
-| 28 | First product surface prototype | Pending | Build only after Project Memory, CLI/TUI navigation, Thinking Engine primitives, coding workflow, and shell architecture are coherent enough to support a real workflow. |
+| 23 | Brownfield multi-repo coding proof planning | Done | Factory V2 `PLANNING_ONLY` pack completed at `docs/Factory/runs/RUN_20260705_0747_brownfield_multi_repo_coding_proof_plan/`; pack-lint passed. |
+| 24 | Brownfield multi-repo coding proof implementation | Next | Implement only after `BMR-CPH-V0-001` receives human Go. No live providers, real repo access, persistence, product UI, or Workspace Shell. |
+| 25 | Live coding adapter evaluation plan | Pending | Evaluate Codex CLI, Cursor CLI, Cursor SDK, OpenAI SDK, and OpenAI Agents SDK against invocation, authority, evidence, and no-mutation requirements before live use. |
+| 26 | Memory provider evaluation | Pending | Evaluate Supermemory-style providers as external retrieval/context adapters, not canonical Project Memory. |
+| 27 | Project Memory persistence architecture | Pending | Define persistence after workflow and provider evidence clarifies which objects and transitions must be durable. |
+| 28 | Workspace Shell architecture | Pending | Define desktop, web, mobile, voice, collaboration, dashboards, notifications, mission monitoring, and portfolio views after the workflow and integration boundaries are clearer. |
+| 29 | First product surface prototype | Pending | Build only after Project Memory, CLI/TUI navigation, Thinking Engine primitives, coding workflow, and shell architecture are coherent enough to support a real workflow. |
 
 ## Immediate Next Move
 
-Continue with Factory planning for:
+Continue with human Go/No-go review for:
 
-Brownfield multi-repo coding proof
+`BMR-CPH-V0-001` Brownfield Multi-Repo Coding Proof implementation
 
-Recent implementation pack path:
+Pack path:
 
-- `docs/Factory/runs/RUN_20260702_0617_coding_harness_workflow_v0_plan/`
+- `docs/Factory/runs/RUN_20260705_0747_brownfield_multi_repo_coding_proof_plan/`
 
 Current state:
 
 - Factory V2 planning pack: complete and passed.
-- Human Go: received on 2026-07-01.
-- MS-00 Contract Scaffold: complete.
-- MS-01 Golden Fixture Corpus: complete.
-- MS-02 Memory Semantics: complete.
-- MS-03 Context Assembly And Markdown Mapping: complete.
-- MS-04 Mock Coding Adapter Contract: complete.
-- MS-05 Headless CLI: complete.
-- MS-06 Thin TUI Scope: complete.
-- MS-07 Validation Closeout: complete.
-- Thinking Engine architecture: complete.
-- Thinking Engine planning run: complete.
-- Thinking Engine Intake v0 implementation: complete.
-- Thinking Engine Intake v0 proof review: complete.
-- Candidate Review and Promotion planning run: complete and passed.
-- Candidate Review and Promotion v0 implementation: complete.
-- Socratic Discovery planning run: complete and passed.
-- Socratic Discovery v0 implementation: complete and passed validation closeout.
-- Coding Proof Harness planning run: complete and passed.
-- Coding Proof Harness v0 implementation: complete and passed validation closeout.
-- Roadmap sequencing review: complete and passed.
-- Coding Harness Workflow v0 planning run: complete and passed.
-- Coding Harness Workflow v0 implementation: complete and passed validation closeout.
-- Factory V2 direct-source recall repair refresh: complete.
-- Next work: create a Factory planning pack for the Brownfield multi-repo coding proof.
+- Human Go for implementation: not yet recorded for `BMR-CPH-V0-001`.
+- Immediate decision: approve, revise, or reject the planning pack before implementation.
 
-The pack consumed:
-
-- `docs/VISION.md`
-- `docs/CORE_CONCEPTS.md`
-- `docs/GOVERNANCE_MODEL.md`
-- `docs/research/PROJECT_MEMORY_RESEARCH_SYNTHESIS.md`
-- `docs/PROJECT_MEMORY_ARCHITECTURE.md`
-
-The completed MS-04 micro-sprint implemented deterministic local functions and tests for:
-
-- mocked Provider Invocation records
-- Cursor/Codex/OpenAI adapter surface metadata
-- input and output references
-- policy context, confidence, cost, and latency fields
-- capability and authority separation
-- no live CLI or SDK calls
-
-The completed MS-05 micro-sprint implemented a small headless CLI over the existing Project Memory service functions. The CLI does not duplicate contract, fixture, semantics, context assembly, or adapter-twin logic.
-
-The completed MS-06 micro-sprint implemented the smallest thin TUI scope over the same service and CLI primitives. It improves navigation without becoming the product shell.
-
-The completed MS-07 validation closeout validates the Project Memory v0 prototype against the canonical documents, research synthesis, Factory pack, fixtures, CLI, TUI, context assembly, Markdown mapping, and adapter-twin behavior.
-
-The completed Thinking Engine architecture builds on the validated Project Memory v0 proof and clarifies discovery, Thinking, Socratic dialogue, hypotheses, inference strategies, Discovery Playbooks, readiness assessment, and the boundary between thinking support and mission execution.
-
-The Thinking Engine architecture must treat Greenfield and Brownfield project intake as different starting conditions:
-
-- Greenfield projects start by creating the initial project context, canonical docs, assumptions, constraints, and working agreements before feature work begins.
-- Brownfield coding projects start with a repo/workspace audit before feature work begins, including existing application structure, build/test commands, architecture documentation, dependency and integration context, known risks, missing docs, and current decision/evidence gaps.
-- Brownfield systems may span multiple repositories rather than one monorepo. Intake must identify the system boundary, repository map, ownership, integration points, deployment surfaces, shared documentation, and where decisions/evidence currently live.
-- Non-coding projects may have critical context outside repositories entirely. Intake must support external context sources such as analytics dashboards, campaign assets, research notes, briefs, spreadsheets, design files, CRM records, ad accounts, and other operational artifacts.
-- Both paths must verify that the minimum context files, Markdown documents, or equivalent source artifacts exist before Soane agrees a starting point or delegates work.
-
-The completed Thinking Engine planning run produced `TEI-V0-001`, a bounded implementation plan for Thinking Engine Intake v0.
-
-The completed Thinking Engine Intake v0 implementation proves the local service layer for intake category classification, Context Baseline construction, Discovery Playbook selection, Readiness Assessment, and Project Memory candidate output. Do not extend this proof into live adapters, database selection, or a broader Workspace product shell without a new bounded plan.
-
-The completed Candidate Review and Promotion planning run defines `CRP-V0-001`, the next bounded slice. It should close the gap between candidate output and accepted Project Memory truth before Socratic discovery or Workspace Shell work proceeds.
-
-The completed Candidate Review and Promotion v0 implementation closes that gap locally by requiring explicit review decisions, preserving provenance and lineage, keeping candidate and non-current records out of current truth, preserving the authority boundary, and exposing a thin CLI wrapper over the shared service.
-
-The completed Socratic Discovery planning run defines `SD-V0-001`, the next bounded Thinking Engine slice. It should prove the local guided discovery loop before Workspace Shell architecture or live model integrations proceed.
-
-The completed Socratic Discovery v0 implementation proves the local guided discovery loop with deterministic sessions, traceable questions, Project Memory candidate answers, uncertainty-preserving candidate hypotheses, and stop conditions. It does not introduce live models, live adapters, persistence, product UI, Workspace Shell, or mission execution.
-
-The completed Coding Proof Harness planning run defines `CPH-V0-001`, the next bounded proof slice. It should prove a coding workflow by composing existing Intake, Socratic Discovery, Project Memory context assembly, adapter-twin Provider Invocation records, candidate output capture, and Candidate Review and Promotion. It remains mock-first and does not introduce live providers, repository mutation, persistence, product UI, Workspace Shell, or mission execution.
-
-The completed Coding Proof Harness v0 implementation proves that end-to-end path locally with Greenfield and Brownfield coding fixtures, task-specific context assembly, mocked provider selection, Provider Invocation records, candidate output capture, and review-gated promotion. It does not introduce live providers, repository mutation, persistence, product UI, Workspace Shell, or mission execution.
-
-The completed roadmap sequencing review records that the next immediate slice should be a CLI-first workflow wrapper over the coding harness before Workspace Shell architecture. The recommended sequence after that is Brownfield multi-repo proof, live coding adapter evaluation planning, memory-provider evaluation, Project Memory persistence architecture, Workspace Shell architecture, and then first product surface prototype.
-
-The completed Coding Harness Workflow v0 planning run defines `CHW-V0-001`, a bounded implementation slice for a thin CLI-first workflow wrapper over `soane.thinking_engine.coding_harness`. It should make the coding proof easier to navigate by listing fixtures, running selected scenarios, summarizing intake, discovery, context package, mocked provider invocation, candidate output, and review status, and optionally emitting JSON. It must not introduce live providers, repository mutation, persistence, product UI, Workspace Shell, or mission execution.
-
-The completed Coding Harness Workflow v0 implementation provides `python3 -m soane.thinking_engine.coding_workflow` with fixture listing, fixture execution, readable text summaries, JSON summaries, explicit optional candidate review, blocked Brownfield summaries, and no live provider or repository side effects. It is the operator surface for inspecting the coding proof before multi-repo Brownfield expansion.
-
-The completed Factory V2 direct-source recall repair refresh imports the starter-kit repair path into Soane's embedded scaffold. Generated `WEAK` Stage A recall remains blocking unless a direct-source repair addendum records concrete local files read, source summaries, remaining unresolved refs, materiality check, and `Final Repaired Verdict: REPAIRED_DIRECT_SOURCE_CHECK`.
+The completed Brownfield multi-repo coding proof planning run defines a bounded implementation slice for deterministic multi-repository Brownfield fixtures. It should prove repository maps, in-scope and out-of-scope repositories, service boundaries, integration contracts, ownership, build/test responsibility, authority path, blocked readiness, workflow summaries, and candidate review behavior without live providers or real repository access.
 
 The golden fixture set should include at least:
 
@@ -209,7 +134,8 @@ The governed memory invariants should include:
 | Coding Harness Workflow v0 planning | Done | `docs/Factory/runs/RUN_20260702_0617_coding_harness_workflow_v0_plan/` defines `CHW-V0-001`. |
 | Coding Harness Workflow v0 implementation | Done | Implemented `python3 -m soane.thinking_engine.coding_workflow` with service-delegating fixture list/run commands and validation closeout. |
 | Factory V2 direct-source recall repair refresh | Done | Embedded Factory V2 scaffold now supports validated direct-source repair for generated `WEAK` Stage A context recall reports. |
-| Brownfield multi-repo coding proof | Next | Add before product shell design so system-boundary complexity is explicit. |
+| Brownfield multi-repo coding proof planning | Done | `docs/Factory/runs/RUN_20260705_0747_brownfield_multi_repo_coding_proof_plan/` defines `BMR-CPH-V0-001`. |
+| Brownfield multi-repo coding proof implementation | Next | Implement only after human Go; keep it deterministic, fixture-backed, and service-delegating. |
 | Live coding adapter evaluation plan | Candidate | Evaluate live Codex/Cursor/OpenAI surfaces before any live provider invocation is introduced. |
 | Memory provider evaluation | Candidate | Evaluate Supermemory-style providers as external retrieval/context adapters before persistence choices. |
 | Project Memory persistence architecture | Candidate | Defer until workflow and provider evidence clarifies durable storage requirements. |
@@ -225,7 +151,7 @@ Do not move Factory V3 work into this repository. Factory V3 remains a separate 
 
 In this roadmap, Factory V2 means the starter-kit process. Factory V3 means the separate newer repository and is not scaffolded here.
 
-The next Factory V2 planning run should produce the Brownfield multi-repo coding proof plan and consume `docs/PROJECT_MEMORY_ARCHITECTURE.md`, `docs/THINKING_ENGINE_ARCHITECTURE.md`, the Coding Proof Harness v0 evidence, the Coding Harness Workflow v0 evidence, and the refreshed direct-source recall repair rules.
+The next implementation run should consume `docs/Factory/runs/RUN_20260705_0747_brownfield_multi_repo_coding_proof_plan/` and execute only after explicit human Go.
 
 Define the Project Memory v0 contract before implementation. The CLI should wrap the contract; it should not become the accidental architecture.
 
