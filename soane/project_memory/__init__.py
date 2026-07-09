@@ -41,6 +41,15 @@ from soane.project_memory.context import (
     build_context_package,
     render_markdown_view,
 )
+from soane.project_memory.agent_context import (
+    AgentContextBundle,
+    DocumentSlice,
+    MarkdownRole,
+    agent_context_summary,
+    build_agent_context_bundle,
+    format_agent_context_markdown,
+    markdown_role_for_source,
+)
 from soane.project_memory.fixtures import FixtureValidationError, GoldenFixture, load_fixture, load_fixtures
 from soane.project_memory.review import (
     CandidateReviewError,
@@ -77,6 +86,7 @@ __all__ = [
     "AdapterTwinError",
     "AdapterTwinInvocation",
     "AdapterTwinResult",
+    "AgentContextBundle",
     "EvidenceLevel",
     "LifecycleStatus",
     "MemoryObject",
@@ -98,10 +108,14 @@ __all__ = [
     "ContextItem",
     "ContextPackage",
     "ContextRequest",
+    "DocumentSlice",
     "MemorySemanticsError",
     "MarkdownSource",
+    "MarkdownRole",
     "MarkdownView",
     "ProjectMemory",
+    "agent_context_summary",
+    "build_agent_context_bundle",
     "build_context_package",
     "can_transition",
     "default_adapter_twins",
@@ -110,6 +124,8 @@ __all__ = [
     "is_candidate_object",
     "load_fixture",
     "load_fixtures",
+    "format_agent_context_markdown",
+    "markdown_role_for_source",
     "render_markdown_view",
     "review_candidate",
     "validate_memory_object",

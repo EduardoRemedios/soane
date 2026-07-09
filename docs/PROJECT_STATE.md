@@ -2,7 +2,7 @@
 
 > Purpose: Current source of truth for the Soane repository state.
 >
-> Last updated: 2026-07-05
+> Last updated: 2026-07-09
 
 ## Current Identity
 
@@ -19,6 +19,8 @@ Implementation:
 - Project Memory headless CLI at `soane/project_memory/cli.py`
 - Project Memory thin TUI at `soane/project_memory/tui.py`
 - Project Memory context assembly and Markdown mapping at `soane/project_memory/context.py`
+- Project Memory agent-facing context bundle service at `soane/project_memory/agent_context.py`
+- Project Memory repo-local reviewed object seed corpus at `docs/project_memory/objects/`
 - Project Memory golden fixture loader at `soane/project_memory/fixtures.py`
 - Project Memory local semantics layer at `soane/project_memory/semantics.py`
 - Project Memory candidate review and promotion service at `soane/project_memory/review.py`
@@ -35,6 +37,7 @@ Implementation:
 - headless CLI tests at `tests/test_project_memory_cli.py`
 - thin TUI tests at `tests/test_project_memory_tui.py`
 - context assembly and Markdown mapping tests at `tests/test_project_memory_context.py`
+- agent-facing context bundle tests at `tests/test_project_memory_agent_context.py`
 - golden fixture tests at `tests/test_project_memory_fixtures.py`
 - memory semantics tests at `tests/test_project_memory_semantics.py`
 - candidate review and promotion tests at `tests/test_project_memory_review.py`
@@ -134,6 +137,7 @@ bash scripts/knowledge_lint.sh
 ./scripts/factoryctl context-index
 ./scripts/factoryctl pack-lint --run RUN_20260701_0848_project_memory_v0_plan
 python3 -m unittest tests/test_project_memory_contract.py tests/test_project_memory_fixtures.py tests/test_project_memory_semantics.py tests/test_project_memory_context.py
+python3 -m unittest tests/test_project_memory_agent_context.py
 python3 -m unittest tests/test_project_memory_adapter_twins.py
 python3 -m unittest tests/test_project_memory_cli.py
 python3 -m unittest tests/test_project_memory_tui.py
@@ -166,6 +170,15 @@ Thin TUI entry point:
 
 ```bash
 python3 -m soane.project_memory.tui --help
+```
+
+Agent-facing context entry points:
+
+```bash
+python3 -m soane.project_memory.cli agent-context --task "<TASK>"
+python3 -m soane.project_memory.cli agent-trace --id <MEMORY_OBJECT_ID>
+python3 -m soane.project_memory.cli agent-affected --path <SOURCE_PATH>
+python3 -m soane.project_memory.cli validate --no-fixtures --memory-dir docs/project_memory/objects
 ```
 
 Coding Harness Workflow entry point:
@@ -218,6 +231,7 @@ cat docs/Factory/runs/RUN_20260705_0747_brownfield_multi_repo_coding_proof_plan/
 - MS-05 Headless CLI is implemented.
 - MS-06 Thin TUI Scope is implemented.
 - MS-07 Validation Closeout is complete.
+- Agent-facing context slice v0 is implemented with Markdown role classification, expanded top-level doc recall, Project Memory provenance ref matching, repo-local reviewed memory-object JSON loading, compact context bundles, object tracing, source-path affected-object lookup, and focused tests.
 - Thinking Engine architecture is complete.
 - `RUN_20260701_1438_thinking_engine_intake_v0_plan`: Factory V2 `PLANNING_ONLY` pack for `TEI-V0-001` Thinking Engine Intake v0. Status: `PASS`; pack lint passed.
 - Human Go for `TEI-V0-001` was given on 2026-07-01.

@@ -1,0 +1,23 @@
+{
+  "id": "pmem_decision_soane_factory_v2_boundary",
+  "type": "decision",
+  "title": "Treat Factory V2 as process scaffold rather than Workspace product architecture",
+  "status": "accepted",
+  "visibility": "project",
+  "provenance": {
+    "source_refs": ["AGENTS.md", "docs/PROJECT_STATE.md"],
+    "created_by": "agent-context-slice",
+    "created_at": "2026-07-09T12:30:00+00:00",
+    "evidence_level": "E2"
+  },
+  "relationships": [
+    {
+      "type": "evidences",
+      "target_id": "pmem_evidence_artifact_soane_factory_v2_boundary"
+    }
+  ],
+  "metadata": {
+    "repo_memory_seed": true,
+    "object_set": "agent-context-v0"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "id": "pmem_decision_soane_agent_context_before_persistence",
+  "type": "decision",
+  "title": "Build agent-facing context slices before persistence hardening",
+  "status": "accepted",
+  "visibility": "project",
+  "provenance": {
+    "source_refs": ["docs/ROADMAP.md", "docs/CHANGELOG.md"],
+    "created_by": "agent-context-slice",
+    "created_at": "2026-07-09T12:15:00+00:00",
+    "evidence_level": "E2"
+  },
+  "relationships": [
+    {
+      "type": "evidences",
+      "target_id": "pmem_evidence_artifact_soane_agent_context_slice"
+    },
+    {
+      "type": "depends_on",
+      "target_id": "pmem_decision_soane_markdown_roles_for_agents"
+    }
+  ],
+  "metadata": {
+    "repo_memory_seed": true,
+    "object_set": "agent-context-v0"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "pmem_evidence_artifact_soane_agent_context_slice",
+  "type": "evidence_artifact",
+  "title": "Roadmap records agent-facing context slice before persistence hardening",
+  "status": "accepted",
+  "visibility": "project",
+  "provenance": {
+    "source_refs": ["docs/ROADMAP.md", "docs/CHANGELOG.md"],
+    "created_by": "agent-context-slice",
+    "created_at": "2026-07-09T12:10:00+00:00",
+    "evidence_level": "E2"
+  },
+  "relationships": [],
+  "metadata": {
+    "repo_memory_seed": true,
+    "object_set": "agent-context-v0"
+  }
+}

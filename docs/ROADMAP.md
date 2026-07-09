@@ -2,7 +2,7 @@
 
 > Purpose: Track near-term Soane repository work.
 >
-> Last updated: 2026-07-05
+> Last updated: 2026-07-09
 
 ## Completed
 
@@ -30,6 +30,7 @@
 | Brownfield multi-repo coding proof planning | Done | `docs/Factory/runs/RUN_20260705_0747_brownfield_multi_repo_coding_proof_plan/` |
 | Brownfield multi-repo coding proof implementation | Done | `soane/thinking_engine/coding_harness.py`, `soane/thinking_engine/coding_workflow.py`, `tests/fixtures/coding_proof_harness/`, `docs/Factory/runs/RUN_20260705_0747_brownfield_multi_repo_coding_proof_plan/VALIDATION_CLOSEOUT_REPORT.md` |
 | Live coding adapter evaluation planning | Done | `docs/Factory/runs/RUN_20260705_0923_live_coding_adapter_eval_plan/` |
+| Agent-facing context slice v0 | Done | `soane/project_memory/agent_context.py`, `soane/project_memory/cli.py`, `docs/project_memory/objects/`, `tests/test_project_memory_agent_context.py` |
 
 ## Sequence
 
@@ -60,13 +61,14 @@
 | 23 | Brownfield multi-repo coding proof planning | Done | Factory V2 `PLANNING_ONLY` pack completed at `docs/Factory/runs/RUN_20260705_0747_brownfield_multi_repo_coding_proof_plan/`; pack-lint passed. |
 | 24 | Brownfield multi-repo coding proof implementation | Done | Implemented deterministic multi-repo Brownfield fixtures, system-boundary context, blocked readiness behavior, workflow summaries, candidate-only provider output, and validation closeout. |
 | 25 | Live coding adapter evaluation planning | Done | Factory V2 `PLANNING_ONLY` pack completed at `docs/Factory/runs/RUN_20260705_0923_live_coding_adapter_eval_plan/`; pack-lint passed. |
-| 26 | Live coding adapter evaluation implementation | Next | Build deterministic, source-backed adapter profiles, scoring, and CLI evaluation output for Codex CLI, Cursor CLI, Cursor SDK, OpenAI SDK, and OpenAI Agents SDK. No live provider calls, credential reads, dependency installs, or repository mutation. |
-| 27 | First live read-only coding proof | Pending | Run only after `LCAE-V0-001` selects a first surface and a separate human-approved live-proof pack defines auth, sandbox, read-only scope, output capture, evidence capture, and rollback/stop rules. |
-| 28 | Second domain proof selection | Pending | Select a non-coding proof domain so Workspace primitives are not overfit to software repositories. Candidate domains include research, digital marketing, operations, consulting, or product strategy. |
-| 29 | Memory provider evaluation | Pending | Evaluate Supermemory-style providers as external retrieval/context adapters, not canonical Project Memory. |
-| 30 | Project Memory persistence architecture | Pending | Define persistence after workflow, provider, and live-proof evidence clarifies which objects and transitions must be durable. |
-| 31 | Workspace Shell architecture | Pending | Define desktop, web, mobile, voice, collaboration, dashboards, notifications, mission monitoring, and portfolio views after workflow, integration, memory, and second-domain boundaries are clearer. |
-| 32 | First product surface prototype | Pending | Build only after Project Memory, CLI/TUI navigation, Thinking Engine primitives, coding workflow, adapter evaluation, and shell architecture are coherent enough to support a real workflow. |
+| 26 | Agent-facing context slice v0 | Done | Added Markdown role classification, repo-local memory-object JSON loading, top-level doc recall, and `agent-context`, `agent-trace`, and `agent-affected` commands that bridge Factory context-index recall with Project Memory provenance refs before persistence hardening. |
+| 27 | Live coding adapter evaluation implementation | Next | Build deterministic, source-backed adapter profiles, scoring, and CLI evaluation output for Codex CLI, Cursor CLI, Cursor SDK, OpenAI SDK, and OpenAI Agents SDK. No live provider calls, credential reads, dependency installs, or repository mutation. |
+| 28 | First live read-only coding proof | Pending | Run only after `LCAE-V0-001` selects a first surface and a separate human-approved live-proof pack defines auth, sandbox, read-only scope, output capture, evidence capture, and rollback/stop rules. |
+| 29 | Second domain proof selection | Pending | Select a non-coding proof domain so Workspace primitives are not overfit to software repositories. Candidate domains include research, digital marketing, operations, consulting, or product strategy. |
+| 30 | Memory provider evaluation | Pending | Evaluate Supermemory-style providers as external retrieval/context adapters, not canonical Project Memory. |
+| 31 | Project Memory persistence architecture | Pending | Define persistence after workflow, provider, and live-proof evidence clarifies which objects and transitions must be durable. |
+| 32 | Workspace Shell architecture | Pending | Define desktop, web, mobile, voice, collaboration, dashboards, notifications, mission monitoring, and portfolio views after workflow, integration, memory, and second-domain boundaries are clearer. |
+| 33 | First product surface prototype | Pending | Build only after Project Memory, CLI/TUI navigation, Thinking Engine primitives, coding workflow, adapter evaluation, and shell architecture are coherent enough to support a real workflow. |
 
 ## Decision Gates
 
@@ -124,6 +126,8 @@ Future fixture expansion should continue to cover Decision linked to Evidence, A
 | Canonical Markdown generation rules | Partial | Source mapping exists in Project Memory v0; durable canonical generation rules should wait for persistence architecture. |
 | Mock Cursor/Codex/OpenAI adapter contract | Done | Implemented as deterministic adapter twins for Cursor CLI, Codex CLI, Cursor SDK, OpenAI SDK, and OpenAI Agents SDK. |
 | Context assembly v0 | Done | Implemented task-specific context packaging with source maps and lifecycle-aware memory selection. |
+| Agent-facing context commands | Done | `agent-context`, `agent-trace`, and `agent-affected` assemble explained task context, trace memory relationships, and map source paths to affected Project Memory objects using repo-local memory JSON by default. |
+| Repo-local memory object seed corpus | Done | `docs/project_memory/objects/` contains reviewed Project Memory JSON records for Markdown roles, agent context before persistence, Factory V2 boundary, persistence deferral, and the live adapter evaluation gate. |
 | Capture/review/promotion flow | Done | Candidate Review and Promotion v0 prevents raw conversation, notes, and model output from silently becoming accepted Project Memory truth. |
 | Persistence guardrails | Pending | Should keep storage portable, IDs deterministic, fixtures stable, and migration/rewrite behavior explicit before database selection. |
 | Governed memory invariant tests | Done | Current tests cover scope, temporal supersession, provenance preservation, controlled propagation, contradiction representation, and retrieval/current-truth behavior at v0 scale. |

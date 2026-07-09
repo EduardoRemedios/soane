@@ -1,0 +1,27 @@
+{
+  "id": "pmem_decision_soane_lcae_next_gate",
+  "type": "decision",
+  "title": "Keep live coding adapter evaluation as the next implementation gate",
+  "status": "accepted",
+  "visibility": "project",
+  "provenance": {
+    "source_refs": ["docs/ROADMAP.md"],
+    "created_by": "agent-context-slice",
+    "created_at": "2026-07-09T12:35:00+00:00",
+    "evidence_level": "E2"
+  },
+  "relationships": [
+    {
+      "type": "evidences",
+      "target_id": "pmem_evidence_artifact_soane_agent_context_slice"
+    },
+    {
+      "type": "depends_on",
+      "target_id": "pmem_decision_soane_agent_context_before_persistence"
+    }
+  ],
+  "metadata": {
+    "repo_memory_seed": true,
+    "object_set": "agent-context-v0"
+  }
+}

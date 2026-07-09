@@ -82,6 +82,21 @@ Generated documents are produced from tools, Project Memory, Factory V2 process,
 
 Generated documents are useful evidence and review surfaces. They are not automatically authoritative unless a human or governance process promotes them.
 
+## Markdown Role Vocabulary
+
+Markdown files should be classified by their role before agents use them as context.
+
+The current role vocabulary is:
+
+- `constitutional`: durable product identity, core vocabulary, and governance rules. Current examples: `docs/VISION.md`, `docs/CORE_CONCEPTS.md`, and `docs/GOVERNANCE_MODEL.md`.
+- `canonical`: stable architectural, project-state, roadmap, changelog, integration, or repository-context records that guide future work.
+- `working`: active planning, templates, run artifacts, sketches, and other non-final work surfaces.
+- `generated`: tool-produced or process-produced reports, prompts, closeouts, checklists, and recall artifacts.
+- `evidence`: verification plans, traceability matrices, risk registers, pre-mortems, research synthesis, and reviewed source-analysis artifacts.
+- `deprecated`: archived, superseded, or intentionally retired Markdown that must not be treated as current truth unless surfaced for history.
+
+Markdown role is not the same thing as Project Memory status. A canonical Markdown file can still contain claims that need Project Memory objects, and a generated Markdown file can become evidence without becoming authoritative truth.
+
 ## Amendment Rules
 
 ### Constitutional Amendments

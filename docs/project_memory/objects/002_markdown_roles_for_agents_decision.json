@@ -1,0 +1,23 @@
+{
+  "id": "pmem_decision_soane_markdown_roles_for_agents",
+  "type": "decision",
+  "title": "Classify Markdown by role before agent context use",
+  "status": "accepted",
+  "visibility": "project",
+  "provenance": {
+    "source_refs": ["docs/GOVERNANCE_MODEL.md"],
+    "created_by": "agent-context-slice",
+    "created_at": "2026-07-09T12:05:00+00:00",
+    "evidence_level": "E2"
+  },
+  "relationships": [
+    {
+      "type": "evidences",
+      "target_id": "pmem_evidence_artifact_soane_markdown_role_vocab"
+    }
+  ],
+  "metadata": {
+    "repo_memory_seed": true,
+    "object_set": "agent-context-v0"
+  }
+}

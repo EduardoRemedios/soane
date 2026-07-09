@@ -17,6 +17,7 @@ DEFAULT_DB_ENV_VAR = "FACTORY_CONTEXT_DB_PATH"
 LEGACY_DB_PATH = Path("artifacts/factory_context/context.sqlite3")
 DEFAULT_SOURCE_PATTERNS = (
     "AGENTS.md",
+    "docs/*.md",
     "docs/PROJECT_STATE.md",
     "docs/ROADMAP.md",
     "docs/CHANGELOG.md",

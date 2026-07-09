@@ -99,6 +99,11 @@ class ProjectMemory:
     def visible_objects(self, access: AccessContext) -> tuple[MemoryObject, ...]:
         return tuple(obj for obj in self._objects.values() if is_visible(obj, access))
 
+    def objects(self) -> tuple[MemoryObject, ...]:
+        """Return all objects for audit/internal inspection without visibility filtering."""
+
+        return tuple(self._objects.values())
+
     def current_objects(self, access: AccessContext) -> tuple[MemoryObject, ...]:
         return tuple(
             obj

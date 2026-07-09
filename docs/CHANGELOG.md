@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-07-09
+
+- Implemented an agent-facing Project Memory context slice with `soane/project_memory/agent_context.py`, bridging Factory context-index document recall with Project Memory provenance refs and Markdown role classification.
+- Added `python3 -m soane.project_memory.cli agent-context`, `agent-trace`, and `agent-affected` commands so agents can request small explained bundles, trace memory object relationships, and find memory objects tied to a source path before rereading broad repo context.
+- Added real Project Memory JSON input support with `--memory-file`, `--memory-dir`, and `--no-fixtures`, plus a repo-local reviewed seed corpus at `docs/project_memory/objects/` for agent-facing commands.
+- Expanded the Factory context index default source patterns to include top-level `docs/*.md`, so constitutional and canonical docs can participate in agent context recall.
+- Added `tests/test_project_memory_agent_context.py` covering Markdown role mapping, context-index to Project Memory ref bridging, and the new agent-facing CLI commands.
+- Formalized Markdown role vocabulary in `docs/GOVERNANCE_MODEL.md` so constitutional, canonical, working, generated, evidence, and deprecated Markdown have explicit context semantics.
+
 ## 2026-07-05
 
 - Refreshed Soane's embedded Factory V2 scaffold from `/Users/eduardodosremedios/factory-starter-kit` with the direct-source recall repair path for generated `WEAK` Stage A context recall reports, including docs, template, lint support, knowledge lint coverage, and `tests/test_context_recall_repair.py`.
