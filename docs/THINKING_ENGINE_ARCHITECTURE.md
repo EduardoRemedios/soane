@@ -102,7 +102,7 @@ It writes back structured outputs such as:
 - synthesis notes
 - operational learning
 
-Generated Markdown remains a view. It may present Thinking Engine outputs, but it is not the durable source of truth unless the underlying Project Memory objects exist.
+Generated Markdown remains a projection. It may present Thinking Engine outputs, but it is not governed Project understanding unless the underlying Project Memory objects exist and have the required review state.
 
 ## Core Flow
 
@@ -373,6 +373,26 @@ Good synthesis should state:
 
 Synthesis is not a Decision. It may recommend a Decision, but the Decision must remain explicit.
 
+## Decision Framing
+
+For consequential choices, the Thinking Engine should create a structured Decision Frame before recommending commitment.
+
+A Decision Frame should make visible:
+
+- objective and decision deadline
+- alternatives, including the status quo where meaningful
+- decision criteria and their relative importance
+- causal Claims and Assumptions
+- predicted outcomes and confidence
+- Evidence supporting and challenging each alternative
+- trade-offs, sensitivity, and uncertainty
+- dissent, counterarguments, and what would change the recommendation
+- reversibility, information value, and review trigger
+
+Decision framing should be proportional to consequence. It should not turn low-risk choices into ceremony, and it should not allow high-consequence choices to proceed without explicit alternatives and uncertainty.
+
+After an important Decision reaches its review trigger, the Thinking Engine should help produce a Decision Review comparing expected and observed outcomes. It should preserve causal uncertainty and feed resulting Operational Learning into future Assumptions, readiness assessments, and Decision Frames.
+
 ## Inference Strategy
 
 The Thinking Engine owns Inference Strategy selection for reasoning tasks.
@@ -459,7 +479,9 @@ Expected outputs include:
 - Constraints
 - Evidence references
 - synthesis
+- Decision Frames
 - proposed Decisions
+- Decision Review candidates
 - readiness assessment
 - planning recommendation
 - delegation blockers

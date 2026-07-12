@@ -1,0 +1,51 @@
+schema_version: 1
+run_id: RUN_20260712_1011_vision_epistemic_hardening
+sprint_id: VEH-V1-001
+execution_mode: EXECUTION_ENABLED
+
+checks:
+  - id: VM-001
+    tier: V3
+    type: test
+    constraint_ids: [VC-009]
+    description: Full repository regression suite.
+    command: python3 -m unittest discover -s tests
+    expected: Command exits 0.
+    halt_on_failure: true
+    evidence_path: docs/Factory/runs/RUN_20260712_1011_vision_epistemic_hardening/VALIDATION_CLOSEOUT_REPORT.md
+  - id: VM-002
+    tier: V1
+    type: command
+    constraint_ids: [VC-010]
+    description: Canonical knowledge lint.
+    command: bash scripts/knowledge_lint.sh
+    expected: Command exits 0.
+    halt_on_failure: true
+    evidence_path: docs/Factory/runs/RUN_20260712_1011_vision_epistemic_hardening/VALIDATION_CLOSEOUT_REPORT.md
+  - id: VM-003
+    tier: V1
+    type: command
+    constraint_ids: [VC-010]
+    description: Context index refresh.
+    command: ./scripts/factoryctl context-index
+    expected: Command exits 0.
+    halt_on_failure: true
+    evidence_path: docs/Factory/runs/RUN_20260712_1011_vision_epistemic_hardening/VALIDATION_CLOSEOUT_REPORT.md
+  - id: VM-004
+    tier: V1
+    type: command
+    constraint_ids: [VC-010]
+    description: Factory pack lint.
+    command: ./scripts/factoryctl pack-lint --run RUN_20260712_1011_vision_epistemic_hardening
+    expected: Command exits 0.
+    halt_on_failure: true
+    evidence_path: docs/Factory/runs/RUN_20260712_1011_vision_epistemic_hardening/VALIDATION_CLOSEOUT_REPORT.md
+  - id: VM-005
+    tier: V1
+    type: command
+    constraint_ids: [VC-008, VC-010]
+    description: Diff whitespace and scope check.
+    command: git diff --check
+    expected: Command exits 0 and changed paths remain within the envelope.
+    halt_on_failure: true
+    evidence_path: docs/Factory/runs/RUN_20260712_1011_vision_epistemic_hardening/VALIDATION_CLOSEOUT_REPORT.md

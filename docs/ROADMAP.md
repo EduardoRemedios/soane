@@ -33,6 +33,7 @@
 | Agent-facing context slice v0 | Done | `soane/project_memory/agent_context.py`, `soane/project_memory/cli.py`, `docs/project_memory/objects/`, `tests/test_project_memory_agent_context.py` |
 | Agent context relevance and fail-closed planning | Done | `docs/Factory/runs/RUN_20260712_0909_agent_context_relevance_v1_plan/` |
 | Agent context relevance and fail-closed implementation | Done | `soane/project_memory/agent_context.py`, `scripts/factory_context_index.py`, `tests/test_factory_context_index_atomic.py`, `docs/Factory/runs/RUN_20260712_0909_agent_context_relevance_v1_plan/VALIDATION_CLOSEOUT_REPORT.md` |
+| Vision and epistemic model hardening | Done | `docs/VISION.md`, `docs/CORE_CONCEPTS.md`, `docs/GOVERNANCE_MODEL.md`, `docs/PROJECT_MEMORY_ARCHITECTURE.md`, `docs/THINKING_ENGINE_ARCHITECTURE.md`, `docs/Factory/runs/RUN_20260712_1011_vision_epistemic_hardening/` |
 
 ## Sequence
 
@@ -66,15 +67,16 @@
 | 26 | Agent-facing context slice v0 | Done | Added Markdown role classification, repo-local memory-object JSON loading, top-level doc recall, and `agent-context`, `agent-trace`, and `agent-affected` commands that bridge Factory context-index recall with Project Memory provenance refs before persistence hardening. |
 | 27 | Agent context relevance and fail-closed planning | Done | `RUN_20260712_0909_agent_context_relevance_v1_plan` passed Stage I2 and final pack lint. |
 | 28 | Agent context relevance and fail-closed implementation | Done | Implemented bounded natural-task recall, separate budgets, fail-closed zero matches, one-hop expansion, source freshness, and rollback-safe concurrent index rebuilds; validation closeout passed. |
-| 29 | Markdown-to-memory candidate ingestion planning | Next | Create a planning-only Factory pack for reviewable candidates with precise provenance and freshness signals; do not auto-promote extracted claims or choose durable persistence. |
-| 30 | Graph-aware context and trace | Pending | Add bounded typed inbound/outbound traversal, cycle handling, affected-by propagation, and explanation paths after ingestion supplies realistic graph density. |
-| 31 | Live coding adapter evaluation implementation | Pending | Execute the existing `LCAE-V0-001` pack after the context correctness gate and source-evidence refresh. No live provider calls. |
-| 32 | First live read-only coding proof | Pending | Run only after `LCAE-V0-001` selects a first surface and a separate human-approved live-proof pack defines auth, sandbox, read-only scope, output capture, evidence capture, and rollback/stop rules. |
-| 33 | Second domain proof selection | Pending | Select a non-coding proof domain so Workspace primitives are not overfit to software repositories. |
-| 34 | Memory provider evaluation | Pending | Evaluate external retrieval/context adapters, not canonical Project Memory. |
-| 35 | Project Memory persistence architecture | Pending | Define persistence after relevance, ingestion, traversal, provider, and live-proof evidence clarifies durable access and mutation patterns. |
-| 36 | Workspace Shell architecture | Pending | Define the product shell after workflow, integration, memory, and second-domain boundaries are clearer. |
-| 37 | First product surface prototype | Pending | Build only after the memory, thinking, workflow, adapter, and shell boundaries support a real workflow. |
+| 29 | Vision and epistemic model hardening | Done | Accepted Claim, fact-status, Decision Review, Knowledge Scope, bounded Delegation, memory-rights, Markdown-mode, and success-measure doctrine; runtime representation remains deferred. |
+| 30 | Markdown-to-memory candidate ingestion planning | Next | Create a planning-only Factory pack for reviewable Claim candidates with precise provenance, source authority, Markdown mode, scope, and freshness signals; do not auto-promote claims or choose durable persistence. |
+| 31 | Graph-aware context and trace | Pending | Add bounded typed inbound/outbound traversal, cycle handling, affected-by propagation, and explanation paths after ingestion supplies realistic graph density. |
+| 32 | Live coding adapter evaluation implementation | Pending | Execute the existing `LCAE-V0-001` pack after the context correctness gate and source-evidence refresh. No live provider calls. |
+| 33 | First live read-only coding proof | Pending | Run only after `LCAE-V0-001` selects a first surface and a separate human-approved live-proof pack defines auth, sandbox, read-only scope, output capture, evidence capture, and rollback/stop rules. |
+| 34 | Second domain proof selection | Pending | Select a non-coding proof domain so Workspace primitives are not overfit to software repositories. |
+| 35 | Memory provider evaluation | Pending | Evaluate external retrieval/context adapters, not canonical Project Memory. |
+| 36 | Project Memory persistence architecture | Pending | Define persistence after relevance, ingestion, traversal, provider, and live-proof evidence clarifies durable access and mutation patterns. |
+| 37 | Workspace Shell architecture | Pending | Define the product shell after workflow, integration, memory, and second-domain boundaries are clearer. |
+| 38 | First product surface prototype | Pending | Build only after the memory, thinking, workflow, adapter, and shell boundaries support a real workflow. |
 
 ## Decision Gates
 
@@ -105,7 +107,8 @@ Current state:
 - Agent-facing context v1: implemented and validation closeout passed.
 - Live coding adapter evaluation planning: complete and retained as the next adapter pack after context correctness.
 - `ACR-V1-001` planning and implementation: complete.
-- Next work: plan review-gated Markdown-to-memory candidate ingestion with source anchors, fingerprints, and freshness behavior.
+- Vision and epistemic model hardening: doctrine accepted; runtime representation remains deferred.
+- Next work: plan review-gated Markdown-to-memory Claim candidate ingestion with source anchors, source authority, Markdown mode, Knowledge Scope, fingerprints, and freshness behavior.
 
 The context correctness slice must remain local and deterministic. It must not add persistence, semantic embeddings, external providers, automatic memory promotion, product UI, or live adapter invocation.
 

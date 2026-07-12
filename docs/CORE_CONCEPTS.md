@@ -34,8 +34,8 @@ Terms should not be overloaded for convenience. A conversation is not a decision
 At the highest level:
 
 - a `Project` is the durable unit of work and memory
-- `Project Memory` is the source of truth for that project
-- `Conversations`, `Discoveries`, `Hypotheses`, `Decisions`, `Evidence`, and `Missions` are recorded in Project Memory
+- `Project Memory` is the governed system of record for the Workspace's current understanding of that project
+- `Conversations`, `Discoveries`, `Claims`, `Hypotheses`, `Decisions`, `Decision Reviews`, `Evidence`, and `Missions` are recorded in Project Memory
 - a `Mission` is delegated work performed through governed execution systems
 - `Authority` determines whether an action may proceed
 - `Evidence` supports understanding, decisions, verification, and trust
@@ -92,18 +92,22 @@ Projects should be stable enough to preserve memory over time. If a unit of work
 
 ## Project Memory
 
-Project Memory is the durable source of truth for a Project.
+Project Memory is the governed system of record for the Workspace's current understanding of a Project.
 
-It stores the structured and retrievable record of what is known, what is assumed, what is uncertain, what has been decided, what evidence exists, and what work has happened.
+It stores the structured and retrievable record of what is asserted, observed, supported, accepted, assumed, uncertain, decided, reviewed, and performed.
+
+Project Memory does not supersede the authority of external source systems. It records their references and the Workspace's governed interpretation while preserving provenance, source authority, epistemic status, and contradiction.
 
 Project Memory includes:
 
 - conversations
 - discoveries
+- claims
 - hypotheses
 - assumptions
 - constraints
 - decisions
+- Decision Reviews
 - architecture
 - roadmap
 - evidence
@@ -129,7 +133,7 @@ Project Memory should preserve both conclusions and the reasoning that produced 
 
 The Project Graph is the structured representation of relationships inside Project Memory.
 
-It connects entities such as goals, systems, people, teams, repositories, documents, decisions, assumptions, evidence, missions, capabilities, and authorities.
+It connects entities such as goals, systems, people, teams, repositories, documents, claims, decisions, Decision Reviews, assumptions, evidence, missions, capabilities, authorities, and knowledge scopes.
 
 The Project Graph should support:
 
@@ -145,7 +149,7 @@ The Project Graph is not a visualisation. Visual graphs may be generated from it
 
 ## Canonical Document
 
-A Canonical Document is a human-readable generated or curated view over Project Memory that records an authoritative understanding of part of a Project.
+A Canonical Document is a human-readable authored, generated, or curated representation of an authoritative understanding of part of a Project.
 
 Examples include:
 
@@ -161,6 +165,14 @@ Canonical Documents are important because they are readable, reviewable, diffabl
 
 Canonical Documents should remain traceable to Project Memory. If a Canonical Document becomes the only place a decision or fact exists, Project Memory has failed to capture the underlying knowledge.
 
+Canonical Documents have three modes:
+
+- **Authored authority** is maintained directly by accountable humans or governance processes and must not be overwritten by generation.
+- **Generated projection** is rendered from Project Memory and may be regenerated from its recorded source objects.
+- **Curated round trip** begins from structured memory but accepts reviewed human amendment; changes must be reconciled back into candidate memory before regeneration treats them as authoritative.
+
+The mode, write authority, source mapping, and review state should be explicit.
+
 ## Conversation
 
 A Conversation is an interaction between humans, AI systems, or both.
@@ -170,6 +182,27 @@ Conversations may contain questions, answers, proposals, disagreements, decision
 A Conversation is not automatically Project Memory. It becomes Project Memory when relevant content is extracted, structured, linked, and retained.
 
 The Workspace should not force humans or agents to reconstruct project truth from raw conversation history. Conversation is an input to memory, not a substitute for memory.
+
+## Claim
+
+A Claim is a proposition asserted about a Project, its environment, or its work.
+
+A Claim is not automatically a fact. It should record:
+
+- the proposition
+- claimant or producing system
+- source and source authority
+- provenance and derivation
+- scope and applicable context
+- supporting and challenging Evidence
+- Verification state
+- confidence where relevant
+- freshness and review state
+- current epistemic status
+
+Useful epistemic states include `asserted`, `observed`, `supported`, `contested`, `accepted`, `verified`, `superseded`, and `invalidated`. These states are not interchangeable, and no retrieval score or model confidence may promote a Claim by itself.
+
+An accepted fact is a Claim whose provenance, evidence, verification, source authority, scope, and review status satisfy the applicable governance standard. Fact is therefore a revisable epistemic status, not an unqualified object label.
 
 ## Discovery
 
@@ -336,6 +369,24 @@ Decisions may be:
 - retired
 
 Important Decisions should be traceable to the conversations, research, evidence, assumptions, and authorities that shaped them.
+
+## Decision Review
+
+A Decision Review compares what a Decision expected with what was later observed.
+
+A Decision Review should record:
+
+- the Decision reviewed
+- expected outcomes and indicators
+- original confidence and causal assumptions
+- review date or trigger
+- observed outcomes and Evidence
+- whether relevant Assumptions and Constraints held
+- causal uncertainty and confounding factors
+- resulting Operational Learning
+- amendment, reversal, continuation, or further-review action
+
+Decision Review exists to improve future judgement, not merely to score past decision makers.
 
 ## Evidence
 
@@ -507,6 +558,23 @@ The Workspace does not own Authority. Authority, proof, receipts, evidence, trus
 
 The Workspace should keep Authority explicit. It should not confuse recommendation, capability, approval, execution, verification, or proof with Authority.
 
+## Delegation
+
+Delegation is the governed assignment of bounded discretion or work from an Authority-bearing person, responsibility, policy, or external system to another subject.
+
+Delegation should identify:
+
+- issuing Authority Reference
+- subject receiving the delegation
+- permitted decisions or actions
+- scope, conditions, and duration
+- evidence and policy requirements
+- budget or resource limits
+- accountability and monitoring responsibility
+- escalation, interruption, expiry, and revocation conditions
+
+Delegation does not transfer ultimate accountability unless the governing Authority explicitly says so. Capability does not create Delegation, and the Workspace does not create Authority by recording one.
+
 ## Responsibility
 
 Responsibility is an assigned obligation to decide, review, approve, execute, monitor, or maintain something.
@@ -585,6 +653,20 @@ Context is the relevant subset of Project Memory and external information assemb
 Context should be purposeful. More context is not always better. The Workspace should assemble context based on relevance, freshness, provenance, policy, privacy, and task intent.
 
 Context is not memory. Context is a selected view used for a specific activity. Project Memory is the durable substrate.
+
+## Knowledge Scope
+
+Knowledge Scope defines where a Project Memory object may be retained, retrieved, used, or promoted.
+
+Initial scopes may include private working context, Project, organisation, portfolio, and external or public. Wider scope must not be inferred from relevance, repetition, or technical accessibility.
+
+Cross-project promotion should be explicit and governed. It should preserve provenance, source authority, privacy, contractual restrictions, consent requirements, and unresolved contradictions. If promotion authority or propagation rules are unclear, retrieval should fail closed.
+
+## Memory Rights
+
+Memory Rights govern capture, access, amendment, correction, export, retention, deletion, redaction, restriction, and revocation.
+
+They should identify the subject or owner, accountable controller, purpose, applicable policy, retention basis, and any legal or contractual hold. Derived knowledge should retain applicable restrictions from its sources. Auditability should not be used as a reason to preserve content that must lawfully or validly be removed.
 
 ## Synthesis
 
@@ -674,7 +756,7 @@ Supported hypotheses may inform decisions, but they are not decisions until acce
 
 A Conversation is interaction history. Project Memory is structured, durable understanding.
 
-The Workspace should extract memory from conversations rather than treating conversations as the primary source of truth.
+The Workspace should extract reviewed memory candidates from conversations rather than treating conversation history as governed project understanding.
 
 ### Verification and Approval
 
@@ -691,7 +773,7 @@ When adding features, APIs, schemas, prompts, agents, documents, or user interfa
 - which core concept is being represented
 - whether the term is being used consistently
 - whether the concept belongs to the Workspace or another portfolio product
-- whether the source of truth is Project Memory or a generated view
+- whether the authoritative record is an external source, authored authority, Project Memory object, or generated view
 - whether evidence, authority, and decisions are being kept distinct
 - whether the design reduces uncertainty before execution
 

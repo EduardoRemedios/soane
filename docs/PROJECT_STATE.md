@@ -115,6 +115,8 @@ Planning outputs:
 - `docs/Factory/runs/RUN_20260705_0923_live_coding_adapter_eval_plan/`
 - `docs/Factory/runs/RUN_20260712_0909_agent_context_relevance_v1_plan/`
 - `docs/Factory/runs/RUN_20260712_0909_agent_context_relevance_v1_plan/VALIDATION_CLOSEOUT_REPORT.md`
+- `docs/Factory/runs/RUN_20260712_1011_vision_epistemic_hardening/`
+- `docs/Factory/runs/RUN_20260712_1011_vision_epistemic_hardening/VALIDATION_CLOSEOUT_REPORT.md`
 
 ## Current Architectural Posture
 
@@ -126,10 +128,13 @@ In this repository, `docs/Factory/` means the Factory V2 starter-kit scaffold. I
 
 Factory V3 remains separate in its own repository and should continue to own mission governance.
 
+Project Memory is constitutionally the governed system of record for the Workspace's current Project understanding, not the ultimate authority for external reality or source-system records. Claim, Decision Review, Knowledge Scope, bounded Delegation, memory rights, and explicit Markdown authority modes are accepted doctrine. Their runtime representations are deferred.
+
 ## What Does Not Exist Yet
 
 - product UI
 - full Project Memory implementation beyond v0 local contract, semantics, context, adapter twins, CLI/TUI, candidate review, agent-facing context commands, and the reviewed repo-local seed corpus
+- runtime Claim epistemic states, Decision Review, Knowledge Scope promotion, bounded Delegation records, or authored/curated Markdown reconciliation
 - full Thinking Engine implementation beyond Intake v0, Socratic Discovery v0, Coding Proof Harness v0, Coding Harness Workflow v0, and Brownfield multi-repo coding proof behavior
 - Workspace Shell implementation
 - integration clients for Factory V3, Temper, Aegis, Sentinel, or Harmony
@@ -168,6 +173,7 @@ python3 -m unittest tests/test_context_recall_repair.py
 ./scripts/factoryctl pack-lint --run RUN_20260705_0747_brownfield_multi_repo_coding_proof_plan
 ./scripts/factoryctl pack-lint --run RUN_20260705_0923_live_coding_adapter_eval_plan
 ./scripts/factoryctl pack-lint --run RUN_20260712_0909_agent_context_relevance_v1_plan
+./scripts/factoryctl pack-lint --run RUN_20260712_1011_vision_epistemic_hardening
 python3 scripts/agent_loop_bridge_validate.py tests/fixtures/agent_loop_bridge/valid_handoff.json --json
 ```
 

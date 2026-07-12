@@ -329,14 +329,16 @@ The Workspace may plan, launch, monitor, pause, resume, inspect, and review miss
 
 ## Project Memory Relationship
 
-Project Memory is the intended durable source of truth for the Workspace.
+Project Memory is the intended governed system of record for the Workspace's current Project understanding. It does not supersede source-system authority for external records.
 
-Until Project Memory exists, canonical Markdown documents act as the repository's durable knowledge surface.
+Until richer Project Memory representation exists, canonical Markdown documents act as the repository's durable knowledge surface according to their declared document status and authority mode.
 
 Once Project Memory exists:
 
-- canonical Markdown should become generated or curated views over Project Memory
+- canonical Markdown should declare authored-authority, generated-projection, or curated-round-trip mode
+- Claims should preserve provenance, source authority, epistemic status, and review state
 - Decisions should be first-class Project Memory objects
+- Decision Reviews should compare expected and observed outcomes
 - Assumptions should remain visible and linked
 - Evidence should be traceable to source artifacts
 - constitutional documents should remain human-readable governance surfaces

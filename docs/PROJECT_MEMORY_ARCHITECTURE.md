@@ -15,11 +15,11 @@ It consumes:
 
 ## Purpose
 
-Project Memory is the durable source of truth for a Project.
+Project Memory is the governed system of record for the Workspace's current understanding of a Project.
 
 It exists so humans and AI systems can understand:
 
-- what is known
+- what is asserted, observed, supported, or accepted
 - what is assumed
 - what is uncertain
 - what has been decided
@@ -27,6 +27,8 @@ It exists so humans and AI systems can understand:
 - what work has happened
 - what authority or proof references exist
 - what should happen next
+
+Project Memory does not override the authority of systems that produce external records, Authority, Proof, mission state, or runtime state. It preserves source authority and records the Workspace's governed interpretation of those references.
 
 Project Memory is not chat history. It is not a vector database. It is not a document folder. It is not a transcript archive.
 
@@ -58,7 +60,7 @@ Project Memory does not:
 - own Harmony regulated conversation
 - replace source repositories
 - mirror neighbouring product state
-- treat generated Markdown as the only source of truth
+- treat generated Markdown as governed Project understanding without underlying reviewed memory
 - treat model output as authoritative by default
 - choose a storage engine in this document
 - define API endpoints in this document
@@ -165,7 +167,7 @@ Examples:
 
 This layer should answer: what does this task need to know right now?
 
-Context Assembly is not the source of truth. It is a retrieval, ranking, filtering, and packaging function over memory.
+Context Assembly is not an authoritative record. It is a retrieval, ranking, filtering, and packaging function over memory.
 
 ## First-Class Object Model
 
@@ -194,6 +196,23 @@ An interaction between humans, AI systems, or both.
 Conversation is not automatically Project Memory.
 
 Conversation becomes memory only when relevant claims, questions, decisions, assumptions, or evidence are extracted, reviewed, linked, and retained.
+
+### Claim
+
+A proposition asserted about a Project, its environment, or its work.
+
+Claims should link to:
+
+- claimant or producing system
+- source and source authority
+- supporting and challenging Evidence
+- Verification records
+- derivation lineage
+- applicable Knowledge Scope
+- affected Decisions, Assumptions, Hypotheses, or Canonical Knowledge Artifacts
+- epistemic status and review state
+
+Claim is not synonymous with fact. An accepted fact is a reviewed, scoped, and revisable epistemic status supported by appropriate provenance, Evidence, Verification, and source authority.
 
 ### Question
 
@@ -262,6 +281,21 @@ Decisions should link to:
 - owner or authority
 - reversal conditions
 - affected objects
+
+### Decision Review
+
+A structured comparison between a Decision's expected consequences and later observations.
+
+Decision Reviews should link to:
+
+- Decision reviewed
+- expected outcomes, indicators, and original confidence
+- causal Assumptions and Constraints
+- observed outcomes and Evidence
+- review trigger and reviewer
+- causal uncertainty
+- resulting Operational Learning
+- continuation, amendment, reversal, or further-review action
 
 ### Evidence Artifact
 
@@ -379,6 +413,21 @@ Canonical Knowledge Artifacts should record:
 - related Decisions, Assumptions, Evidence, and Questions
 
 Canonical Markdown documents are examples of Canonical Knowledge Artifacts.
+
+### Knowledge Scope
+
+A governed boundary describing where a memory object may be retained, retrieved, used, or promoted.
+
+Knowledge Scope should record:
+
+- current scope, such as private working context, Project, organisation, portfolio, or external/public
+- accountable owner or controller
+- access and purpose constraints
+- privacy, contractual, consent, and retention requirements
+- promotion authority and review state
+- inherited restrictions and provenance
+
+Wider scope must not be inferred from relevance or technical accessibility. Cross-project retrieval should fail closed when promotion or propagation authority is unclear.
 
 ## Common Object Fields
 
@@ -617,6 +666,14 @@ Forgetting should distinguish:
 
 The architecture should preserve auditability where appropriate without retaining content that must be removed.
 
+## Memory Rights And Propagation
+
+Project Memory must make the rights governing capture, access, correction, export, retention, deletion, redaction, restriction, and revocation inspectable.
+
+Derived Claims, syntheses, context packages, and Canonical Knowledge Artifacts should inherit applicable source restrictions. Consolidation must not launder private, contractual, revoked, or purpose-limited material into a wider Knowledge Scope.
+
+Cross-project promotion requires explicit authority, provenance, scope review, and conflict preservation. Promotion creates a governed wider-scope representation; it does not silently mutate the source Project's record or erase project-local disagreement.
+
 ## Context Assembly
 
 Context Assembly selects relevant information for a specific task.
@@ -644,6 +701,12 @@ Context Assembly should not treat retrieval rank as truth.
 
 Canonical Markdown files are generated or curated views over Project Memory.
 
+Canonical Markdown should declare one of three modes:
+
+- **Authored authority:** maintained directly by accountable humans or governance processes; generation may propose changes but must not overwrite it.
+- **Generated projection:** rendered from Project Memory and replaceable only through deterministic regeneration from recorded source objects.
+- **Curated round trip:** generated from memory, amended by humans, and reconciled through reviewed candidate changes before later regeneration.
+
 Generation should record:
 
 - source memory objects
@@ -662,7 +725,9 @@ Generated Markdown should be:
 - reviewable
 - traceable
 
-Markdown should not be the only source of truth once Project Memory exists.
+Generated Markdown should not be treated as governed Project understanding without its underlying reviewed Project Memory objects.
+
+Generation must detect source divergence. Human edits must not be overwritten or promoted silently; unresolved differences should become review work with exact source mappings.
 
 ## Integration Boundaries
 
@@ -745,6 +810,14 @@ Implemented v0 foundations now define:
 - canonical Markdown source mapping
 - context assembly rules
 
+The following accepted semantic extensions are not yet implemented as runtime object types:
+
+- Claim and explicit epistemic status
+- Decision Review
+- Knowledge Scope and cross-project promotion
+- Delegation representation beyond external Authority References
+- authored-authority and curated-round-trip reconciliation
+
 The import path from existing Markdown documents remains pending. It must create reviewable candidates rather than silently promote extracted claims.
 
 V1 should not define:
@@ -760,7 +833,7 @@ V1 should not define:
 
 ## Implementation Reconciliation
 
-The original readiness criteria have been satisfied for the v0 prototype:
+The original readiness criteria remain satisfied for the v0 prototype as implemented:
 
 - this conceptual architecture is accepted
 - v1 object types are selected
@@ -769,11 +842,14 @@ The original readiness criteria have been satisfied for the v0 prototype:
 - canonical Markdown generation rules are bounded
 - non-goals remain explicit
 
-The v0 implementation proved memory object modeling, traceability, candidate review, context assembly, and agent-facing commands before durable persistence.
+The v0 implementation proved memory object modeling, traceability, candidate review, context assembly, and agent-facing commands before durable persistence. It does not yet enforce the accepted semantic extensions listed above.
 
 ## Remaining Questions
 
 - How should canonical documents be regenerated without losing human edits?
+- Which authored-authority documents may propose reviewed memory candidates without becoming generated projections?
+- What minimum evidence and authority permit a Claim to receive accepted or verified status?
+- What policy and identity references are required before Knowledge Scope promotion can be implemented?
 - Which Factory V2 run artifacts should be imported into Project Memory first?
 - How should Markdown source changes mark linked memory objects stale or affected?
 - What bounded typed-relationship traversal is useful for agent context without causing graph explosion?

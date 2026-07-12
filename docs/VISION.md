@@ -30,7 +30,7 @@ The Workspace exists to improve:
 - collaboration
 - supervised delegation
 
-Implementation can be delegated. Judgement remains human.
+Implementation can be delegated. Humans retain accountability and governed authority. AI systems may exercise bounded judgement only within explicit, revocable delegations that define scope, policy, evidence, budget, escalation, and duration.
 
 The Workspace should therefore help humans decide what should be done, why it should be done, under what constraints, with what evidence, and with what level of confidence. Execution systems may carry out work, but the Workspace exists to reduce uncertainty before that work begins and to preserve the reasoning that justified it.
 
@@ -64,7 +64,7 @@ It assumes that AI systems increasingly become:
 - operators
 - verifiers
 
-The Workspace exists to maximise the effectiveness of both groups. It should not pretend that AI owns authority where human judgement is required. It should also not waste human attention on implementation work that can be safely delegated once intent, constraints, evidence, and authority are clear.
+The Workspace exists to maximise the effectiveness of both groups. Capability, recommendation, and delegated discretion do not create Authority. The Workspace should not pretend that AI owns authority, and it should not waste human attention on work that can be safely delegated once intent, constraints, evidence, accountability, and authority are clear.
 
 ## Product Scope
 
@@ -176,16 +176,20 @@ The Workspace may integrate with Harmony where regulated conversation or operato
 
 Project Memory is the central architectural concept of the Workspace.
 
-Project Memory is the durable source of truth for a project. It stores the reasoning, evidence, decisions, constraints, and operational history that allow humans and AI systems to understand what is true, what is uncertain, what has been decided, and what remains open.
+Project Memory is the governed system of record for the Workspace's current understanding of a Project. It stores the reasoning, claims, evidence, decisions, constraints, and operational history that allow humans and AI systems to understand what is asserted, supported, uncertain, decided, observed, and still open.
+
+Project Memory does not become the ultimate authority for external reality merely by indexing or synthesising it. Source systems remain authoritative for the records they own. Project Memory should preserve source authority, provenance, epistemic status, and contradiction so accepted understanding can be revised when better evidence or governing records appear.
 
 Project Memory stores:
 
 - conversations
 - discoveries
+- claims
 - hypotheses
 - assumptions
 - constraints
 - decisions
+- decision reviews
 - architecture
 - roadmap
 - evidence
@@ -193,9 +197,9 @@ Project Memory stores:
 - mission history
 - operational learning
 
-Canonical Markdown files are generated views over Project Memory.
+Canonical Markdown files may be authored authority, generated projections, or curated round trips over Project Memory. Their mode must be explicit.
 
-Markdown is important because it is portable, reviewable, diffable, and accessible to humans and tools. Project Memory is fundamental because it is the durable structured substrate from which those files are produced. Markdown should never be treated as the only source of truth when a richer Project Memory representation exists.
+Markdown is important because it is portable, reviewable, diffable, and accessible to humans and tools. Project Memory is fundamental because it is the durable structured substrate from which generated and curated views are produced. Generated output must not overwrite authored authority, and curated changes must not silently become authoritative memory. Markdown should not be treated as the only source of project understanding when a richer Project Memory representation exists.
 
 The Workspace should be able to regenerate canonical documents from Project Memory, explain why they say what they say, and trace important claims back to supporting evidence or decisions.
 
@@ -233,9 +237,11 @@ The Project Memory Engine is responsible for:
 
 - project graph
 - semantic knowledge graph
+- claim and epistemic-status management
 - context assembly
 - cross-project retrieval
 - decision history
+- decision outcome review
 - evidence indexing
 - canonical Markdown generation
 - search
@@ -291,7 +297,7 @@ No architectural decision should assume that a current model, provider, context 
 
 Voice is a first-class interface.
 
-Voice is not an accessibility feature. Users should be able to perform almost every project activity conversationally, including discovery, clarification, review, approval, monitoring, and steering.
+Voice is not merely an accessibility feature. Users should be able to perform almost every project activity conversationally, including discovery, clarification, review, approval, monitoring, and steering. Voice must also meet accessibility, consent, authentication, privacy, and correction requirements appropriate to the interaction.
 
 Voice should work consistently across:
 
@@ -330,7 +336,7 @@ The Workspace must support:
 
 Governance should be responsibility-based rather than role-based. Responsibilities are assigned through policy.
 
-The same system should scale naturally from one person to thousands. Scaling should not require changing the conceptual model of projects, decisions, memory, or delegation. A solo developer and a large enterprise should use the same underlying primitives, with different policies, responsibilities, and organisational structure.
+The same core epistemic primitives should remain useful from one person to thousands. Enterprise scale will require additional identity, tenancy, federation, administration, privacy, and compliance structures, but it should not require redefining the meaning of projects, claims, decisions, evidence, memory, or delegation.
 
 Collaboration should preserve accountability. The Workspace should make it clear who decided, who reviewed, who approved, what evidence was available, and what assumptions were active at the time.
 
@@ -363,6 +369,16 @@ The Workspace coordinates the portfolio. It does not absorb the portfolio. When 
 
 Project Memory is not a feature layered on top of chat. It is the durable infrastructure of the Workspace. Interfaces, agents, documents, and execution systems should all interact with Project Memory as the source of project continuity.
 
+### Preserve Source Authority
+
+Project Memory records governed project understanding. It should not erase the distinction between a source-system record, an observation, an assertion, an accepted understanding, a verified finding, and a governed Decision. Retrieval rank, repetition, model confidence, and document status do not turn an assertion into fact.
+
+### Govern Memory Rights
+
+Memory capture and reuse should have an explicit purpose, scope, and accountable owner. The Workspace should support access restriction, correction, export, retention, deletion, redaction, revocation, and consent where required. Privacy, contractual, and source restrictions should propagate with derived knowledge.
+
+Cross-project knowledge should fail closed. Knowledge may move from a Project to a wider organisational or portfolio scope only through an explicit, governed promotion that preserves provenance, restrictions, and unresolved conflict.
+
 ### Reduce Uncertainty
 
 Every major subsystem should reduce uncertainty. The Workspace should identify unknowns, structure inquiry, compare alternatives, record decisions, and clarify readiness.
@@ -383,6 +399,25 @@ The Workspace should not bind its architecture to any model provider or current 
 
 Important conclusions should be traceable. The Workspace should make it possible to understand why a decision was proposed, what evidence supported it, what alternatives were considered, and what uncertainty remained.
 
+### Learn From Outcomes
+
+Important Decisions should state expected consequences, confidence, and review conditions. The Workspace should later compare those expectations with observed outcomes, preserve causal uncertainty, and feed the resulting learning into assumptions, readiness, planning, and future Decisions.
+
+## Measures Of Success
+
+The Workspace should measure whether it improves project understanding and governed judgement. Useful measures include:
+
+- time to assemble trustworthy task context
+- provenance and source-authority coverage
+- age of unresolved high-risk Assumptions and Questions
+- time to detect stale or contradictory understanding
+- Decision Review completion and prediction calibration
+- escaped Constraint or Authority violations
+- successful context reuse without repository-wide rereading
+- human attention required per governed outcome
+
+Artifact volume, memory-object count, conversation length, and model activity are not success measures by themselves.
+
 ## Long-Term Vision
 
 The Workspace becomes the operating environment through which organisations think, collaborate, govern, and supervise autonomous AI work.
@@ -399,6 +434,6 @@ Its long-term value lies in:
 - maintaining trusted project memory
 - enabling safe delegation
 
-The Workspace should become the place where humans think and AI works.
+The Workspace should become the place where humans and AI systems develop shared project understanding, humans retain accountability and governed authority, and agents perform reasoning and work within explicit delegations.
 
-That distinction should guide every future architectural decision.
+That allocation of understanding, accountability, authority, and delegated action should guide every future architectural decision.
