@@ -733,9 +733,9 @@ The memory substrate must remain inspectable and usable across model providers, 
 
 ## V1 Architecture Boundary
 
-The first Project Memory implementation should be small.
+The initial Project Memory implementation remains intentionally small.
 
-V1 should define:
+Implemented v0 foundations now define:
 
 - object type registry
 - lifecycle states
@@ -744,7 +744,8 @@ V1 should define:
 - evidence-level attachment
 - canonical Markdown source mapping
 - context assembly rules
-- import path from existing Markdown documents
+
+The import path from existing Markdown documents remains pending. It must create reviewable candidates rather than silently promote extracted claims.
 
 V1 should not define:
 
@@ -757,9 +758,9 @@ V1 should not define:
 - full integration clients for portfolio products
 - automated memory extraction without review
 
-## Readiness Criteria For Implementation
+## Implementation Reconciliation
 
-Implementation planning may begin when:
+The original readiness criteria have been satisfied for the v0 prototype:
 
 - this conceptual architecture is accepted
 - v1 object types are selected
@@ -768,18 +769,15 @@ Implementation planning may begin when:
 - canonical Markdown generation rules are bounded
 - non-goals remain explicit
 
-The first implementation slice should prove memory object modeling and traceability before retrieval sophistication.
+The v0 implementation proved memory object modeling, traceability, candidate review, context assembly, and agent-facing commands before durable persistence.
 
-## Open Questions
+## Remaining Questions
 
-- Which object types are required in the first implementation slice?
-- Should Project Memory begin as structured files before a database exists?
-- What is the minimum relationship model needed for useful context assembly?
 - How should canonical documents be regenerated without losing human edits?
-- What review workflow promotes extracted candidate memory into active memory?
-- How should stale or superseded memory be displayed to humans?
-- What is the smallest useful evidence model before Aegis integration?
 - Which Factory V2 run artifacts should be imported into Project Memory first?
+- How should Markdown source changes mark linked memory objects stale or affected?
+- What bounded typed-relationship traversal is useful for agent context without causing graph explosion?
+- Which context access patterns must be proven before persistence architecture begins?
 
 ## Architecture Decision
 

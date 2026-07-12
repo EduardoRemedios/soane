@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-07-12
+
+- Reconciled canonical document status, repository test guidance, Project Memory and Thinking Engine implementation history, and resolved architecture questions after a canonical-doc freshness review.
+- Recorded the governed amendment that aligns the canonical-document registry with current architecture and repository-context records.
+- Reordered the immediate roadmap around `ACR-V1-001` Agent Context Relevance and Fail-Closed Assembly after realistic task queries exposed brittle all-term recall, all-visible-memory fallback on empty seeds, and an unproven concurrent refresh contract.
+- Retained the passed `LCAE-V0-001` planning pack behind the agent-context correctness gate, followed by Markdown-to-memory candidate ingestion and graph-aware context traversal before persistence architecture.
+- Added `RUN_20260712_0909_agent_context_relevance_v1_plan`, a planning-only Factory pack for `ACR-V1-001`; Stage A through I2 and final pack lint passed with bounded query, zero-match, traversal, refresh, and regression verification contracts.
+- Superseded the repo-local Project Memory decision that named `LCAE-V0-001` as the immediate gate and added the accepted agent-context correctness decision with Factory evidence and source derivation refs.
+- Recorded human Go and implemented `ACR-V1-001` with bounded natural-task query planning, query-specificity and document-role ranking, separate document/memory budgets, fail-closed zero matches, explicit lower-level selection modes, one-hop allowlisted relationship expansion, current-before-non-current memory selection, source freshness, and explicit selection/refresh output states.
+- Made Factory context-index rebuilds concurrency-safe through a SQLite-owned writer lock and one rollback-safe transaction; concurrent readers retain the previous valid snapshot until successful commit.
+- Added `tests/test_factory_context_index_atomic.py` and expanded agent/context tests; 29 focused tests and 126 full repository tests passed at validation closeout.
+
 ## 2026-07-09
 
 - Implemented an agent-facing Project Memory context slice with `soane/project_memory/agent_context.py`, bridging Factory context-index document recall with Project Memory provenance refs and Markdown role classification.

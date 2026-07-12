@@ -2,7 +2,7 @@
 
 > Purpose: Current source of truth for the Soane repository state.
 >
-> Last updated: 2026-07-09
+> Last updated: 2026-07-12
 
 ## Current Identity
 
@@ -20,6 +20,7 @@ Implementation:
 - Project Memory thin TUI at `soane/project_memory/tui.py`
 - Project Memory context assembly and Markdown mapping at `soane/project_memory/context.py`
 - Project Memory agent-facing context bundle service at `soane/project_memory/agent_context.py`
+- Agent context v1 bounded query planning, fail-closed selection states, one-hop relationship expansion, source freshness reporting, and truthful refresh states
 - Project Memory repo-local reviewed object seed corpus at `docs/project_memory/objects/`
 - Project Memory golden fixture loader at `soane/project_memory/fixtures.py`
 - Project Memory local semantics layer at `soane/project_memory/semantics.py`
@@ -38,6 +39,7 @@ Implementation:
 - thin TUI tests at `tests/test_project_memory_tui.py`
 - context assembly and Markdown mapping tests at `tests/test_project_memory_context.py`
 - agent-facing context bundle tests at `tests/test_project_memory_agent_context.py`
+- atomic Factory context-index rebuild tests at `tests/test_factory_context_index_atomic.py`
 - golden fixture tests at `tests/test_project_memory_fixtures.py`
 - memory semantics tests at `tests/test_project_memory_semantics.py`
 - candidate review and promotion tests at `tests/test_project_memory_review.py`
@@ -51,11 +53,18 @@ Constitutional documents:
 - `docs/VISION.md`
 - `docs/CORE_CONCEPTS.md`
 - `docs/GOVERNANCE_MODEL.md`
+
+Canonical architecture and repository records:
+
 - `docs/PROJECT_MEMORY_ARCHITECTURE.md`
 - `docs/THINKING_ENGINE_ARCHITECTURE.md`
 - `docs/PORTFOLIO_CONTEXT.md`
 - `docs/PORTFOLIO_ASSUMPTIONS.md`
 - `docs/INTEGRATION_ARCHITECTURE.md`
+- `docs/PROJECT_STATE.md`
+- `docs/ROADMAP.md`
+- `docs/CHANGELOG.md`
+- `AGENTS.md`
 
 Factory V2 process scaffold:
 
@@ -104,6 +113,8 @@ Planning outputs:
 - `docs/Factory/runs/RUN_20260705_0747_brownfield_multi_repo_coding_proof_plan/`
 - `docs/Factory/runs/RUN_20260705_0747_brownfield_multi_repo_coding_proof_plan/VALIDATION_CLOSEOUT_REPORT.md`
 - `docs/Factory/runs/RUN_20260705_0923_live_coding_adapter_eval_plan/`
+- `docs/Factory/runs/RUN_20260712_0909_agent_context_relevance_v1_plan/`
+- `docs/Factory/runs/RUN_20260712_0909_agent_context_relevance_v1_plan/VALIDATION_CLOSEOUT_REPORT.md`
 
 ## Current Architectural Posture
 
@@ -118,13 +129,13 @@ Factory V3 remains separate in its own repository and should continue to own mis
 ## What Does Not Exist Yet
 
 - product UI
-- full Project Memory implementation beyond v0 local contract, semantics, context, adapter twins, CLI/TUI, and candidate review
+- full Project Memory implementation beyond v0 local contract, semantics, context, adapter twins, CLI/TUI, candidate review, agent-facing context commands, and the reviewed repo-local seed corpus
 - full Thinking Engine implementation beyond Intake v0, Socratic Discovery v0, Coding Proof Harness v0, Coding Harness Workflow v0, and Brownfield multi-repo coding proof behavior
 - Workspace Shell implementation
 - integration clients for Factory V3, Temper, Aegis, Sentinel, or Harmony
 - live Cursor CLI, Codex CLI, Cursor SDK, OpenAI SDK, or OpenAI Agents SDK adapters
 - concrete API schemas
-- runnable application tests
+- runnable product-application tests; the repository has a runnable Python unit-test suite
 - active implementation runs
 - active Workspace missions
 
@@ -138,6 +149,7 @@ bash scripts/knowledge_lint.sh
 ./scripts/factoryctl pack-lint --run RUN_20260701_0848_project_memory_v0_plan
 python3 -m unittest tests/test_project_memory_contract.py tests/test_project_memory_fixtures.py tests/test_project_memory_semantics.py tests/test_project_memory_context.py
 python3 -m unittest tests/test_project_memory_agent_context.py
+python3 -m unittest tests/test_factory_context_index_atomic.py
 python3 -m unittest tests/test_project_memory_adapter_twins.py
 python3 -m unittest tests/test_project_memory_cli.py
 python3 -m unittest tests/test_project_memory_tui.py
@@ -155,6 +167,7 @@ python3 -m unittest tests/test_context_recall_repair.py
 ./scripts/factoryctl pack-lint --run RUN_20260702_0617_coding_harness_workflow_v0_plan
 ./scripts/factoryctl pack-lint --run RUN_20260705_0747_brownfield_multi_repo_coding_proof_plan
 ./scripts/factoryctl pack-lint --run RUN_20260705_0923_live_coding_adapter_eval_plan
+./scripts/factoryctl pack-lint --run RUN_20260712_0909_agent_context_relevance_v1_plan
 python3 scripts/agent_loop_bridge_validate.py tests/fixtures/agent_loop_bridge/valid_handoff.json --json
 ```
 
@@ -251,4 +264,9 @@ cat docs/Factory/runs/RUN_20260705_0747_brownfield_multi_repo_coding_proof_plan/
 - `RUN_20260705_0747_brownfield_multi_repo_coding_proof_plan`: Factory V2 pack for `BMR-CPH-V0-001` Brownfield Multi-Repo Coding Proof. Status: `PASS`; execution enabled after human Go on 2026-07-05; pack lint passed.
 - `BMR-CPH-V0-001` Brownfield Multi-Repo Coding Proof is implemented with deterministic ready and blocked multi-repo fixtures, local system-boundary context, task-relevant versus out-of-scope repository summaries, blocked readiness behavior, workflow JSON/text summaries, candidate-only provider output, no live provider calls, and no repository mutation.
 - `RUN_20260705_0923_live_coding_adapter_eval_plan`: Factory V2 `PLANNING_ONLY` pack for `LCAE-V0-001` Live Coding Adapter Evaluation. Status: `PASS`; pack lint passed.
-- Next roadmap step: human Go/No-go for `LCAE-V0-001` implementation. The planned implementation creates deterministic, source-backed adapter evaluation profiles and scoring only; it does not invoke live Codex, Cursor, OpenAI, SDK, CLI, or cloud-agent surfaces.
+- Canonical-doc freshness review found that natural multi-term agent-context queries can return no document slices, while an empty memory seed set falls back to all visible memory; concurrent index refreshes also lack an explicit atomicity contract.
+- `RUN_20260712_0909_agent_context_relevance_v1_plan`: Factory V2 pack for `ACR-V1-001` Agent Context Relevance and Fail-Closed Assembly. Status: `PASS`; execution enabled after human Go on 2026-07-12; Stage A through I2 and final pack lint passed.
+- The prior repo-local decision that made `LCAE-V0-001` the immediate next gate is superseded by the accepted agent-context correctness gate; adapter evaluation remains queued after ACR-V1-001.
+- Human Go for `ACR-V1-001` was given on 2026-07-12 and execution mode was enabled.
+- `ACR-V1-001` is implemented with bounded natural-task query planning, separate document and memory budgets, fail-closed zero-match behavior, explicit broad versus seeded lower-level context, one-hop allowlisted relationship expansion, lifecycle-aware ranking, observational source freshness, SQLite-owned rebuild serialization, rollback-safe publication, explicit selection/refresh states, 14 new tests, and validation closeout.
+- Next roadmap step: create a planning-only Factory pack for Markdown-to-memory candidate ingestion. `LCAE-V0-001` remains queued after ingestion and graph-aware context unless a later approved roadmap decision changes the order.

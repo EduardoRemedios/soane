@@ -47,6 +47,7 @@ class ProjectMemoryCliTests(unittest.TestCase):
         self.assertTrue(payload["ok"])
         self.assertEqual("context-build", payload["command"])
         self.assertEqual("MS-05 CLI context proof", payload["purpose"])
+        self.assertEqual("explicit_seed", payload["selection_mode"])
         self.assertEqual("Roadmap Markdown view", payload["current"][0]["title"])
 
     def test_export_markdown_command_renders_markdown_and_source_map(self) -> None:

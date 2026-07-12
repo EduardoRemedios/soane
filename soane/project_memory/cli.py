@@ -9,7 +9,12 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Mapping, Sequence
 
-from soane.project_memory.context import ContextRequest, build_context_package, render_markdown_view
+from soane.project_memory.context import (
+    ContextRequest,
+    ContextSelectionMode,
+    build_context_package,
+    render_markdown_view,
+)
 from soane.project_memory.agent_context import (
     agent_context_summary,
     build_agent_context_bundle,
@@ -113,6 +118,7 @@ def _build_parser() -> argparse.ArgumentParser:
         help="seed memory object by fixture ID and key; repeatable",
     )
     agent_context_parser.add_argument("--limit", type=int, default=5, help="maximum document slices")
+    agent_context_parser.add_argument("--memory-limit", type=int, default=8, help="maximum memory objects")
     agent_context_parser.add_argument("--repo-root", type=Path, default=Path("."), help="repository root")
     agent_context_parser.add_argument("--db-path", type=Path, default=None, help="optional context-index SQLite path")
     agent_context_parser.add_argument("--no-refresh-index", action="store_true", help="use the existing context index")
@@ -291,6 +297,7 @@ def _cmd_agent_context(args: argparse.Namespace) -> dict[str, Any] | str:
         queries=tuple(args.query),
         seed_object_ids=tuple(seed_ids),
         limit=args.limit,
+        memory_limit=args.memory_limit,
         db_path=args.db_path,
         refresh_index=not args.no_refresh_index,
     )
@@ -399,6 +406,9 @@ def _context_request(args: argparse.Namespace, fixtures: Sequence[GoldenFixture]
         access=_access_context(args),
         boundary=args.boundary,
         seed_object_ids=tuple(seed_ids),
+        selection_mode=(
+            ContextSelectionMode.EXPLICIT_SEED if seed_ids else ContextSelectionMode.EXPLICIT_BROAD
+        ),
     )
 
 
@@ -424,6 +434,7 @@ def _context_package_summary(package: Any) -> dict[str, Any]:
         "command": "context-build",
         "purpose": package.purpose,
         "boundary": package.boundary,
+        "selection_mode": package.selection_mode.value,
         "current": [_context_item_summary(item) for item in package.current],
         "surfaced": [_context_item_summary(item) for item in package.surfaced],
         "contradictions": [

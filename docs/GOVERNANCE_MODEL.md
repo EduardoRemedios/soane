@@ -14,6 +14,10 @@ It builds on:
 - `docs/PORTFOLIO_ASSUMPTIONS.md`
 - `docs/INTEGRATION_ARCHITECTURE.md`
 
+Amendment record:
+
+- 2026-07-12: Aligned the explicit canonical-document registry and current governance-work summary with the implemented architecture, repository context, and Project Memory slices. Human authority: repository owner approval in the canonical-doc freshness review.
+
 ## Purpose
 
 The Workspace exists to improve human judgement before autonomous execution.
@@ -53,11 +57,15 @@ Canonical documents are stable architectural or product records that guide futur
 
 Current canonical documents:
 
+- `AGENTS.md`
 - `docs/PORTFOLIO_CONTEXT.md`
 - `docs/PORTFOLIO_ASSUMPTIONS.md`
 - `docs/INTEGRATION_ARCHITECTURE.md`
+- `docs/PROJECT_MEMORY_ARCHITECTURE.md`
+- `docs/THINKING_ENGINE_ARCHITECTURE.md`
 - `docs/PROJECT_STATE.md`
 - `docs/ROADMAP.md`
+- `docs/CHANGELOG.md`
 
 Canonical documents should remain aligned with constitutional documents and Project Memory once Project Memory exists.
 
@@ -349,15 +357,8 @@ Review should prioritize:
 
 Review should not continuously polish stable documents merely for style. Constitutional and canonical documents should evolve because understanding changed, not because phrasing could be improved.
 
-## Next Expected Governance Work
+## Current Governance Work
 
-The next governance work should be driven by implementation need.
+The repository now has a Project Memory object model, evidence and decision objects, candidate review and promotion semantics, and reviewed repo-local memory inputs.
 
-Likely future additions:
-
-- a Decision Record format
-- an Evidence Artifact format
-- a Project Memory object model
-- a Factory V2 run for the first implementation slice
-
-Do not add these prematurely if the implementation has not yet taught the repository what shape they need.
+The next governance work should be driven by observed agent-context behavior. Immediate needs are fail-closed context selection, explicit relevance and traversal explanations, source freshness, and reviewed Markdown-to-memory candidate ingestion. Durable record formats and persistence remain deferred until these access and mutation patterns are proven.

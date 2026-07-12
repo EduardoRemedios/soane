@@ -2,7 +2,7 @@
 
 > Purpose: Track near-term Soane repository work.
 >
-> Last updated: 2026-07-09
+> Last updated: 2026-07-12
 
 ## Completed
 
@@ -31,6 +31,8 @@
 | Brownfield multi-repo coding proof implementation | Done | `soane/thinking_engine/coding_harness.py`, `soane/thinking_engine/coding_workflow.py`, `tests/fixtures/coding_proof_harness/`, `docs/Factory/runs/RUN_20260705_0747_brownfield_multi_repo_coding_proof_plan/VALIDATION_CLOSEOUT_REPORT.md` |
 | Live coding adapter evaluation planning | Done | `docs/Factory/runs/RUN_20260705_0923_live_coding_adapter_eval_plan/` |
 | Agent-facing context slice v0 | Done | `soane/project_memory/agent_context.py`, `soane/project_memory/cli.py`, `docs/project_memory/objects/`, `tests/test_project_memory_agent_context.py` |
+| Agent context relevance and fail-closed planning | Done | `docs/Factory/runs/RUN_20260712_0909_agent_context_relevance_v1_plan/` |
+| Agent context relevance and fail-closed implementation | Done | `soane/project_memory/agent_context.py`, `scripts/factory_context_index.py`, `tests/test_factory_context_index_atomic.py`, `docs/Factory/runs/RUN_20260712_0909_agent_context_relevance_v1_plan/VALIDATION_CLOSEOUT_REPORT.md` |
 
 ## Sequence
 
@@ -62,18 +64,23 @@
 | 24 | Brownfield multi-repo coding proof implementation | Done | Implemented deterministic multi-repo Brownfield fixtures, system-boundary context, blocked readiness behavior, workflow summaries, candidate-only provider output, and validation closeout. |
 | 25 | Live coding adapter evaluation planning | Done | Factory V2 `PLANNING_ONLY` pack completed at `docs/Factory/runs/RUN_20260705_0923_live_coding_adapter_eval_plan/`; pack-lint passed. |
 | 26 | Agent-facing context slice v0 | Done | Added Markdown role classification, repo-local memory-object JSON loading, top-level doc recall, and `agent-context`, `agent-trace`, and `agent-affected` commands that bridge Factory context-index recall with Project Memory provenance refs before persistence hardening. |
-| 27 | Live coding adapter evaluation implementation | Next | Build deterministic, source-backed adapter profiles, scoring, and CLI evaluation output for Codex CLI, Cursor CLI, Cursor SDK, OpenAI SDK, and OpenAI Agents SDK. No live provider calls, credential reads, dependency installs, or repository mutation. |
-| 28 | First live read-only coding proof | Pending | Run only after `LCAE-V0-001` selects a first surface and a separate human-approved live-proof pack defines auth, sandbox, read-only scope, output capture, evidence capture, and rollback/stop rules. |
-| 29 | Second domain proof selection | Pending | Select a non-coding proof domain so Workspace primitives are not overfit to software repositories. Candidate domains include research, digital marketing, operations, consulting, or product strategy. |
-| 30 | Memory provider evaluation | Pending | Evaluate Supermemory-style providers as external retrieval/context adapters, not canonical Project Memory. |
-| 31 | Project Memory persistence architecture | Pending | Define persistence after workflow, provider, and live-proof evidence clarifies which objects and transitions must be durable. |
-| 32 | Workspace Shell architecture | Pending | Define desktop, web, mobile, voice, collaboration, dashboards, notifications, mission monitoring, and portfolio views after workflow, integration, memory, and second-domain boundaries are clearer. |
-| 33 | First product surface prototype | Pending | Build only after Project Memory, CLI/TUI navigation, Thinking Engine primitives, coding workflow, adapter evaluation, and shell architecture are coherent enough to support a real workflow. |
+| 27 | Agent context relevance and fail-closed planning | Done | `RUN_20260712_0909_agent_context_relevance_v1_plan` passed Stage I2 and final pack lint. |
+| 28 | Agent context relevance and fail-closed implementation | Done | Implemented bounded natural-task recall, separate budgets, fail-closed zero matches, one-hop expansion, source freshness, and rollback-safe concurrent index rebuilds; validation closeout passed. |
+| 29 | Markdown-to-memory candidate ingestion planning | Next | Create a planning-only Factory pack for reviewable candidates with precise provenance and freshness signals; do not auto-promote extracted claims or choose durable persistence. |
+| 30 | Graph-aware context and trace | Pending | Add bounded typed inbound/outbound traversal, cycle handling, affected-by propagation, and explanation paths after ingestion supplies realistic graph density. |
+| 31 | Live coding adapter evaluation implementation | Pending | Execute the existing `LCAE-V0-001` pack after the context correctness gate and source-evidence refresh. No live provider calls. |
+| 32 | First live read-only coding proof | Pending | Run only after `LCAE-V0-001` selects a first surface and a separate human-approved live-proof pack defines auth, sandbox, read-only scope, output capture, evidence capture, and rollback/stop rules. |
+| 33 | Second domain proof selection | Pending | Select a non-coding proof domain so Workspace primitives are not overfit to software repositories. |
+| 34 | Memory provider evaluation | Pending | Evaluate external retrieval/context adapters, not canonical Project Memory. |
+| 35 | Project Memory persistence architecture | Pending | Define persistence after relevance, ingestion, traversal, provider, and live-proof evidence clarifies durable access and mutation patterns. |
+| 36 | Workspace Shell architecture | Pending | Define the product shell after workflow, integration, memory, and second-domain boundaries are clearer. |
+| 37 | First product surface prototype | Pending | Build only after the memory, thinking, workflow, adapter, and shell boundaries support a real workflow. |
 
 ## Decision Gates
 
 | Gate | Unlocks | Required Evidence |
 | --- | --- | --- |
+| Agent context correctness gate | Markdown ingestion, graph-aware context, and adapter evaluation execution | Natural task queries select bounded relevant documents and memory; zero-match behavior fails closed; selection/exclusion reasons are inspectable; visibility and lifecycle rules hold; concurrent refresh behavior is deterministic. |
 | Deterministic adapter evaluation gate | First live read-only coding proof | `LCAE-V0-001` implementation passes tests, recommends a first live surface, records blocked alternatives, and proves no live calls, credential reads, dependency installs, or repository mutation. |
 | Live coding proof gate | Broader coding adapter work | Separate Factory pack authorizes live use, repository scope is read-only unless explicitly approved otherwise, sandbox and approval policy are recorded, output and trace capture are deterministic enough for review, and Provider Invocation records remain candidate-only until reviewed. |
 | Second domain gate | Workspace generalization beyond coding | A non-coding proof domain is selected with concrete context sources, authority rules, evidence types, and expected outputs. The proof must show that Project Memory and Thinking Engine primitives are domain-general. |
@@ -82,24 +89,25 @@
 
 ## Immediate Next Move
 
-Proceed only after human Go/No-go with:
+Prepare a planning-only Factory run for:
 
-`LCAE-V0-001` Live Coding Adapter Evaluation implementation
+`MMI-V0-001` Markdown-to-Memory Candidate Ingestion
 
 Recent implementation evidence:
 
-- `docs/Factory/runs/RUN_20260705_0747_brownfield_multi_repo_coding_proof_plan/VALIDATION_CLOSEOUT_REPORT.md`
-- `docs/Factory/runs/RUN_20260705_0923_live_coding_adapter_eval_plan/`
+- `soane/project_memory/agent_context.py`
+- `soane/project_memory/context.py`
+- `scripts/factory_context_index.py`
+- `tests/test_project_memory_agent_context.py`
 
 Current state:
 
-- Brownfield multi-repo coding proof: implemented and passed validation closeout.
-- Live coding adapter evaluation planning: complete and pack-lint passed.
-- Next work: implement deterministic evaluation profiles, scoring, recommendation output, blocked cases, and a thin CLI wrapper for the five candidate surfaces before any live provider invocation.
+- Agent-facing context v1: implemented and validation closeout passed.
+- Live coding adapter evaluation planning: complete and retained as the next adapter pack after context correctness.
+- `ACR-V1-001` planning and implementation: complete.
+- Next work: plan review-gated Markdown-to-memory candidate ingestion with source anchors, fingerprints, and freshness behavior.
 
-The completed Brownfield multi-repo coding proof implementation proves deterministic multi-repository Brownfield fixtures, repository maps, in-scope and out-of-scope repositories, service boundaries, integration contracts, ownership, build/test responsibility, authority path, blocked readiness, workflow summaries, and candidate review behavior without live providers or real repository access.
-
-The completed live coding adapter evaluation plan keeps the next implementation bounded to evidence-backed profile generation. It must not call live Codex, Cursor, OpenAI, SDK, CLI, cloud-agent, credential, or dependency-install surfaces.
+The context correctness slice must remain local and deterministic. It must not add persistence, semantic embeddings, external providers, automatic memory promotion, product UI, or live adapter invocation.
 
 ## Backlog Notes
 
@@ -125,8 +133,8 @@ Future fixture expansion should continue to cover Decision linked to Evidence, A
 | Golden fixture suite | Done | Current fixture corpus covers core v0 memory, context, review, adapter twin, intake, discovery, and coding workflow behavior; future expansion remains expected. |
 | Canonical Markdown generation rules | Partial | Source mapping exists in Project Memory v0; durable canonical generation rules should wait for persistence architecture. |
 | Mock Cursor/Codex/OpenAI adapter contract | Done | Implemented as deterministic adapter twins for Cursor CLI, Codex CLI, Cursor SDK, OpenAI SDK, and OpenAI Agents SDK. |
-| Context assembly v0 | Done | Implemented task-specific context packaging with source maps and lifecycle-aware memory selection. |
-| Agent-facing context commands | Done | `agent-context`, `agent-trace`, and `agent-affected` assemble explained task context, trace memory relationships, and map source paths to affected Project Memory objects using repo-local memory JSON by default. |
+| Context assembly v0 | Done | Lower-level broad and explicit-seed modes are distinct; agent zero matches no longer imply broad memory or unrelated contradictions. |
+| Agent-facing context commands | Done | Natural-task query planning, separate budgets, explicit states, one-hop reasons, source freshness, and rollback-safe index refresh are implemented and tested. |
 | Repo-local memory object seed corpus | Done | `docs/project_memory/objects/` contains reviewed Project Memory JSON records for Markdown roles, agent context before persistence, Factory V2 boundary, persistence deferral, and the live adapter evaluation gate. |
 | Capture/review/promotion flow | Done | Candidate Review and Promotion v0 prevents raw conversation, notes, and model output from silently becoming accepted Project Memory truth. |
 | Persistence guardrails | Pending | Should keep storage portable, IDs deterministic, fixtures stable, and migration/rewrite behavior explicit before database selection. |
@@ -150,7 +158,11 @@ Future fixture expansion should continue to cover Decision linked to Evidence, A
 | Brownfield multi-repo coding proof planning | Done | `docs/Factory/runs/RUN_20260705_0747_brownfield_multi_repo_coding_proof_plan/` defines `BMR-CPH-V0-001`. |
 | Brownfield multi-repo coding proof implementation | Done | Implemented deterministic multi-repo Brownfield fixtures, local system-boundary context, workflow summaries, blocked readiness behavior, and validation closeout. |
 | Live coding adapter evaluation planning | Done | `docs/Factory/runs/RUN_20260705_0923_live_coding_adapter_eval_plan/` defines `LCAE-V0-001`. |
-| Live coding adapter evaluation implementation | Next | Implement deterministic adapter profiles, scoring, recommendation output, blocked cases, and CLI evaluation output without live provider calls. |
+| Agent context relevance and fail-closed planning | Done | `RUN_20260712_0909_agent_context_relevance_v1_plan` passed Stage I2 and pack lint. |
+| Agent context relevance and fail-closed implementation | Done | Validation closeout passed with 126 repository tests and all ACR verification checks. |
+| Markdown-to-memory candidate ingestion planning | Next | Must preserve path/heading/line provenance, content fingerprints, freshness, and Candidate Review and Promotion. |
+| Graph-aware context and trace | Pending | Must be bounded by relationship type, depth, visibility, lifecycle, and context budget. |
+| Live coding adapter evaluation implementation | Pending | Existing pack remains valid after context correctness and source-evidence refresh. |
 | First live read-only coding proof | Pending | Requires a separate human-approved live-proof pack after deterministic adapter evaluation selects a first surface. |
 | Second domain proof | Pending | Should prevent Soane from becoming coding-only by proving the same primitives on a non-coding workflow. |
 | Memory provider evaluation | Candidate | Evaluate Supermemory-style providers as external retrieval/context adapters before persistence choices. |
@@ -167,7 +179,7 @@ Do not move Factory V3 work into this repository. Factory V3 remains a separate 
 
 In this roadmap, Factory V2 means the starter-kit process. Factory V3 means the separate newer repository and is not scaffolded here.
 
-The next implementation run should consume `docs/Factory/runs/RUN_20260705_0923_live_coding_adapter_eval_plan/` after explicit human Go. It should evaluate live coding adapter surfaces through deterministic local profiles before any live provider invocation is introduced.
+The next bounded work is a planning-only Factory run for `MMI-V0-001` Markdown-to-Memory Candidate Ingestion. ACR-V1-001 is implemented and closed. The existing `LCAE-V0-001` pack remains queued behind ingestion and graph-aware context so live adapter evaluation consumes a more representative context system.
 
 Define the Project Memory v0 contract before implementation. The CLI should wrap the contract; it should not become the accidental architecture.
 

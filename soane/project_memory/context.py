@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from enum import StrEnum
 
 from soane.project_memory.contract import LifecycleStatus, MemoryObject, RelationshipType
 from soane.project_memory.semantics import AccessContext, NON_CURRENT_STATUSES, ProjectMemory, is_visible
@@ -12,12 +13,18 @@ class ContextAssemblyError(ValueError):
     """Raised when context assembly receives an invalid request."""
 
 
+class ContextSelectionMode(StrEnum):
+    EXPLICIT_BROAD = "explicit_broad"
+    EXPLICIT_SEED = "explicit_seed"
+
+
 @dataclass(frozen=True)
 class ContextRequest:
     purpose: str
     access: AccessContext
     boundary: str = "project_context"
     seed_object_ids: tuple[str, ...] = ()
+    selection_mode: ContextSelectionMode = ContextSelectionMode.EXPLICIT_BROAD
 
 
 @dataclass(frozen=True)
@@ -37,6 +44,7 @@ class ContextExclusion:
 class ContextPackage:
     purpose: str
     boundary: str
+    selection_mode: ContextSelectionMode
     current: tuple[ContextItem, ...]
     surfaced: tuple[ContextItem, ...]
     contradictions: tuple[tuple[MemoryObject, MemoryObject], ...]
@@ -83,9 +91,10 @@ def build_context_package(memory: ProjectMemory, request: ContextRequest) -> Con
     return ContextPackage(
         purpose=request.purpose,
         boundary=request.boundary,
+        selection_mode=request.selection_mode,
         current=tuple(current),
         surfaced=tuple(surfaced),
-        contradictions=memory.contradictions(request.access),
+        contradictions=_context_contradictions(memory, request, candidates),
         exclusions=tuple(exclusions),
     )
 
@@ -93,7 +102,13 @@ def build_context_package(memory: ProjectMemory, request: ContextRequest) -> Con
 def render_markdown_view(package: ContextPackage) -> MarkdownView:
     """Render a human-readable Markdown view with source mappings."""
 
-    lines = [f"# Context Package: {package.purpose}", "", f"Boundary: `{package.boundary}`", ""]
+    lines = [
+        f"# Context Package: {package.purpose}",
+        "",
+        f"Boundary: `{package.boundary}`",
+        f"Selection Mode: `{package.selection_mode.value}`",
+        "",
+    ]
     source_map: dict[str, MarkdownSource] = {}
 
     lines.append("## Current Memory")
@@ -136,7 +151,9 @@ def render_markdown_view(package: ContextPackage) -> MarkdownView:
 
 def _candidate_objects(memory: ProjectMemory, request: ContextRequest) -> tuple[MemoryObject, ...]:
     if not request.seed_object_ids:
-        return memory.visible_objects(request.access)
+        if request.selection_mode == ContextSelectionMode.EXPLICIT_BROAD:
+            return memory.visible_objects(request.access)
+        return ()
 
     candidates: list[MemoryObject] = []
     for object_id in request.seed_object_ids:
@@ -146,6 +163,22 @@ def _candidate_objects(memory: ProjectMemory, request: ContextRequest) -> tuple[
         if is_visible(memory_object, request.access):
             candidates.append(memory_object)
     return tuple(candidates)
+
+
+def _context_contradictions(
+    memory: ProjectMemory,
+    request: ContextRequest,
+    candidates: tuple[MemoryObject, ...],
+) -> tuple[tuple[MemoryObject, MemoryObject], ...]:
+    contradictions = memory.contradictions(request.access)
+    if request.selection_mode == ContextSelectionMode.EXPLICIT_BROAD:
+        return contradictions
+    selected_ids = {item.id for item in candidates}
+    return tuple(
+        (left, right)
+        for left, right in contradictions
+        if left.id in selected_ids and right.id in selected_ids
+    )
 
 
 def _seed_exclusions(memory: ProjectMemory, request: ContextRequest) -> list[ContextExclusion]:

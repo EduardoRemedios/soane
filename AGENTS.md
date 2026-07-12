@@ -96,7 +96,13 @@ Dependencies:
 python3 -m pip install -r requirements.txt
 ```
 
-No application build or test command exists yet. Add one only when implementation introduces runnable code.
+Repository test suite:
+
+```bash
+python3 -m unittest discover -s tests
+```
+
+No product application build command exists yet. Add one only when implementation introduces a runnable product surface.
 
 ## 5) Hard Guardrails
 

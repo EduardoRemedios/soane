@@ -1,0 +1,82 @@
+schema_version: 1
+run_id: RUN_20260712_0909_agent_context_relevance_v1_plan
+sprint_id: ACR-V1-001
+execution_mode: EXECUTION_ENABLED
+
+checks:
+  - id: VM-001
+    tier: V2
+    type: test
+    constraint_ids:
+      - VC-001
+      - VC-002
+      - VC-003
+      - VC-004
+      - VC-005
+      - VC-006
+      - VC-007
+      - VC-008
+      - VC-009
+      - VC-013
+    description: Focused agent-context, context semantics, and atomic index tests.
+    command: python3 -m unittest tests/test_project_memory_agent_context.py tests/test_project_memory_context.py tests/test_factory_context_index_atomic.py
+    expected: Command exits 0 with relevance, zero-match, traversal, contention, failure, and output contracts passing.
+    halt_on_failure: true
+    evidence_path: docs/Factory/runs/RUN_20260712_0909_agent_context_relevance_v1_plan/VALIDATION_CLOSEOUT_REPORT.md
+
+  - id: VM-002
+    tier: V3
+    type: test
+    constraint_ids:
+      - VC-010
+    description: Full repository regression suite.
+    command: python3 -m unittest discover -s tests
+    expected: Command exits 0.
+    halt_on_failure: true
+    evidence_path: docs/Factory/runs/RUN_20260712_0909_agent_context_relevance_v1_plan/VALIDATION_CLOSEOUT_REPORT.md
+
+  - id: VM-003
+    tier: V1
+    type: command
+    constraint_ids:
+      - VC-011
+      - VC-012
+    description: Knowledge lint remains clean after implementation.
+    command: bash scripts/knowledge_lint.sh
+    expected: Command exits 0.
+    halt_on_failure: true
+    evidence_path: docs/Factory/runs/RUN_20260712_0909_agent_context_relevance_v1_plan/VALIDATION_CLOSEOUT_REPORT.md
+
+  - id: VM-004
+    tier: V1
+    type: command
+    constraint_ids:
+      - VC-008
+      - VC-009
+    description: Default context index rebuild completes successfully.
+    command: ./scripts/factoryctl context-index
+    expected: Command exits 0 and reports a complete rebuilt index.
+    halt_on_failure: true
+    evidence_path: docs/Factory/runs/RUN_20260712_0909_agent_context_relevance_v1_plan/VALIDATION_CLOSEOUT_REPORT.md
+
+  - id: VM-005
+    tier: V1
+    type: command
+    constraint_ids:
+      - VC-012
+    description: Executed Factory pack remains internally valid.
+    command: ./scripts/factoryctl pack-lint --run RUN_20260712_0909_agent_context_relevance_v1_plan
+    expected: Command exits 0 without warnings.
+    halt_on_failure: true
+    evidence_path: docs/Factory/runs/RUN_20260712_0909_agent_context_relevance_v1_plan/VALIDATION_CLOSEOUT_REPORT.md
+
+  - id: VM-006
+    tier: V1
+    type: static
+    constraint_ids:
+      - VC-012
+    description: Diff contains no whitespace errors.
+    command: git diff --check
+    expected: Command exits 0.
+    halt_on_failure: true
+    evidence_path: docs/Factory/runs/RUN_20260712_0909_agent_context_relevance_v1_plan/VALIDATION_CLOSEOUT_REPORT.md

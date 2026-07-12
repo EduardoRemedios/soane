@@ -3,7 +3,12 @@ from __future__ import annotations
 import unittest
 from pathlib import Path
 
-from soane.project_memory.context import ContextRequest, build_context_package, render_markdown_view
+from soane.project_memory.context import (
+    ContextRequest,
+    ContextSelectionMode,
+    build_context_package,
+    render_markdown_view,
+)
 from soane.project_memory.fixtures import load_fixtures
 from soane.project_memory.semantics import PROJECT_READER, PROJECT_REVIEWER, ProjectMemory
 
@@ -31,6 +36,28 @@ class ProjectMemoryContextTests(unittest.TestCase):
         self.assertNotIn(superseded.id, current_ids)
         self.assertIn(stale.id, surfaced_ids)
         self.assertIn(superseded.id, surfaced_ids)
+
+    def test_explicit_seed_mode_with_no_seeds_is_empty(self) -> None:
+        package = build_context_package(
+            self.memory,
+            ContextRequest(
+                purpose="fail closed empty seed proof",
+                access=PROJECT_READER,
+                selection_mode=ContextSelectionMode.EXPLICIT_SEED,
+            ),
+        )
+        self.assertFalse(package.current)
+        self.assertFalse(package.surfaced)
+        self.assertFalse(package.contradictions)
+        self.assertEqual(ContextSelectionMode.EXPLICIT_SEED, package.selection_mode)
+
+    def test_default_context_selection_remains_explicit_broad(self) -> None:
+        package = build_context_package(
+            self.memory,
+            ContextRequest(purpose="intentional broad inspection", access=PROJECT_READER),
+        )
+        self.assertTrue(package.current)
+        self.assertEqual(ContextSelectionMode.EXPLICIT_BROAD, package.selection_mode)
 
     def test_context_package_surfaces_contradictions(self) -> None:
         package = build_context_package(

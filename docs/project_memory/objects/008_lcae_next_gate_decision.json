@@ -2,7 +2,7 @@
   "id": "pmem_decision_soane_lcae_next_gate",
   "type": "decision",
   "title": "Keep live coding adapter evaluation as the next implementation gate",
-  "status": "accepted",
+  "status": "superseded",
   "visibility": "project",
   "provenance": {
     "source_refs": ["docs/ROADMAP.md"],
@@ -20,8 +20,11 @@
       "target_id": "pmem_decision_soane_agent_context_before_persistence"
     }
   ],
+  "updated_at": "2026-07-12T09:30:00+00:00",
+  "superseded_by": ["pmem_decision_soane_agent_context_correctness_gate"],
   "metadata": {
     "repo_memory_seed": true,
-    "object_set": "agent-context-v0"
+    "object_set": "agent-context-v0",
+    "supersession_reason": "Agent-context relevance and fail-closed correctness must be proven before adapter evaluation execution."
   }
 }

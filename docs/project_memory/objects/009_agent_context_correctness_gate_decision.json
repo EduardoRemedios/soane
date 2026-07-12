@@ -1,0 +1,49 @@
+{
+  "id": "pmem_decision_soane_agent_context_correctness_gate",
+  "type": "decision",
+  "title": "Harden agent-context correctness before live adapter evaluation",
+  "status": "accepted",
+  "visibility": "project",
+  "provenance": {
+    "source_refs": [
+      "docs/ROADMAP.md",
+      "docs/PROJECT_STATE.md",
+      "docs/Factory/runs/RUN_20260712_0909_agent_context_relevance_v1_plan/pack/PACK_AUDIT_REPORT.md",
+      "docs/Factory/runs/RUN_20260712_0909_agent_context_relevance_v1_plan/VALIDATION_CLOSEOUT_REPORT.md"
+    ],
+    "created_by": "canonical-doc-freshness-review",
+    "created_at": "2026-07-12T09:30:00+00:00",
+    "evidence_level": "E2",
+    "derivation_refs": [
+      "soane/project_memory/agent_context.py",
+      "soane/project_memory/context.py",
+      "scripts/factory_context_index.py",
+      "tests/test_project_memory_agent_context.py"
+    ]
+  },
+  "relationships": [
+    {
+      "type": "supersedes",
+      "target_id": "pmem_decision_soane_lcae_next_gate"
+    },
+    {
+      "type": "depends_on",
+      "target_id": "pmem_decision_soane_agent_context_before_persistence"
+    },
+    {
+      "type": "evidences",
+      "target_id": "pmem_evidence_artifact_soane_agent_context_slice"
+    }
+  ],
+  "supersedes": ["pmem_decision_soane_lcae_next_gate"],
+  "updated_at": "2026-07-12T10:55:00+00:00",
+  "metadata": {
+    "repo_memory_seed": true,
+    "object_set": "agent-context-v1-planning",
+    "factory_run": "RUN_20260712_0909_agent_context_relevance_v1_plan",
+    "sprint_id": "ACR-V1-001",
+    "implementation_status": "complete",
+    "validation_status": "ready",
+    "next_planned_slice": "MMI-V0-001"
+  }
+}

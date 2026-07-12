@@ -514,11 +514,9 @@ The Thinking Engine should be designed against these failure modes:
 - using live adapters before contract semantics are stable
 - allowing model output to silently rewrite Project Memory
 
-## Implementation Boundaries
+## Implementation Reconciliation
 
-The first implementation slice after this architecture should not build the full product shell.
-
-It should likely focus on one bounded workflow:
+The first bounded workflow has been implemented without building the full product shell. It includes:
 
 - intake classification
 - context baseline assessment
@@ -526,14 +524,12 @@ It should likely focus on one bounded workflow:
 - readiness assessment
 - Project Memory write-back
 
-Factory V2 should be used to plan that implementation slice after this architecture is reviewed.
+Candidate Review and Promotion, Socratic Discovery, the Coding Proof Harness, its CLI workflow, and Brownfield multi-repository behavior have also been implemented as local deterministic slices.
 
-## Open Questions
+## Remaining Questions
 
-- What is the minimum useful Context Baseline schema for v0?
-- Which Discovery Playbook should be implemented first after architecture review?
-- Should the first Thinking Engine proof use coding, digital marketing, or both?
 - How should external non-repository artifacts be referenced before connector integrations exist?
-- What level of human review is required before Thinking Engine outputs are promoted into Project Memory?
+- Which non-coding domain should provide the second end-to-end proof?
+- How should agent-context relevance, freshness, and bounded graph expansion affect readiness?
 
-These questions should be resolved through the next Factory V2 planning run before implementation.
+These questions should be resolved through bounded Factory V2 runs before product-shell or persistence commitments.

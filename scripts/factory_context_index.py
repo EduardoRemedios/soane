@@ -7,6 +7,7 @@ import os
 import re
 import sqlite3
 from collections import Counter
+from contextlib import contextmanager
 from pathlib import Path
 from typing import Any, Iterable, Sequence
 
@@ -339,8 +340,9 @@ class SQLiteFactoryContextIndex:
         self.root = root.resolve()
         self.db_path = db_path
         self.db_path.parent.mkdir(parents=True, exist_ok=True)
-        self.connection = sqlite3.connect(str(self.db_path))
+        self.connection = sqlite3.connect(str(self.db_path), timeout=30.0)
         self.connection.row_factory = sqlite3.Row
+        self.connection.execute("PRAGMA busy_timeout=30000")
 
     def close(self) -> None:
         self.connection.close()
@@ -403,77 +405,81 @@ class SQLiteFactoryContextIndex:
 
     def rebuild(self, patterns: Iterable[str]) -> dict[str, Any]:
         self.initialize()
-        self.connection.execute("DELETE FROM facts")
-        self.connection.execute("DELETE FROM chunks")
-        self.connection.execute("DELETE FROM sources")
-        self.connection.commit()
+        self.connection.execute("BEGIN IMMEDIATE")
+        try:
+            self.connection.execute("DELETE FROM facts")
+            self.connection.execute("DELETE FROM chunks")
+            self.connection.execute("DELETE FROM sources")
 
-        source_count = 0
-        chunk_count = 0
-        fact_count = 0
-        for source_path in _discover_source_paths(self.root, patterns):
-            rel_path = source_path.relative_to(self.root).as_posix()
-            text = source_path.read_text(encoding="utf-8")
-            metadata = _classify_source(rel_path, text)
-            title = _extract_title(text, rel_path)
-            version = _extract_version(text)
-            content_sha = hashlib.sha256(text.encode("utf-8")).hexdigest()
-            source_cursor = self.connection.execute(
-                """
-                INSERT INTO sources (
-                    path, title, version, artifact_type, run_id, mission_id, phase_id, sprint_id,
-                    line_count, char_count, content_sha
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-                """,
-                (
-                    rel_path,
-                    title,
-                    version,
-                    metadata["artifact_type"],
-                    metadata["run_id"],
-                    metadata["mission_id"],
-                    metadata["phase_id"],
-                    metadata["sprint_id"],
-                    len(text.splitlines()),
-                    len(text),
-                    content_sha,
-                ),
-            )
-            source_id = int(source_cursor.lastrowid)
-            source_count += 1
-
-            for chunk in _chunk_markdown(text):
-                chunk_cursor = self.connection.execute(
+            source_count = 0
+            chunk_count = 0
+            fact_count = 0
+            for source_path in _discover_source_paths(self.root, patterns):
+                rel_path = source_path.relative_to(self.root).as_posix()
+                text = source_path.read_text(encoding="utf-8")
+                metadata = _classify_source(rel_path, text)
+                title = _extract_title(text, rel_path)
+                version = _extract_version(text)
+                content_sha = hashlib.sha256(text.encode("utf-8")).hexdigest()
+                source_cursor = self.connection.execute(
                     """
-                    INSERT INTO chunks (
-                        source_id, source_path, heading, start_line, end_line, token_estimate, content
-                    ) VALUES (?, ?, ?, ?, ?, ?, ?)
+                    INSERT INTO sources (
+                        path, title, version, artifact_type, run_id, mission_id, phase_id, sprint_id,
+                        line_count, char_count, content_sha
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                     """,
                     (
-                        source_id,
                         rel_path,
-                        chunk["heading"],
-                        chunk["start_line"],
-                        chunk["end_line"],
-                        _token_estimate(chunk["content"]),
-                        chunk["content"],
+                        title,
+                        version,
+                        metadata["artifact_type"],
+                        metadata["run_id"],
+                        metadata["mission_id"],
+                        metadata["phase_id"],
+                        metadata["sprint_id"],
+                        len(text.splitlines()),
+                        len(text),
+                        content_sha,
                     ),
                 )
-                chunk_id = int(chunk_cursor.lastrowid)
-                chunk_count += 1
-                for fact_type, value in _extract_facts(chunk["content"]):
-                    self.connection.execute(
-                        """
-                        INSERT INTO facts (source_path, chunk_id, fact_type, value)
-                        VALUES (?, ?, ?, ?)
-                        """,
-                        (rel_path, chunk_id, fact_type, value),
-                    )
-                    fact_count += 1
+                source_id = int(source_cursor.lastrowid)
+                source_count += 1
 
-        self.connection.commit()
+                for chunk in _chunk_markdown(text):
+                    chunk_cursor = self.connection.execute(
+                        """
+                        INSERT INTO chunks (
+                            source_id, source_path, heading, start_line, end_line, token_estimate, content
+                        ) VALUES (?, ?, ?, ?, ?, ?, ?)
+                        """,
+                        (
+                            source_id,
+                            rel_path,
+                            chunk["heading"],
+                            chunk["start_line"],
+                            chunk["end_line"],
+                            _token_estimate(chunk["content"]),
+                            chunk["content"],
+                        ),
+                    )
+                    chunk_id = int(chunk_cursor.lastrowid)
+                    chunk_count += 1
+                    for fact_type, value in _extract_facts(chunk["content"]):
+                        self.connection.execute(
+                            """
+                            INSERT INTO facts (source_path, chunk_id, fact_type, value)
+                            VALUES (?, ?, ?, ?)
+                            """,
+                            (rel_path, chunk_id, fact_type, value),
+                        )
+                        fact_count += 1
+            self.connection.commit()
+        except Exception:
+            self.connection.rollback()
+            raise
         return {
             "db_path": str(self.db_path),
+            "refresh_state": "refreshed",
             "source_count": source_count,
             "chunk_count": chunk_count,
             "fact_count": fact_count,
@@ -507,6 +513,7 @@ class SQLiteFactoryContextIndex:
                 chunks.content,
                 sources.title,
                 sources.artifact_type,
+                sources.content_sha,
                 sources.run_id,
                 sources.mission_id,
                 sources.phase_id,
@@ -535,6 +542,7 @@ class SQLiteFactoryContextIndex:
                     "source_path": row["source_path"],
                     "title": row["title"],
                     "artifact_type": row["artifact_type"],
+                    "content_sha": row["content_sha"],
                     "heading": row["heading"],
                     "start_line": row["start_line"],
                     "end_line": row["end_line"],
@@ -663,17 +671,43 @@ class SQLiteFactoryContextIndex:
         raise FactoryContextIndexError(f"unknown context reference: {ref}")
 
 
-def build_context_index(root: Path, db_path: Path | None = None) -> dict[str, Any]:
-    db = SQLiteFactoryContextIndex(root=root, db_path=_resolve_context_db_path(root, db_path))
+@contextmanager
+def _exclusive_rebuild_lock(db_path: Path):
+    lock_path = db_path.with_name(f"{db_path.name}.lock.sqlite3")
+    lock_path.parent.mkdir(parents=True, exist_ok=True)
+    lock_connection = sqlite3.connect(str(lock_path), timeout=30.0, isolation_level=None)
+    lock_connection.execute("PRAGMA busy_timeout=30000")
     try:
-        return db.rebuild(DEFAULT_SOURCE_PATTERNS)
+        lock_connection.execute("BEGIN EXCLUSIVE")
+        try:
+            yield
+        finally:
+            lock_connection.rollback()
     finally:
-        db.close()
+        lock_connection.close()
+
+
+def build_context_index(root: Path, db_path: Path | None = None) -> dict[str, Any]:
+    resolved_db_path = _resolve_context_db_path(root, db_path)
+    try:
+        with _exclusive_rebuild_lock(resolved_db_path):
+            db = SQLiteFactoryContextIndex(root=root, db_path=resolved_db_path)
+            try:
+                return db.rebuild(DEFAULT_SOURCE_PATTERNS)
+            finally:
+                db.close()
+    except FactoryContextIndexError:
+        raise
+    except (OSError, sqlite3.Error, ValueError) as exc:
+        raise FactoryContextIndexError(f"context index rebuild failed: {exc}") from exc
 
 
 def _open_index(root: Path, db_path: Path | None = None) -> SQLiteFactoryContextIndex:
-    db = SQLiteFactoryContextIndex(root=root, db_path=_resolve_context_db_path(root, db_path))
-    db.initialize()
+    resolved_db_path = _resolve_context_db_path(root, db_path)
+    initialized = resolved_db_path.is_file() and resolved_db_path.stat().st_size > 0
+    db = SQLiteFactoryContextIndex(root=root, db_path=resolved_db_path)
+    if not initialized:
+        db.initialize()
     _ensure_supported_db_version(db.schema_version())
     return db
 
