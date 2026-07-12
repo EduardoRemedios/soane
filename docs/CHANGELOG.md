@@ -2,6 +2,7 @@
 
 ## 2026-07-12
 
+- Added planning-only Factory run `RUN_20260712_1030_markdown_memory_ingestion_v0_plan` for `MMI-V0-001`; Stage A direct-source repair, Stage A through I2, and final pack lint passed with a bounded Claim contract, path-safe prose extraction, deterministic source comparison, review-only promotion, CLI, and regression envelope.
 - Hardened the Workspace vision and epistemic model: Project Memory now records governed current understanding without superseding source-system authority; Claim and fact-status semantics, Decision Review, bounded Delegation, Knowledge Scope, memory rights, Markdown authority modes, decision framing, and outcome-oriented success measures are canonical doctrine.
 - Added Factory run `RUN_20260712_1011_vision_epistemic_hardening` for `VEH-V1-001`; Stage A through I2, final pack lint, knowledge lint, context refresh, and all 126 repository tests passed through execution closeout.
 - Kept runtime Claim, Decision Review, Knowledge Scope, Delegation, and Markdown round-trip representation explicitly deferred, and updated `MMI-V0-001` to consume the new doctrine during candidate-ingestion planning.

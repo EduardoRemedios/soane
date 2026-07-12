@@ -117,6 +117,7 @@ Planning outputs:
 - `docs/Factory/runs/RUN_20260712_0909_agent_context_relevance_v1_plan/VALIDATION_CLOSEOUT_REPORT.md`
 - `docs/Factory/runs/RUN_20260712_1011_vision_epistemic_hardening/`
 - `docs/Factory/runs/RUN_20260712_1011_vision_epistemic_hardening/VALIDATION_CLOSEOUT_REPORT.md`
+- `docs/Factory/runs/RUN_20260712_1030_markdown_memory_ingestion_v0_plan/`
 
 ## Current Architectural Posture
 
