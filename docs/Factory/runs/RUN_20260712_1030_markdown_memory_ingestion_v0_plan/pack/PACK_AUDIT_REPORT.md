@@ -65,3 +65,15 @@ This pack proves an agent-facing ingestion workflow without turning ingestion in
 
 - Purple Reviewer: Codex Factory Purple Gate
 - Date: 2026-07-12
+
+## Execution Authorization Addendum
+
+- Human Go: recorded 2026-07-12
+- Execution Mode: `EXECUTION_ENABLED`
+- Verification manifest: present
+- Scope change: none
+- Audit verdict change: none
+
+## Execution Closeout Scope Correction
+
+- Live implementation made the architecture's “Claim not implemented” statement stale. Envelope v3 allows only the necessary implementation-status reconciliation in `docs/PROJECT_MEMORY_ARCHITECTURE.md`; this remains inside the original objective and file budget and does not add product scope.

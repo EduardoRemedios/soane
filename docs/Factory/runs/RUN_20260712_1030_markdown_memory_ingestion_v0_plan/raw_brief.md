@@ -20,11 +20,18 @@ The pack should define:
 
 ## Execution Contract
 
-Execution Mode: PLANNING_ONLY
+Execution Mode: EXECUTION_ENABLED
 
-Execution Authorization: NOT_GRANTED
+Execution Authorization: Human Go in the current Codex conversation on 2026-07-12
 
 Downstream Fan-Out: NOT_APPROVED
+
+## Execution Authorization Addendum
+
+- Human decision: Go
+- Recorded: 2026-07-12
+- Authorized envelope: `pack/MMI-V0-001_ENVELOPE.md`
+- Scope change: none
 
 ## Scope
 

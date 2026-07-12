@@ -25,6 +25,7 @@ class ContractValidationError(ValueError):
 class MemoryObjectType(StrEnum):
     PROJECT = "project"
     CONVERSATION = "conversation"
+    CLAIM = "claim"
     QUESTION = "question"
     ASSUMPTION = "assumption"
     HYPOTHESIS = "hypothesis"
@@ -246,6 +247,8 @@ def validate_memory_object(memory_object: MemoryObject) -> None:
             memory_object.authority_ref is None,
             "capability reference must not embed authority; use an Authority Reference relationship",
         )
+    if memory_object.type == MemoryObjectType.CLAIM:
+        _validate_claim(memory_object)
     if memory_object.confidence is not None:
         _require(0.0 <= memory_object.confidence <= 1.0, "confidence must be between 0 and 1")
     for relationship in memory_object.relationships:
@@ -268,3 +271,59 @@ def _require(condition: bool, message: str) -> None:
     if not condition:
         raise ContractValidationError(message)
 
+
+def _validate_claim(memory_object: MemoryObject) -> None:
+    metadata = memory_object.metadata
+    required_strings = (
+        "proposition",
+        "source_path",
+        "heading_path",
+        "anchor_key",
+        "occurrence_id",
+        "block_fingerprint",
+        "document_fingerprint",
+        "markdown_role",
+        "authority_mode",
+        "source_authority",
+        "knowledge_scope",
+        "epistemic_status",
+        "extraction_method",
+        "source_snapshot_version",
+    )
+    for key in required_strings:
+        value = metadata.get(key)
+        _require(isinstance(value, str) and bool(value.strip()), f"claim metadata.{key} is required")
+
+    _require(metadata["proposition"] == memory_object.title, "claim proposition must match title")
+
+    start_line = metadata.get("start_line")
+    end_line = metadata.get("end_line")
+    _require(type(start_line) is int and start_line > 0, "claim metadata.start_line must be positive")
+    _require(type(end_line) is int and end_line >= start_line, "claim metadata.end_line precedes start_line")
+    _require(metadata["knowledge_scope"] == "project", "claim knowledge_scope must be project in v0")
+    _require(
+        metadata["markdown_role"]
+        in {"constitutional", "canonical", "working", "generated", "evidence", "deprecated"},
+        "claim markdown_role is invalid",
+    )
+    _require(
+        metadata["authority_mode"] in {"authored_authority", "generated_projection", "curated_round_trip"},
+        "claim authority_mode is invalid",
+    )
+    for key in ("block_fingerprint", "document_fingerprint"):
+        value = str(metadata[key])
+        _require(len(value) == 64 and all(char in "0123456789abcdef" for char in value), f"claim {key} is invalid")
+    _require(metadata["source_path"] in memory_object.provenance.source_refs, "claim source_path must be a source_ref")
+
+    is_candidate = bool(metadata.get("candidate")) or bool(metadata.get("promotion_required"))
+    if is_candidate:
+        _require(metadata.get("candidate") is True, "claim candidate flag must be true")
+        _require(metadata.get("promotion_required") is True, "claim promotion_required flag must be true")
+        _require(memory_object.status == LifecycleStatus.PROPOSED, "claim candidate status must be proposed")
+        _require(memory_object.visibility == Visibility.PROJECT, "claim candidate visibility must be project")
+        _require(
+            memory_object.provenance.evidence_level == EvidenceLevel.E1_SOURCE_REFERENCE,
+            "claim candidate evidence level must be E1",
+        )
+        _require(metadata["epistemic_status"] == "asserted", "claim candidate epistemic_status must be asserted")
+        _require(memory_object.authority_ref is None, "claim candidate must not embed authority")

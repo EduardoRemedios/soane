@@ -20,6 +20,8 @@ Implementation:
 - Project Memory thin TUI at `soane/project_memory/tui.py`
 - Project Memory context assembly and Markdown mapping at `soane/project_memory/context.py`
 - Project Memory agent-facing context bundle service at `soane/project_memory/agent_context.py`
+- shared Markdown role and authority-mode vocabulary at `soane/project_memory/markdown_roles.py`
+- deterministic Markdown-to-Claim candidate ingestion and source comparison at `soane/project_memory/markdown_ingestion.py`
 - Agent context v1 bounded query planning, fail-closed selection states, one-hop relationship expansion, source freshness reporting, and truthful refresh states
 - Project Memory repo-local reviewed object seed corpus at `docs/project_memory/objects/`
 - Project Memory golden fixture loader at `soane/project_memory/fixtures.py`
@@ -31,6 +33,7 @@ Implementation:
 - Coding Harness Workflow v0 CLI wrapper at `soane/thinking_engine/coding_workflow.py`
 - Project Memory golden fixture corpus at `tests/fixtures/project_memory/golden/`
 - Project Memory review fixture corpus at `tests/fixtures/project_memory/review/`
+- Project Memory Markdown ingestion fixture corpus at `tests/fixtures/project_memory/markdown_ingestion/`
 - Thinking Engine Intake v0 fixture corpus at `tests/fixtures/thinking_engine/intake/`
 - Coding Proof Harness v0 fixture corpus at `tests/fixtures/coding_proof_harness/`
 - static contract tests at `tests/test_project_memory_contract.py`
@@ -39,6 +42,7 @@ Implementation:
 - thin TUI tests at `tests/test_project_memory_tui.py`
 - context assembly and Markdown mapping tests at `tests/test_project_memory_context.py`
 - agent-facing context bundle tests at `tests/test_project_memory_agent_context.py`
+- Markdown-to-Claim ingestion tests at `tests/test_project_memory_markdown_ingestion.py`
 - atomic Factory context-index rebuild tests at `tests/test_factory_context_index_atomic.py`
 - golden fixture tests at `tests/test_project_memory_fixtures.py`
 - memory semantics tests at `tests/test_project_memory_semantics.py`
@@ -118,6 +122,7 @@ Planning outputs:
 - `docs/Factory/runs/RUN_20260712_1011_vision_epistemic_hardening/`
 - `docs/Factory/runs/RUN_20260712_1011_vision_epistemic_hardening/VALIDATION_CLOSEOUT_REPORT.md`
 - `docs/Factory/runs/RUN_20260712_1030_markdown_memory_ingestion_v0_plan/`
+- `docs/Factory/runs/RUN_20260712_1030_markdown_memory_ingestion_v0_plan/VALIDATION_CLOSEOUT_REPORT.md`
 
 ## Current Architectural Posture
 
@@ -129,13 +134,13 @@ In this repository, `docs/Factory/` means the Factory V2 starter-kit scaffold. I
 
 Factory V3 remains separate in its own repository and should continue to own mission governance.
 
-Project Memory is constitutionally the governed system of record for the Workspace's current Project understanding, not the ultimate authority for external reality or source-system records. Claim, Decision Review, Knowledge Scope, bounded Delegation, memory rights, and explicit Markdown authority modes are accepted doctrine. Their runtime representations are deferred.
+Project Memory is constitutionally the governed system of record for the Workspace's current Project understanding, not the ultimate authority for external reality or source-system records. Proposed/asserted Claim candidates and bounded canonical-Markdown ingestion now have runtime representation. Decision Review, wider Knowledge Scope, bounded Delegation, memory rights enforcement, epistemic elevation, and Markdown round trips remain deferred.
 
 ## What Does Not Exist Yet
 
 - product UI
 - full Project Memory implementation beyond v0 local contract, semantics, context, adapter twins, CLI/TUI, candidate review, agent-facing context commands, and the reviewed repo-local seed corpus
-- runtime Claim epistemic states, Decision Review, Knowledge Scope promotion, bounded Delegation records, or authored/curated Markdown reconciliation
+- Claim epistemic transitions beyond proposed/asserted candidates, Decision Review, Knowledge Scope promotion, bounded Delegation records, or authored/curated Markdown reconciliation
 - full Thinking Engine implementation beyond Intake v0, Socratic Discovery v0, Coding Proof Harness v0, Coding Harness Workflow v0, and Brownfield multi-repo coding proof behavior
 - Workspace Shell implementation
 - integration clients for Factory V3, Temper, Aegis, Sentinel, or Harmony
@@ -155,6 +160,7 @@ bash scripts/knowledge_lint.sh
 ./scripts/factoryctl pack-lint --run RUN_20260701_0848_project_memory_v0_plan
 python3 -m unittest tests/test_project_memory_contract.py tests/test_project_memory_fixtures.py tests/test_project_memory_semantics.py tests/test_project_memory_context.py
 python3 -m unittest tests/test_project_memory_agent_context.py
+python3 -m unittest tests/test_project_memory_markdown_ingestion.py
 python3 -m unittest tests/test_factory_context_index_atomic.py
 python3 -m unittest tests/test_project_memory_adapter_twins.py
 python3 -m unittest tests/test_project_memory_cli.py
@@ -175,6 +181,7 @@ python3 -m unittest tests/test_context_recall_repair.py
 ./scripts/factoryctl pack-lint --run RUN_20260705_0923_live_coding_adapter_eval_plan
 ./scripts/factoryctl pack-lint --run RUN_20260712_0909_agent_context_relevance_v1_plan
 ./scripts/factoryctl pack-lint --run RUN_20260712_1011_vision_epistemic_hardening
+./scripts/factoryctl pack-lint --run RUN_20260712_1030_markdown_memory_ingestion_v0_plan
 python3 scripts/agent_loop_bridge_validate.py tests/fixtures/agent_loop_bridge/valid_handoff.json --json
 ```
 
@@ -199,6 +206,8 @@ python3 -m soane.project_memory.cli agent-context --task "<TASK>"
 python3 -m soane.project_memory.cli agent-trace --id <MEMORY_OBJECT_ID>
 python3 -m soane.project_memory.cli agent-affected --path <SOURCE_PATH>
 python3 -m soane.project_memory.cli validate --no-fixtures --memory-dir docs/project_memory/objects
+python3 -m soane.project_memory.cli ingest-markdown --repo-root . --path docs/PROJECT_MEMORY_ARCHITECTURE.md --authority-mode authored_authority --source-authority repo-canonical-docs --limit 5
+python3 -m soane.project_memory.cli compare-markdown --before-root <BEFORE_ROOT> --after-root <AFTER_ROOT> --path docs/PROJECT_MEMORY_ARCHITECTURE.md --authority-mode authored_authority --source-authority repo-canonical-docs --limit 5
 ```
 
 Coding Harness Workflow entry point:
@@ -217,6 +226,7 @@ cat docs/Factory/runs/RUN_20260701_1529_socratic_discovery_v0_plan/VALIDATION_CL
 cat docs/Factory/runs/RUN_20260701_1548_coding_proof_harness_v0_plan/VALIDATION_CLOSEOUT_REPORT.md
 cat docs/Factory/runs/RUN_20260702_0617_coding_harness_workflow_v0_plan/VALIDATION_CLOSEOUT_REPORT.md
 cat docs/Factory/runs/RUN_20260705_0747_brownfield_multi_repo_coding_proof_plan/VALIDATION_CLOSEOUT_REPORT.md
+cat docs/Factory/runs/RUN_20260712_1030_markdown_memory_ingestion_v0_plan/VALIDATION_CLOSEOUT_REPORT.md
 ```
 
 ## Active Boundary Decisions
@@ -276,4 +286,6 @@ cat docs/Factory/runs/RUN_20260705_0747_brownfield_multi_repo_coding_proof_plan/
 - The prior repo-local decision that made `LCAE-V0-001` the immediate next gate is superseded by the accepted agent-context correctness gate; adapter evaluation remains queued after ACR-V1-001.
 - Human Go for `ACR-V1-001` was given on 2026-07-12 and execution mode was enabled.
 - `ACR-V1-001` is implemented with bounded natural-task query planning, separate document and memory budgets, fail-closed zero-match behavior, explicit broad versus seeded lower-level context, one-hop allowlisted relationship expansion, lifecycle-aware ranking, observational source freshness, SQLite-owned rebuild serialization, rollback-safe publication, explicit selection/refresh states, 14 new tests, and validation closeout.
-- Next roadmap step: create a planning-only Factory pack for Markdown-to-memory candidate ingestion. `LCAE-V0-001` remains queued after ingestion and graph-aware context unless a later approved roadmap decision changes the order.
+- `RUN_20260712_1030_markdown_memory_ingestion_v0_plan`: Factory V2 pack for `MMI-V0-001`. Status: `PASS`; execution enabled after human Go on 2026-07-12; pack lint passed.
+- `MMI-V0-001` is implemented with proposed/asserted Claim validation, shared Markdown role and authority-mode vocabulary, repository-contained canonical prose extraction, exact anchors and fingerprints, bounded output, observational source comparison, fail-closed duplicate handling, review-compatible interchange, and thin CLI commands.
+- Next roadmap step: create a planning-only Factory pack for Graph-Aware Context And Trace. `LCAE-V0-001` remains queued after graph-aware context unless a later approved roadmap decision changes the order.

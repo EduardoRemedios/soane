@@ -28,6 +28,7 @@ class ProjectMemoryContractTests(unittest.TestCase):
         expected = {
             "project",
             "conversation",
+            "claim",
             "question",
             "assumption",
             "hypothesis",
@@ -113,4 +114,3 @@ class ProjectMemoryContractTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-

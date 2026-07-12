@@ -2,6 +2,8 @@
 
 ## 2026-07-12
 
+- Recorded human Go and implemented `MMI-V0-001` with proposed/asserted Claim validation, shared Markdown role and authority-mode vocabulary, repository-contained canonical prose ingestion, exact anchors and fingerprints, bounded candidate/snapshot/exclusion output, observational source comparison, fail-closed duplicate lineage, review-compatible JSON interchange, and `ingest-markdown`/`compare-markdown` CLI commands.
+- Added fixed real-source and adversarial ingestion fixtures plus path, parser, identity, comparison, review, agent-context, and CLI coverage; 58 focused tests and 141 full repository tests passed before closeout.
 - Added planning-only Factory run `RUN_20260712_1030_markdown_memory_ingestion_v0_plan` for `MMI-V0-001`; Stage A direct-source repair, Stage A through I2, and final pack lint passed with a bounded Claim contract, path-safe prose extraction, deterministic source comparison, review-only promotion, CLI, and regression envelope.
 - Hardened the Workspace vision and epistemic model: Project Memory now records governed current understanding without superseding source-system authority; Claim and fact-status semantics, Decision Review, bounded Delegation, Knowledge Scope, memory rights, Markdown authority modes, decision framing, and outcome-oriented success measures are canonical doctrine.
 - Added Factory run `RUN_20260712_1011_vision_epistemic_hardening` for `VEH-V1-001`; Stage A through I2, final pack lint, knowledge lint, context refresh, and all 126 repository tests passed through execution closeout.

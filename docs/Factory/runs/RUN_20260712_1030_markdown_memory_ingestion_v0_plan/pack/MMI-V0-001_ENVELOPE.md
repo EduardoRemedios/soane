@@ -1,11 +1,12 @@
 # Sprint Envelope: MMI-V0-001
 
 ## Version
-v2
+v3
 
 ## Change Log
 - v1 (2026-07-12): Stage H envelope.
 - v2 (2026-07-12): Added candidate budget, review-compatible export, and exact no-touch checks after Stage I.
+- v3 (2026-07-12): Allowed one required Project Memory architecture reconciliation during execution closeout.
 
 ## Objective
 
@@ -14,6 +15,7 @@ Implement a local deterministic path from one eligible canonical Markdown docume
 ## Expected Files
 
 - `soane/project_memory/contract.py`
+- `soane/project_memory/__init__.py` for the established public package surface
 - `soane/project_memory/markdown_roles.py` (new, only if needed to avoid process coupling/import cycles)
 - `soane/project_memory/agent_context.py`
 - `soane/project_memory/markdown_ingestion.py` (new)
@@ -27,6 +29,7 @@ Implement a local deterministic path from one eligible canonical Markdown docume
 - `docs/PROJECT_STATE.md`
 - `docs/ROADMAP.md`
 - `docs/CHANGELOG.md`
+- `docs/PROJECT_MEMORY_ARCHITECTURE.md` only to reconcile implemented-versus-deferred status
 - this run's `VALIDATION_CLOSEOUT_REPORT.md`
 
 ## File-Touch Budget
@@ -67,7 +70,7 @@ Implement a local deterministic path from one eligible canonical Markdown docume
 - No change to `scripts/factory_context_index.py` schema or its `facts` semantics.
 - No dependency additions or imports of private Factory parser helpers.
 - No review-service semantic change unless a focused Claim compatibility defect is proven; epistemic elevation remains out of scope.
-- No canonical-document content changes, generated write-back, external providers, embeddings, UI, live adapters, or portfolio integrations.
+- No canonical-document changes except the bounded Project Memory implementation-status reconciliation; no generated write-back, external providers, embeddings, UI, live adapters, or portfolio integrations.
 - No Decision Review, Delegation, wider Knowledge Scope, or cross-project runtime implementation.
 
 ## Verification Before Merge

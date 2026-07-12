@@ -35,6 +35,10 @@ Fix: Preserve epistemic status separately; review compatibility must not promote
 - Envelope v2 adds candidate budgets, ordered comparison rules, review-compatible export, optional role refactor, and explicit no-epistemic-elevation constraints.
 - No Critical finding or `[SCOPE EXPANSION]` remains.
 
+## Execution Closeout Correction
+
+- Envelope v3 permits the minimum `docs/PROJECT_MEMORY_ARCHITECTURE.md` reconciliation needed to stop the canonical implementation-status section from claiming Claim remains entirely unimplemented. The total file budget is unchanged and no product requirement was added.
+
 ## Verdict
 
 PASS for Stage J consolidation.

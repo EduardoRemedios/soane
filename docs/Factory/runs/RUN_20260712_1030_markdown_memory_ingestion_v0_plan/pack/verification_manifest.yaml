@@ -1,0 +1,60 @@
+schema_version: 1
+run_id: RUN_20260712_1030_markdown_memory_ingestion_v0_plan
+sprint_id: MMI-V0-001
+execution_mode: EXECUTION_ENABLED
+
+checks:
+  - id: VM-001
+    tier: V2
+    type: test
+    constraint_ids: [VC-001, VC-002, VC-003, VC-004, VC-005, VC-006, VC-007, VC-008, VC-009, VC-010, VC-011]
+    description: Focused Claim contract, Markdown ingestion, review, agent-context, and CLI tests.
+    command: python3 -m unittest tests/test_project_memory_contract.py tests/test_project_memory_markdown_ingestion.py tests/test_project_memory_review.py tests/test_project_memory_agent_context.py tests/test_project_memory_cli.py
+    expected: Command exits 0.
+    halt_on_failure: true
+    evidence_path: docs/Factory/runs/RUN_20260712_1030_markdown_memory_ingestion_v0_plan/VALIDATION_CLOSEOUT_REPORT.md
+  - id: VM-002
+    tier: V3
+    type: test
+    constraint_ids: [VC-012]
+    description: Full repository regression suite.
+    command: python3 -m unittest discover -s tests
+    expected: Command exits 0.
+    halt_on_failure: true
+    evidence_path: docs/Factory/runs/RUN_20260712_1030_markdown_memory_ingestion_v0_plan/VALIDATION_CLOSEOUT_REPORT.md
+  - id: VM-003
+    tier: V1
+    type: command
+    constraint_ids: [VC-013, VC-014]
+    description: Canonical knowledge lint.
+    command: bash scripts/knowledge_lint.sh
+    expected: Command exits 0.
+    halt_on_failure: true
+    evidence_path: docs/Factory/runs/RUN_20260712_1030_markdown_memory_ingestion_v0_plan/VALIDATION_CLOSEOUT_REPORT.md
+  - id: VM-004
+    tier: V1
+    type: command
+    constraint_ids: [VC-014]
+    description: Context index refresh.
+    command: ./scripts/factoryctl context-index
+    expected: Command exits 0.
+    halt_on_failure: true
+    evidence_path: docs/Factory/runs/RUN_20260712_1030_markdown_memory_ingestion_v0_plan/VALIDATION_CLOSEOUT_REPORT.md
+  - id: VM-005
+    tier: V1
+    type: command
+    constraint_ids: [VC-014]
+    description: Executed Factory pack lint.
+    command: ./scripts/factoryctl pack-lint --run RUN_20260712_1030_markdown_memory_ingestion_v0_plan
+    expected: Command exits 0.
+    halt_on_failure: true
+    evidence_path: docs/Factory/runs/RUN_20260712_1030_markdown_memory_ingestion_v0_plan/VALIDATION_CLOSEOUT_REPORT.md
+  - id: VM-006
+    tier: V1
+    type: command
+    constraint_ids: [VC-013, VC-014]
+    description: Diff whitespace and scope hygiene.
+    command: git diff --check
+    expected: Command exits 0 and changed paths remain inside the envelope.
+    halt_on_failure: true
+    evidence_path: docs/Factory/runs/RUN_20260712_1030_markdown_memory_ingestion_v0_plan/VALIDATION_CLOSEOUT_REPORT.md

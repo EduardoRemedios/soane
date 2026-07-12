@@ -1,17 +1,18 @@
 # Pack Manifest: MMI-V0-001
 
 ## Version
-v2
+v3
 
 ## Change Log
 - v1 (2026-07-12): Stage J consolidation before I2.
 - v2 (2026-07-12): Recorded Stage I2 PASS artifacts.
+- v3 (2026-07-12): Recorded human Go, execution enablement, and verification manifest.
 
 ## Run Metadata
 - RUN_ID: `RUN_20260712_1030_markdown_memory_ingestion_v0_plan`
 - Sprint ID: `MMI-V0-001`
 - Created: 2026-07-12 10:30 WEST
-- Execution Mode: `PLANNING_ONLY`
+- Execution Mode: `EXECUTION_ENABLED`
 - Spec Versions: STAGE_CONTRACTS v4.14; PURPLE_GATE_CHECKLIST v3.3
 
 ## Required Run Root Files
@@ -52,10 +53,10 @@ v2
 - `HANDOFF_STAGE_I2.md`: present
 
 ## Optional Artifacts
-- `verification_manifest.yaml`: intentionally absent for planning-only run
-- `EXECUTION_PROMPT.md`: prohibited until later human Go changes execution mode
+- `verification_manifest.yaml`: present and non-empty
+- `EXECUTION_PROMPT.md`: present at run root after human Go
 
 ## Final Pack Status
 - Required artifacts are present and non-empty.
 - Stage I2 verdict: PASS.
-- Run remains PLANNING_ONLY pending explicit human Go.
+- Human Go is recorded; execution is limited to the locked MMI-V0-001 envelope.

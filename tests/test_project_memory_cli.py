@@ -169,15 +169,109 @@ class ProjectMemoryCliTests(unittest.TestCase):
         self.assertNotEqual(0, result.returncode)
         self.assertIn("authority_ref is required", result.stderr)
 
+    def test_ingest_markdown_exports_review_compatible_claims(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / "repo"
+            source = root / "docs/PROJECT_MEMORY_ARCHITECTURE.md"
+            source.parent.mkdir(parents=True)
+            source.write_text("# Architecture\n\n## Purpose\n\nA CLI-ingested claim.\n", encoding="utf-8")
+            export_dir = Path(tmp) / "candidates"
+
+            result = self._run_cli(
+                "ingest-markdown",
+                "--repo-root",
+                str(root),
+                "--path",
+                "docs/PROJECT_MEMORY_ARCHITECTURE.md",
+                "--authority-mode",
+                "authored_authority",
+                "--source-authority",
+                "repo-canonical-docs",
+                "--export-dir",
+                str(export_dir),
+            )
+            payload = json.loads(result.stdout)
+            exported = Path(payload["exported_candidates"][0])
+            reviewed = self._run_cli(
+                "review-candidate",
+                "--candidate-json",
+                str(exported),
+                "--outcome",
+                "accept",
+                "--reviewer",
+                "cli-reviewer",
+                "--rationale",
+                "The exported Claim is review-compatible.",
+            )
+
+        self.assertEqual("ingest-markdown", payload["command"])
+        self.assertEqual("claim", payload["candidates"][0]["type"])
+        self.assertEqual("review_interchange", payload["export_kind"])
+        self.assertEqual("accepted", json.loads(reviewed.stdout)["reviewed_object"]["status"])
+
+    def test_ingest_markdown_rejects_nonempty_export_directory(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / "repo"
+            source = root / "docs/PROJECT_MEMORY_ARCHITECTURE.md"
+            source.parent.mkdir(parents=True)
+            source.write_text("# Architecture\n\n## Purpose\n\nA claim.\n", encoding="utf-8")
+            export_dir = Path(tmp) / "candidates"
+            export_dir.mkdir()
+            (export_dir / "stale.json").write_text("{}", encoding="utf-8")
+
+            result = self._run_cli(
+                "ingest-markdown",
+                "--repo-root",
+                str(root),
+                "--path",
+                "docs/PROJECT_MEMORY_ARCHITECTURE.md",
+                "--authority-mode",
+                "authored_authority",
+                "--source-authority",
+                "repo-canonical-docs",
+                "--export-dir",
+                str(export_dir),
+                expect_success=False,
+            )
+
+        self.assertIn("must be empty", result.stderr)
+
+    def test_compare_markdown_reports_modified_source(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            before_root = Path(tmp) / "before"
+            after_root = Path(tmp) / "after"
+            for root, claim in ((before_root, "Original claim."), (after_root, "Modified claim.")):
+                source = root / "docs/PROJECT_MEMORY_ARCHITECTURE.md"
+                source.parent.mkdir(parents=True)
+                source.write_text(f"# Architecture\n\n## Purpose\n\n{claim}\n", encoding="utf-8")
+
+            result = self._run_cli(
+                "compare-markdown",
+                "--before-root",
+                str(before_root),
+                "--after-root",
+                str(after_root),
+                "--path",
+                "docs/PROJECT_MEMORY_ARCHITECTURE.md",
+                "--authority-mode",
+                "authored_authority",
+                "--source-authority",
+                "repo-canonical-docs",
+            )
+            payload = json.loads(result.stdout)
+
+        self.assertEqual("compare-markdown", payload["command"])
+        self.assertEqual(["modified"], [event["state"] for event in payload["events"]])
+
     def _run_cli(self, command: str, *args: str, expect_success: bool = True) -> subprocess.CompletedProcess[str]:
+        fixture_args = [] if command in {"ingest-markdown", "compare-markdown"} else ["--fixture-dir", str(FIXTURE_DIR)]
         result = subprocess.run(
             [
                 sys.executable,
                 "-m",
                 "soane.project_memory.cli",
                 command,
-                "--fixture-dir",
-                str(FIXTURE_DIR),
+                *fixture_args,
                 *args,
             ],
             check=False,

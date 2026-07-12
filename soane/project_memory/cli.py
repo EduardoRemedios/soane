@@ -33,6 +33,15 @@ from soane.project_memory.contract import (
     validate_memory_object,
 )
 from soane.project_memory.fixtures import GoldenFixture, load_fixtures
+from soane.project_memory.markdown_ingestion import (
+    MarkdownIngestionRequest,
+    compare_markdown_snapshots,
+    comparison_payload,
+    ingest_markdown,
+    ingestion_result_payload,
+    memory_object_payload,
+)
+from soane.project_memory.markdown_roles import MarkdownAuthorityMode
 from soane.project_memory.review import ReviewDecision, ReviewOutcome, review_candidate
 from soane.project_memory.semantics import AccessContext, ProjectMemory
 
@@ -166,6 +175,39 @@ def _build_parser() -> argparse.ArgumentParser:
     review_parser.add_argument("--amended-title", help="amended title for amend outcome")
     review_parser.add_argument("--authority-ref", help="authority reference for authority-gated promotion")
     review_parser.set_defaults(func=_cmd_review_candidate)
+
+    ingest_parser = subparsers.add_parser("ingest-markdown", help="create reviewable Claim candidates from Markdown")
+    ingest_parser.add_argument("--repo-root", type=Path, default=Path("."), help="repository root")
+    ingest_parser.add_argument("--path", required=True, help="repository-relative Markdown path")
+    ingest_parser.add_argument(
+        "--authority-mode",
+        choices=[mode.value for mode in MarkdownAuthorityMode],
+        required=True,
+        help="explicit Markdown authority mode",
+    )
+    ingest_parser.add_argument("--source-authority", required=True, help="source authority identifier")
+    ingest_parser.add_argument("--limit", type=int, default=20, help="maximum Claim candidates")
+    ingest_parser.add_argument("--export-dir", type=Path, help="optional empty directory for candidate JSON interchange")
+    ingest_parser.set_defaults(func=_cmd_ingest_markdown)
+
+    compare_parser = subparsers.add_parser("compare-markdown", help="compare two Markdown source snapshots")
+    compare_parser.add_argument("--before-root", type=Path, required=True, help="repository root for the prior source")
+    compare_parser.add_argument("--after-root", type=Path, required=True, help="repository root for the current source")
+    compare_parser.add_argument("--path", required=True, help="repository-relative Markdown path in both roots")
+    compare_parser.add_argument(
+        "--authority-mode",
+        choices=[mode.value for mode in MarkdownAuthorityMode],
+        required=True,
+        help="prior Markdown authority mode",
+    )
+    compare_parser.add_argument(
+        "--after-authority-mode",
+        choices=[mode.value for mode in MarkdownAuthorityMode],
+        help="current authority mode; defaults to the prior mode",
+    )
+    compare_parser.add_argument("--source-authority", required=True, help="source authority identifier")
+    compare_parser.add_argument("--limit", type=int, default=20, help="maximum candidates per snapshot")
+    compare_parser.set_defaults(func=_cmd_compare_markdown)
 
     return parser
 
@@ -395,6 +437,67 @@ def _cmd_review_candidate(args: argparse.Namespace) -> dict[str, Any]:
             "authority_ref": result.decision.authority_ref,
         },
     }
+
+
+def _cmd_ingest_markdown(args: argparse.Namespace) -> dict[str, Any]:
+    result = ingest_markdown(
+        MarkdownIngestionRequest(
+            root=args.repo_root,
+            source_path=args.path,
+            authority_mode=MarkdownAuthorityMode(args.authority_mode),
+            source_authority=args.source_authority,
+            candidate_limit=args.limit,
+        )
+    )
+    exported = _export_candidates(result.candidates, args.export_dir) if args.export_dir else []
+    return {
+        "ok": True,
+        "command": "ingest-markdown",
+        **ingestion_result_payload(result),
+        "exported_candidates": exported,
+        "export_kind": "review_interchange" if exported else None,
+    }
+
+
+def _cmd_compare_markdown(args: argparse.Namespace) -> dict[str, Any]:
+    before = ingest_markdown(
+        MarkdownIngestionRequest(
+            root=args.before_root,
+            source_path=args.path,
+            authority_mode=MarkdownAuthorityMode(args.authority_mode),
+            source_authority=args.source_authority,
+            candidate_limit=args.limit,
+        )
+    )
+    after = ingest_markdown(
+        MarkdownIngestionRequest(
+            root=args.after_root,
+            source_path=args.path,
+            authority_mode=MarkdownAuthorityMode(args.after_authority_mode or args.authority_mode),
+            source_authority=args.source_authority,
+            candidate_limit=args.limit,
+        )
+    )
+    comparison = compare_markdown_snapshots(before.snapshot, after.snapshot)
+    return {
+        "ok": True,
+        "command": "compare-markdown",
+        **comparison_payload(comparison, event_limit=args.limit),
+        "before_warnings": list(before.warnings),
+        "after_warnings": list(after.warnings),
+    }
+
+
+def _export_candidates(candidates: Sequence[MemoryObject], export_dir: Path) -> list[str]:
+    if export_dir.exists() and (not export_dir.is_dir() or any(export_dir.iterdir())):
+        raise CliError(f"candidate export directory must be empty: {export_dir}")
+    export_dir.mkdir(parents=True, exist_ok=True)
+    exported: list[str] = []
+    for index, candidate in enumerate(candidates, start=1):
+        path = export_dir / f"{index:03d}_{candidate.id}.json"
+        path.write_text(json.dumps(memory_object_payload(candidate), indent=2, sort_keys=True) + "\n", encoding="utf-8")
+        exported.append(path.as_posix())
+    return exported
 
 
 def _context_request(args: argparse.Namespace, fixtures: Sequence[GoldenFixture]) -> ContextRequest:

@@ -809,16 +809,19 @@ Implemented v0 foundations now define:
 - evidence-level attachment
 - canonical Markdown source mapping
 - context assembly rules
+- proposed/asserted Claim candidate validation
+- deterministic canonical-Markdown prose ingestion with exact source anchors and fingerprints
+- observational source-snapshot comparison and agent-facing ingestion commands
 
-The following accepted semantic extensions are not yet implemented as runtime object types:
+The following accepted semantic extensions remain incomplete:
 
-- Claim and explicit epistemic status
+- Claim epistemic transitions beyond proposed/asserted candidates
 - Decision Review
 - Knowledge Scope and cross-project promotion
 - Delegation representation beyond external Authority References
 - authored-authority and curated-round-trip reconciliation
 
-The import path from existing Markdown documents remains pending. It must create reviewable candidates rather than silently promote extracted claims.
+The first import path now creates reviewable proposed/asserted Claim candidates from bounded canonical prose without silent promotion. Constitutional ingestion, structured Markdown extraction, durable source tracking, automatic lifecycle propagation, and round-trip write-back remain pending.
 
 V1 should not define:
 
@@ -837,12 +840,12 @@ The original readiness criteria remain satisfied for the v0 prototype as impleme
 
 - this conceptual architecture is accepted
 - v1 object types are selected
-- object lifecycle states are sufficient for Decisions, Assumptions, Evidence, and Questions
+- object lifecycle states are sufficient for current Decisions, Assumptions, Evidence, Questions, and proposed/asserted Claims
 - provenance and source-reference requirements are clear
 - canonical Markdown generation rules are bounded
 - non-goals remain explicit
 
-The v0 implementation proved memory object modeling, traceability, candidate review, context assembly, and agent-facing commands before durable persistence. It does not yet enforce the accepted semantic extensions listed above.
+The v0 implementation proved memory object modeling, traceability, candidate review, context assembly, bounded Markdown-to-Claim ingestion, observational source comparison, and agent-facing commands before durable persistence. It does not yet enforce the remaining semantic extensions listed above.
 
 ## Remaining Questions
 
