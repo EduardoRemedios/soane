@@ -1,0 +1,15 @@
+{
+  "fixture_id": "GCT-GRAPH-001",
+  "assertions": [
+    "outbound and inbound depends_on return different neighbors",
+    "source match selects claim directly",
+    "inbound depends_on propagates from claim to decision",
+    "proposed claim remains non-current and is not mutated",
+    "hidden is represented opaquely and hidden_downstream is unreachable",
+    "decision and constraint cycle terminates without duplicate selection",
+    "current objects rank before old_decision when non-current inclusion is enabled",
+    "unrelated is absent from affected results",
+    "edge and path budget exhaustion is explicit",
+    "repeated execution is semantically identical"
+  ]
+}

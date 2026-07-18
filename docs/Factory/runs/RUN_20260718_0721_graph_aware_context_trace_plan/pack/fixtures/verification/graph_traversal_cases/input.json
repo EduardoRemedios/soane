@@ -1,0 +1,24 @@
+{
+  "fixture_id": "GCT-GRAPH-001",
+  "description": "MMI-style Claim graph with direction, lifecycle, cycle, visibility, and budget cases",
+  "nodes": [
+    {"key": "claim", "type": "claim", "status": "proposed", "visibility": "project", "source": "docs/PROJECT_MEMORY_ARCHITECTURE.md"},
+    {"key": "decision", "type": "decision", "status": "accepted", "visibility": "project"},
+    {"key": "constraint", "type": "constraint", "status": "active", "visibility": "project"},
+    {"key": "evidence", "type": "evidence_artifact", "status": "active", "visibility": "project"},
+    {"key": "old_decision", "type": "decision", "status": "superseded", "visibility": "project"},
+    {"key": "hidden", "type": "assumption", "status": "active", "visibility": "restricted"},
+    {"key": "hidden_downstream", "type": "decision", "status": "accepted", "visibility": "project"},
+    {"key": "unrelated", "type": "mission_reference", "status": "active", "visibility": "project"}
+  ],
+  "edges": [
+    {"source": "decision", "type": "depends_on", "target": "claim"},
+    {"source": "decision", "type": "depends_on", "target": "constraint"},
+    {"source": "claim", "type": "derived_from", "target": "evidence"},
+    {"source": "constraint", "type": "supports", "target": "decision"},
+    {"source": "old_decision", "type": "supersedes", "target": "claim"},
+    {"source": "hidden", "type": "depends_on", "target": "claim"},
+    {"source": "hidden_downstream", "type": "depends_on", "target": "hidden"},
+    {"source": "unrelated", "type": "references", "target": "external_portfolio_record"}
+  ]
+}

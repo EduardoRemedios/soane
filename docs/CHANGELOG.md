@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-07-18
+
+- Added planning-only Factory run `RUN_20260718_0721_graph_aware_context_trace_plan` for `GCT-V0-001`; Stage A through I2 and final pack lint passed.
+- Locked a storage-neutral two-hop traversal contract with typed inbound/outbound paths, per-hop visibility, explicit non-current inclusion, deterministic cycle and alternate-path handling, hard object/path/edge/output ceilings, and opaque exclusions.
+- Planned shared integration with `agent-context`, `agent-trace`, and `agent-affected`, including a fixed MMI-style proposed Claim graph and no expansion into persistence, inferred edges, code graphs, new relationship types, external providers, UI, or automatic truth mutation.
+
 ## 2026-07-12
 
 - Recorded human Go and implemented `MMI-V0-001` with proposed/asserted Claim validation, shared Markdown role and authority-mode vocabulary, repository-contained canonical prose ingestion, exact anchors and fingerprints, bounded candidate/snapshot/exclusion output, observational source comparison, fail-closed duplicate lineage, review-compatible JSON interchange, and `ingest-markdown`/`compare-markdown` CLI commands.

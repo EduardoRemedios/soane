@@ -2,7 +2,7 @@
 
 > Purpose: Current source of truth for the Soane repository state.
 >
-> Last updated: 2026-07-12
+> Last updated: 2026-07-18
 
 ## Current Identity
 
@@ -288,4 +288,5 @@ cat docs/Factory/runs/RUN_20260712_1030_markdown_memory_ingestion_v0_plan/VALIDA
 - `ACR-V1-001` is implemented with bounded natural-task query planning, separate document and memory budgets, fail-closed zero-match behavior, explicit broad versus seeded lower-level context, one-hop allowlisted relationship expansion, lifecycle-aware ranking, observational source freshness, SQLite-owned rebuild serialization, rollback-safe publication, explicit selection/refresh states, 14 new tests, and validation closeout.
 - `RUN_20260712_1030_markdown_memory_ingestion_v0_plan`: Factory V2 pack for `MMI-V0-001`. Status: `PASS`; execution enabled after human Go on 2026-07-12; pack lint passed.
 - `MMI-V0-001` is implemented with proposed/asserted Claim validation, shared Markdown role and authority-mode vocabulary, repository-contained canonical prose extraction, exact anchors and fingerprints, bounded output, observational source comparison, fail-closed duplicate handling, review-compatible interchange, and thin CLI commands.
-- Next roadmap step: create a planning-only Factory pack for Graph-Aware Context And Trace. `LCAE-V0-001` remains queued after graph-aware context unless a later approved roadmap decision changes the order.
+- `RUN_20260718_0721_graph_aware_context_trace_plan`: Factory V2 `PLANNING_ONLY` pack for `GCT-V0-001`. Status: `PASS`; Stage A through I2 and final pack lint passed with direction-aware typed paths, per-hop visibility, lifecycle ordering, cycle handling, hard traversal/output ceilings, additive command integration, and a realistic MMI-style Claim graph.
+- Next roadmap step: human Go or No-go review for `GCT-V0-001`; implementation remains unauthorized while the run is `PLANNING_ONLY`. `LCAE-V0-001` remains queued after graph-aware context unless a later approved roadmap decision changes the order.
