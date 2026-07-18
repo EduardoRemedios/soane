@@ -17,6 +17,7 @@ from scripts.factory_context_index import (
     recall_context,
 )
 from soane.project_memory.context import (
+    ContextExclusion,
     ContextItem,
     ContextPackage,
     ContextRequest,
@@ -24,6 +25,13 @@ from soane.project_memory.context import (
     build_context_package,
 )
 from soane.project_memory.contract import MemoryObject, RelationshipType
+from soane.project_memory.graph import (
+    GraphTraversalRequest,
+    GraphTraversalResult,
+    TraversalDirection,
+    graph_result_payload,
+    traverse_memory,
+)
 from soane.project_memory.markdown_roles import MarkdownRole, markdown_role_for_source
 from soane.project_memory.semantics import NON_CURRENT_STATUSES, AccessContext, ProjectMemory
 
@@ -74,6 +82,7 @@ class AgentContextBundle:
     memory_budget: int
     query_plan: tuple[str, ...]
     memory_truncations: tuple[str, ...]
+    graph: GraphTraversalResult
     memory: ContextPackage
     documents: tuple[DocumentSlice, ...]
     explanation: tuple[str, ...]
@@ -187,8 +196,9 @@ def build_agent_context_bundle(
         if index_available
         else ()
     )
-    context_seed_ids, seed_reasons, memory_truncations = _select_memory_ids(
+    context_seed_ids, seed_reasons, memory_truncations, graph = _select_memory_ids(
         memory=memory,
+        access=access,
         explicit_seed_ids=seed_object_ids,
         documents=documents,
         memory_limit=memory_limit,
@@ -204,6 +214,7 @@ def build_agent_context_bundle(
         ),
     )
     context_package = _with_selection_reasons(context_package, seed_reasons)
+    context_package = _with_graph_exclusions(context_package, graph)
     selection_mode = AgentSelectionMode.EXPLICIT_SEED if seed_object_ids else AgentSelectionMode.RELEVANCE
     selection_state, selection_reason = _selection_outcome(
         index_available=index_available,
@@ -223,11 +234,13 @@ def build_agent_context_bundle(
         memory_budget=memory_limit,
         query_plan=query_plan,
         memory_truncations=memory_truncations,
+        graph=graph,
         memory=context_package,
         documents=documents,
         explanation=_explanation(
             documents,
             context_package,
+            graph,
             context_seed_ids,
             refresh_state,
             selection_state,
@@ -294,6 +307,22 @@ def format_agent_context_markdown(bundle: AgentContextBundle) -> str:
     if bundle.memory_truncations:
         lines.extend(["", "## Budget Truncations"])
         lines.extend(f"- {item}" for item in bundle.memory_truncations)
+    graph_paths = [
+        path
+        for selection in bundle.graph.selections
+        if selection.depth > 0
+        for path in selection.paths
+    ]
+    lines.extend(["", "## Graph Paths"])
+    if graph_paths:
+        for path in graph_paths:
+            rendered_steps = " > ".join(
+                f"{step.relationship_type.value}:{step.direction.value}:{step.source_id}->{step.target_id}"
+                for step in path.steps
+            )
+            lines.append(f"- `{path.seed_id}`: {rendered_steps}")
+    else:
+        lines.append("- None")
     return "\n".join(lines) + "\n"
 
 
@@ -312,6 +341,7 @@ def agent_context_summary(bundle: AgentContextBundle) -> dict[str, Any]:
         "query_plan": list(bundle.query_plan),
         "budgets": {"documents": bundle.document_budget, "memory": bundle.memory_budget},
         "memory_truncations": list(bundle.memory_truncations),
+        "graph": graph_result_payload(bundle.graph),
         "explanation": list(bundle.explanation),
         "memory": {
             "purpose": bundle.memory.purpose,
@@ -456,47 +486,64 @@ def _has_context_index(root: Path, db_path: Path | None) -> bool:
 def _select_memory_ids(
     *,
     memory: ProjectMemory,
+    access: AccessContext,
     explicit_seed_ids: Sequence[str],
     documents: Sequence[DocumentSlice],
     memory_limit: int,
-) -> tuple[tuple[str, ...], dict[str, str], tuple[str, ...]]:
-    selected: list[str] = []
-    reasons: dict[str, str] = {}
-    truncations: list[str] = []
-    truncated_ids: set[str] = set()
+) -> tuple[tuple[str, ...], dict[str, str], tuple[str, ...], GraphTraversalResult]:
+    seed_ids: list[str] = []
+    seed_reasons: dict[str, str] = {}
 
-    def add(object_id: str, reason: str) -> bool:
-        if object_id in reasons:
-            return True
-        if len(selected) >= memory_limit:
-            if object_id not in truncated_ids:
-                truncated_ids.add(object_id)
-                truncations.append(f"memory_budget_reached:{object_id}:{reason}")
-            return False
-        selected.append(object_id)
-        reasons[object_id] = reason
-        return True
+    def seed(object_id: str, reason: str) -> None:
+        if object_id in seed_reasons:
+            return
+        seed_ids.append(object_id)
+        seed_reasons[object_id] = reason
 
     for object_id in explicit_seed_ids:
-        add(object_id, "explicit_seed")
+        seed(object_id, "explicit_seed")
     for document in documents:
         for object_id in document.related_memory_object_ids:
-            add(object_id, f"source_ref:{document.source_path}")
+            seed(object_id, f"source_ref:{document.source_path}")
 
-    base_ids = tuple(selected)
-    for source_id in base_ids:
-        source = memory.inspect(source_id)
-        if source is None:
+    graph = traverse_memory(
+        memory,
+        GraphTraversalRequest(
+            seed_object_ids=tuple(seed_ids),
+            access=access,
+            directions=frozenset({TraversalDirection.OUTBOUND, TraversalDirection.INBOUND}),
+            relationship_types=AGENT_EXPANSION_RELATIONSHIPS,
+            max_depth=2,
+            object_limit=memory_limit,
+            path_limit_per_object=1,
+            examined_edge_limit=128,
+            include_non_current=True,
+        ),
+    )
+    reasons: dict[str, str] = {}
+    for selection in graph.selections:
+        if selection.depth == 0:
+            reasons[selection.object.id] = seed_reasons.get(selection.object.id, "graph_seed")
             continue
-        relationships = sorted(source.relationships, key=lambda item: (item.type.value, item.target_id))
-        for relationship in relationships:
-            if relationship.type not in AGENT_EXPANSION_RELATIONSHIPS:
-                continue
-            target = memory.inspect(relationship.target_id)
-            if target is None:
-                continue
-            add(target.id, f"relationship:{relationship.type.value}:{source.id}")
-    return tuple(selected), reasons, tuple(truncations)
+        path = selection.paths[0]
+        if len(path.steps) == 1:
+            step = path.steps[0]
+            reasons[selection.object.id] = (
+                f"relationship:{step.relationship_type.value}:{step.source_id}"
+            )
+        else:
+            reasons[selection.object.id] = "relationship_path:" + ">".join(
+                f"{step.relationship_type.value}:{step.direction.value}:{step.source_id}"
+                for step in path.steps
+            )
+    truncations = tuple(_graph_truncation_reason(item.reason, item.omitted_count) for item in graph.truncations)
+    return tuple(item.object.id for item in graph.selections), reasons, truncations, graph
+
+
+def _graph_truncation_reason(reason: str, omitted_count: int) -> str:
+    if reason == "object_limit":
+        return f"memory_budget_reached:{omitted_count}"
+    return f"graph_{reason}:{omitted_count}"
 
 
 def _with_selection_reasons(package: ContextPackage, reasons: Mapping[str, str]) -> ContextPackage:
@@ -508,6 +555,42 @@ def _with_selection_reasons(package: ContextPackage, reasons: Mapping[str, str])
         surfaced=tuple(ContextItem(item.object, reasons.get(item.object.id, item.reason)) for item in package.surfaced),
         contradictions=package.contradictions,
         exclusions=package.exclusions,
+    )
+
+
+def _with_graph_exclusions(
+    package: ContextPackage,
+    graph: GraphTraversalResult,
+) -> ContextPackage:
+    exclusions: list[ContextExclusion] = []
+    seen: set[tuple[str, str]] = set()
+
+    def add(object_id: str, title: str, reason: str) -> None:
+        key = (object_id, reason)
+        if key in seen:
+            return
+        seen.add(key)
+        exclusions.append(ContextExclusion(object_id, title, reason))
+
+    for exclusion in package.exclusions:
+        title = "[inaccessible]" if exclusion.reason == "not_visible_to_access_context" else exclusion.title
+        add(exclusion.object_id, title, exclusion.reason)
+    for exclusion in graph.exclusions:
+        reason = (
+            "not_visible_to_access_context"
+            if exclusion.reason in {"inaccessible_seed", "inaccessible_target"}
+            else f"graph_{exclusion.reason}"
+        )
+        title = "[inaccessible]" if reason == "not_visible_to_access_context" else "[graph exclusion]"
+        add(exclusion.target_id, title, reason)
+    return ContextPackage(
+        purpose=package.purpose,
+        boundary=package.boundary,
+        selection_mode=package.selection_mode,
+        current=package.current,
+        surfaced=package.surfaced,
+        contradictions=package.contradictions,
+        exclusions=tuple(exclusions),
     )
 
 
@@ -549,6 +632,7 @@ def _normalize_source_ref(ref: str) -> str:
 def _explanation(
     documents: Sequence[DocumentSlice],
     context_package: ContextPackage,
+    graph: GraphTraversalResult,
     seed_object_ids: Sequence[str],
     refresh_state: IndexRefreshState,
     selection_state: AgentSelectionState,
@@ -564,6 +648,10 @@ def _explanation(
         f"Selection state is {selection_state.value}: {selection_reason}.",
         f"Context index refresh state is {refresh_state.value}.",
         f"Query plan used {len(query_plan)} of {MAX_QUERY_ATTEMPTS} allowed attempts; budgets are documents={document_budget}, memory={memory_budget}.",
+        (
+            f"Typed graph traversal selected {len(graph.selections)} object(s) after examining "
+            f"{graph.examined_edge_count} edge(s)."
+        ),
     ]
     if seed_object_ids:
         lines.append(f"{len(seed_object_ids)} Project Memory object(s) seeded context assembly.")
@@ -572,7 +660,7 @@ def _explanation(
     if context_package.exclusions:
         lines.append(f"{len(context_package.exclusions)} memory object(s) were excluded by visibility or propagation rules.")
     if memory_truncations:
-        lines.append(f"{len(memory_truncations)} memory candidate(s) were excluded by the memory budget.")
+        lines.append(f"Graph traversal recorded {len(memory_truncations)} budget truncation record(s).")
     role_counts = _role_counts(documents)
     if role_counts:
         lines.append(

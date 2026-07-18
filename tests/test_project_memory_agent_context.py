@@ -94,6 +94,8 @@ class ProjectMemoryAgentContextTests(unittest.TestCase):
         self.assertEqual(f"relationship:evidences:{decision.id}", reasons[evidence.id])
         self.assertLessEqual(len(bundle.memory.current) + len(bundle.memory.surfaced), 2)
         self.assertEqual(2, bundle.memory_budget)
+        graph_evidence = next(item for item in bundle.graph.selections if item.object.id == evidence.id)
+        self.assertEqual("outbound", graph_evidence.paths[0].steps[0].direction.value)
 
     def test_memory_budget_records_relationship_truncation(self) -> None:
         fixture = next(item for item in load_fixtures(FIXTURE_DIR) if item.fixture_id == "GF-001")
@@ -131,6 +133,8 @@ class ProjectMemoryAgentContextTests(unittest.TestCase):
             (restricted.id, "not_visible_to_access_context"),
             {(item.object_id, item.reason) for item in bundle.memory.exclusions},
         )
+        hidden = next(item for item in bundle.memory.exclusions if item.object_id == restricted.id)
+        self.assertEqual("[inaccessible]", hidden.title)
 
     def test_failed_refresh_reuses_previous_valid_index_truthfully(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -356,6 +360,14 @@ class ProjectMemoryAgentContextTests(unittest.TestCase):
                 "--fixture-key",
                 "GF-001",
                 "decision",
+                "--direction",
+                "outbound",
+                "--relationship",
+                "evidences",
+                "--depth",
+                "1",
+                "--object-limit",
+                "2",
             ],
             check=False,
             cwd=REPO_ROOT,
@@ -369,6 +381,15 @@ class ProjectMemoryAgentContextTests(unittest.TestCase):
         self.assertEqual("agent-trace", payload["command"])
         self.assertEqual("decision", payload["object"]["type"])
         self.assertTrue(any(item["type"] == "evidences" for item in payload["outgoing"]))
+        graph_objects = {item["object"]["type"] for item in payload["graph"]["selections"]}
+        self.assertEqual({"decision", "evidence_artifact"}, graph_objects)
+        evidence_path = next(
+            item["paths"][0]
+            for item in payload["graph"]["selections"]
+            if item["object"]["type"] == "evidence_artifact"
+        )
+        self.assertEqual("outbound", evidence_path["steps"][0]["direction"])
+        self.assertEqual("evidences", evidence_path["steps"][0]["relationship_type"])
 
     def test_agent_trace_cli_reads_repo_memory_by_default(self) -> None:
         result = subprocess.run(
@@ -418,6 +439,58 @@ class ProjectMemoryAgentContextTests(unittest.TestCase):
         self.assertEqual("canonical", payload["markdown_role"])
         self.assertGreater(payload["affected_count"], 0)
         self.assertTrue(any(item["type"] == "decision" for item in payload["objects"]))
+        propagated = [
+            item
+            for item in payload["objects"]
+            if item["type"] == "decision" and item["matched_by"] == "relationship_path"
+        ]
+        self.assertTrue(propagated)
+        self.assertTrue(
+            any(
+                step["direction"] == "inbound" and step["relationship_type"] == "evidences"
+                for selection in payload["graph"]["selections"]
+                for path in selection["paths"]
+                for step in path["steps"]
+            )
+        )
+
+    def test_agent_affected_unmatched_source_fails_closed(self) -> None:
+        result = subprocess.run(
+            [
+                sys.executable,
+                "-m",
+                "soane.project_memory.cli",
+                "agent-affected",
+                "--fixture-dir",
+                str(FIXTURE_DIR),
+                "--path",
+                "docs/DOES_NOT_EXIST.md",
+            ],
+            check=False,
+            cwd=REPO_ROOT,
+            text=True,
+            capture_output=True,
+        )
+
+        if result.returncode != 0:
+            self.fail(f"CLI failed with {result.returncode}\nstdout={result.stdout}\nstderr={result.stderr}")
+        payload = json.loads(result.stdout)
+        self.assertEqual(0, payload["affected_count"])
+        self.assertEqual([], payload["objects"])
+        self.assertEqual("no_seeds", payload["graph"]["truncations"][0]["reason"])
+
+    def test_agent_trace_help_exposes_bounded_graph_controls(self) -> None:
+        result = subprocess.run(
+            [sys.executable, "-m", "soane.project_memory.cli", "agent-trace", "--help"],
+            check=False,
+            cwd=REPO_ROOT,
+            text=True,
+            capture_output=True,
+        )
+
+        self.assertEqual(0, result.returncode)
+        for option in ("--direction", "--relationship", "--depth", "--object-limit", "--path-limit", "--edge-limit"):
+            self.assertIn(option, result.stdout)
 
     def test_agent_affected_cli_reads_repo_memory_by_default(self) -> None:
         result = subprocess.run(

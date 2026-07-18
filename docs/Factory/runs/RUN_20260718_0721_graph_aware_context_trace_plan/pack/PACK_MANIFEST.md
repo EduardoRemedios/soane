@@ -2,12 +2,13 @@
 
 ## Version
 
-v2
+v3
 
 ## Change Log
 
 - v1 (2026-07-18): Stage J consolidation before I2.
 - v2 (2026-07-18): Recorded Stage I2 PASS artifacts.
+- v3 (2026-07-18): Recorded human Go, execution enablement, and verification manifest.
 
 ## Run Metadata
 
@@ -15,7 +16,7 @@ v2
 - Sprint ID: `SPRINT_20260718_001`
 - Created: 2026-07-18 07:21 WEST
 - Owner: Soane Project Memory
-- Execution Mode: `PLANNING_ONLY`
+- Execution Mode: `EXECUTION_ENABLED`
 - Spec Versions: NAMING_CONVENTIONS v4.7; DEFINITIONS v3.5; STAGE_CONTRACTS v4.14; PURPLE_GATE_CHECKLIST v3.3
 
 ## Required Run Root Files
@@ -60,11 +61,11 @@ v2
 
 ## Optional Artifacts
 
-- `verification_manifest.yaml`: absent by design for planning-only run
-- `EXECUTION_PROMPT.md`: forbidden while planning-only and before human Go
+- `verification_manifest.yaml`: present and non-empty
+- `EXECUTION_PROMPT.md`: present at run root after human Go
 
 ## Consolidation Status
 
 - Required artifacts are present and non-empty.
 - Stage I2 verdict: PASS.
-- Human Go remains required before execution enablement.
+- Human Go is recorded; execution is limited to the locked GCT-V0-001 envelope.

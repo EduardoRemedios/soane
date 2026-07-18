@@ -37,6 +37,7 @@
 | Markdown-to-memory candidate ingestion planning | Done | `docs/Factory/runs/RUN_20260712_1030_markdown_memory_ingestion_v0_plan/` |
 | Markdown-to-memory candidate ingestion implementation | Done | `soane/project_memory/markdown_ingestion.py`, `soane/project_memory/markdown_roles.py`, `tests/test_project_memory_markdown_ingestion.py`, `docs/Factory/runs/RUN_20260712_1030_markdown_memory_ingestion_v0_plan/VALIDATION_CLOSEOUT_REPORT.md` |
 | Graph-aware context and trace planning | Done | `docs/Factory/runs/RUN_20260718_0721_graph_aware_context_trace_plan/` |
+| Graph-aware context and trace implementation | Done | `soane/project_memory/graph.py`, `soane/project_memory/agent_context.py`, `soane/project_memory/cli.py`, `tests/test_project_memory_graph_traversal.py`, `docs/Factory/runs/RUN_20260718_0721_graph_aware_context_trace_plan/VALIDATION_CLOSEOUT_REPORT.md` |
 
 ## Sequence
 
@@ -74,8 +75,8 @@
 | 30 | Markdown-to-memory candidate ingestion planning | Done | `RUN_20260712_1030_markdown_memory_ingestion_v0_plan` passed Stage I2 and final pack lint with Claim, path containment, extraction, comparison, review, CLI, and regression contracts. |
 | 31 | Markdown-to-memory candidate ingestion implementation | Done | Added Claim candidate validation, shared Markdown vocabulary, path-safe canonical prose ingestion, bounded snapshots/output, deterministic comparison, review-compatible interchange, and CLI commands without persistence or automatic promotion. |
 | 32 | Graph-aware context and trace planning | Done | `RUN_20260718_0721_graph_aware_context_trace_plan` passed Stage A through I2 and final pack lint with typed paths, per-hop policy, hard work ceilings, command integration, and realistic Claim-graph verification. |
-| 33 | Graph-aware context and trace implementation | Next | Execute `GCT-V0-001` only after human Go; no persistence, inferred edges, code graph, new relationship types, or automatic memory mutation. |
-| 34 | Live coding adapter evaluation implementation | Pending | Execute the existing `LCAE-V0-001` pack after graph-aware context closes and source evidence is refreshed. No live provider calls. |
+| 33 | Graph-aware context and trace implementation | Done | Added shared typed traversal, hard work ceilings, graph-aware context, bounded trace, exact-source affected-by propagation, realistic Claim proof, and validation closeout. |
+| 34 | Live coding adapter evaluation implementation | Next | Refresh the existing `LCAE-V0-001` pack against current source/context evidence, then request human Go. No live provider calls. |
 | 35 | First live read-only coding proof | Pending | Run only after `LCAE-V0-001` selects a first surface and a separate human-approved live-proof pack defines auth, sandbox, read-only scope, output capture, evidence capture, and rollback/stop rules. |
 | 36 | Second domain proof selection | Pending | Select a non-coding proof domain so Workspace primitives are not overfit to software repositories. |
 | 37 | Memory provider evaluation | Pending | Evaluate external retrieval/context adapters, not canonical Project Memory. |
@@ -96,28 +97,29 @@
 
 ## Immediate Next Move
 
-Review for human Go:
+Refresh the existing planning pack for:
 
-`GCT-V0-001` Graph-Aware Context And Trace
+`LCAE-V0-001` Live Coding Adapter Evaluation
 
 Recent implementation evidence:
 
 - `soane/project_memory/agent_context.py`
-- `soane/project_memory/context.py`
-- `scripts/factory_context_index.py`
+- `soane/project_memory/graph.py`
+- `soane/project_memory/cli.py`
 - `tests/test_project_memory_agent_context.py`
+- `tests/test_project_memory_graph_traversal.py`
 
 Current state:
 
 - Agent-facing context v1: implemented and validation closeout passed.
-- Live coding adapter evaluation planning: complete and retained as the next adapter pack after context correctness.
+- Live coding adapter evaluation planning: complete but requires current source/context evidence before execution review.
 - `ACR-V1-001` planning and implementation: complete.
 - Vision and epistemic model hardening: doctrine accepted; runtime representation remains deferred.
 - `MMI-V0-001` planning and implementation: complete; validation closeout passed.
-- `GCT-V0-001` planning: Stage A through I2 and final pack lint passed in `PLANNING_ONLY` mode.
-- Next work after human Go: implement the shared traversal service and integrate it with agent context, trace, and affected-by workflows.
+- `GCT-V0-001` planning and implementation: complete; validation closeout passed.
+- Next work: refresh `LCAE-V0-001`, confirm its no-live-call and no-credential-read boundaries against current code, and request human Go or No-go.
 
-The implementation slice must remain local and deterministic. It must not add persistence, semantic embeddings, inferred edges, code graphing, external providers, automatic memory promotion, product UI, or live adapter invocation.
+The adapter evaluation slice remains local and deterministic. It must not make live provider calls, read credentials, install dependencies, mutate repositories, add persistence, or promote Provider Invocation candidates automatically.
 
 ## Backlog Notes
 
@@ -144,7 +146,7 @@ Future fixture expansion should continue to cover Decision linked to Evidence, A
 | Canonical Markdown generation rules | Partial | Source mapping exists in Project Memory v0; durable canonical generation rules should wait for persistence architecture. |
 | Mock Cursor/Codex/OpenAI adapter contract | Done | Implemented as deterministic adapter twins for Cursor CLI, Codex CLI, Cursor SDK, OpenAI SDK, and OpenAI Agents SDK. |
 | Context assembly v0 | Done | Lower-level broad and explicit-seed modes are distinct; agent zero matches no longer imply broad memory or unrelated contradictions. |
-| Agent-facing context commands | Done | Natural-task query planning, separate budgets, explicit states, one-hop reasons, source freshness, and rollback-safe index refresh are implemented and tested. |
+| Agent-facing context commands | Done | Natural-task query planning, separate budgets, explicit states, typed two-hop paths, source freshness, bounded trace/affected propagation, and rollback-safe index refresh are implemented and tested. |
 | Repo-local memory object seed corpus | Done | `docs/project_memory/objects/` contains reviewed Project Memory JSON records for Markdown roles, agent context before persistence, Factory V2 boundary, persistence deferral, and the live adapter evaluation gate. |
 | Capture/review/promotion flow | Done | Candidate Review and Promotion v0 prevents raw conversation, notes, and model output from silently becoming accepted Project Memory truth. |
 | Persistence guardrails | Pending | Should keep storage portable, IDs deterministic, fixtures stable, and migration/rewrite behavior explicit before database selection. |
@@ -173,8 +175,8 @@ Future fixture expansion should continue to cover Decision linked to Evidence, A
 | Markdown-to-memory candidate ingestion planning | Done | `RUN_20260712_1030_markdown_memory_ingestion_v0_plan` passed Stage I2 and pack lint. |
 | Markdown-to-memory candidate ingestion implementation | Done | Proposed/asserted Claims, exact provenance, bounded output, observational comparison, review-compatible interchange, and CLI commands are implemented without persistence. |
 | Graph-aware context and trace planning | Done | `RUN_20260718_0721_graph_aware_context_trace_plan` passed Stage I2 and pack lint with hard traversal and explanation budgets. |
-| Graph-aware context and trace implementation | Next | Requires human Go; shared traversal must preserve policy, lifecycle, paths, command compatibility, and the no-persistence boundary. |
-| Live coding adapter evaluation implementation | Pending | Existing pack remains valid after context correctness and source-evidence refresh. |
+| Graph-aware context and trace implementation | Done | Shared traversal preserves policy, lifecycle, typed paths, command compatibility, hard ceilings, and the no-persistence boundary. |
+| Live coding adapter evaluation implementation | Next | Refresh existing pack evidence against the completed context system before human execution review. |
 | First live read-only coding proof | Pending | Requires a separate human-approved live-proof pack after deterministic adapter evaluation selects a first surface. |
 | Second domain proof | Pending | Should prevent Soane from becoming coding-only by proving the same primitives on a non-coding workflow. |
 | Memory provider evaluation | Candidate | Evaluate Supermemory-style providers as external retrieval/context adapters before persistence choices. |
@@ -191,7 +193,7 @@ Do not move Factory V3 work into this repository. Factory V3 remains a separate 
 
 In this roadmap, Factory V2 means the starter-kit process. Factory V3 means the separate newer repository and is not scaffolded here.
 
-The next bounded work is human review and, after explicit Go, implementation of `GCT-V0-001` Graph-Aware Context And Trace. ACR-V1-001 and MMI-V0-001 are implemented and closed. The existing `LCAE-V0-001` pack remains queued behind graph-aware context so live adapter evaluation consumes a more representative context system.
+The next bounded work is refreshing the passed `LCAE-V0-001` planning pack against the completed graph-aware context system, then requesting human Go or No-go. ACR-V1-001, MMI-V0-001, and GCT-V0-001 are implemented and closed.
 
 Define the Project Memory v0 contract before implementation. The CLI should wrap the contract; it should not become the accidental architecture.
 

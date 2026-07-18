@@ -33,6 +33,12 @@ from soane.project_memory.contract import (
     validate_memory_object,
 )
 from soane.project_memory.fixtures import GoldenFixture, load_fixtures
+from soane.project_memory.graph import (
+    GraphTraversalRequest,
+    TraversalDirection,
+    graph_result_payload,
+    traverse_memory,
+)
 from soane.project_memory.markdown_ingestion import (
     MarkdownIngestionRequest,
     compare_markdown_snapshots,
@@ -48,6 +54,20 @@ from soane.project_memory.semantics import AccessContext, ProjectMemory
 
 DEFAULT_FIXTURE_DIR = Path("tests/fixtures/project_memory/golden")
 DEFAULT_MEMORY_DIR = Path("docs/project_memory/objects")
+TRACE_RELATIONSHIPS = frozenset(RelationshipType)
+AFFECTED_RELATIONSHIPS = frozenset(
+    {
+        RelationshipType.SUPPORTS,
+        RelationshipType.CHALLENGES,
+        RelationshipType.DEPENDS_ON,
+        RelationshipType.INVALIDATES,
+        RelationshipType.DERIVED_FROM,
+        RelationshipType.EVIDENCES,
+        RelationshipType.BLOCKS,
+        RelationshipType.ANSWERS,
+        RelationshipType.MAPS_TO,
+    }
+)
 
 
 class CliError(ValueError):
@@ -150,7 +170,26 @@ def _build_parser() -> argparse.ArgumentParser:
     agent_trace_selector.add_argument("--id", dest="object_id", help="memory object ID")
     agent_trace_selector.add_argument("--fixture-key", nargs=2, metavar=("FIXTURE_ID", "KEY"), help="fixture object selector")
     agent_trace_parser.add_argument("--audit", action="store_true", help="inspect without visibility filtering")
-    agent_trace_parser.set_defaults(func=_cmd_agent_trace)
+    agent_trace_parser.add_argument(
+        "--direction",
+        action="append",
+        choices=[item.value for item in TraversalDirection],
+        help="traversal direction; repeatable; defaults to inbound and outbound",
+    )
+    agent_trace_parser.add_argument(
+        "--relationship",
+        action="append",
+        choices=[item.value for item in RelationshipType],
+        help="allowed relationship type; repeatable; defaults to all existing types",
+    )
+    _add_graph_budget_args(agent_trace_parser, depth=1)
+    agent_trace_parser.add_argument(
+        "--current-only",
+        action="store_false",
+        dest="include_non_current",
+        help="exclude proposed, stale, superseded, and other non-current objects",
+    )
+    agent_trace_parser.set_defaults(func=_cmd_agent_trace, include_non_current=True)
 
     agent_affected_parser = _add_access_args(
         _add_memory_source_args(
@@ -160,6 +199,7 @@ def _build_parser() -> argparse.ArgumentParser:
         )
     )
     agent_affected_parser.add_argument("--path", required=True, help="source path to match against provenance refs")
+    _add_graph_budget_args(agent_affected_parser, depth=2)
     agent_affected_parser.set_defaults(func=_cmd_agent_affected)
 
     review_parser = _add_fixture_args(subparsers.add_parser("review-candidate", help="review one candidate object"))
@@ -258,6 +298,14 @@ def _add_context_args(parser: argparse.ArgumentParser) -> argparse.ArgumentParse
     return parser
 
 
+def _add_graph_budget_args(parser: argparse.ArgumentParser, *, depth: int) -> argparse.ArgumentParser:
+    parser.add_argument("--depth", type=int, default=depth, help="maximum traversal depth")
+    parser.add_argument("--object-limit", type=int, default=32, help="maximum selected memory objects")
+    parser.add_argument("--path-limit", type=int, default=2, help="maximum proof paths per object")
+    parser.add_argument("--edge-limit", type=int, default=256, help="maximum examined relationship edges")
+    return parser
+
+
 def _cmd_validate(args: argparse.Namespace) -> dict[str, Any]:
     fixtures, memory = _load_project_memory(args)
     return {
@@ -353,15 +401,37 @@ def _cmd_agent_trace(args: argparse.Namespace) -> dict[str, Any]:
     object_id = args.object_id
     if args.fixture_key:
         object_id = _object_id_for_fixture_key(fixtures, args.fixture_key[0], args.fixture_key[1])
-    memory_object = memory.inspect(object_id) if args.audit else memory.get(object_id, _access_context(args))
+    access = _access_context(args)
+    memory_object = memory.inspect(object_id) if args.audit else memory.get(object_id, access)
     if memory_object is None:
         raise CliError(f"memory object is not visible or does not exist: {object_id}")
+    graph = traverse_memory(
+        memory,
+        GraphTraversalRequest(
+            seed_object_ids=(object_id,),
+            access=_audit_graph_access(access) if args.audit else access,
+            directions=frozenset(
+                TraversalDirection(item)
+                for item in (args.direction or [item.value for item in TraversalDirection])
+            ),
+            relationship_types=frozenset(
+                RelationshipType(item)
+                for item in (args.relationship or [item.value for item in TRACE_RELATIONSHIPS])
+            ),
+            max_depth=args.depth,
+            object_limit=args.object_limit,
+            path_limit_per_object=args.path_limit,
+            examined_edge_limit=args.edge_limit,
+            include_non_current=args.include_non_current,
+        ),
+    )
     return {
         "ok": True,
         "command": "agent-trace",
         "object": _memory_object_summary(memory_object),
-        "outgoing": _outgoing_relationship_summary(memory, memory_object, _access_context(args), audit=args.audit),
-        "incoming": _incoming_relationship_summary(memory, memory_object.id, _access_context(args), audit=args.audit),
+        "outgoing": _outgoing_relationship_summary(memory, memory_object, access, audit=args.audit),
+        "incoming": _incoming_relationship_summary(memory, memory_object.id, access, audit=args.audit),
+        "graph": graph_result_payload(graph),
     }
 
 
@@ -369,14 +439,37 @@ def _cmd_agent_affected(args: argparse.Namespace) -> dict[str, Any]:
     _, memory = _load_project_memory(args)
     access = _access_context(args)
     source_path = _normalize_source_ref(args.path)
-    affected = []
-    for memory_object in memory.visible_objects(access):
+    direct_seed_ids = []
+    for memory_object in sorted(
+        memory.visible_objects(access),
+        key=lambda item: (item.status.value, item.type.value, item.title, item.id),
+    ):
         refs = {
             _normalize_source_ref(ref)
             for ref in (*memory_object.provenance.source_refs, *memory_object.provenance.derivation_refs)
         }
         if source_path in refs:
-            affected.append(_memory_object_summary(memory_object))
+            direct_seed_ids.append(memory_object.id)
+    graph = traverse_memory(
+        memory,
+        GraphTraversalRequest(
+            seed_object_ids=tuple(direct_seed_ids),
+            access=access,
+            directions=frozenset({TraversalDirection.INBOUND}),
+            relationship_types=AFFECTED_RELATIONSHIPS,
+            max_depth=args.depth,
+            object_limit=args.object_limit,
+            path_limit_per_object=args.path_limit,
+            examined_edge_limit=args.edge_limit,
+            include_non_current=True,
+        ),
+    )
+    affected = []
+    for selection in graph.selections:
+        summary = _memory_object_summary(selection.object)
+        summary["matched_by"] = "source_ref" if selection.depth == 0 else "relationship_path"
+        summary["depth"] = selection.depth
+        affected.append(summary)
     return {
         "ok": True,
         "command": "agent-affected",
@@ -384,6 +477,7 @@ def _cmd_agent_affected(args: argparse.Namespace) -> dict[str, Any]:
         "markdown_role": markdown_role_for_source(source_path).value,
         "affected_count": len(affected),
         "objects": affected,
+        "graph": graph_result_payload(graph),
     }
 
 
@@ -518,6 +612,13 @@ def _context_request(args: argparse.Namespace, fixtures: Sequence[GoldenFixture]
 def _access_context(args: argparse.Namespace) -> AccessContext:
     scopes = tuple(scope for scope in (args.scope or ["project"]) if scope)
     return AccessContext(scopes=scopes, include_suppressed=args.include_suppressed)
+
+
+def _audit_graph_access(access: AccessContext) -> AccessContext:
+    return AccessContext(
+        scopes=tuple(dict.fromkeys((*access.scopes, "project_reviewer", "suppressed_audit"))),
+        include_suppressed=True,
+    )
 
 
 def _object_id_for_fixture_key(fixtures: Sequence[GoldenFixture], fixture_id: str, key: str) -> str:

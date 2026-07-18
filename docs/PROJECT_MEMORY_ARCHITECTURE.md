@@ -812,6 +812,8 @@ Implemented v0 foundations now define:
 - proposed/asserted Claim candidate validation
 - deterministic canonical-Markdown prose ingestion with exact source anchors and fingerprints
 - observational source-snapshot comparison and agent-facing ingestion commands
+- storage-neutral typed relationship traversal with bounded inbound/outbound paths, per-hop visibility, lifecycle-aware ordering, cycle handling, and explicit work/output ceilings
+- graph-aware `agent-context`, `agent-trace`, and `agent-affected` commands over authored Project Memory relationships
 
 The following accepted semantic extensions remain incomplete:
 
@@ -821,7 +823,7 @@ The following accepted semantic extensions remain incomplete:
 - Delegation representation beyond external Authority References
 - authored-authority and curated-round-trip reconciliation
 
-The first import path now creates reviewable proposed/asserted Claim candidates from bounded canonical prose without silent promotion. Constitutional ingestion, structured Markdown extraction, durable source tracking, automatic lifecycle propagation, and round-trip write-back remain pending.
+The first import path now creates reviewable proposed/asserted Claim candidates from bounded canonical prose without silent promotion. Those Claims and reviewed memory can participate in read-only, explained traversal without changing lifecycle or epistemic status. Constitutional ingestion, structured Markdown extraction, durable source tracking, automatic lifecycle propagation, and round-trip write-back remain pending.
 
 V1 should not define:
 
@@ -845,7 +847,7 @@ The original readiness criteria remain satisfied for the v0 prototype as impleme
 - canonical Markdown generation rules are bounded
 - non-goals remain explicit
 
-The v0 implementation proved memory object modeling, traceability, candidate review, context assembly, bounded Markdown-to-Claim ingestion, observational source comparison, and agent-facing commands before durable persistence. It does not yet enforce the remaining semantic extensions listed above.
+The v0 implementation proved memory object modeling, traceability, candidate review, context assembly, bounded Markdown-to-Claim ingestion, observational source comparison, typed two-hop relationship traversal, source-impact propagation, and agent-facing commands before durable persistence. It does not yet enforce the remaining semantic extensions listed above.
 
 ## Remaining Questions
 
@@ -855,7 +857,7 @@ The v0 implementation proved memory object modeling, traceability, candidate rev
 - What policy and identity references are required before Knowledge Scope promotion can be implemented?
 - Which Factory V2 run artifacts should be imported into Project Memory first?
 - How should Markdown source changes mark linked memory objects stale or affected?
-- What bounded typed-relationship traversal is useful for agent context without causing graph explosion?
+- Which authored relationship gaps and command-level traversal policies should be refined from measured agent use?
 - Which context access patterns must be proven before persistence architecture begins?
 
 ## Architecture Decision

@@ -2,6 +2,9 @@
 
 ## 2026-07-18
 
+- Recorded human Go and implemented `GCT-V0-001` with a shared storage-neutral traversal service, typed inbound/outbound shortest paths, per-hop visibility, explicit non-current inclusion, deterministic cycle and alternate-path handling, and hard depth/object/path/edge/output ceilings.
+- Integrated graph traversal into `agent-context`, added bounded controls and additive graph output to `agent-trace`, and added exact-source direct/propagated explanations to `agent-affected` without persistence, inferred edges, code graphs, new relationship types, or memory mutation.
+- Added realistic proposed/asserted Claim, hidden-bridge, direction, lifecycle, cycle, alternate-path, exclusion-taxonomy, budget, CLI compatibility, and unmatched-source coverage; 30 focused tests and 153 full repository tests passed before closeout.
 - Added planning-only Factory run `RUN_20260718_0721_graph_aware_context_trace_plan` for `GCT-V0-001`; Stage A through I2 and final pack lint passed.
 - Locked a storage-neutral two-hop traversal contract with typed inbound/outbound paths, per-hop visibility, explicit non-current inclusion, deterministic cycle and alternate-path handling, hard object/path/edge/output ceilings, and opaque exclusions.
 - Planned shared integration with `agent-context`, `agent-trace`, and `agent-affected`, including a fixed MMI-style proposed Claim graph and no expansion into persistence, inferred edges, code graphs, new relationship types, external providers, UI, or automatic truth mutation.

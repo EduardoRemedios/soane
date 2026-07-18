@@ -19,11 +19,18 @@ The pack should define:
 
 ## Execution Contract
 
-Execution Mode: PLANNING_ONLY
+Execution Mode: EXECUTION_ENABLED
 
-Execution Authorization: Not granted; explicit human Go is required after Stage I2.
+Execution Authorization: Human Go in the current Codex conversation on 2026-07-18.
 
 Downstream Fan-Out: NOT_APPROVED
+
+## Execution Authorization Addendum
+
+- Human decision: Go
+- Recorded: 2026-07-18
+- Authorized envelope: `pack/SPRINT_20260718_001_ENVELOPE.md`
+- Scope change: none
 
 ## Scope
 

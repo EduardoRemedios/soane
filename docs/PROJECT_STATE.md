@@ -20,9 +20,10 @@ Implementation:
 - Project Memory thin TUI at `soane/project_memory/tui.py`
 - Project Memory context assembly and Markdown mapping at `soane/project_memory/context.py`
 - Project Memory agent-facing context bundle service at `soane/project_memory/agent_context.py`
+- Project Memory bounded typed graph traversal service at `soane/project_memory/graph.py`
 - shared Markdown role and authority-mode vocabulary at `soane/project_memory/markdown_roles.py`
 - deterministic Markdown-to-Claim candidate ingestion and source comparison at `soane/project_memory/markdown_ingestion.py`
-- Agent context v1 bounded query planning, fail-closed selection states, one-hop relationship expansion, source freshness reporting, and truthful refresh states
+- Agent context bounded query planning, fail-closed selection states, typed two-hop relationship expansion, source freshness reporting, graph paths, and truthful refresh states
 - Project Memory repo-local reviewed object seed corpus at `docs/project_memory/objects/`
 - Project Memory golden fixture loader at `soane/project_memory/fixtures.py`
 - Project Memory local semantics layer at `soane/project_memory/semantics.py`
@@ -42,6 +43,7 @@ Implementation:
 - thin TUI tests at `tests/test_project_memory_tui.py`
 - context assembly and Markdown mapping tests at `tests/test_project_memory_context.py`
 - agent-facing context bundle tests at `tests/test_project_memory_agent_context.py`
+- typed graph traversal tests at `tests/test_project_memory_graph_traversal.py`
 - Markdown-to-Claim ingestion tests at `tests/test_project_memory_markdown_ingestion.py`
 - atomic Factory context-index rebuild tests at `tests/test_factory_context_index_atomic.py`
 - golden fixture tests at `tests/test_project_memory_fixtures.py`
@@ -134,12 +136,12 @@ In this repository, `docs/Factory/` means the Factory V2 starter-kit scaffold. I
 
 Factory V3 remains separate in its own repository and should continue to own mission governance.
 
-Project Memory is constitutionally the governed system of record for the Workspace's current Project understanding, not the ultimate authority for external reality or source-system records. Proposed/asserted Claim candidates and bounded canonical-Markdown ingestion now have runtime representation. Decision Review, wider Knowledge Scope, bounded Delegation, memory rights enforcement, epistemic elevation, and Markdown round trips remain deferred.
+Project Memory is constitutionally the governed system of record for the Workspace's current Project understanding, not the ultimate authority for external reality or source-system records. Proposed/asserted Claim candidates, bounded canonical-Markdown ingestion, and typed two-hop relationship traversal now have runtime representation. Decision Review, wider Knowledge Scope, bounded Delegation, memory rights enforcement, epistemic elevation, and Markdown round trips remain deferred.
 
 ## What Does Not Exist Yet
 
 - product UI
-- full Project Memory implementation beyond v0 local contract, semantics, context, adapter twins, CLI/TUI, candidate review, agent-facing context commands, and the reviewed repo-local seed corpus
+- full Project Memory implementation beyond v0 local contract, semantics, context, typed traversal, adapter twins, CLI/TUI, candidate review, agent-facing context commands, and the reviewed repo-local seed corpus
 - Claim epistemic transitions beyond proposed/asserted candidates, Decision Review, Knowledge Scope promotion, bounded Delegation records, or authored/curated Markdown reconciliation
 - full Thinking Engine implementation beyond Intake v0, Socratic Discovery v0, Coding Proof Harness v0, Coding Harness Workflow v0, and Brownfield multi-repo coding proof behavior
 - Workspace Shell implementation
@@ -160,6 +162,7 @@ bash scripts/knowledge_lint.sh
 ./scripts/factoryctl pack-lint --run RUN_20260701_0848_project_memory_v0_plan
 python3 -m unittest tests/test_project_memory_contract.py tests/test_project_memory_fixtures.py tests/test_project_memory_semantics.py tests/test_project_memory_context.py
 python3 -m unittest tests/test_project_memory_agent_context.py
+python3 -m unittest tests/test_project_memory_graph_traversal.py
 python3 -m unittest tests/test_project_memory_markdown_ingestion.py
 python3 -m unittest tests/test_factory_context_index_atomic.py
 python3 -m unittest tests/test_project_memory_adapter_twins.py
@@ -182,6 +185,7 @@ python3 -m unittest tests/test_context_recall_repair.py
 ./scripts/factoryctl pack-lint --run RUN_20260712_0909_agent_context_relevance_v1_plan
 ./scripts/factoryctl pack-lint --run RUN_20260712_1011_vision_epistemic_hardening
 ./scripts/factoryctl pack-lint --run RUN_20260712_1030_markdown_memory_ingestion_v0_plan
+./scripts/factoryctl pack-lint --run RUN_20260718_0721_graph_aware_context_trace_plan
 python3 scripts/agent_loop_bridge_validate.py tests/fixtures/agent_loop_bridge/valid_handoff.json --json
 ```
 
@@ -227,6 +231,7 @@ cat docs/Factory/runs/RUN_20260701_1548_coding_proof_harness_v0_plan/VALIDATION_
 cat docs/Factory/runs/RUN_20260702_0617_coding_harness_workflow_v0_plan/VALIDATION_CLOSEOUT_REPORT.md
 cat docs/Factory/runs/RUN_20260705_0747_brownfield_multi_repo_coding_proof_plan/VALIDATION_CLOSEOUT_REPORT.md
 cat docs/Factory/runs/RUN_20260712_1030_markdown_memory_ingestion_v0_plan/VALIDATION_CLOSEOUT_REPORT.md
+cat docs/Factory/runs/RUN_20260718_0721_graph_aware_context_trace_plan/VALIDATION_CLOSEOUT_REPORT.md
 ```
 
 ## Active Boundary Decisions
@@ -288,5 +293,6 @@ cat docs/Factory/runs/RUN_20260712_1030_markdown_memory_ingestion_v0_plan/VALIDA
 - `ACR-V1-001` is implemented with bounded natural-task query planning, separate document and memory budgets, fail-closed zero-match behavior, explicit broad versus seeded lower-level context, one-hop allowlisted relationship expansion, lifecycle-aware ranking, observational source freshness, SQLite-owned rebuild serialization, rollback-safe publication, explicit selection/refresh states, 14 new tests, and validation closeout.
 - `RUN_20260712_1030_markdown_memory_ingestion_v0_plan`: Factory V2 pack for `MMI-V0-001`. Status: `PASS`; execution enabled after human Go on 2026-07-12; pack lint passed.
 - `MMI-V0-001` is implemented with proposed/asserted Claim validation, shared Markdown role and authority-mode vocabulary, repository-contained canonical prose extraction, exact anchors and fingerprints, bounded output, observational source comparison, fail-closed duplicate handling, review-compatible interchange, and thin CLI commands.
-- `RUN_20260718_0721_graph_aware_context_trace_plan`: Factory V2 `PLANNING_ONLY` pack for `GCT-V0-001`. Status: `PASS`; Stage A through I2 and final pack lint passed with direction-aware typed paths, per-hop visibility, lifecycle ordering, cycle handling, hard traversal/output ceilings, additive command integration, and a realistic MMI-style Claim graph.
-- Next roadmap step: human Go or No-go review for `GCT-V0-001`; implementation remains unauthorized while the run is `PLANNING_ONLY`. `LCAE-V0-001` remains queued after graph-aware context unless a later approved roadmap decision changes the order.
+- `RUN_20260718_0721_graph_aware_context_trace_plan`: Factory V2 pack for `GCT-V0-001`. Status: `PASS`; execution enabled after human Go on 2026-07-18; Stage A through I2 and final pack lint passed.
+- `GCT-V0-001` is implemented with storage-neutral direction-aware traversal, typed shortest paths, per-hop visibility, explicit non-current inclusion, deterministic cycle/alternate-path handling, hard object/path/edge/output ceilings, opaque exclusions, shared agent-context expansion, bounded trace controls, and exact-source affected-by propagation. Validation closeout passed with 30 focused and 153 full repository tests.
+- Next roadmap step: refresh the passed `LCAE-V0-001` pack against current source/context evidence, then request human Go or No-go for deterministic adapter evaluation. No live provider calls are authorized.

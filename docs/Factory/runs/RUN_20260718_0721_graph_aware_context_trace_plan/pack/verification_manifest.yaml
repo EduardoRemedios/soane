@@ -1,0 +1,60 @@
+schema_version: 1
+run_id: RUN_20260718_0721_graph_aware_context_trace_plan
+sprint_id: SPRINT_20260718_001
+execution_mode: EXECUTION_ENABLED
+
+checks:
+  - id: VM-001
+    tier: V2
+    type: test
+    constraint_ids: [VC-01, VC-02, VC-03, VC-04, VC-05, VC-06, VC-07, VC-08, VC-09, VC-10, VC-11, VC-12, VC-14]
+    description: Focused graph traversal and agent command verification.
+    command: python3 -m unittest tests.test_project_memory_graph_traversal tests.test_project_memory_agent_context
+    expected: Command exits 0.
+    halt_on_failure: true
+    evidence_path: docs/Factory/runs/RUN_20260718_0721_graph_aware_context_trace_plan/VALIDATION_CLOSEOUT_REPORT.md
+  - id: VM-002
+    tier: V3
+    type: test
+    constraint_ids: [VC-08, VC-15]
+    description: Full repository regression suite.
+    command: python3 -m unittest discover -s tests
+    expected: Command exits 0.
+    halt_on_failure: true
+    evidence_path: docs/Factory/runs/RUN_20260718_0721_graph_aware_context_trace_plan/VALIDATION_CLOSEOUT_REPORT.md
+  - id: VM-003
+    tier: V1
+    type: command
+    constraint_ids: [VC-13, VC-15]
+    description: Canonical knowledge lint.
+    command: bash scripts/knowledge_lint.sh
+    expected: Command exits 0.
+    halt_on_failure: true
+    evidence_path: docs/Factory/runs/RUN_20260718_0721_graph_aware_context_trace_plan/VALIDATION_CLOSEOUT_REPORT.md
+  - id: VM-004
+    tier: V1
+    type: command
+    constraint_ids: [VC-15]
+    description: Context index refresh.
+    command: ./scripts/factoryctl context-index
+    expected: Command exits 0.
+    halt_on_failure: true
+    evidence_path: docs/Factory/runs/RUN_20260718_0721_graph_aware_context_trace_plan/VALIDATION_CLOSEOUT_REPORT.md
+  - id: VM-005
+    tier: V1
+    type: command
+    constraint_ids: [VC-15]
+    description: Executed Factory pack lint.
+    command: ./scripts/factoryctl pack-lint --run RUN_20260718_0721_graph_aware_context_trace_plan
+    expected: Command exits 0.
+    halt_on_failure: true
+    evidence_path: docs/Factory/runs/RUN_20260718_0721_graph_aware_context_trace_plan/VALIDATION_CLOSEOUT_REPORT.md
+  - id: VM-006
+    tier: V1
+    type: command
+    constraint_ids: [VC-13, VC-15]
+    description: Diff whitespace and scope hygiene.
+    command: git diff --check
+    expected: Command exits 0 and changed paths remain inside the envelope.
+    halt_on_failure: true
+    evidence_path: docs/Factory/runs/RUN_20260718_0721_graph_aware_context_trace_plan/VALIDATION_CLOSEOUT_REPORT.md

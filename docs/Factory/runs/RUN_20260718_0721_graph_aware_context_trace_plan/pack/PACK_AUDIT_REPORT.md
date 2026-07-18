@@ -66,9 +66,17 @@ Real Project Memory relationships may be sparse or directionally inconsistent. T
 
 ## Final Notes
 
-The pack is ready for human Go or No-go review. It remains `PLANNING_ONLY`, so no implementation or execution prompt is authorized yet.
+At Stage I2 the pack was ready for human Go or No-go review and remained `PLANNING_ONLY`. The authorization addendum below records the later transition without changing the audit verdict.
 
 ## Sign-off
 
 - Purple Reviewer: Codex Factory Purple Gate
 - Date: 2026-07-18
+
+## Execution Authorization Addendum
+
+- Human Go: recorded 2026-07-18
+- Execution Mode: `EXECUTION_ENABLED`
+- Verification manifest: present
+- Scope change: none
+- Audit verdict change: none
