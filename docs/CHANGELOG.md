@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-07-20
+
+- Added `RUN_20260720_0708_live_coding_adapter_eval_refresh`, a new audit-preserving `PLANNING_ONLY` refresh of `LCAE-V0-001`; Stage A through I2 and final pack lint passed.
+- Revalidated current official Codex, Cursor, OpenAI SDK, and OpenAI Agents SDK evidence without invoking providers or inspecting credentials, configuration, installed versions, or sessions.
+- Removed the prior expected-Codex winner bias; locked hard gates before scoring, deterministic no-recommendation behavior, exact source/access-date evidence, and implementation-time source revalidation.
+- Recorded the material contradiction in official Cursor CLI headless write-control documentation and made `source_contradiction` and `hard_read_only_unproven` non-compensable blockers.
+- Required the deterministic evaluator to consume existing agent-context and graph explanations instead of creating a parallel repository scanner, retrieval path, or memory graph.
+- Kept live calls, provider imports, credential/config/session reads, dependency installation, network access, external repository operations, evaluated-surface mutation, persistence, automatic Project Memory promotion, and Codex SDK evaluation outside the implementation envelope.
+
 ## 2026-07-18
 
 - Recorded human Go and implemented `GCT-V0-001` with a shared storage-neutral traversal service, typed inbound/outbound shortest paths, per-hop visibility, explicit non-current inclusion, deterministic cycle and alternate-path handling, and hard depth/object/path/edge/output ceilings.

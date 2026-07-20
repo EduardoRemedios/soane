@@ -2,7 +2,7 @@
 
 > Purpose: Current source of truth for the Soane repository state.
 >
-> Last updated: 2026-07-18
+> Last updated: 2026-07-20
 
 ## Current Identity
 
@@ -125,6 +125,9 @@ Planning outputs:
 - `docs/Factory/runs/RUN_20260712_1011_vision_epistemic_hardening/VALIDATION_CLOSEOUT_REPORT.md`
 - `docs/Factory/runs/RUN_20260712_1030_markdown_memory_ingestion_v0_plan/`
 - `docs/Factory/runs/RUN_20260712_1030_markdown_memory_ingestion_v0_plan/VALIDATION_CLOSEOUT_REPORT.md`
+- `docs/Factory/runs/RUN_20260718_0721_graph_aware_context_trace_plan/`
+- `docs/Factory/runs/RUN_20260718_0721_graph_aware_context_trace_plan/VALIDATION_CLOSEOUT_REPORT.md`
+- `docs/Factory/runs/RUN_20260720_0708_live_coding_adapter_eval_refresh/`
 
 ## Current Architectural Posture
 
@@ -295,4 +298,6 @@ cat docs/Factory/runs/RUN_20260718_0721_graph_aware_context_trace_plan/VALIDATIO
 - `MMI-V0-001` is implemented with proposed/asserted Claim validation, shared Markdown role and authority-mode vocabulary, repository-contained canonical prose extraction, exact anchors and fingerprints, bounded output, observational source comparison, fail-closed duplicate handling, review-compatible interchange, and thin CLI commands.
 - `RUN_20260718_0721_graph_aware_context_trace_plan`: Factory V2 pack for `GCT-V0-001`. Status: `PASS`; execution enabled after human Go on 2026-07-18; Stage A through I2 and final pack lint passed.
 - `GCT-V0-001` is implemented with storage-neutral direction-aware traversal, typed shortest paths, per-hop visibility, explicit non-current inclusion, deterministic cycle/alternate-path handling, hard object/path/edge/output ceilings, opaque exclusions, shared agent-context expansion, bounded trace controls, and exact-source affected-by propagation. Validation closeout passed with 30 focused and 153 full repository tests.
-- Next roadmap step: refresh the passed `LCAE-V0-001` pack against current source/context evidence, then request human Go or No-go for deterministic adapter evaluation. No live provider calls are authorized.
+- `RUN_20260720_0708_live_coding_adapter_eval_refresh`: refreshed `PLANNING_ONLY` Factory pack for `LCAE-V0-001`. Status: `PASS`; Stage A through I2 and final pack lint passed.
+- The refresh removes the prior expected-winner bias, reuses existing agent-context and graph contracts, makes official-source contradictions non-compensable blockers, and keeps provider calls, credential/config/session inspection, dependency installation, network access, external repository operations, and evaluated-surface mutation out of scope.
+- Next roadmap gate: explicit human Go or No-go for deterministic `LCAE-V0-001` implementation. No implementation or live provider use is authorized by the planning refresh.

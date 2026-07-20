@@ -2,7 +2,7 @@
 
 > Purpose: Track near-term Soane repository work.
 >
-> Last updated: 2026-07-18
+> Last updated: 2026-07-20
 
 ## Completed
 
@@ -38,6 +38,7 @@
 | Markdown-to-memory candidate ingestion implementation | Done | `soane/project_memory/markdown_ingestion.py`, `soane/project_memory/markdown_roles.py`, `tests/test_project_memory_markdown_ingestion.py`, `docs/Factory/runs/RUN_20260712_1030_markdown_memory_ingestion_v0_plan/VALIDATION_CLOSEOUT_REPORT.md` |
 | Graph-aware context and trace planning | Done | `docs/Factory/runs/RUN_20260718_0721_graph_aware_context_trace_plan/` |
 | Graph-aware context and trace implementation | Done | `soane/project_memory/graph.py`, `soane/project_memory/agent_context.py`, `soane/project_memory/cli.py`, `tests/test_project_memory_graph_traversal.py`, `docs/Factory/runs/RUN_20260718_0721_graph_aware_context_trace_plan/VALIDATION_CLOSEOUT_REPORT.md` |
+| Live coding adapter evaluation planning refresh | Done | `docs/Factory/runs/RUN_20260720_0708_live_coding_adapter_eval_refresh/` |
 
 ## Sequence
 
@@ -76,13 +77,14 @@
 | 31 | Markdown-to-memory candidate ingestion implementation | Done | Added Claim candidate validation, shared Markdown vocabulary, path-safe canonical prose ingestion, bounded snapshots/output, deterministic comparison, review-compatible interchange, and CLI commands without persistence or automatic promotion. |
 | 32 | Graph-aware context and trace planning | Done | `RUN_20260718_0721_graph_aware_context_trace_plan` passed Stage A through I2 and final pack lint with typed paths, per-hop policy, hard work ceilings, command integration, and realistic Claim-graph verification. |
 | 33 | Graph-aware context and trace implementation | Done | Added shared typed traversal, hard work ceilings, graph-aware context, bounded trace, exact-source affected-by propagation, realistic Claim proof, and validation closeout. |
-| 34 | Live coding adapter evaluation implementation | Next | Refresh the existing `LCAE-V0-001` pack against current source/context evidence, then request human Go. No live provider calls. |
-| 35 | First live read-only coding proof | Pending | Run only after `LCAE-V0-001` selects a first surface and a separate human-approved live-proof pack defines auth, sandbox, read-only scope, output capture, evidence capture, and rollback/stop rules. |
-| 36 | Second domain proof selection | Pending | Select a non-coding proof domain so Workspace primitives are not overfit to software repositories. |
-| 37 | Memory provider evaluation | Pending | Evaluate external retrieval/context adapters, not canonical Project Memory. |
-| 38 | Project Memory persistence architecture | Pending | Define persistence after relevance, ingestion, traversal, provider, and live-proof evidence clarifies durable access and mutation patterns. |
-| 39 | Workspace Shell architecture | Pending | Define the product shell after workflow, integration, memory, and second-domain requirements are clearer. |
-| 40 | First product surface prototype | Pending | Build only after the memory, thinking, workflow, adapter, and shell boundaries support a real workflow. |
+| 34 | Live coding adapter evaluation planning refresh | Done | `RUN_20260720_0708_live_coding_adapter_eval_refresh` passed Stage A through I2 and final pack lint with current official-source evidence, hard contradiction gates, existing context reuse, and no-touch verification. |
+| 35 | Live coding adapter evaluation implementation | Next | Await explicit human Go or No-go for the refreshed `LCAE-V0-001` deterministic fixture-only evaluator. No live provider calls. |
+| 36 | First live read-only coding proof | Pending | Run only after `LCAE-V0-001` selects a first surface and a separate human-approved live-proof pack defines auth, sandbox, read-only scope, output capture, evidence capture, and rollback/stop rules. |
+| 37 | Second domain proof selection | Pending | Select a non-coding proof domain so Workspace primitives are not overfit to software repositories. |
+| 38 | Memory provider evaluation | Pending | Evaluate external retrieval/context adapters, not canonical Project Memory. |
+| 39 | Project Memory persistence architecture | Pending | Define persistence after relevance, ingestion, traversal, provider, and live-proof evidence clarifies durable access and mutation patterns. |
+| 40 | Workspace Shell architecture | Pending | Define the product shell after workflow, integration, memory, and second-domain requirements are clearer. |
+| 41 | First product surface prototype | Pending | Build only after the memory, thinking, workflow, adapter, and shell boundaries support a real workflow. |
 
 ## Decision Gates
 
@@ -97,7 +99,7 @@
 
 ## Immediate Next Move
 
-Refresh the existing planning pack for:
+Request explicit human Go or No-go for the refreshed planning pack:
 
 `LCAE-V0-001` Live Coding Adapter Evaluation
 
@@ -112,12 +114,13 @@ Recent implementation evidence:
 Current state:
 
 - Agent-facing context v1: implemented and validation closeout passed.
-- Live coding adapter evaluation planning: complete but requires current source/context evidence before execution review.
+- Live coding adapter evaluation planning refresh: complete; Stage A through I2 and pack lint passed.
 - `ACR-V1-001` planning and implementation: complete.
 - Vision and epistemic model hardening: doctrine accepted; runtime representation remains deferred.
 - `MMI-V0-001` planning and implementation: complete; validation closeout passed.
 - `GCT-V0-001` planning and implementation: complete; validation closeout passed.
-- Next work: refresh `LCAE-V0-001`, confirm its no-live-call and no-credential-read boundaries against current code, and request human Go or No-go.
+- Current official Cursor CLI sources conflict on headless write behavior, so the refreshed pack treats contradiction and unproven hard read-only controls as blockers.
+- Next work after human Go: implement the deterministic fixture-only evaluator with existing agent-context input, hard gates before scoring, and no provider or credential access.
 
 The adapter evaluation slice remains local and deterministic. It must not make live provider calls, read credentials, install dependencies, mutate repositories, add persistence, or promote Provider Invocation candidates automatically.
 
@@ -176,7 +179,8 @@ Future fixture expansion should continue to cover Decision linked to Evidence, A
 | Markdown-to-memory candidate ingestion implementation | Done | Proposed/asserted Claims, exact provenance, bounded output, observational comparison, review-compatible interchange, and CLI commands are implemented without persistence. |
 | Graph-aware context and trace planning | Done | `RUN_20260718_0721_graph_aware_context_trace_plan` passed Stage I2 and pack lint with hard traversal and explanation budgets. |
 | Graph-aware context and trace implementation | Done | Shared traversal preserves policy, lifecycle, typed paths, command compatibility, hard ceilings, and the no-persistence boundary. |
-| Live coding adapter evaluation implementation | Next | Refresh existing pack evidence against the completed context system before human execution review. |
+| Live coding adapter evaluation planning refresh | Done | `RUN_20260720_0708_live_coding_adapter_eval_refresh` passed Stage I2 and pack lint with current source, context reuse, hard blocker, and no-touch contracts. |
+| Live coding adapter evaluation implementation | Next | Await explicit human Go or No-go for deterministic fixture-only implementation. |
 | First live read-only coding proof | Pending | Requires a separate human-approved live-proof pack after deterministic adapter evaluation selects a first surface. |
 | Second domain proof | Pending | Should prevent Soane from becoming coding-only by proving the same primitives on a non-coding workflow. |
 | Memory provider evaluation | Candidate | Evaluate Supermemory-style providers as external retrieval/context adapters before persistence choices. |
@@ -193,7 +197,7 @@ Do not move Factory V3 work into this repository. Factory V3 remains a separate 
 
 In this roadmap, Factory V2 means the starter-kit process. Factory V3 means the separate newer repository and is not scaffolded here.
 
-The next bounded work is refreshing the passed `LCAE-V0-001` planning pack against the completed graph-aware context system, then requesting human Go or No-go. ACR-V1-001, MMI-V0-001, and GCT-V0-001 are implemented and closed.
+The next gate is explicit human Go or No-go for the refreshed `LCAE-V0-001` deterministic implementation pack. The refresh is complete; ACR-V1-001, MMI-V0-001, and GCT-V0-001 are implemented and closed.
 
 Define the Project Memory v0 contract before implementation. The CLI should wrap the contract; it should not become the accidental architecture.
 
