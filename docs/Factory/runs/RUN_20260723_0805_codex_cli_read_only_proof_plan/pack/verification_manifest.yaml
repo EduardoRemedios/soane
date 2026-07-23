@@ -1,0 +1,69 @@
+schema_version: 1
+run_id: RUN_20260723_0805_codex_cli_read_only_proof_plan
+sprint_id: CLR-V0-001
+execution_mode: EXECUTION_ENABLED
+
+checks:
+  - id: VM-001
+    tier: V2
+    type: test
+    constraint_ids: [VC-001, VC-002, VC-003, VC-004, VC-005, VC-006, VC-007, VC-008, VC-009, VC-010, VC-011, VC-012, VC-013, VC-014, VC-015, VC-016, VC-017, VC-018, VC-019, VC-020]
+    description: Focused offline proof-core, runner, credential, workflow, and receipt verification.
+    command: /usr/local/bin/python3.12 -m unittest tests/test_thinking_engine_codex_read_only_proof.py
+    expected: Command exits 0 without Docker, Codex, provider, credential, or user-state access.
+    halt_on_failure: true
+    evidence_path: docs/Factory/runs/RUN_20260723_0805_codex_cli_read_only_proof_plan/VALIDATION_CLOSEOUT_REPORT.md
+  - id: VM-002
+    tier: V3
+    type: test
+    constraint_ids: [VC-020, VC-027]
+    description: Full repository regression suite.
+    command: /usr/local/bin/python3.12 -m unittest discover -s tests
+    expected: Command exits 0.
+    halt_on_failure: true
+    evidence_path: docs/Factory/runs/RUN_20260723_0805_codex_cli_read_only_proof_plan/VALIDATION_CLOSEOUT_REPORT.md
+  - id: VM-003
+    tier: V1
+    type: command
+    constraint_ids: [VC-001, VC-003, VC-004, VC-007, VC-013, VC-015, VC-027]
+    description: Compile production and test Python.
+    command: /usr/local/bin/python3.12 -m compileall -q soane tests
+    expected: Command exits 0.
+    halt_on_failure: true
+    evidence_path: docs/Factory/runs/RUN_20260723_0805_codex_cli_read_only_proof_plan/VALIDATION_CLOSEOUT_REPORT.md
+  - id: VM-004
+    tier: V1
+    type: command
+    constraint_ids: [VC-014, VC-027]
+    description: Canonical knowledge lint.
+    command: bash scripts/knowledge_lint.sh
+    expected: Command exits 0.
+    halt_on_failure: true
+    evidence_path: docs/Factory/runs/RUN_20260723_0805_codex_cli_read_only_proof_plan/VALIDATION_CLOSEOUT_REPORT.md
+  - id: VM-005
+    tier: V1
+    type: command
+    constraint_ids: [VC-014, VC-027]
+    description: Context index refresh.
+    command: ./scripts/factoryctl context-index
+    expected: Command exits 0.
+    halt_on_failure: true
+    evidence_path: docs/Factory/runs/RUN_20260723_0805_codex_cli_read_only_proof_plan/VALIDATION_CLOSEOUT_REPORT.md
+  - id: VM-006
+    tier: V1
+    type: command
+    constraint_ids: [VC-001, VC-013, VC-019, VC-027]
+    description: Executed Factory pack lint.
+    command: ./scripts/factoryctl pack-lint --run RUN_20260723_0805_codex_cli_read_only_proof_plan
+    expected: Command exits 0 and confirms execution authorization is internally consistent.
+    halt_on_failure: true
+    evidence_path: docs/Factory/runs/RUN_20260723_0805_codex_cli_read_only_proof_plan/VALIDATION_CLOSEOUT_REPORT.md
+  - id: VM-007
+    tier: V1
+    type: command
+    constraint_ids: [VC-005, VC-011, VC-012, VC-020, VC-027]
+    description: Diff whitespace and scope hygiene.
+    command: git diff --check
+    expected: Command exits 0 and changed paths remain inside the envelope.
+    halt_on_failure: true
+    evidence_path: docs/Factory/runs/RUN_20260723_0805_codex_cli_read_only_proof_plan/VALIDATION_CLOSEOUT_REPORT.md

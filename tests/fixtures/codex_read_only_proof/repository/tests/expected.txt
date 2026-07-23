@@ -1,0 +1,1 @@
+reconciliation_currency=EUR

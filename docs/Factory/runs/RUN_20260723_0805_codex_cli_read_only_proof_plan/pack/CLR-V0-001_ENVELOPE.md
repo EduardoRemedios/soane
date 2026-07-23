@@ -2,7 +2,7 @@
 
 ## Version
 
-v3
+v4
 
 ## Change Log
 
@@ -10,6 +10,7 @@ v3
 - v2 (2026-07-23): Added parent-process credential isolation and bounded proxy route.
 - v3 (2026-07-23): Restricted compatibility probes and made live authorization
   atomically single-use.
+- v4 (2026-07-23): Recorded human Go for MS-00 through MS-03 offline implementation.
 
 ## Sprint ID
 
@@ -17,13 +18,12 @@ v3
 
 ## Execution Mode
 
-`PLANNING_ONLY`
+`EXECUTION_ENABLED`
 
-This pack authorizes neither implementation nor provider use. A future human Go may
-authorize MS-00 through MS-03. MS-04 additionally requires a distinct explicit Go
-for the exact one-call provider transition and all authority inputs in the locked
-intent. That transition must have a unique authorization ID consumed atomically
-before process start.
+Human Go was recorded in the current Codex task on 2026-07-23. Authorization is
+limited to MS-00 through MS-03 offline implementation. MS-04 provider use remains
+unapproved and still requires a distinct explicit Go for the exact one-call
+transition and all authority inputs in the locked intent.
 
 ## Objective
 
@@ -155,7 +155,8 @@ refresh/report, and diff checks. Run:
 
 Verification must map VC-001 through VC-027 to test, report, receipt, and live
 evidence paths. `pack/verification_plan.md` and `pack/traceability_matrix.md` are
-normative.
+normative. Execute `pack/verification_manifest.yaml` in order and halt on every
+failed check marked `halt_on_failure: true`.
 
 ## Stop Gates
 

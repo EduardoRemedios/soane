@@ -2,6 +2,21 @@
 
 ## 2026-07-23
 
+- Recorded human Go for `CLR-V0-001` MS-00 through MS-03 and enabled only the
+  offline implementation; MS-04 provider use remains unauthorized.
+- Added a fixed Acorn Ledger fixture, pure Codex read-only proof core, exact command
+  builder, canonical manifests, fixed result validation, bounded JSONL/event
+  policy, credential-form detection, containment-first receipts, and atomic
+  one-use authorization state.
+- Added fail-closed validation for one immutable Docker/OCI topology and one
+  external single-run provider-proxy attestation without building or invoking a
+  runner, proxy, Codex, provider, credential, network client, or user state.
+- Added an offline text/JSON candidate workflow and generated a candidate-only
+  `BLOCKED` receipt naming the missing runner, credential route, CLI compatibility,
+  authority, source, and offline-evidence inputs.
+- Added six implementation-owned fixture files and 14 focused tests; all 182
+  repository tests, compile, knowledge lint, context refresh, pack lint, candidate
+  reproduction, and diff checks passed at closeout.
 - Added `RUN_20260723_0805_codex_cli_read_only_proof_plan`, the `PLANNING_ONLY` Factory pack for `CLR-V0-001`; Stage A through I2 and final pack lint passed.
 - Locked the first live proof to one fixed Codex CLI task, one non-writable fixture, one immutable disposable runner with no Soane/host-state visibility, one exact model, one credential route, one authorization ID, and one terminal no-retry attempt.
 - Corrected two unsafe assumptions during red-team review: a temporary fixture is not a host-read boundary, and model-shell environment filtering does not prevent parent-process credential recovery through procfs, process listings, files, sockets, or diagnostics.

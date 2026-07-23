@@ -1,0 +1,9 @@
+{
+  "schema_version": "clr-offline-input-v1",
+  "runner_attestation": null,
+  "credential_route_attestation": null,
+  "compatibility_evidence": null,
+  "authority_inputs": null,
+  "source_revalidation": null,
+  "offline_checks": {}
+}

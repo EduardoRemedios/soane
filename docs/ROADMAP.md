@@ -40,6 +40,7 @@
 | Graph-aware context and trace implementation | Done | `soane/project_memory/graph.py`, `soane/project_memory/agent_context.py`, `soane/project_memory/cli.py`, `tests/test_project_memory_graph_traversal.py`, `docs/Factory/runs/RUN_20260718_0721_graph_aware_context_trace_plan/VALIDATION_CLOSEOUT_REPORT.md` |
 | Live coding adapter evaluation planning refresh | Done | `docs/Factory/runs/RUN_20260720_0708_live_coding_adapter_eval_refresh/` |
 | First Codex CLI read-only proof planning | Done | `docs/Factory/runs/RUN_20260723_0805_codex_cli_read_only_proof_plan/` |
+| First Codex CLI read-only proof offline implementation | Done | `soane/thinking_engine/codex_read_only_proof.py`, `soane/thinking_engine/codex_read_only_proof_workflow.py`, `tests/test_thinking_engine_codex_read_only_proof.py`, `docs/Factory/runs/RUN_20260723_0805_codex_cli_read_only_proof_plan/VALIDATION_CLOSEOUT_REPORT.md` |
 
 ## Sequence
 
@@ -81,7 +82,7 @@
 | 34 | Live coding adapter evaluation planning refresh | Done | `RUN_20260720_0708_live_coding_adapter_eval_refresh` passed Stage A through I2 and final pack lint with current official-source evidence, hard contradiction gates, existing context reuse, and no-touch verification. |
 | 35 | Live coding adapter evaluation implementation | Done | Implemented the `LCAE-V0-001` fixture-only evaluator with five typed profiles, source-date revalidation, hard gates before scoring, exact existing agent-context input preservation, deterministic text/JSON output, and no provider side effects. |
 | 36 | First Codex CLI read-only proof planning | Done | `RUN_20260723_0805_codex_cli_read_only_proof_plan` passed Stage A through I2 and final pack lint with immutable-runner, credential-isolation, one-use authorization, bounded evidence, and no-retry contracts. |
-| 37 | First Codex CLI read-only proof implementation | Next | After explicit Go, implement MS-00 through MS-03 offline. MS-04 requires a second exact Go after runner, credential, authority, model, spend, source, and compatibility gates pass. |
+| 37 | First Codex CLI read-only proof offline implementation | Done | Implemented MS-00 through MS-03 without Docker, Codex, provider, credential, network, or user-state access and without mutating the proof fixture. The candidate is correctly blocked on missing live evidence and authority inputs. |
 | 38 | Second domain proof selection | Pending | Select a non-coding proof domain so Workspace primitives are not overfit to software repositories. |
 | 39 | Memory provider evaluation | Pending | Evaluate external retrieval/context adapters, not canonical Project Memory. |
 | 40 | Project Memory persistence architecture | Pending | Define persistence after relevance, ingestion, traversal, provider, and live-proof evidence clarifies durable access and mutation patterns. |
@@ -101,9 +102,9 @@
 
 ## Immediate Next Move
 
-Seek explicit implementation Go for:
+Resolve the blocked live-entry prerequisites for:
 
-`CLR-V0-001` Offline Proof Runner And Execution Candidate
+`CLR-V0-001` MS-04 One-Shot Codex CLI Observation
 
 Current evidence:
 
@@ -113,6 +114,9 @@ Current evidence:
 - `soane/thinking_engine/adapter_evaluation_workflow.py`
 - `tests/test_thinking_engine_adapter_evaluation.py`
 - `tests/test_thinking_engine_adapter_evaluation_workflow.py`
+- `soane/thinking_engine/codex_read_only_proof.py`
+- `soane/thinking_engine/codex_read_only_proof_workflow.py`
+- `tests/test_thinking_engine_codex_read_only_proof.py`
 - `docs/Factory/runs/RUN_20260723_0805_codex_cli_read_only_proof_plan/`
 
 Current state:
@@ -127,10 +131,14 @@ Current state:
 - Current official Cursor CLI sources conflict on headless write behavior, so contradiction and unproven hard read-only controls remain non-compensable blockers.
 - `CLR-V0-001` planning is complete; Stage A through I2 and final pack lint passed.
 - The proof must keep Soane and host state outside an immutable disposable runner and keep the real credential outside Codex/model-command visibility. Child environment filtering alone is insufficient because parent-process inspection can recover a direct key.
-- Next work is implementation only after Go: MS-00 through MS-03 create tests, pure proof core, one exact runner/credential-isolation adapter, and an offline execution candidate.
-- MS-04 remains separately gated: one unique authorization ID, one provider attempt, no retry under any outcome.
+- MS-00 through MS-03 offline implementation and closeout are complete; all 182 repository tests pass.
+- The generated candidate is `BLOCKED` on missing observed runner and credential-route attestations, CLI compatibility, source revalidation, authority, model, spend, and complete offline evidence.
+- Next work is to supply those exact non-synthetic inputs without broadening into a reusable runner or proxy platform, regenerate the candidate, and review it.
+- MS-04 remains separately gated: a distinct human Go, one unique authorization ID, one provider attempt, and no retry under any outcome.
 
-No current authorization permits a live provider call, credential or user-state read, dependency install, repository mutation, or automatic Provider Invocation promotion.
+No current authorization permits a live provider call, Docker or Codex invocation,
+credential or user-state read, dependency install, repository mutation, or automatic
+Provider Invocation promotion.
 
 ## Backlog Notes
 
@@ -189,7 +197,7 @@ Future fixture expansion should continue to cover Decision linked to Evidence, A
 | Graph-aware context and trace implementation | Done | Shared traversal preserves policy, lifecycle, typed paths, command compatibility, hard ceilings, and the no-persistence boundary. |
 | Live coding adapter evaluation planning refresh | Done | `RUN_20260720_0708_live_coding_adapter_eval_refresh` passed Stage I2 and pack lint with current source, context reuse, hard blocker, and no-touch contracts. |
 | Live coding adapter evaluation implementation | Done | Five typed source profiles, hard gates, context preservation, deterministic recommendation, CLI, and validation closeout are complete without live provider use. |
-| First live read-only coding proof | Next | Plan a bounded Codex CLI proof in a separate Factory run; no execution until that pack passes and receives explicit human Go. |
+| First live read-only coding proof | Blocked | Offline implementation is complete. Live entry still needs exact runner, credential-route, CLI/source, authority, model, spend, and one-use authorization evidence plus a separate MS-04 Go. |
 | Second domain proof | Pending | Should prevent Soane from becoming coding-only by proving the same primitives on a non-coding workflow. |
 | Memory provider evaluation | Candidate | Evaluate Supermemory-style providers as external retrieval/context adapters before persistence choices. |
 | Project Memory persistence architecture | Candidate | Defer until workflow and provider evidence clarifies durable storage requirements. |
@@ -205,7 +213,10 @@ Do not move Factory V3 work into this repository. Factory V3 remains a separate 
 
 In this roadmap, Factory V2 means the starter-kit process. Factory V3 means the separate newer repository and is not scaffolded here.
 
-The next gate is a separate planning-only Factory run for the first live read-only Codex CLI proof. `LCAE-V0-001`, ACR-V1-001, MMI-V0-001, and GCT-V0-001 are implemented and closed. Planning the proof does not authorize provider execution.
+The first Codex CLI proof pack and its offline implementation are complete.
+`OFFLINE_EXECUTION_CANDIDATE.json` remains blocked and candidate-only. Do not cross
+MS-04 until the exact live inputs pass and a separate human Go authorizes the
+single no-retry provider attempt.
 
 Define the Project Memory v0 contract before implementation. The CLI should wrap the contract; it should not become the accidental architecture.
 

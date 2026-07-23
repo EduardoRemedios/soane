@@ -1,0 +1,93 @@
+{
+  "attestations": {
+    "cli_identity": null,
+    "credential_route_identity": null,
+    "runner_identity": null
+  },
+  "authority_inputs": {
+    "authority_reference": null,
+    "authorization_id": null,
+    "credential_route_reference": null,
+    "model": null,
+    "project_permission_reference": null,
+    "runner_identity_reference": null,
+    "source_gate_reference": null,
+    "spend_ceiling": null
+  },
+  "authorization": {
+    "candidate_can_authorize_another_run": false,
+    "ms04_authorized": false,
+    "provider_use_authorized": false
+  },
+  "blockers": [
+    "RUNNER_ATTESTATION_MISSING",
+    "CREDENTIAL_ROUTE_MISSING",
+    "CLI_COMPATIBILITY_MISSING",
+    "AUTHORITY_INPUT_MISSING",
+    "SOURCE_REVALIDATION_MISSING",
+    "OFFLINE_GATES_INCOMPLETE"
+  ],
+  "command": [],
+  "evidence_policy": {
+    "destination": "supervisor_quarantine_outside_codex_visible_roots",
+    "protected_form_matches_persisted": false,
+    "raw": "quarantine_then_redact",
+    "teardown_required": true,
+    "transport": "bounded_supervisor_pipes"
+  },
+  "expected_facts": {
+    "currency": "EUR",
+    "evidence_path": "tests/expected.txt",
+    "purpose": "reconciles invoices"
+  },
+  "fixture_manifest": [
+    {
+      "mode": "0644",
+      "path": "README.md",
+      "sha256": "c141e34989a5806a254c805e2e37ef29179558ee95f240c1d803cdfea597b4e8",
+      "size": 50
+    },
+    {
+      "mode": "0644",
+      "path": "schema.json",
+      "sha256": "e955ce4eb2cd1a5911706c07685039673fb4bb70271ec0c9bfcf7b155cfd17f7",
+      "size": 309
+    },
+    {
+      "mode": "0644",
+      "path": "src/rules.txt",
+      "sha256": "168285f67f0511ea888a1b7ad821414ff3b3e4f8fd29ee34d02dcdf64f44f394",
+      "size": 30
+    },
+    {
+      "mode": "0644",
+      "path": "tests/expected.txt",
+      "sha256": "c08a044563ac316d25c23ecc9afd030da8b97223641a0b0ec0cb19affbe8dfc1",
+      "size": 28
+    }
+  ],
+  "governance": {
+    "candidate_review_required": true,
+    "project_memory_write_performed": false,
+    "provider_invocation_record_created": false
+  },
+  "offline_checks": {},
+  "review_state": "candidate_only",
+  "schema_version": "clr-offline-candidate-v1",
+  "scope": {
+    "fixture_sha256": "aeca0fdc78bdd48cd21540327ee01bb562a77a5a8a66fc89f5628b99aacb3144",
+    "proof": "fixed_repository_read_only",
+    "source_date": "2026-07-23",
+    "surface": "codex_cli"
+  },
+  "side_effects": {
+    "authorization_consumed": false,
+    "codex_invocation_performed": false,
+    "credential_or_user_state_read": false,
+    "docker_invocation_performed": false,
+    "network_call_performed": false,
+    "project_memory_write_performed": false,
+    "provider_invocation_performed": false
+  },
+  "status": "BLOCKED"
+}

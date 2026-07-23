@@ -2,11 +2,12 @@
 
 ## Version
 
-v1
+v2
 
 ## Change Log
 
 - v1 (2026-07-23): Audited the completed planning pack.
+- v2 (2026-07-23): Added the post-gate offline implementation authorization.
 
 ## Skill Invocation
 
@@ -104,3 +105,14 @@ Critical gate.
 - This PASS means ready for human implementation Go or No-go review. It does not
   authorize implementation, credential use, or the MS-04 provider call.
 
+## Execution Authorization Addendum
+
+- Human Go: recorded in the current Codex task on 2026-07-23 as "go, proceed"
+- Execution Mode: `EXECUTION_ENABLED`
+- Authorized work: MS-00 through MS-03 offline implementation and closeout
+- Docker/Codex/provider invocation: not authorized
+- Credential or user-state access: not authorized
+- MS-04 live transition: not authorized
+
+The authorization changes execution state only. It does not weaken the audited
+runner, credential, one-shot, evidence, or Candidate Review gates.

@@ -1,0 +1,20 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "purpose",
+    "currency",
+    "evidence_path"
+  ],
+  "properties": {
+    "purpose": {
+      "type": "string"
+    },
+    "currency": {
+      "const": "EUR"
+    },
+    "evidence_path": {
+      "const": "tests/expected.txt"
+    }
+  }
+}

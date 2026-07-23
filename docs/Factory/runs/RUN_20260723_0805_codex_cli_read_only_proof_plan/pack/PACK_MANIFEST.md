@@ -2,12 +2,13 @@
 
 ## Version
 
-v2
+v3
 
 ## Change Log
 
 - v1 (2026-07-23): Consolidated the planning pack before Stage I2.
 - v2 (2026-07-23): Recorded the completed Stage I2 audit and handoff.
+- v3 (2026-07-23): Recorded offline implementation Go and execution verification.
 
 ## Run Metadata
 
@@ -15,7 +16,7 @@ v2
 - Sprint ID: CLR-V0-001
 - Created: 2026-07-23 08:05 local
 - Owner: Soane project owner
-- Execution Mode: PLANNING_ONLY
+- Execution Mode: EXECUTION_ENABLED for MS-00 through MS-03 only
 - Specs: NAMING_CONVENTIONS v4.7; DEFINITIONS v3.5; STAGE_CONTRACTS
   v4.14; PURPLE_GATE_CHECKLIST v3.3
 
@@ -24,10 +25,10 @@ v2
 - `raw_brief.md`: present and non-empty
 - `KNOWLEDGE_LINT.txt`: present, non-empty, PASS
 - `CONTEXT_RECALL_REPORT.md`: present, non-empty, direct-source repaired
-- `EXECUTION_MODE.txt`: present, `PLANNING_ONLY`
+- `EXECUTION_MODE.txt`: present, `EXECUTION_ENABLED`
 - `SPRINT_ID.txt`: present, `CLR-V0-001`
 - `RETRO.md`: present and non-empty
-- `EXECUTION_PROMPT.md`: not required for planning-only
+- `EXECUTION_PROMPT.md`: present and non-empty
 
 ## Required Pack Files
 
@@ -47,7 +48,7 @@ v2
 - `PACK_CHECKLIST.md`: present and non-empty
 - `PACK_MANIFEST.md`: present and non-empty
 - `PACK_AUDIT_REPORT.md`: present, non-empty, PASS
-- `verification_manifest.yaml`: omitted for planning-only
+- `verification_manifest.yaml`: present, non-empty, valid
 
 ## Handoffs
 

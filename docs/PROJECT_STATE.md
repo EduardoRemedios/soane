@@ -32,6 +32,8 @@ Implementation:
 - Socratic Discovery v0 local service at `soane/thinking_engine/discovery.py`
 - Coding Proof Harness v0 local service at `soane/thinking_engine/coding_harness.py`
 - Coding Harness Workflow v0 CLI wrapper at `soane/thinking_engine/coding_workflow.py`
+- Codex CLI read-only proof core at `soane/thinking_engine/codex_read_only_proof.py`
+- Codex CLI offline candidate workflow at `soane/thinking_engine/codex_read_only_proof_workflow.py`
 - Project Memory golden fixture corpus at `tests/fixtures/project_memory/golden/`
 - Project Memory review fixture corpus at `tests/fixtures/project_memory/review/`
 - Project Memory Markdown ingestion fixture corpus at `tests/fixtures/project_memory/markdown_ingestion/`
@@ -53,6 +55,8 @@ Implementation:
 - Socratic Discovery v0 tests at `tests/test_thinking_engine_discovery.py`
 - Coding Proof Harness v0 tests at `tests/test_thinking_engine_coding_harness.py`
 - Coding Harness Workflow v0 tests at `tests/test_thinking_engine_coding_workflow.py`
+- Codex CLI read-only proof fixtures at `tests/fixtures/codex_read_only_proof/`
+- Codex CLI read-only proof tests at `tests/test_thinking_engine_codex_read_only_proof.py`
 
 Constitutional documents:
 
@@ -129,6 +133,7 @@ Planning outputs:
 - `docs/Factory/runs/RUN_20260718_0721_graph_aware_context_trace_plan/VALIDATION_CLOSEOUT_REPORT.md`
 - `docs/Factory/runs/RUN_20260720_0708_live_coding_adapter_eval_refresh/`
 - `docs/Factory/runs/RUN_20260723_0805_codex_cli_read_only_proof_plan/`
+- `docs/Factory/runs/RUN_20260723_0805_codex_cli_read_only_proof_plan/VALIDATION_CLOSEOUT_REPORT.md`
 
 ## Current Architectural Posture
 
@@ -148,6 +153,7 @@ Project Memory is constitutionally the governed system of record for the Workspa
 - full Project Memory implementation beyond v0 local contract, semantics, context, typed traversal, adapter twins, CLI/TUI, candidate review, agent-facing context commands, and the reviewed repo-local seed corpus
 - Claim epistemic transitions beyond proposed/asserted candidates, Decision Review, Knowledge Scope promotion, bounded Delegation records, or authored/curated Markdown reconciliation
 - full Thinking Engine implementation beyond Intake v0, Socratic Discovery v0, Coding Proof Harness v0, Coding Harness Workflow v0, and Brownfield multi-repo coding proof behavior
+- observed Codex CLI read-only proof behavior; the offline core exists, but its live candidate is blocked
 - Workspace Shell implementation
 - integration clients for Factory V3, Temper, Aegis, Sentinel, or Harmony
 - live Cursor CLI, Codex CLI, Cursor SDK, OpenAI SDK, or OpenAI Agents SDK adapters
@@ -191,6 +197,7 @@ python3 -m unittest tests/test_context_recall_repair.py
 ./scripts/factoryctl pack-lint --run RUN_20260712_1030_markdown_memory_ingestion_v0_plan
 ./scripts/factoryctl pack-lint --run RUN_20260718_0721_graph_aware_context_trace_plan
 ./scripts/factoryctl pack-lint --run RUN_20260723_0805_codex_cli_read_only_proof_plan
+python3 -m unittest tests/test_thinking_engine_codex_read_only_proof.py
 python3 scripts/agent_loop_bridge_validate.py tests/fixtures/agent_loop_bridge/valid_handoff.json --json
 ```
 
@@ -234,6 +241,16 @@ python3 -m soane.thinking_engine.adapter_evaluation_workflow \
   --source-date 2026-07-23
 ```
 
+Codex CLI offline proof-candidate entry point:
+
+```bash
+python3 -m soane.thinking_engine.codex_read_only_proof_workflow \
+  --config tests/fixtures/codex_read_only_proof/offline_blocked.json \
+  --fixture-root tests/fixtures/codex_read_only_proof/repository \
+  --source-date 2026-07-23 \
+  --json
+```
+
 Validation closeout:
 
 ```bash
@@ -247,6 +264,7 @@ cat docs/Factory/runs/RUN_20260705_0747_brownfield_multi_repo_coding_proof_plan/
 cat docs/Factory/runs/RUN_20260712_1030_markdown_memory_ingestion_v0_plan/VALIDATION_CLOSEOUT_REPORT.md
 cat docs/Factory/runs/RUN_20260718_0721_graph_aware_context_trace_plan/VALIDATION_CLOSEOUT_REPORT.md
 cat docs/Factory/runs/RUN_20260720_0708_live_coding_adapter_eval_refresh/VALIDATION_CLOSEOUT_REPORT.md
+cat docs/Factory/runs/RUN_20260723_0805_codex_cli_read_only_proof_plan/VALIDATION_CLOSEOUT_REPORT.md
 ```
 
 ## Active Boundary Decisions
@@ -314,6 +332,7 @@ cat docs/Factory/runs/RUN_20260720_0708_live_coding_adapter_eval_refresh/VALIDAT
 - `RUN_20260720_0708_live_coding_adapter_eval_refresh`: refreshed Factory pack for `LCAE-V0-001`. Status: `PASS`; execution enabled after human Go on 2026-07-23; Stage A through I2 and final pack lint passed.
 - The refresh removes the prior expected-winner bias, reuses existing agent-context and graph contracts, makes official-source contradictions non-compensable blockers, and keeps provider calls, credential/config/session inspection, dependency installation, network access, external repository operations, and evaluated-surface mutation out of scope.
 - `LCAE-V0-001` is implemented with five typed official-source profiles, implementation-time source revalidation, hard gates before scoring, exact agent-context JSON preservation, deterministic recommendation and tie behavior, and a thin local text/JSON workflow. Codex CLI is the documentation-level recommendation; Cursor CLI remains blocked by contradictory official write-control claims. No provider, credential, network, external repository, Project Memory write, or evaluated-surface mutation path was added.
-- `RUN_20260723_0805_codex_cli_read_only_proof_plan`: Factory V2 `PLANNING_ONLY` pack for `CLR-V0-001`. Status: `PASS`; Stage A through I2 and final pack lint passed.
+- `RUN_20260723_0805_codex_cli_read_only_proof_plan`: Factory V2 pack for `CLR-V0-001`. Status: `PASS`; execution enabled for MS-00 through MS-03 after human Go on 2026-07-23; Stage A through I2 and executed pack lint passed.
 - `CLR-V0-001` locks one fixed Codex CLI task behind an immutable disposable runner, no host/Soane visibility, one exact credential-isolation route, parent-process credential checks, bounded evidence, atomic one-use authorization, and a terminal no-retry receipt. The preferred route keeps the real provider credential behind a single-run proxy outside Codex/model visibility; direct-key auth remains blocked without mechanical parent-inspection denial evidence.
-- Next roadmap gate: explicit human Go for MS-00 through MS-03 offline implementation only. MS-04 live provider use remains a second, exact authorization decision after every offline gate passes.
+- `CLR-V0-001` MS-00 through MS-03 are implemented with a pure proof core, fixed fixture, Docker/OCI and external-proxy attestation validation, atomic authorization state, focused tests, offline workflow, and validation closeout.
+- The generated offline candidate is `BLOCKED` because observed runner, credential route, CLI compatibility, source revalidation, authority, model, spend, and complete gate evidence are absent. MS-04 live provider use remains a second, exact authorization decision after those inputs pass.
