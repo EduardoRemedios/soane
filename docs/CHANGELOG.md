@@ -2,6 +2,12 @@
 
 ## 2026-07-23
 
+- Added `RUN_20260723_0805_codex_cli_read_only_proof_plan`, the `PLANNING_ONLY` Factory pack for `CLR-V0-001`; Stage A through I2 and final pack lint passed.
+- Locked the first live proof to one fixed Codex CLI task, one non-writable fixture, one immutable disposable runner with no Soane/host-state visibility, one exact model, one credential route, one authorization ID, and one terminal no-retry attempt.
+- Corrected two unsafe assumptions during red-team review: a temporary fixture is not a host-read boundary, and model-shell environment filtering does not prevent parent-process credential recovery through procfs, process listings, files, sockets, or diagnostics.
+- Preferred a single-run provider credential proxy outside Codex/model visibility; direct `CODEX_API_KEY` use remains blocked unless the exact runner/version mechanically proves all parent-inspection routes are denied.
+- Added deterministic runner-topology, shell/parent credential, credential-route, event-policy, proof-fixture, and receipt fixtures with V1 through V4 traceability for 12 risks and 27 verification checks.
+- Kept the run planning-only. A future Go may authorize MS-00 through MS-03 offline implementation; MS-04 live provider use still requires a second exact human authorization after all offline gates pass.
 - Recorded human Go and implemented `LCAE-V0-001` as a deterministic, fixture-only Thinking Engine adapter evaluator covering Codex CLI, Cursor CLI, Cursor SDK, OpenAI SDK, and OpenAI Agents SDK.
 - Revalidated official source evidence at implementation start, preserved Cursor CLI's contradictory write-control claims as hard blockers, and kept documentation evidence distinct from measured live behavior.
 - Added typed profiles with explicit authentication, capability, authority, project permission, sandbox, repository scope, mutation, output, trace, session, cost, latency, privacy, review, limitation, and source evidence fields.

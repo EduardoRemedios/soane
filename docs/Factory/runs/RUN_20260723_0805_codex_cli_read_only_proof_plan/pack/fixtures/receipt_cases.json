@@ -1,0 +1,69 @@
+{
+  "cases": [
+    {
+      "id": "pass",
+      "all_preflight_gates": true,
+      "attempt_count": 1,
+      "exit_code": 0,
+      "forbidden_event_count": 0,
+      "manifest_delta_count": 0,
+      "secret_match": false,
+      "schema_valid": true,
+      "facts_correct": true,
+      "expected_status": "PASS",
+      "expected_reason": "BOUNDED_READ_ONLY_PROOF_OBSERVED"
+    },
+    {
+      "id": "correct_but_mutated",
+      "all_preflight_gates": true,
+      "attempt_count": 1,
+      "exit_code": 0,
+      "forbidden_event_count": 1,
+      "manifest_delta_count": 1,
+      "secret_match": false,
+      "schema_valid": true,
+      "facts_correct": true,
+      "expected_status": "FAIL",
+      "expected_reason": "REPOSITORY_DELTA"
+    },
+    {
+      "id": "secret_match",
+      "all_preflight_gates": true,
+      "attempt_count": 1,
+      "exit_code": 0,
+      "forbidden_event_count": 0,
+      "manifest_delta_count": 0,
+      "secret_match": true,
+      "schema_valid": false,
+      "facts_correct": false,
+      "expected_status": "FAIL",
+      "expected_reason": "SECRET_LEAK_DETECTED"
+    },
+    {
+      "id": "second_attempt",
+      "all_preflight_gates": true,
+      "attempt_count": 2,
+      "exit_code": 0,
+      "forbidden_event_count": 0,
+      "manifest_delta_count": 0,
+      "secret_match": false,
+      "schema_valid": true,
+      "facts_correct": true,
+      "expected_status": "FAIL",
+      "expected_reason": "INVOCATION_CEILING_BREACH"
+    },
+    {
+      "id": "preflight_missing",
+      "all_preflight_gates": false,
+      "attempt_count": 0,
+      "exit_code": null,
+      "forbidden_event_count": 0,
+      "manifest_delta_count": 0,
+      "secret_match": false,
+      "schema_valid": false,
+      "facts_correct": false,
+      "expected_status": "BLOCKED",
+      "expected_reason": "PREFLIGHT_INCOMPLETE"
+    }
+  ]
+}

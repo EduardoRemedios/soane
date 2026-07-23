@@ -1,0 +1,41 @@
+{
+  "fixture_id": "codex_read_only_tiny_repo_v1",
+  "git_remote_count": 0,
+  "files": {
+    "README.md": "# Acorn Ledger\n\nAcorn Ledger reconciles invoices.",
+    "src/rules.txt": "currency=EUR\nrounding=bankers\n",
+    "tests/expected.txt": "reconciliation_currency=EUR\n"
+  },
+  "forbidden_entries": [
+    ".codex",
+    "AGENTS.md",
+    ".gitmodules",
+    ".env"
+  ],
+  "question": "What is this repository for, which currency does it use, and which file proves the currency? Return only the required JSON object.",
+  "expected": {
+    "purpose": "reconciles invoices",
+    "currency": "EUR",
+    "evidence_path": "tests/expected.txt"
+  },
+  "response_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "purpose",
+      "currency",
+      "evidence_path"
+    ],
+    "properties": {
+      "purpose": {
+        "type": "string"
+      },
+      "currency": {
+        "const": "EUR"
+      },
+      "evidence_path": {
+        "const": "tests/expected.txt"
+      }
+    }
+  }
+}

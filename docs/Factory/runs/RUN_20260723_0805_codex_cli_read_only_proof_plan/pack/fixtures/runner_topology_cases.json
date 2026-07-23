@@ -1,0 +1,72 @@
+{
+  "cases": [
+    {
+      "id": "isolated_minimal",
+      "expected": "allow",
+      "immutable_runner_identity": true,
+      "visible_roots": [
+        {
+          "name": "fixture",
+          "mode": "read-only"
+        },
+        {
+          "name": "private_runtime",
+          "mode": "runner-private"
+        }
+      ],
+      "host_mounts": [],
+      "sockets": [],
+      "ambient_secret_names": []
+    },
+    {
+      "id": "host_home_visible",
+      "expected": "deny",
+      "immutable_runner_identity": true,
+      "visible_roots": [
+        {
+          "name": "fixture",
+          "mode": "read-only"
+        },
+        {
+          "name": "host_home",
+          "mode": "read-only"
+        }
+      ],
+      "host_mounts": [
+        "host_home"
+      ],
+      "sockets": [],
+      "ambient_secret_names": []
+    },
+    {
+      "id": "container_socket_visible",
+      "expected": "deny",
+      "immutable_runner_identity": true,
+      "visible_roots": [
+        {
+          "name": "fixture",
+          "mode": "read-only"
+        }
+      ],
+      "host_mounts": [],
+      "sockets": [
+        "container_control"
+      ],
+      "ambient_secret_names": []
+    },
+    {
+      "id": "unpinned_runner",
+      "expected": "deny",
+      "immutable_runner_identity": false,
+      "visible_roots": [
+        {
+          "name": "fixture",
+          "mode": "read-only"
+        }
+      ],
+      "host_mounts": [],
+      "sockets": [],
+      "ambient_secret_names": []
+    }
+  ]
+}

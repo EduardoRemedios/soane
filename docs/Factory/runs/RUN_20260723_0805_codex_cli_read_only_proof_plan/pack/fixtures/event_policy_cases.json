@@ -1,0 +1,52 @@
+{
+  "cases": [
+    {
+      "id": "read_only_success",
+      "events": [
+        "thread.started",
+        "turn.started",
+        "command.started",
+        "command.completed",
+        "message.completed",
+        "turn.completed"
+      ],
+      "expected": "allow"
+    },
+    {
+      "id": "file_change",
+      "events": [
+        "thread.started",
+        "file_change"
+      ],
+      "expected": "deny",
+      "reason": "FORBIDDEN_FILE_CHANGE_EVENT"
+    },
+    {
+      "id": "external_tool",
+      "events": [
+        "thread.started",
+        "mcp.call"
+      ],
+      "expected": "deny",
+      "reason": "FORBIDDEN_EXTERNAL_TOOL_EVENT"
+    },
+    {
+      "id": "approval",
+      "events": [
+        "thread.started",
+        "approval.requested"
+      ],
+      "expected": "deny",
+      "reason": "FORBIDDEN_APPROVAL_EVENT"
+    },
+    {
+      "id": "unknown",
+      "events": [
+        "thread.started",
+        "future.event"
+      ],
+      "expected": "deny",
+      "reason": "UNKNOWN_EVENT_CLASS"
+    }
+  ]
+}

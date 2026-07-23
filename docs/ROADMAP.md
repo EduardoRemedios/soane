@@ -2,7 +2,7 @@
 
 > Purpose: Track near-term Soane repository work.
 >
-> Last updated: 2026-07-20
+> Last updated: 2026-07-23
 
 ## Completed
 
@@ -39,6 +39,7 @@
 | Graph-aware context and trace planning | Done | `docs/Factory/runs/RUN_20260718_0721_graph_aware_context_trace_plan/` |
 | Graph-aware context and trace implementation | Done | `soane/project_memory/graph.py`, `soane/project_memory/agent_context.py`, `soane/project_memory/cli.py`, `tests/test_project_memory_graph_traversal.py`, `docs/Factory/runs/RUN_20260718_0721_graph_aware_context_trace_plan/VALIDATION_CLOSEOUT_REPORT.md` |
 | Live coding adapter evaluation planning refresh | Done | `docs/Factory/runs/RUN_20260720_0708_live_coding_adapter_eval_refresh/` |
+| First Codex CLI read-only proof planning | Done | `docs/Factory/runs/RUN_20260723_0805_codex_cli_read_only_proof_plan/` |
 
 ## Sequence
 
@@ -79,12 +80,13 @@
 | 33 | Graph-aware context and trace implementation | Done | Added shared typed traversal, hard work ceilings, graph-aware context, bounded trace, exact-source affected-by propagation, realistic Claim proof, and validation closeout. |
 | 34 | Live coding adapter evaluation planning refresh | Done | `RUN_20260720_0708_live_coding_adapter_eval_refresh` passed Stage A through I2 and final pack lint with current official-source evidence, hard contradiction gates, existing context reuse, and no-touch verification. |
 | 35 | Live coding adapter evaluation implementation | Done | Implemented the `LCAE-V0-001` fixture-only evaluator with five typed profiles, source-date revalidation, hard gates before scoring, exact existing agent-context input preservation, deterministic text/JSON output, and no provider side effects. |
-| 36 | First live read-only coding proof | Next | Create a separate planning-only Factory pack for a bounded Codex CLI proof. Execution requires later human approval after auth, sandbox, read-only scope, network, trace/privacy, evidence capture, rollback, and stop rules pass review. |
-| 37 | Second domain proof selection | Pending | Select a non-coding proof domain so Workspace primitives are not overfit to software repositories. |
-| 38 | Memory provider evaluation | Pending | Evaluate external retrieval/context adapters, not canonical Project Memory. |
-| 39 | Project Memory persistence architecture | Pending | Define persistence after relevance, ingestion, traversal, provider, and live-proof evidence clarifies durable access and mutation patterns. |
-| 40 | Workspace Shell architecture | Pending | Define the product shell after workflow, integration, memory, and second-domain requirements are clearer. |
-| 41 | First product surface prototype | Pending | Build only after the memory, thinking, workflow, adapter, and shell boundaries support a real workflow. |
+| 36 | First Codex CLI read-only proof planning | Done | `RUN_20260723_0805_codex_cli_read_only_proof_plan` passed Stage A through I2 and final pack lint with immutable-runner, credential-isolation, one-use authorization, bounded evidence, and no-retry contracts. |
+| 37 | First Codex CLI read-only proof implementation | Next | After explicit Go, implement MS-00 through MS-03 offline. MS-04 requires a second exact Go after runner, credential, authority, model, spend, source, and compatibility gates pass. |
+| 38 | Second domain proof selection | Pending | Select a non-coding proof domain so Workspace primitives are not overfit to software repositories. |
+| 39 | Memory provider evaluation | Pending | Evaluate external retrieval/context adapters, not canonical Project Memory. |
+| 40 | Project Memory persistence architecture | Pending | Define persistence after relevance, ingestion, traversal, provider, and live-proof evidence clarifies durable access and mutation patterns. |
+| 41 | Workspace Shell architecture | Pending | Define the product shell after workflow, integration, memory, and second-domain requirements are clearer. |
+| 42 | First product surface prototype | Pending | Build only after the memory, thinking, workflow, adapter, and shell boundaries support a real workflow. |
 
 ## Decision Gates
 
@@ -99,9 +101,9 @@
 
 ## Immediate Next Move
 
-Prepare a separate planning-only Factory pack for:
+Seek explicit implementation Go for:
 
-First Live Read-Only Coding Proof
+`CLR-V0-001` Offline Proof Runner And Execution Candidate
 
 Current evidence:
 
@@ -111,6 +113,7 @@ Current evidence:
 - `soane/thinking_engine/adapter_evaluation_workflow.py`
 - `tests/test_thinking_engine_adapter_evaluation.py`
 - `tests/test_thinking_engine_adapter_evaluation_workflow.py`
+- `docs/Factory/runs/RUN_20260723_0805_codex_cli_read_only_proof_plan/`
 
 Current state:
 
@@ -122,7 +125,10 @@ Current state:
 - `GCT-V0-001` planning and implementation: complete; validation closeout passed.
 - Codex CLI is the evaluator's documentation-level recommendation for a future first proof.
 - Current official Cursor CLI sources conflict on headless write behavior, so contradiction and unproven hard read-only controls remain non-compensable blockers.
-- Next work is planning only: define a fail-closed Codex CLI live-proof envelope and seek separate human Go after its review gates pass.
+- `CLR-V0-001` planning is complete; Stage A through I2 and final pack lint passed.
+- The proof must keep Soane and host state outside an immutable disposable runner and keep the real credential outside Codex/model-command visibility. Child environment filtering alone is insufficient because parent-process inspection can recover a direct key.
+- Next work is implementation only after Go: MS-00 through MS-03 create tests, pure proof core, one exact runner/credential-isolation adapter, and an offline execution candidate.
+- MS-04 remains separately gated: one unique authorization ID, one provider attempt, no retry under any outcome.
 
 No current authorization permits a live provider call, credential or user-state read, dependency install, repository mutation, or automatic Provider Invocation promotion.
 

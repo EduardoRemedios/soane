@@ -2,7 +2,7 @@
 
 > Purpose: Current source of truth for the Soane repository state.
 >
-> Last updated: 2026-07-20
+> Last updated: 2026-07-23
 
 ## Current Identity
 
@@ -128,6 +128,7 @@ Planning outputs:
 - `docs/Factory/runs/RUN_20260718_0721_graph_aware_context_trace_plan/`
 - `docs/Factory/runs/RUN_20260718_0721_graph_aware_context_trace_plan/VALIDATION_CLOSEOUT_REPORT.md`
 - `docs/Factory/runs/RUN_20260720_0708_live_coding_adapter_eval_refresh/`
+- `docs/Factory/runs/RUN_20260723_0805_codex_cli_read_only_proof_plan/`
 
 ## Current Architectural Posture
 
@@ -189,6 +190,7 @@ python3 -m unittest tests/test_context_recall_repair.py
 ./scripts/factoryctl pack-lint --run RUN_20260712_1011_vision_epistemic_hardening
 ./scripts/factoryctl pack-lint --run RUN_20260712_1030_markdown_memory_ingestion_v0_plan
 ./scripts/factoryctl pack-lint --run RUN_20260718_0721_graph_aware_context_trace_plan
+./scripts/factoryctl pack-lint --run RUN_20260723_0805_codex_cli_read_only_proof_plan
 python3 scripts/agent_loop_bridge_validate.py tests/fixtures/agent_loop_bridge/valid_handoff.json --json
 ```
 
@@ -264,6 +266,7 @@ cat docs/Factory/runs/RUN_20260720_0708_live_coding_adapter_eval_refresh/VALIDAT
 - Define the Project Memory v0 contract, golden fixtures, context assembly v0, capture/review/promotion flow, and mock-first adapter contract before implementation.
 - Include governed memory invariants in the Project Memory v0 contract: scope and visibility, temporal supersession, provenance lineage, controlled propagation, contradiction handling, and equivalent enforcement across retrieval paths.
 - Prefer mock-first, then CLI-backed coding harness adapters, then SDK-backed integrations once the adapter contract is stable.
+- The first Codex CLI proof must use an attested disposable runner that cannot see Soane or unrelated host state, one fixed read-only fixture, a one-use authorization ID, and a credential-isolation route outside model-command visibility. Child environment filtering alone does not prove that a direct parent-process key is inaccessible.
 - Treat Greenfield and Brownfield project intake differently. Brownfield coding work may involve one repository, multiple repositories, or a wider workspace/system boundary. Intake requires repo/workspace audit, existing application context, build/test discovery, architecture/documentation gap analysis, ownership and integration mapping, and agreed starting-context files before feature planning or coding delegation.
 - Do not assume all project context lives in Git. Non-coding work may depend on external artifacts such as analytics dashboards, campaign assets, research notes, briefs, spreadsheets, design files, CRM records, ad accounts, and other operational systems. Soane must be able to identify and govern those sources as context inputs.
 
@@ -311,4 +314,6 @@ cat docs/Factory/runs/RUN_20260720_0708_live_coding_adapter_eval_refresh/VALIDAT
 - `RUN_20260720_0708_live_coding_adapter_eval_refresh`: refreshed Factory pack for `LCAE-V0-001`. Status: `PASS`; execution enabled after human Go on 2026-07-23; Stage A through I2 and final pack lint passed.
 - The refresh removes the prior expected-winner bias, reuses existing agent-context and graph contracts, makes official-source contradictions non-compensable blockers, and keeps provider calls, credential/config/session inspection, dependency installation, network access, external repository operations, and evaluated-surface mutation out of scope.
 - `LCAE-V0-001` is implemented with five typed official-source profiles, implementation-time source revalidation, hard gates before scoring, exact agent-context JSON preservation, deterministic recommendation and tie behavior, and a thin local text/JSON workflow. Codex CLI is the documentation-level recommendation; Cursor CLI remains blocked by contradictory official write-control claims. No provider, credential, network, external repository, Project Memory write, or evaluated-surface mutation path was added.
-- Next roadmap gate: a separate planning-only Factory run for the first live read-only coding proof. It must define auth, sandbox, repository scope, network, trace/privacy, evidence, rollback, and stop controls before seeking separate human authorization. No live provider use is currently authorized.
+- `RUN_20260723_0805_codex_cli_read_only_proof_plan`: Factory V2 `PLANNING_ONLY` pack for `CLR-V0-001`. Status: `PASS`; Stage A through I2 and final pack lint passed.
+- `CLR-V0-001` locks one fixed Codex CLI task behind an immutable disposable runner, no host/Soane visibility, one exact credential-isolation route, parent-process credential checks, bounded evidence, atomic one-use authorization, and a terminal no-retry receipt. The preferred route keeps the real provider credential behind a single-run proxy outside Codex/model visibility; direct-key auth remains blocked without mechanical parent-inspection denial evidence.
+- Next roadmap gate: explicit human Go for MS-00 through MS-03 offline implementation only. MS-04 live provider use remains a second, exact authorization decision after every offline gate passes.

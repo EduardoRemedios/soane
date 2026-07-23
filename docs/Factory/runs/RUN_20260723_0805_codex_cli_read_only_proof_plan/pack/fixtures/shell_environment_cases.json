@@ -1,0 +1,52 @@
+{
+  "approved_model_shell_names": [
+    "LANG",
+    "LC_ALL",
+    "PATH"
+  ],
+  "forbidden_name_patterns": [
+    "*KEY*",
+    "*SECRET*",
+    "*TOKEN*",
+    "*CREDENTIAL*"
+  ],
+  "parent_inspection_paths": [
+    "child_environment",
+    "parent_process_environment",
+    "procfs_environ",
+    "process_listing_environment",
+    "credential_files",
+    "credential_sockets",
+    "crash_diagnostics"
+  ],
+  "cases": [
+    {
+      "id": "minimal_allowlist",
+      "parent": {
+        "CODEX_API_KEY": "SENTINEL_SECRET_VALUE",
+        "HOME": "/sentinel/home",
+        "LANG": "C.UTF-8",
+        "PATH": "/usr/bin:/bin"
+      },
+      "expected_child_names": [
+        "LANG",
+        "PATH"
+      ],
+      "expected_secret_visible": false
+    },
+    {
+      "id": "profile_use_enabled",
+      "policy_override": {
+        "experimental_use_profile": true
+      },
+      "expected": "deny"
+    },
+    {
+      "id": "default_secret_excludes_disabled",
+      "policy_override": {
+        "ignore_default_excludes": true
+      },
+      "expected": "deny"
+    }
+  ]
+}
