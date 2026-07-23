@@ -2,12 +2,13 @@
 
 ## Version
 
-v2
+v3
 
 ## Change Log
 
 - v1 (2026-07-05): Initial Stage I2 Purple audit in the upstream planning run.
 - v2 (2026-07-20): Audited refreshed pack with the factory-purple-gate skill.
+- v3 (2026-07-23): Added the post-gate human authorization record.
 
 ## Skill Invocation
 
@@ -85,4 +86,16 @@ None. No `[SCOPE EXPANSION]` or unapproved inferred requirement remains.
 
 ## Human Review Note
 
-This run is `PLANNING_ONLY`. PASS means the refreshed deterministic implementation pack is ready for explicit human Go or No-go. It does not authorize implementation or any live adapter use, and no `EXECUTION_PROMPT.md` may be generated from this run.
+Stage I2 PASS established that the refreshed deterministic implementation pack was
+ready for explicit human Go or No-go. It did not authorize live adapter use.
+
+## Execution Authorization Addendum
+
+- Human Go: recorded in the current Codex task on 2026-07-23 as "GO I approve the implementation"
+- Execution Mode: `EXECUTION_ENABLED`
+- Authorized work: locked `LCAE-V0-001` deterministic, fixture-only implementation
+- Live adapter use: not authorized
+- Downstream fan-out: not authorized
+
+The authorization changes execution state only. It does not change the audited
+intent, risk controls, file budget, stop gates, or bounded deferrals.

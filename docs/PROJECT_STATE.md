@@ -223,6 +223,15 @@ Coding Harness Workflow entry point:
 python3 -m soane.thinking_engine.coding_workflow --help
 ```
 
+Adapter evaluation entry point:
+
+```bash
+python3 -m soane.thinking_engine.adapter_evaluation_workflow \
+  --profile-dir tests/fixtures/live_adapter_evaluation/profiles \
+  --context-json tests/fixtures/live_adapter_evaluation/context_ready.json \
+  --source-date 2026-07-23
+```
+
 Validation closeout:
 
 ```bash
@@ -235,6 +244,7 @@ cat docs/Factory/runs/RUN_20260702_0617_coding_harness_workflow_v0_plan/VALIDATI
 cat docs/Factory/runs/RUN_20260705_0747_brownfield_multi_repo_coding_proof_plan/VALIDATION_CLOSEOUT_REPORT.md
 cat docs/Factory/runs/RUN_20260712_1030_markdown_memory_ingestion_v0_plan/VALIDATION_CLOSEOUT_REPORT.md
 cat docs/Factory/runs/RUN_20260718_0721_graph_aware_context_trace_plan/VALIDATION_CLOSEOUT_REPORT.md
+cat docs/Factory/runs/RUN_20260720_0708_live_coding_adapter_eval_refresh/VALIDATION_CLOSEOUT_REPORT.md
 ```
 
 ## Active Boundary Decisions
@@ -298,6 +308,7 @@ cat docs/Factory/runs/RUN_20260718_0721_graph_aware_context_trace_plan/VALIDATIO
 - `MMI-V0-001` is implemented with proposed/asserted Claim validation, shared Markdown role and authority-mode vocabulary, repository-contained canonical prose extraction, exact anchors and fingerprints, bounded output, observational source comparison, fail-closed duplicate handling, review-compatible interchange, and thin CLI commands.
 - `RUN_20260718_0721_graph_aware_context_trace_plan`: Factory V2 pack for `GCT-V0-001`. Status: `PASS`; execution enabled after human Go on 2026-07-18; Stage A through I2 and final pack lint passed.
 - `GCT-V0-001` is implemented with storage-neutral direction-aware traversal, typed shortest paths, per-hop visibility, explicit non-current inclusion, deterministic cycle/alternate-path handling, hard object/path/edge/output ceilings, opaque exclusions, shared agent-context expansion, bounded trace controls, and exact-source affected-by propagation. Validation closeout passed with 30 focused and 153 full repository tests.
-- `RUN_20260720_0708_live_coding_adapter_eval_refresh`: refreshed `PLANNING_ONLY` Factory pack for `LCAE-V0-001`. Status: `PASS`; Stage A through I2 and final pack lint passed.
+- `RUN_20260720_0708_live_coding_adapter_eval_refresh`: refreshed Factory pack for `LCAE-V0-001`. Status: `PASS`; execution enabled after human Go on 2026-07-23; Stage A through I2 and final pack lint passed.
 - The refresh removes the prior expected-winner bias, reuses existing agent-context and graph contracts, makes official-source contradictions non-compensable blockers, and keeps provider calls, credential/config/session inspection, dependency installation, network access, external repository operations, and evaluated-surface mutation out of scope.
-- Next roadmap gate: explicit human Go or No-go for deterministic `LCAE-V0-001` implementation. No implementation or live provider use is authorized by the planning refresh.
+- `LCAE-V0-001` is implemented with five typed official-source profiles, implementation-time source revalidation, hard gates before scoring, exact agent-context JSON preservation, deterministic recommendation and tie behavior, and a thin local text/JSON workflow. Codex CLI is the documentation-level recommendation; Cursor CLI remains blocked by contradictory official write-control claims. No provider, credential, network, external repository, Project Memory write, or evaluated-surface mutation path was added.
+- Next roadmap gate: a separate planning-only Factory run for the first live read-only coding proof. It must define auth, sandbox, repository scope, network, trace/privacy, evidence, rollback, and stop controls before seeking separate human authorization. No live provider use is currently authorized.

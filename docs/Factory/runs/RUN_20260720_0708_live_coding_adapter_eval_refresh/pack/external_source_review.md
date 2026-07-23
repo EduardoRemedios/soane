@@ -2,16 +2,17 @@
 
 ## Version
 
-v2
+v3
 
 ## Change Log
 
 - v1 (2026-07-05): Initial bounded official-source review in the upstream planning run.
 - v2 (2026-07-20): Refreshed official sources and recorded contradictions and adjacent Codex SDK evidence.
+- v3 (2026-07-23): Revalidated implementation-time official-source claims before execution.
 
 ## Review Method
 
-- Access date: 2026-07-20
+- Access date: 2026-07-23
 - Evidence kind: official documentation only
 - No provider, CLI, SDK, API, model, cloud agent, auth, credential, config, or session was invoked or inspected.
 - Documentation claims remain subject to implementation-time revalidation.
@@ -46,3 +47,24 @@ v2
 - OpenAI SDK remains a model/tool invocation surface, not a coding-agent executor.
 - OpenAI Agents SDK remains an orchestration surface whose trace privacy, approvals, state, and tool policies require a larger application-owned contract.
 - No documentation claim authorizes live use, credential access, repository mutation, or automatic Project Memory promotion.
+
+## Implementation-Time Revalidation
+
+Official sources were revisited on 2026-07-23 before implementation. The material
+conclusions remain unchanged:
+
+- Codex CLI still documents `read-only`, `workspace-write`, and
+  `danger-full-access` sandbox values plus structured output and ephemeral execution
+  controls.
+- Cursor CLI official material still conflicts: the parameters and using pages
+  describe print mode as write/bash capable or full-write, while the headless page
+  says changes without `--force` are proposed rather than applied.
+- Cursor SDK now has additional persistence and auto-review capabilities, but the
+  reviewed official material still does not establish the hard local read-only
+  containment contract required by this slice.
+- OpenAI SDK remains an API client rather than a repository coding harness.
+- OpenAI Agents SDK still places tool policy in the application and documents that
+  traces may capture sensitive model and function input/output data.
+
+The source-profile fixtures therefore use `2026-07-23` as their access date and
+preserve all previously recorded hard blockers.

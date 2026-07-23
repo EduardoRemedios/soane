@@ -2,12 +2,13 @@
 
 ## Version
 
-v2
+v3
 
 ## Change Log
 
 - v1 (2026-07-05): Initial Stage J manifest in the upstream planning run.
 - v2 (2026-07-20): Consolidated refreshed run before Stage I2.
+- v3 (2026-07-23): Recorded human Go and added the execution verification manifest.
 
 ## Run Metadata
 
@@ -15,7 +16,7 @@ v2
 - Sprint ID: LCAE-V0-001
 - Created: 2026-07-20 07:08 local
 - Owner: Soane project owner
-- Execution Mode: PLANNING_ONLY
+- Execution Mode: EXECUTION_ENABLED
 - Spec Versions: STAGE_CONTRACTS v4.14, PURPLE_GATE_CHECKLIST v3.3
 - Upstream Pack: RUN_20260705_0923_live_coding_adapter_eval_plan
 
@@ -24,7 +25,8 @@ v2
 - raw_brief.md: present and non-empty
 - KNOWLEDGE_LINT.txt: present and PASS
 - CONTEXT_RECALL_REPORT.md: present and repaired
-- EXECUTION_MODE.txt: present and PLANNING_ONLY
+- EXECUTION_MODE.txt: present and EXECUTION_ENABLED
+- EXECUTION_PROMPT.md: present and non-empty
 - SPRINT_ID.txt: present and matches manifest
 - RETRO.md: present and non-empty
 
@@ -63,5 +65,5 @@ v2
 
 ## Verification Manifest
 
-- verification_manifest.yaml present: no
-- Reason: this is a planning-only pack; runnable checks are specified in `verification_plan.md`.
+- verification_manifest.yaml present: yes
+- Execution checks map VC-001 through VC-014 to focused, regression, static, and hygiene evidence.

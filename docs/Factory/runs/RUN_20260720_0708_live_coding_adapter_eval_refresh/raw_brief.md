@@ -71,3 +71,16 @@ A refreshed Factory pack for `LCAE-V0-001`, ready for explicit human Go or No-go
 ## Go Or No-Go Rule
 
 Go only if Stage A through I2 and final pack lint pass, current source contradictions fail closed, current context-system reuse is explicit, and the implementation envelope can be executed without live calls, credential reads, dependency installs, external repository access, or repository mutation by evaluated surfaces.
+
+## Execution Authorization Addendum
+
+- Execution Mode: EXECUTION_ENABLED
+- Execution Authorization: Human Go recorded in the current Codex task on 2026-07-23: "GO I approve the implementation"
+- Authorized Envelope: `LCAE-V0-001`
+- Downstream Fan-Out: NOT_APPROVED
+- Live Adapter Use: NOT_APPROVED
+
+This later explicit authorization supersedes the planning-only execution restriction for the
+locked deterministic implementation only. It does not authorize a provider invocation,
+credential or user-state inspection, evaluated-surface repository mutation, or any deferred
+live-proof work.

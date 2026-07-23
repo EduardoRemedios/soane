@@ -1,0 +1,47 @@
+{
+  "schema_version": "lcae-profile-v1",
+  "surface": "codex_cli",
+  "surface_kind": "cli",
+  "sources": [
+    {
+      "url": "https://developers.openai.com/codex/cli/reference/",
+      "accessed_on": "2026-07-23",
+      "evidence_kind": "official_documentation",
+      "claims": [
+        "read_only_sandbox",
+        "jsonl_events",
+        "output_schema",
+        "ephemeral_session",
+        "resume_identity"
+      ]
+    }
+  ],
+  "source_state": "current_consistent",
+  "invocation_modes": ["non_interactive"],
+  "authentication_modes": ["chatgpt", "api_key"],
+  "authentication_state": "required_not_inspected",
+  "capabilities": ["coding_harness", "structured_execution"],
+  "capability_state": "documented_not_measured",
+  "requires_authority": true,
+  "requires_project_permission": true,
+  "authority_control": "explicit_external_precondition",
+  "project_permission_control": "explicit_external_precondition",
+  "sandbox_state": "documented_read_only",
+  "repository_scope_controls": ["working_directory"],
+  "mutation_controls": ["read_only_sandbox"],
+  "first_proof_mode": "local_read_only",
+  "structured_output": ["jsonl_events", "output_schema"],
+  "traceability": ["event_stream", "provider_invocation_record"],
+  "session_identity": ["resume_session_id", "ephemeral_session"],
+  "cost_metadata": "provider_reported_or_deferred",
+  "latency_metadata": "locally_measured_in_future_live_proof",
+  "trace_privacy": "requires_explicit_policy",
+  "privacy_controls": ["ephemeral_session", "local_report_only"],
+  "candidate_review_required": true,
+  "hard_blockers": [],
+  "limitations": [
+    "documentation_not_measured_behavior",
+    "network_isolation_unproven",
+    "hook_behavior_unproven"
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "ok": true,
+  "command": "agent-context",
+  "task": "Select a first read-only coding adapter proof surface",
+  "scope": "docs",
+  "index_refreshed": true,
+  "refresh_state": "refreshed",
+  "refresh_error": null,
+  "selection_mode": "relevance",
+  "selection_state": "ready",
+  "selection_reason": "relevant_context_selected",
+  "query_plan": ["coding adapter", "read-only proof"],
+  "budgets": {"documents": 3, "memory": 4},
+  "memory_truncations": ["graph_object_limit:2"],
+  "graph": {
+    "selections": [
+      {
+        "object": {"id": "decision://adapter-evaluation"},
+        "depth": 0,
+        "paths": []
+      }
+    ],
+    "exclusions": [{"object_id": "evidence://restricted", "reason": "not_visible_to_access_context"}],
+    "truncations": [{"reason": "object_limit", "omitted_count": 2}],
+    "examined_edge_count": 6
+  },
+  "explanation": [
+    "Factory context index selected bounded canonical evidence.",
+    "Typed graph traversal preserved visibility and budget exclusions."
+  ],
+  "memory": {
+    "purpose": "Agent context: Select a first read-only coding adapter proof surface",
+    "boundary": "agent_context",
+    "current": [{"id": "decision://adapter-evaluation", "reason": "source_ref:docs/ROADMAP.md"}],
+    "surfaced": [],
+    "contradictions": [],
+    "exclusions": [{"object_id": "evidence://restricted", "reason": "not_visible_to_access_context"}]
+  },
+  "documents": [
+    {
+      "source_path": "docs/ROADMAP.md",
+      "start_line": 100,
+      "end_line": 110,
+      "heading": "Immediate Sequence",
+      "excerpt": "Evaluate live coding adapter surfaces before a separately authorized proof.",
+      "artifact_type": "canonical_doc",
+      "markdown_role": "canonical",
+      "selected_by": "coding adapter",
+      "score": 88,
+      "related_memory_object_ids": ["decision://adapter-evaluation"],
+      "source_freshness": "current"
+    }
+  ]
+}

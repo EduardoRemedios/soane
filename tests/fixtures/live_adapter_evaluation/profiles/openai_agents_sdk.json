@@ -1,0 +1,58 @@
+{
+  "schema_version": "lcae-profile-v1",
+  "surface": "openai_agents_sdk",
+  "surface_kind": "sdk",
+  "sources": [
+    {
+      "url": "https://openai.github.io/openai-agents-python/",
+      "accessed_on": "2026-07-23",
+      "evidence_kind": "official_documentation",
+      "claims": ["agent_orchestration", "sessions", "guardrails", "tracing"]
+    },
+    {
+      "url": "https://openai.github.io/openai-agents-python/human_in_the_loop/",
+      "accessed_on": "2026-07-23",
+      "evidence_kind": "official_documentation",
+      "claims": ["tool_approval_interruptions"]
+    },
+    {
+      "url": "https://openai.github.io/openai-agents-python/tracing/",
+      "accessed_on": "2026-07-23",
+      "evidence_kind": "official_documentation",
+      "claims": ["traces_may_capture_sensitive_inputs_and_outputs"]
+    }
+  ],
+  "source_state": "current_consistent",
+  "invocation_modes": ["remote_api_with_application_tools"],
+  "authentication_modes": ["api_key"],
+  "authentication_state": "required_not_inspected",
+  "capabilities": ["agent_orchestration", "tool_approval", "tracing"],
+  "capability_state": "documented_not_measured",
+  "requires_authority": true,
+  "requires_project_permission": true,
+  "authority_control": "explicit_external_precondition",
+  "project_permission_control": "explicit_external_precondition",
+  "sandbox_state": "application_owned",
+  "repository_scope_controls": [],
+  "mutation_controls": ["application_owned_tool_approval"],
+  "first_proof_mode": "live_only",
+  "structured_output": ["run_results", "stream_events"],
+  "traceability": ["model_spans", "tool_spans", "handoff_spans"],
+  "session_identity": ["session_state"],
+  "cost_metadata": "provider_reported_or_deferred",
+  "latency_metadata": "locally_measured_in_future_live_proof",
+  "trace_privacy": "unclear",
+  "privacy_controls": ["sensitive_trace_capture_can_be_disabled"],
+  "candidate_review_required": true,
+  "hard_blockers": [
+    "hard_read_only_unproven",
+    "repository_scope_unbounded",
+    "trace_privacy_unclear",
+    "live_only_evaluation_required"
+  ],
+  "limitations": [
+    "documentation_not_measured_behavior",
+    "application_owns_repository_and_tool_policy",
+    "trace_policy_not_selected"
+  ]
+}

@@ -2,12 +2,13 @@
 
 ## Version
 
-v2
+v3
 
 ## Change Log
 
 - v1 (2026-07-05): Initial Stage H envelope in the upstream planning run.
 - v2 (2026-07-20): Refreshed implementation boundary, context reuse, hard gates, files, and verification.
+- v3 (2026-07-23): Recorded human Go for the locked deterministic implementation.
 
 ## Sprint ID
 
@@ -15,9 +16,11 @@ v2
 
 ## Execution Mode
 
-`PLANNING_ONLY`
+`EXECUTION_ENABLED`
 
-This refresh does not authorize implementation. A new explicit human Go is required.
+Human Go was recorded in the current Codex task on 2026-07-23. Authorization is
+limited to this fixture-only deterministic implementation; live adapter use and
+downstream fan-out remain unapproved.
 
 ## Objective
 

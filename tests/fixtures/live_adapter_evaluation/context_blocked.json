@@ -1,0 +1,31 @@
+{
+  "ok": true,
+  "command": "agent-context",
+  "task": "Select a first read-only coding adapter proof surface",
+  "scope": "docs",
+  "index_refreshed": false,
+  "refresh_state": "failed",
+  "refresh_error": "context index unavailable",
+  "selection_mode": "relevance",
+  "selection_state": "blocked",
+  "selection_reason": "context_index_unavailable",
+  "query_plan": ["coding adapter"],
+  "budgets": {"documents": 3, "memory": 4},
+  "memory_truncations": [],
+  "graph": {
+    "selections": [],
+    "exclusions": [],
+    "truncations": [],
+    "examined_edge_count": 0
+  },
+  "explanation": ["Context assembly failed closed."],
+  "memory": {
+    "purpose": "Agent context: Select a first read-only coding adapter proof surface",
+    "boundary": "agent_context",
+    "current": [],
+    "surfaced": [],
+    "contradictions": [],
+    "exclusions": []
+  },
+  "documents": []
+}

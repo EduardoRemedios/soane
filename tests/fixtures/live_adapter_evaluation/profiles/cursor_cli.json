@@ -1,0 +1,52 @@
+{
+  "schema_version": "lcae-profile-v1",
+  "surface": "cursor_cli",
+  "surface_kind": "cli",
+  "sources": [
+    {
+      "url": "https://docs.cursor.com/en/cli/reference/parameters",
+      "accessed_on": "2026-07-23",
+      "evidence_kind": "official_documentation",
+      "claims": ["print_mode_write_and_bash", "structured_output", "resume_identity"]
+    },
+    {
+      "url": "https://docs.cursor.com/en/cli/headless",
+      "accessed_on": "2026-07-23",
+      "evidence_kind": "official_documentation",
+      "claims": ["without_force_changes_proposed_not_applied"]
+    },
+    {
+      "url": "https://docs.cursor.com/en/cli/using",
+      "accessed_on": "2026-07-23",
+      "evidence_kind": "official_documentation",
+      "claims": ["non_interactive_full_write_access"]
+    }
+  ],
+  "source_state": "current_contradictory",
+  "invocation_modes": ["non_interactive"],
+  "authentication_modes": ["cursor_account", "api_key"],
+  "authentication_state": "required_not_inspected",
+  "capabilities": ["coding_harness", "write_tools", "bash_tools"],
+  "capability_state": "documented_not_measured",
+  "requires_authority": true,
+  "requires_project_permission": true,
+  "authority_control": "explicit_external_precondition",
+  "project_permission_control": "explicit_external_precondition",
+  "sandbox_state": "contradictory",
+  "repository_scope_controls": ["launch_working_directory"],
+  "mutation_controls": ["force_flag_changes_write_behavior"],
+  "first_proof_mode": "mutation_capable",
+  "structured_output": ["json", "stream_json"],
+  "traceability": ["tool_events"],
+  "session_identity": ["resume_chat_id", "session_id"],
+  "cost_metadata": "unavailable",
+  "latency_metadata": "locally_measured_in_future_live_proof",
+  "trace_privacy": "requires_explicit_policy",
+  "privacy_controls": ["local_report_only"],
+  "candidate_review_required": true,
+  "hard_blockers": ["source_contradiction", "hard_read_only_unproven"],
+  "limitations": [
+    "documentation_not_measured_behavior",
+    "official_write_control_claims_conflict"
+  ]
+}

@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-07-23
+
+- Recorded human Go and implemented `LCAE-V0-001` as a deterministic, fixture-only Thinking Engine adapter evaluator covering Codex CLI, Cursor CLI, Cursor SDK, OpenAI SDK, and OpenAI Agents SDK.
+- Revalidated official source evidence at implementation start, preserved Cursor CLI's contradictory write-control claims as hard blockers, and kept documentation evidence distinct from measured live behavior.
+- Added typed profiles with explicit authentication, capability, authority, project permission, sandbox, repository scope, mutation, output, trace, session, cost, latency, privacy, review, limitation, and source evidence fields.
+- Added non-compensable gates before versioned scoring, deterministic recommendation/no-recommendation/tie behavior, exact existing agent-context JSON preservation, and a thin local text/JSON CLI.
+- The evaluator recommends Codex CLI at documentation level while explicitly withholding live authorization; no provider, credential, config, session, network, external repository, Project Memory write, or evaluated-surface mutation path was added.
+- Added seven fixed fixtures and 15 focused tests; 68 targeted regressions and all 168 repository tests passed before closeout.
+- Moved the roadmap to a separate planning-only first live read-only Codex CLI proof pack with later, independent human authorization required for execution.
+
 ## 2026-07-20
 
 - Added `RUN_20260720_0708_live_coding_adapter_eval_refresh`, a new audit-preserving `PLANNING_ONLY` refresh of `LCAE-V0-001`; Stage A through I2 and final pack lint passed.

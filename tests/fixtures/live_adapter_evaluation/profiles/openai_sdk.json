@@ -1,0 +1,44 @@
+{
+  "schema_version": "lcae-profile-v1",
+  "surface": "openai_sdk",
+  "surface_kind": "sdk",
+  "sources": [
+    {
+      "url": "https://developers.openai.com/api/docs/libraries",
+      "accessed_on": "2026-07-23",
+      "evidence_kind": "official_documentation",
+      "claims": ["responses_api_client", "api_key_authentication"]
+    }
+  ],
+  "source_state": "current_consistent",
+  "invocation_modes": ["remote_api"],
+  "authentication_modes": ["api_key"],
+  "authentication_state": "required_not_inspected",
+  "capabilities": ["model_and_tool_invocation"],
+  "capability_state": "documented_not_measured",
+  "requires_authority": true,
+  "requires_project_permission": true,
+  "authority_control": "explicit_external_precondition",
+  "project_permission_control": "explicit_external_precondition",
+  "sandbox_state": "not_supplied",
+  "repository_scope_controls": [],
+  "mutation_controls": [],
+  "first_proof_mode": "live_only",
+  "structured_output": ["api_response_objects"],
+  "traceability": ["request_metadata"],
+  "session_identity": [],
+  "cost_metadata": "provider_reported_or_deferred",
+  "latency_metadata": "locally_measured_in_future_live_proof",
+  "trace_privacy": "requires_explicit_policy",
+  "privacy_controls": [],
+  "candidate_review_required": true,
+  "hard_blockers": [
+    "hard_read_only_unproven",
+    "repository_scope_unbounded",
+    "live_only_evaluation_required"
+  ],
+  "limitations": [
+    "documentation_not_measured_behavior",
+    "not_a_repository_coding_harness"
+  ]
+}
